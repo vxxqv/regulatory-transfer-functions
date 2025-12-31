@@ -88,7 +88,7 @@ class Fixture:
     fields = [
         "resource_id", "resource_type", "accession", "role", "selection_state",
         "data_url", "expected_bytes", "budget_bytes", "provider_checksum_algorithm",
-        "provider_checksum", "opening_order", "outcome_opened",
+        "provider_checksum", "opening_order", "outcome_opened", "notes",
     ]
 
     def __init__(self, base_url, payload=b"\x00locked\xffpayload"):
@@ -123,6 +123,7 @@ class Fixture:
             "provider_checksum": hashlib.md5(payload).hexdigest(),
             "opening_order": str(opening),
             "outcome_opened": "false",
+            "notes": "",
         }
 
     def _rows(self):
@@ -136,7 +137,7 @@ class Fixture:
             "role": "program_role", "selection_state": "selected_frozen", "data_url": program_relative,
             "expected_bytes": str(program_path.stat().st_size), "budget_bytes": "0",
             "provider_checksum_algorithm": "SHA256", "provider_checksum": program_hash,
-            "opening_order": "0", "outcome_opened": "false",
+            "opening_order": "0", "outcome_opened": "false", "notes": "",
         }]
         rows.append(self._row("B01", "baseline_ld", "BASE", "baseline_role", "/a.bin"))
         rows.append(self._row("R01", "build_reference", "BUILD", "build_role", "/build.bin"))
@@ -539,6 +540,28 @@ class GeneticAcquisitionTest(unittest.TestCase):
         self.assertEqual(MockHandler.gets, 1)
         manifest = json.loads((self.fixture.data_root / "checksum_manifest.json").read_text(encoding="utf-8"))
         self.assertEqual(len(manifest["entries"]), 19)
+
+    def test_directory_resource_uses_only_locked_members(self):
+        listing = b'<a href="keep.bin">keep</a><a href="extra.bin">extra</a>'
+        MockHandler.files["/directory/"] = listing
+        MockHandler.files["/directory/keep.bin"] = b"keep"
+        MockHandler.files["/directory/extra.bin"] = b"extra"
+        try:
+            row = self.fixture.rows[1]
+            row["data_url"] = self.base_url + "/directory/"
+            row["expected_bytes"] = "4"
+            row["budget_bytes"] = "4"
+            row["provider_checksum_algorithm"] = "NA"
+            row["provider_checksum"] = "NA"
+            row["notes"] = "members=keep.bin;local_SHA256_required"
+            self.fixture.write()
+            self.assertEqual(self.fixture.acquirer().run(dry_run=True, max_files=1), acquisition.EXIT_OK)
+            roster = json.loads((self.fixture.data_root / "acquisition_roster.json").read_text(encoding="utf-8"))
+            first = [row for row in roster["physical_files"] if row["resource_id"] == "B01"]
+            self.assertEqual([row["url"] for row in first], [self.base_url + "/directory/keep.bin"])
+        finally:
+            for path in ["/directory/", "/directory/keep.bin", "/directory/extra.bin"]:
+                MockHandler.files.pop(path, None)
 
     def test_manifest_only_does_not_trust_prior_complete_state(self):
         self.prepare_roster()

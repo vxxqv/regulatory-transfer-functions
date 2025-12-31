@@ -6,13 +6,15 @@
 
 The pre-outcome protocol and resource gates are complete, and the locked sequential plan fits the recorded free-space snapshot. This is a scientific readiness decision, not authorization to transfer files. A later execution action may perform sequential checksum downloads in the locked order. Outcome opening and genetics execution remain prohibited until every selected file has passed its provider checksum when one exists, a local SHA256 has been recorded, the checksum manifest has itself been hashed, and the immutable role order has been reconfirmed. No association or molecular outcome file was opened for this lock.
 
+A metadata-only preflight resolved 32 logical resources into 82 physical files and verified their current remote sizes without downloading a payload. Six retired baseline-LD links were replaced by the matching files in the official Zenodo release. The eQTL directory roles remain restricted to their frozen all-variant summary, index, credible-set, and log-Bayes-factor members; newly listed conditional-cis and permuted files are excluded.
+
 ## Scope and stopping rule
 
 The lock covers five immune diseases, two selected falsification diseases, European LD, state-resolved CD4 eQTL resources, ATAC-seq, H3K27ac, and fixed gene and genome annotations. Each branch must add an independent evidence type or resolve a central uncertainty, and it must be capable of changing or narrowing a conclusion. A favorable result is not required. A branch stops without a replacement when availability, checksum, schema, power, novelty, or results-reporting gates fail.
 
 ## Baseline LD
 
-The primary S-LDSC reference is Broad Institute baseline-LD v2.2 on GRCh37 for chromosomes 1 through 22. The exact annotation, frequency, PLINK, HapMap3 no-MHC weight, regression-SNP, and version files are fixed in the configuration and resource table with canonical URLs and provider MD5 values. Primary S-LDSC uses HapMap3 SNPs outside the MHC, overlapping annotations, printed coefficients, and delete-values. The GRCh38 1000 Genomes NYGC callset is a separate fine-mapping LD resource and is not a substitute for baseline-LD.
+The primary S-LDSC reference is baseline-LD v2.2 on GRCh37 for chromosomes 1 through 22, obtained from the official Zenodo reference release. The exact annotation, frequency, PLINK, HapMap3 no-MHC weight, regression-SNP, and version files are fixed in the configuration and resource table with canonical URLs and provider MD5 values. Primary S-LDSC uses HapMap3 SNPs outside the MHC, overlapping annotations, printed coefficients, and delete-values. The GRCh38 1000 Genomes NYGC callset is a separate fine-mapping LD resource and is not a substitute for baseline-LD.
 
 ## Disease denominator and falsification controls
 
@@ -50,7 +52,7 @@ CD4 program annotations are frozen before the first negative GWAS. The complete 
 
 ## Retention and capacity
 
-Free space was 182,042,304,512 bytes at 2026-09-13 21:16:03 UTC. Locked sources require 56,937,355,656 bytes. Locked summaries reserve 8,000,000,000 bytes, the largest temporary stage reserves 36,000,000,000 bytes, and tool caches reserve 2,000,000,000 bytes. The peak before safety is 102,937,355,656 bytes. Adding a 25% free-space safety margin of 45,510,576,128 bytes gives 148,447,931,784 bytes, leaving 33,594,372,728 bytes.
+Free space was 182,042,304,512 bytes at 2026-09-13 21:16:03 UTC. Locked sources require 56,938,317,233 bytes. Locked summaries reserve 8,000,000,000 bytes, the largest temporary stage reserves 36,000,000,000 bytes, and tool caches reserve 2,000,000,000 bytes. The peak before safety is 102,938,317,233 bytes. Adding a 25% free-space safety margin of 45,510,576,128 bytes gives 148,448,893,361 bytes, leaving 33,593,411,151 bytes.
 
 LD and analysis work proceeds chromosome by chromosome. Original provider files are never deleted. A temporary intermediate may be retired only after its reproducible command or specification, source hashes, locked summary, summary hash, and numerical checks are recorded. Execution stops if current free space falls below the fixed safety margin.
 

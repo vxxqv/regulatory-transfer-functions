@@ -48,11 +48,11 @@ LD_TYPES = {"ld_reference", "ld_metadata"}
 NA_VALUES = {"", "NA", "N/A", "null", "None"}
 CHUNK_BYTES = 8 * 1024 * 1024
 MAX_METADATA_BYTES = 16 * 1024 * 1024
-PINNED_PROTOCOL_SHA256 = "4ef4a0b23af2531d34e4ec815fbba9e2e0556eebf3258de88fb8e87c76b4e3f3"
-PINNED_RESOURCE_SHA256 = "a6e54c0a4751b336bb8fbeca381020fd1f0fda27323b595bb5baaa072c7fe499"
+PINNED_PROTOCOL_SHA256 = "f2cd334f94dd156e6b9aabbaf8351343836f1a478634ac9a589c472315681318"
+PINNED_RESOURCE_SHA256 = "b77069177245f5ca6fc87a66f835da7a07b9fa91bfa642a6da82ca2e8ce742d4"
 PINNED_REFERENCE_COUNTS = {"baseline": 6, "build": 7, "ld": 3}
 ALLOWED_HOSTS = {
-    "storage.googleapis.com",
+    "zenodo.org",
     "hgdownload.soe.ucsc.edu",
     "raw.githubusercontent.com",
     "bismap.hoffmanlab.org",
@@ -920,7 +920,7 @@ class GeneticInputAcquirer:
         except UnicodeDecodeError as error:
             raise AcquisitionError("Directory metadata is not UTF-8", EXIT_NETWORK) from error
         base_parts = urlsplit(base)
-        candidates: set[str] = set()
+        listed: dict[str, str] = {}
         for href in parser.links:
             joined = urljoin(base, href)
             parts = urlsplit(joined)
@@ -931,12 +931,19 @@ class GeneticInputAcquirer:
             if "/" in parts.path[len(base_parts.path):].strip("/"):
                 continue
             safe_url(joined, allow_directory=False)
-            candidates.add(joined)
-        if not candidates:
-            raise AcquisitionError(f"No files listed for directory resource {row['resource_id']}", EXIT_NETWORK)
+            listed[self._filename_from_url(joined)] = joined
+        member_match = re.search(r"(?:^|;)members=([^;]+)(?:;|$)", row.get("notes", ""))
+        if not member_match:
+            raise AcquisitionError(f"Directory members are not frozen for {row['resource_id']}", EXIT_PROTOCOL)
+        members = member_match.group(1).split(",")
+        if not members or any(not name or name in {".", ".."} or "/" in name or "\\" in name for name in members):
+            raise AcquisitionError(f"Directory member lock is invalid for {row['resource_id']}", EXIT_PROTOCOL)
+        if len(members) != len(set(members)) or not set(members).issubset(listed):
+            raise AcquisitionError(f"A locked directory member is unavailable for {row['resource_id']}", EXIT_NETWORK)
+        candidates = [listed[name] for name in members]
         physicals = []
         total = 0
-        for component, url in enumerate(sorted(candidates, key=natural_key), start=1):
+        for component, url in enumerate(candidates, start=1):
             metadata = self._remote_metadata(url)
             total += metadata.size
             relative = f"{logical_index:03d}_{row['resource_id']}/{self._filename_from_url(url)}"

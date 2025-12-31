@@ -65,13 +65,31 @@ class GeneticProtocolLockTest(unittest.TestCase):
 
     def test_baseline_ld_is_exact(self):
         baseline = self.cfg["baseline_ld"]
+        self.assertEqual(baseline["provider"], "Zenodo S-LDSC reference release")
+        self.assertEqual(baseline["creator"], "Steven Gazal")
         self.assertEqual(baseline["release"], "baseline-LD_v2.2")
         self.assertEqual(baseline["genome_build"], "GRCh37")
         self.assertEqual(baseline["weight_ld"], "1000G_Phase3_weights_hm3_no_MHC")
         self.assertEqual(baseline["frequency_files"], "1000G_Phase3_frq")
-        for key in ["annotations_archive", "frequencies_archive", "plink_reference_archive", "weights_archive", "regression_snp_list", "version_record"]:
+        expected_files = {
+            "annotations_archive": ("1000G_Phase3_baselineLD_v2.2_ldscores.tgz", 675845447),
+            "frequencies_archive": ("1000G_Phase3_frq.tgz", 85939688),
+            "plink_reference_archive": ("1000G_Phase3_plinkfiles.tgz", 288277344),
+            "weights_archive": ("1000G_Phase3_weights_hm3_no_MHC.tgz", 12757654),
+            "regression_snp_list": ("hm3_no_MHC.list.txt", 12395058),
+            "version_record": ("readme_baseline_versions.txt", 3775),
+        }
+        baseline_rows = {row["accession"]: row for row in self.rows if row["resource_type"] == "baseline_ld"}
+        for key, (filename, expected_bytes) in expected_files.items():
             self.assertRegex(baseline[key]["md5"], r"^[0-9a-f]{32}$")
-            self.assertTrue(baseline[key]["url"].startswith("https://"))
+            self.assertEqual(
+                baseline[key]["url"],
+                f"https://zenodo.org/records/10515792/files/{filename}?download=1",
+            )
+            row = next(row for row in baseline_rows.values() if row["data_url"] == baseline[key]["url"])
+            self.assertEqual(row["provider"], "Zenodo_S_LDSC_reference_release")
+            self.assertEqual(int(row["expected_bytes"]), expected_bytes)
+            self.assertEqual(int(row["budget_bytes"]), expected_bytes)
 
     def test_numeric_region_calipers_are_complete(self):
         match = self.cfg["negative_region_matching"]
@@ -108,6 +126,19 @@ class GeneticProtocolLockTest(unittest.TestCase):
         self.assertEqual(ordered[0]["accession"], "GCST90478363")
         self.assertEqual(ordered[1]["accession"], "GCST90476060")
         self.assertFalse(roles["role_change_after_opening_allowed"])
+
+    def test_eqtl_directory_members_are_frozen(self):
+        expected = {
+            "E01": "QTD000689.all.tsv.gz,QTD000689.all.tsv.gz.tbi",
+            "E02": "QTD000689.credible_sets.tsv.gz,QTD000689.lbf_variable.txt.gz",
+            "E03": "QTD000693.all.tsv.gz,QTD000693.all.tsv.gz.tbi",
+            "E04": "QTD000693.credible_sets.tsv.gz,QTD000693.lbf_variable.txt.gz",
+            "E05": "QTD000690.all.tsv.gz,QTD000690.all.tsv.gz.tbi",
+            "E06": "QTD000690.credible_sets.tsv.gz,QTD000690.lbf_variable.txt.gz",
+        }
+        rows = {row["resource_id"]: row for row in self.rows}
+        for resource_id, members in expected.items():
+            self.assertIn(f"members={members};", rows[resource_id]["notes"])
 
     def test_program_annotations_precede_disease_outcomes(self):
         freeze = self.cfg["program_annotation_freeze"]
@@ -161,6 +192,8 @@ class GeneticProtocolLockTest(unittest.TestCase):
         selected_with_md5 = [row for row in self.rows if row["selection_state"] == "selected" and row["provider_checksum_algorithm"] == "MD5"]
         self.assertTrue(selected_with_md5)
         self.assertTrue(all(len(row["provider_checksum"]) == 32 for row in selected_with_md5))
+        self.assertTrue(all(row["expected_bytes"] not in {"", "NA"} for row in selected_with_md5))
+        self.assertTrue(all(row["expected_bytes"] == row["budget_bytes"] for row in selected_with_md5))
 
     def test_analysis_order_and_causal_gates_are_frozen(self):
         block = self.cfg["analysis_order"]
@@ -184,11 +217,15 @@ class GeneticProtocolLockTest(unittest.TestCase):
         self.assertFalse(cap["delete_source_files"])
         self.assertGreater(cap["safety_margin_bytes"], 0)
 
-    def test_no_outcome_values_or_local_artifacts(self):
+    def test_no_outcome_values_or_downloaded_payloads(self):
         forbidden_columns = {"observed_beta", "observed_odds_ratio", "observed_p_value", "observed_q_value", "posterior_probability", "heritability"}
         self.assertFalse(forbidden_columns.intersection(self.rows[0]))
         artifact_root = ROOT / "data" / "independent_confirmation" / "genetics"
-        self.assertFalse(artifact_root.exists())
+        if artifact_root.exists():
+            allowed = {".acquisition.lock", "acquisition_roster.json", "acquisition_roster.json.sha256"}
+            observed = {path.relative_to(artifact_root).as_posix() for path in artifact_root.rglob("*")}
+            self.assertTrue(observed.issubset(allowed))
+            self.assertFalse((artifact_root / "checksum_manifest.json").exists())
 
     def test_ascii_dashes_and_prohibited_metadata_language(self):
         prohibited = ("artificial " + "intelligence", "language " + "model", "generated " + "by", "ai " + "disclosure")

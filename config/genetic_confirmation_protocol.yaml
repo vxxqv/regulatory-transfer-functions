@@ -18,7 +18,8 @@ scope:
   favorable_results_required: false
 
 baseline_ld:
-  provider: Broad Institute Alkes Group
+  provider: Zenodo S-LDSC reference release
+  creator: Steven Gazal
   official_record: https://doi.org/10.5281/zenodo.10515792
   release: baseline-LD_v2.2
   genome_build: GRCh37
@@ -26,27 +27,27 @@ baseline_ld:
   chromosomes: autosomes_1_to_22
   annotations_archive:
     file: 1000G_Phase3_baselineLD_v2.2_ldscores.tgz
-    url: https://storage.googleapis.com/broad-alkesgroup-public/LDSCORE/1000G_Phase3_baselineLD_v2.2_ldscores.tgz
+    url: https://zenodo.org/records/10515792/files/1000G_Phase3_baselineLD_v2.2_ldscores.tgz?download=1
     md5: b261e0caf06a003e7522938e01b3d349
   frequencies_archive:
     file: 1000G_Phase3_frq.tgz
-    url: https://storage.googleapis.com/broad-alkesgroup-public/LDSCORE/1000G_Phase3_frq.tgz
+    url: https://zenodo.org/records/10515792/files/1000G_Phase3_frq.tgz?download=1
     md5: ac29686ffd5b6378789857a522ebca77
   plink_reference_archive:
     file: 1000G_Phase3_plinkfiles.tgz
-    url: https://storage.googleapis.com/broad-alkesgroup-public/LDSCORE/1000G_Phase3_plinkfiles.tgz
+    url: https://zenodo.org/records/10515792/files/1000G_Phase3_plinkfiles.tgz?download=1
     md5: a7773ab485827b533cb300c76356d76b
   weights_archive:
     file: 1000G_Phase3_weights_hm3_no_MHC.tgz
-    url: https://storage.googleapis.com/broad-alkesgroup-public/LDSCORE/1000G_Phase3_weights_hm3_no_MHC.tgz
+    url: https://zenodo.org/records/10515792/files/1000G_Phase3_weights_hm3_no_MHC.tgz?download=1
     md5: a98ac0f089ee285177544a3e6e721ca3
   regression_snp_list:
     file: hm3_no_MHC.list.txt
-    url: https://storage.googleapis.com/broad-alkesgroup-public/LDSCORE/hm3_no_MHC.list.txt
+    url: https://zenodo.org/records/10515792/files/hm3_no_MHC.list.txt?download=1
     md5: 65a34c68833eb4a764d0707b5505b508
   version_record:
     file: readme_baseline_versions.txt
-    url: https://storage.googleapis.com/broad-alkesgroup-public/LDSCORE/readme_baseline_versions.txt
+    url: https://zenodo.org/records/10515792/files/readme_baseline_versions.txt?download=1
     md5: 9a800a186e8aa0449865d81a1ba4a00e
   primary_flags: [overlap_annot, print_coefficients, print_delete_vals]
   regression_snps: HapMap3_no_MHC
@@ -319,13 +320,13 @@ retention_and_capacity:
   free_bytes: 182042304512
   safety_margin_fraction: 0.25
   safety_margin_bytes: 45510576128
-  source_file_budget_bytes: 56937355656
+  source_file_budget_bytes: 56938317233
   locked_summary_budget_bytes: 8000000000
   maximum_stage_temporary_bytes: 36000000000
   tool_cache_budget_bytes: 2000000000
-  planned_peak_before_safety_bytes: 102937355656
-  planned_peak_with_safety_bytes: 148447931784
-  remaining_headroom_bytes: 33594372728
+  planned_peak_before_safety_bytes: 102938317233
+  planned_peak_with_safety_bytes: 148448893361
+  remaining_headroom_bytes: 33593411151
   budget_fits: true
   source_files_never_deleted: true
   reference_acquisition_order: [baseline_LD, genome_build_references, chromosome_1_to_22_LD, outcome_files_in_locked_order]
