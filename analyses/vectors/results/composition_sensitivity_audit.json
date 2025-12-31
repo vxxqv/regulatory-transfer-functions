@@ -1,0 +1,199 @@
+{
+  "analysis": "frozen_signed_rerouting_composition_sensitivity",
+  "checks": {
+    "evaluated_compositions": 9628,
+    "evaluated_pairs": 8168,
+    "evaluated_targets": 3696,
+    "matching_strata": 75,
+    "maximum_absolute_clr_row_mean": 2.6201263381153696e-15,
+    "maximum_gain_recalculation_error": 2.9716305061100456e-07,
+    "maximum_input_closure_error": 3.0509601067763015e-07,
+    "maximum_replaced_closure_error": 3.3306690738754696e-16,
+    "maximum_stratum_size": 148,
+    "maximum_zero_parts": 0,
+    "minimum_stratum_size": 67,
+    "minimum_zero_parts": 0,
+    "negative_observed_distances": 0,
+    "nonfinite_clr_coordinates": 0,
+    "nonfinite_observed_distances": 0,
+    "source_evaluable_pairs": 8168,
+    "source_pair_rows": 14101,
+    "state_pair_counts": {
+      "Rest__Stim48hr": 2647,
+      "Rest__Stim8hr": 2671,
+      "Stim8hr__Stim48hr": 2850
+    },
+    "tensor_coordinate_duplicates": 0,
+    "tensor_parts_per_target_state": 30,
+    "zero_replaced_coordinates": 0
+  },
+  "configuration": {
+    "bootstrap": "target-cluster percentile bootstrap of observed mean minus fixed permutation-null median",
+    "bootstrap_replicates": 1000,
+    "confidence_level": 0.95,
+    "delta": 0.0005555555555555556,
+    "distance": "Euclidean CLR distance divided by sqrt(30)",
+    "matching": "right-state target permutation within state pair and within-state-pair quintiles of absolute gain and mean response norm",
+    "multiplicity": "Benjamini-Hochberg over overall plus the three state-pair directional upper-tail tests",
+    "parts": 30,
+    "permutation_fixed_points": "allowed by the frozen unrestricted within-stratum permutation",
+    "permutation_replicates": 1000,
+    "quintile_tie_rule": "rank(method='first') after deterministic state-pair/target sorting",
+    "seed": 20260912,
+    "summary_statistic": "mean normalized Aitchison distance",
+    "zero_replacement": "multiplicative"
+  },
+  "decision_criterion": "supported if the overall lower confidence bound is above zero and q is below 0.05",
+  "decision_criterion_met": false,
+  "hypothesis": "State-pair programme composition remains more different than a magnitude-matched target permutation null under a log-ratio geometry.",
+  "input_path_resolution": {
+    "canonical_path_used": "analyses/vectors/results/network_gain_rows.parquet",
+    "handoff_path": "analyses/primary/results/network_gain_rows.parquet",
+    "handoff_path_exists": false,
+    "reason": "The vector-analysis producer and frozen strengthening manifest identify the canonical vector-results path."
+  },
+  "inputs": [
+    {
+      "bytes": 5959719,
+      "path": "analyses/vectors/results/contextual_transfer_tensor.parquet",
+      "sha256": "d644893577cc5a78a0bda649584d21e608f3e105f78ed865a6d0328b541a8099"
+    },
+    {
+      "bytes": 374850,
+      "path": "analyses/vectors/results/context_rerouting_pairs.parquet",
+      "sha256": "b3845ac971b20991a0be5635d00d56c2593b67c746a8c9c517adc9c16e58c745"
+    },
+    {
+      "bytes": 2883127,
+      "path": "analyses/vectors/results/network_gain_rows.parquet",
+      "sha256": "d31cb32ec00b4474b8736d146d2709eeec378cf0575b0fd5338b48503ae1a608"
+    }
+  ],
+  "interpretation": "Same-target cross-state programme compositions were closer than matched cross-target permutations under the frozen CLR geometry.",
+  "limitations": [
+    "The target-cluster interval treats the permutation-null median as fixed and therefore does not include Monte Carlo uncertainty in that median.",
+    "Inference is conditional on the frozen 30-component reference decomposition and the prespecified 1/1800 zero replacement.",
+    "The available tensor is target-state level, so guide- and donor-specific compositional reproducibility cannot be estimated here.",
+    "Matched permutations preserve coarse quintiles rather than exact continuous gain and response-norm values."
+  ],
+  "outputs": [
+    {
+      "bytes": 710808,
+      "path": "analyses/vectors/results/composition_sensitivity_pairs.parquet",
+      "rows": 8168,
+      "sha256": "2f7d1c02704443e20614c586626fffb7feda67082e75ef50a44c0edd82adbb40"
+    },
+    {
+      "bytes": 1612,
+      "path": "analyses/vectors/results/composition_sensitivity_summary.csv",
+      "rows": 4,
+      "sha256": "a776ac74765b4c5b295585e7d0e4ac1eb60d6260d59cbedacdd03af5da4a9594"
+    },
+    {
+      "bytes": 91150,
+      "path": "analyses/vectors/results/composition_sensitivity_null.parquet",
+      "rows": 4000,
+      "sha256": "81a987a68360efa3d3c13bc9014a9b586d85713724edc3b333cc06102a67fd09"
+    }
+  ],
+  "results": [
+    {
+      "bootstrap_replicates": 1000,
+      "cluster_bootstrap_ci_high": -0.3188371086,
+      "cluster_bootstrap_ci_low": -0.3687827779,
+      "effect_direction": "observed_less_than_matched_null",
+      "minimum_required_pairs": 1000,
+      "observed_mean_normalized_aitchison_distance": 2.8321678286,
+      "observed_median_normalized_aitchison_distance": 2.9348351703,
+      "observed_minus_null_median": -0.3429896697,
+      "pairs": 8168,
+      "passes_minimum_power": true,
+      "permutation_null_ci_high": 3.1820823819,
+      "permutation_null_ci_low": 3.1678318689,
+      "permutation_null_mean_of_means": 3.1750975513,
+      "permutation_null_median_of_means": 3.1751574983,
+      "permutation_p_lower": 0.000999001,
+      "permutation_p_upper": 1.0,
+      "permutation_replicates": 1000,
+      "q_value_upper_bh": 1.0,
+      "scope": "overall",
+      "status": "failed",
+      "targets": 3696
+    },
+    {
+      "bootstrap_replicates": 1000,
+      "cluster_bootstrap_ci_high": -0.3310552502,
+      "cluster_bootstrap_ci_low": -0.3960520127,
+      "effect_direction": "observed_less_than_matched_null",
+      "minimum_required_pairs": 250,
+      "observed_mean_normalized_aitchison_distance": 2.8256351804,
+      "observed_median_normalized_aitchison_distance": 2.9286907665,
+      "observed_minus_null_median": -0.3648129937,
+      "pairs": 2671,
+      "passes_minimum_power": true,
+      "permutation_null_ci_high": 3.2027560553,
+      "permutation_null_ci_low": 3.1775243808,
+      "permutation_null_mean_of_means": 3.1902134628,
+      "permutation_null_median_of_means": 3.1904481741,
+      "permutation_p_lower": 0.000999001,
+      "permutation_p_upper": 1.0,
+      "permutation_replicates": 1000,
+      "q_value_upper_bh": 1.0,
+      "scope": "Rest__Stim8hr",
+      "status": "failed",
+      "targets": 2671
+    },
+    {
+      "bootstrap_replicates": 1000,
+      "cluster_bootstrap_ci_high": -0.2784567775,
+      "cluster_bootstrap_ci_low": -0.3476043016,
+      "effect_direction": "observed_less_than_matched_null",
+      "minimum_required_pairs": 250,
+      "observed_mean_normalized_aitchison_distance": 2.8520125884,
+      "observed_median_normalized_aitchison_distance": 2.9469061918,
+      "observed_minus_null_median": -0.3121682216,
+      "pairs": 2647,
+      "passes_minimum_power": true,
+      "permutation_null_ci_high": 3.1771138758,
+      "permutation_null_ci_low": 3.1526153086,
+      "permutation_null_mean_of_means": 3.1642755751,
+      "permutation_null_median_of_means": 3.16418081,
+      "permutation_p_lower": 0.000999001,
+      "permutation_p_upper": 1.0,
+      "permutation_replicates": 1000,
+      "q_value_upper_bh": 1.0,
+      "scope": "Rest__Stim48hr",
+      "status": "failed",
+      "targets": 2647
+    },
+    {
+      "bootstrap_replicates": 1000,
+      "cluster_bootstrap_ci_high": -0.3187064283,
+      "cluster_bootstrap_ci_low": -0.3842167313,
+      "effect_direction": "observed_less_than_matched_null",
+      "minimum_required_pairs": 250,
+      "observed_mean_normalized_aitchison_distance": 2.8198589249,
+      "observed_median_normalized_aitchison_distance": 2.92524657,
+      "observed_minus_null_median": -0.3512653384,
+      "pairs": 2850,
+      "passes_minimum_power": true,
+      "permutation_null_ci_high": 3.1828924941,
+      "permutation_null_ci_low": 3.1592811139,
+      "permutation_null_mean_of_means": 3.1709821727,
+      "permutation_null_median_of_means": 3.1711242633,
+      "permutation_p_lower": 0.000999001,
+      "permutation_p_upper": 1.0,
+      "permutation_replicates": 1000,
+      "q_value_upper_bh": 1.0,
+      "scope": "Stim8hr__Stim48hr",
+      "status": "failed",
+      "targets": 2850
+    }
+  ],
+  "scalar_context_result": {
+    "preserved_without_reinterpretation": true,
+    "rule": "retain the failed scalar context-switching conclusion",
+    "status": "failed"
+  },
+  "status": "failed"
+}
