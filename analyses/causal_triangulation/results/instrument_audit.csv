@@ -1,0 +1,2 @@
+locus,gene,rsid,role,assessed_allele,other_allele,z_score,p_value,samples,valid_for_mediation,exclusion_reason
+ptpn22,PTPN22,rs2476601,variant_to_cis,A,G,15.2163,2.7610999999999996e-52,30125,False,fewer_than_three_independent_instruments

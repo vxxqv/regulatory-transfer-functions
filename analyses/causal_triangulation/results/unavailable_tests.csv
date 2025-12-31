@@ -1,0 +1,7 @@
+analysis,locus,status,reason
+two_step_mediation,gata3,not_tested,colocalization or minimum instrument assumptions failed
+two_step_mediation,stat3,not_tested,colocalization or minimum instrument assumptions failed
+two_step_mediation,ptpn22,not_tested,colocalization or minimum instrument assumptions failed
+matched_negative_locus,gata3,unresolved,MAF and local gene-density fields unavailable in the frozen source bundle
+matched_negative_locus,stat3,unresolved,MAF and local gene-density fields unavailable in the frozen source bundle
+matched_negative_locus,ptpn22,unresolved,MAF and local gene-density fields unavailable in the frozen source bundle

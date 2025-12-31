@@ -1,0 +1,9 @@
+{
+  "all_loci_reported": true,
+  "atac_file_sha256": "f6d24433af87ecae698368268a5215a01d80c75bf425e38593d808548762fefb",
+  "atac_source": "ENCODE ENCSR841LHT, ENCFF944LFH, GRCh38 IDR thresholded peaks",
+  "atac_source_noncompliance_note": true,
+  "eligible_locus_denominator": 3,
+  "loci_with_mediation_claim": 0,
+  "matched_negative_locus_status": "unresolved_missing_matching_fields"
+}

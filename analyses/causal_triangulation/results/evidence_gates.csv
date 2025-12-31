@@ -1,0 +1,22 @@
+locus,gene,trait,gate,status,value,evidence
+gata3,GATA3,asthma,statistical_fine_mapping,passed,0.4496459637453133,Open Targets credible set
+gata3,GATA3,asthma,gwas_cis_eqtl_colocalization,failed,0.0,Open Targets target-specific maximum H4
+gata3,GATA3,asthma,credible_set_cd4_chromatin_overlap,failed,0.0,ENCODE ENCSR841LHT IDR peaks
+gata3,GATA3,asthma,enhancer_to_gene,failed,0.8451496958732605,One rE2G feature alone does not meet the two-link gate
+gata3,GATA3,asthma,perturbational_cis_effect,passed,-16.196718732294897,Frozen CD4 on-target z-score
+gata3,GATA3,asthma,signed_downstream_program,passed,60.0,Frozen signed CD4 program
+gata3,GATA3,asthma,trans_eqtl_direction_concordance,unresolved,,eQTLGen lead-variant trans associations
+stat3,STAT3,inflammatory bowel disease,statistical_fine_mapping,passed,0.0415528255932921,Open Targets credible set
+stat3,STAT3,inflammatory bowel disease,gwas_cis_eqtl_colocalization,passed,0.964428186416626,Open Targets target-specific maximum H4
+stat3,STAT3,inflammatory bowel disease,credible_set_cd4_chromatin_overlap,failed,0.0,ENCODE ENCSR841LHT IDR peaks
+stat3,STAT3,inflammatory bowel disease,enhancer_to_gene,failed,0.0280619487166404,One rE2G feature alone does not meet the two-link gate
+stat3,STAT3,inflammatory bowel disease,perturbational_cis_effect,passed,-14.569750579234713,Frozen CD4 on-target z-score
+stat3,STAT3,inflammatory bowel disease,signed_downstream_program,passed,60.0,Frozen signed CD4 program
+stat3,STAT3,inflammatory bowel disease,trans_eqtl_direction_concordance,unresolved,,eQTLGen lead-variant trans associations
+ptpn22,PTPN22,rheumatoid arthritis,statistical_fine_mapping,passed,0.9996845345178752,Open Targets credible set
+ptpn22,PTPN22,rheumatoid arthritis,gwas_cis_eqtl_colocalization,failed,0.0,Open Targets target-specific maximum H4
+ptpn22,PTPN22,rheumatoid arthritis,credible_set_cd4_chromatin_overlap,failed,0.0,ENCODE ENCSR841LHT IDR peaks
+ptpn22,PTPN22,rheumatoid arthritis,enhancer_to_gene,failed,0.0,One rE2G feature alone does not meet the two-link gate
+ptpn22,PTPN22,rheumatoid arthritis,perturbational_cis_effect,passed,-24.03907429053709,Frozen CD4 on-target z-score
+ptpn22,PTPN22,rheumatoid arthritis,signed_downstream_program,passed,1.0,Frozen signed CD4 program
+ptpn22,PTPN22,rheumatoid arthritis,trans_eqtl_direction_concordance,unresolved,,eQTLGen lead-variant trans associations
