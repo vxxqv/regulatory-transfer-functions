@@ -3,9 +3,11 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import pytest
 import yaml
 
 from analyses.grn_benchmark.run_beeline import finite_horizon
+from analyses.multiverse.run_rerouting_multiverse import js
 from analyses.multiverse.run_scalar_multiverse import adjust_q, fold, multiplier_summary
 from analyses.multiverse.run_validation_multiverse import disease_predictions
 
@@ -75,9 +77,31 @@ def test_disease_effect_matches_paired_out_of_fold_brier_improvement() -> None:
     assert contributions.mean() > 0
 
 
+def test_disease_effect_rejects_single_fold_specification() -> None:
+    table = pd.DataFrame(
+        {
+            "significant": [0, 1],
+            "cluster": ["one_cluster", "one_cluster"],
+            "culture_condition": ["Rest", "Stim8hr"],
+            "cluster_size": [20, 20],
+            "transfer_signal": [0.1, 0.2],
+        }
+    )
+    with pytest.raises(ValueError, match="fewer than two clusters"):
+        disease_predictions(table, ["transfer_signal"])
+
+
+def test_jensen_shannon_handles_exact_zero_energy() -> None:
+    left = np.array([[1.0, 0.0], [0.0, 1.0]])
+    right = np.array([[0.0, 1.0], [0.0, 1.0]])
+    divergence = js(left, right)
+    assert np.isfinite(divergence).all()
+    assert divergence[0] > 0
+    assert divergence[1] == 0
+
+
 def test_finite_horizon_operator_is_stabilized() -> None:
     operator = np.array([[1.5, 0.2], [0.0, 1.2]])
     propagated = finite_horizon(operator, depth=3)
     assert np.isfinite(propagated).all()
     assert propagated.shape == operator.shape
-

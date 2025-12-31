@@ -41,18 +41,25 @@ def score_columns(rows: pd.DataFrame) -> dict[str, str]:
 def disease_predictions(table: pd.DataFrame, feature_columns: list[str]) -> tuple[float, pd.Series]:
     y = table["significant"].astype(int).to_numpy()
     clusters = table["cluster"].astype(str).to_numpy()
+    if len(table) == 0 or len(np.unique(clusters)) < 2 or len(np.unique(y)) < 2:
+        raise ValueError("fewer than two clusters or outcome classes remain")
     folds = np.array([
         int(hashlib.sha256(value.encode("utf-8")).hexdigest()[:12], 16) % 5 for value in clusters
     ])
+    active_folds = np.unique(folds)
+    if len(active_folds) < 2:
+        raise ValueError("all eligible clusters map to one held-out fold")
     state = pd.get_dummies(table["culture_condition"], prefix="state", dtype=float)
     baseline = pd.concat([table[["cluster_size"]].reset_index(drop=True), state.reset_index(drop=True)], axis=1)
     augmented = pd.concat([baseline, table[feature_columns].reset_index(drop=True)], axis=1)
     predictions = {}
     for name, features in [("baseline", baseline), ("augmented", augmented)]:
         pred = np.full(len(table), np.nan)
-        for heldout in range(5):
+        for heldout in active_folds:
             train = folds != heldout
             test = folds == heldout
+            if len(np.unique(y[train])) < 2:
+                raise ValueError("a held-out fold leaves one training outcome class")
             model = Pipeline([
                 ("impute", SimpleImputer()),
                 ("scale", StandardScaler()),
@@ -197,7 +204,20 @@ def main() -> None:
                         }
                     )
                     continue
-                delta_auc, brier_improvement = disease_predictions(disease_spec, features)
+                try:
+                    delta_auc, brier_improvement = disease_predictions(disease_spec, features)
+                except ValueError as error:
+                    unavailable.append(
+                        {
+                            **descriptor,
+                            "specification_id": f"disease_{spec}_{covariate_set}",
+                            "covariate_set": covariate_set,
+                            "module_resolution": resolution,
+                            "result_family": "disease_convergence",
+                            "reason": str(error),
+                        }
+                    )
+                    continue
                 uncertainty = multiplier_summary(
                     brier_improvement,
                     disease_spec["cluster"],

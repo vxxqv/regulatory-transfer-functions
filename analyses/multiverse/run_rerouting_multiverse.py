@@ -26,8 +26,16 @@ def energies(scores: np.ndarray) -> np.ndarray:
 
 def js(left: np.ndarray, right: np.ndarray) -> np.ndarray:
     midpoint = 0.5 * (left + right)
-    left_term = np.where(left > 0, left * np.log(left / np.maximum(midpoint, 1e-300)), 0)
-    right_term = np.where(right > 0, right * np.log(right / np.maximum(midpoint, 1e-300)), 0)
+    left_term = np.zeros_like(left)
+    right_term = np.zeros_like(right)
+    left_positive = left > 0
+    right_positive = right > 0
+    left_term[left_positive] = left[left_positive] * np.log(
+        left[left_positive] / np.maximum(midpoint[left_positive], 1e-300)
+    )
+    right_term[right_positive] = right[right_positive] * np.log(
+        right[right_positive] / np.maximum(midpoint[right_positive], 1e-300)
+    )
     return 0.5 * (left_term.sum(axis=1) + right_term.sum(axis=1))
 
 
