@@ -1,0 +1,13 @@
+states:
+  Rest: "#4C78A8"
+  Stim8hr: "#F28E2B"
+  Stim48hr: "#59A14F"
+transfer_classes:
+  buffered: "#3B4CC0"
+  intermediate: "#7F7F7F"
+  amplified: "#B40426"
+evidence_tiers:
+  primary_causal: "#3BA55D"
+  orthogonal_causal: "#2B83BA"
+  natural_genetics: "#3B4CC0"
+  disease_support: "#C73E3A"

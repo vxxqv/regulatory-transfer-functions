@@ -1,0 +1,63 @@
+configfile: "config/analysis.yaml"
+
+rule all:
+    input:
+        "analyses/primary/results/primary_results.json",
+        "data/interim/gwt_vectors/audit.json",
+        "analyses/vectors/results/vector_results.json",
+        "data/interim/eqtlgen/audit.json",
+        "analyses/natural_genetics/results/natural_genetics_results.json",
+        "figures/fig01/fig01.pdf"
+
+rule primary_summary:
+    input:
+        source="work/upstream/GWT_perturbseq_analysis_2025"
+    output:
+        "analyses/primary/results/primary_results.json"
+    shell:
+        "python analyses/primary/run_primary.py --source-root {input.source}"
+
+rule response_vectors:
+    input:
+        h5ad="data/raw/gwt/GWCD4i.DE_stats.h5ad",
+        summary="work/upstream/GWT_perturbseq_analysis_2025/metadata/suppl_tables/DE_stats.suppl_table.csv"
+    output:
+        "data/interim/gwt_vectors/audit.json"
+    shell:
+        "python src/ingest/extract_response_vectors.py --h5ad {input.h5ad} --summary {input.summary}"
+
+rule vector_analysis:
+    input:
+        "data/interim/gwt_vectors/audit.json"
+    output:
+        "analyses/vectors/results/vector_results.json"
+    shell:
+        "python analyses/vectors/run_vector_analysis.py"
+
+rule prepare_eqtlgen:
+    input:
+        cis="data/raw/eqtlgen/cis_significant.txt.gz",
+        trans="data/raw/eqtlgen/trans_significant.txt.gz",
+        summary="work/upstream/GWT_perturbseq_analysis_2025/metadata/suppl_tables/DE_stats.suppl_table.csv"
+    output:
+        "data/interim/eqtlgen/audit.json"
+    shell:
+        "python src/ingest/prepare_eqtlgen.py --cis {input.cis} --trans {input.trans} --target-summary {input.summary}"
+
+rule natural_genetics:
+    input:
+        vectors="data/interim/gwt_vectors/audit.json",
+        genetics="data/interim/eqtlgen/audit.json"
+    output:
+        "analyses/natural_genetics/results/natural_genetics_results.json"
+    shell:
+        "python analyses/natural_genetics/run_eqtlgen.py"
+
+rule figure_1:
+    input:
+        "figures/fig01/figure_data/nodes.tsv",
+        "figures/fig01/figure_data/edges.tsv"
+    output:
+        "figures/fig01/fig01.pdf"
+    shell:
+        "python figures/fig01/make_figure.py"
