@@ -1,0 +1,11 @@
+{
+  "estimate_range": [
+    0.5642831301565817,
+    0.7391947727050591
+  ],
+  "expected_direction_fraction": 1.0,
+  "median_estimate": 0.6740444236814987,
+  "q_supported_fraction": 1.0,
+  "specifications": 180,
+  "wall_seconds": 7.49146109999856
+}
