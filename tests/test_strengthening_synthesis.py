@@ -33,4 +33,16 @@ def test_strengthening_synthesis_uses_verified_extensions():
     assert "0.9942" in result.loc["Transfer gain and buffering", "strengthened_estimate"]
     assert "-0.3430" in result.loc["Signed programme rerouting and context dependence", "strengthened_estimate"]
     assert "-0.0616" in result.loc["GRN benchmarking", "strengthened_estimate"]
-    assert result["materially_improves_manuscript"].sum() == 4
+    molecular_denominator = result.loc["Molecular regulatory support", "original_denominator"]
+    assert "715 eligible regulator-state combinations" in molecular_denominator
+    assert "600 nonnull summaries clustered across 265 regulators" in molecular_denominator
+    assert "124798 edge rows" in molecular_denominator
+    cross_state = result.loc["Cross state and cross system conservation"]
+    assert "arithmetic-component energy fraction" in cross_state["confidence_interval"]
+    assert "core fraction" not in " ".join(cross_state.astype(str))
+    assert "165 trans genes" in result.loc["Natural genetic concordance", "original_denominator"]
+    assert "-0.1864 to -0.0096" in result.loc["Disease convergence and locus causal triangulation", "confidence_interval"]
+    assert "paired two-sided q 0.0742" in result.loc["Disease convergence and locus causal triangulation", "corrected_significance"]
+    assert "did not establish reverse superiority" in result.loc["Disease convergence and locus causal triangulation", "effect_size_interpretation"]
+    assert "matched negative-locus analysis is unresolved" in result.loc["Disease convergence and locus causal triangulation", "remaining_limitation"].lower()
+    assert result["materially_improves_manuscript"].sum() == 5

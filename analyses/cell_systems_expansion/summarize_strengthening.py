@@ -17,6 +17,8 @@ def row(**values: object) -> dict[str, object]:
 def main() -> None:
     transfer = pd.read_csv(ROOT / "analyses/primary/results/transfer_stability_summary.csv").set_index("metric")
     transfer_sensitivity = pd.read_csv(ROOT / "analyses/primary/results/transfer_measurement_error_sensitivity.csv")
+    buffering_deletion = pd.read_csv(ROOT / "analyses/primary/results/buffering_deletion_summary.csv").set_index("heldout_state")
+    buffering_influence = pd.read_csv(ROOT / "analyses/primary/results/buffering_leave_one_target.csv")
     primary = pd.read_json(ROOT / "analyses/primary/results/primary_results.json", typ="series")
     scalar = pd.read_csv(ROOT / "analyses/multiverse/results/scalar_family_summary.csv").set_index("result_family")
     vectors = pd.read_json(ROOT / "analyses/vectors/results/vector_results.json", typ="series")
@@ -31,10 +33,14 @@ def main() -> None:
     grn_contrasts = pd.read_csv(ROOT / "analyses/grn_benchmark/results/paired_method_contrasts.csv")
     molecular = pd.read_csv(ROOT / "analyses/molecular_cascade/results/hypothesis_decisions.csv")
     molecular_gain = molecular.loc[molecular["family"].eq("transfer_gain")].iloc[0]
+    molecular_rows = pd.read_parquet(ROOT / "analyses/molecular_cascade/results/target_state_evidence.parquet")
+    eligible_molecular = molecular_rows.loc[molecular_rows["eligible_regulator"].astype(bool)]
+    nonnull_molecular = eligible_molecular.loc[eligible_molecular["significant_response_edges"].gt(0)]
     molecular_prediction = pd.read_csv(ROOT / "analyses/molecular_cascade/results/paired_prediction_comparison.csv")
     natural = pd.read_csv(ROOT / "analyses/natural_genetics/results_audit_corrected/hypothesis_tests.csv")
     natural = natural.loc[(natural["subset"].eq("primary")) & natural["scope"].eq("overall") & natural["metric"].eq("direction_agreement")].iloc[0]
     disease = pd.read_json(ROOT / "analyses/disease/results/disease_results.json", typ="series")
+    disease_uncertainty = pd.read_csv(ROOT / "analyses/disease/results/model_uncertainty.csv").set_index("metric")
     loci = pd.read_csv(ROOT / "analyses/causal_triangulation/results/locus_grades.csv")
     validation = pd.read_csv(ROOT / "analyses/multiverse/results/validation_family_summary.csv").set_index("result_family")
 
@@ -45,6 +51,8 @@ def main() -> None:
     simple_wins = int(grn_contrasts["corrected_result"].eq("frozen_simple_comparator_superior").sum())
     core_ranges = state_prediction.set_index("outcome")["delta_r2"].to_dict()
     molecular_ranges = molecular_prediction.set_index("dataset")["delta_r2"].to_dict()
+    pooled_buffering = buffering_deletion.loc["Pooled"]
+    disease_auroc = disease_uncertainty.loc["auroc"]
 
     records = [
         row(
@@ -52,13 +60,13 @@ def main() -> None:
             extension_action="Hierarchical shrinkage and class stability",
             original_estimate=f"out of fold R2 {primary['out_of_fold_r2']:.4f}; gain support {scalar.loc['transfer_gain', 'q_supported_fraction']:.3f}; buffering support {scalar.loc['buffering', 'q_supported_fraction']:.3f}",
             original_denominator="15807 target state observations from 6105 targets",
-            strengthened_estimate=f"rank rho {transfer.loc['spearman', 'estimate']:.4f}; buffered retention {transfer.loc['buffered_rank_retention', 'estimate']:.3f}; amplified retention {transfer.loc['amplified_rank_retention', 'estimate']:.3f}",
-            strengthened_denominator="6105 targets with 611 targets in each original tail",
-            confidence_interval=f"rho {transfer.loc['spearman', 'ci_low']:.4f} to {transfer.loc['spearman', 'ci_high']:.4f}; buffered {transfer.loc['buffered_rank_retention', 'ci_low']:.3f} to {transfer.loc['buffered_rank_retention', 'ci_high']:.3f}; amplified {transfer.loc['amplified_rank_retention', 'ci_low']:.3f} to {transfer.loc['amplified_rank_retention', 'ci_high']:.3f}",
-            corrected_significance=f"tail retention q {transfer.loc['buffered_rank_retention', 'q_value']:.6f} and {transfer.loc['amplified_rank_retention', 'q_value']:.6f}",
-            effect_size_interpretation="Target ordering is highly stable after partial pooling, but only about one third of tail labels remain beyond the original fixed cutoffs after shrinkage.",
-            sensitivity_and_influence=f"Variance multipliers 1.0 to 1.5 retain rho at least {transfer_sensitivity['spearman'].min():.3f} and rank retention at least {min(transfer_sensitivity['buffered_rank_retention'].min(), transfer_sensitivity['amplified_rank_retention'].min()):.3f}; all target influence values are retained.",
-            evidence_gained="Improved precision and explicit separation of rank stability from threshold dependent labels.",
+            strengthened_estimate=f"rank rho {transfer.loc['spearman', 'estimate']:.4f}; buffered retention {transfer.loc['buffered_rank_retention', 'estimate']:.3f}; amplified retention {transfer.loc['amplified_rank_retention', 'estimate']:.3f}; pooled held-state buffering {pooled_buffering['estimate']:.4f}",
+            strengthened_denominator="6105 targets with 611 targets in each original tail; 4399 complete-state targets and 1320 held-state selections",
+            confidence_interval=f"rho {transfer.loc['spearman', 'ci_low']:.4f} to {transfer.loc['spearman', 'ci_high']:.4f}; buffered {transfer.loc['buffered_rank_retention', 'ci_low']:.3f} to {transfer.loc['buffered_rank_retention', 'ci_high']:.3f}; amplified {transfer.loc['amplified_rank_retention', 'ci_low']:.3f} to {transfer.loc['amplified_rank_retention', 'ci_high']:.3f}; held-state buffering {pooled_buffering['ci_low']:.4f} to {pooled_buffering['ci_high']:.4f}",
+            corrected_significance=f"tail retention q {transfer.loc['buffered_rank_retention', 'q_value']:.6f} and {transfer.loc['amplified_rank_retention', 'q_value']:.6f}; held-state buffering q {pooled_buffering['q_lower_tail']:.6f}",
+            effect_size_interpretation="Target ordering is highly stable after partial pooling, held-state buffering replicates in every state, but only about one third of tail labels remain beyond the original fixed cutoffs after shrinkage.",
+            sensitivity_and_influence=f"Variance multipliers 1.0 to 1.5 retain rho at least {transfer_sensitivity['spearman'].min():.3f} and rank retention at least {min(transfer_sensitivity['buffered_rank_retention'].min(), transfer_sensitivity['amplified_rank_retention'].min()):.3f}; maximum absolute leave-one-target buffering change {buffering_influence['change_from_full'].abs().max():.4f}.",
+            evidence_gained="Improved precision, explicit separation of rank stability from threshold-dependent labels, and held-state buffering with matched nulls and exact target deletions.",
             remaining_limitation="Target state sampling variances are unavailable, so measurement error is bounded rather than point identified.",
             final_status="mixed",
             materially_improves_manuscript=True,
@@ -72,10 +80,10 @@ def main() -> None:
             strengthened_denominator=f"{int(reroute['pairs'])} pairs from {int(reroute['targets'])} targets",
             confidence_interval=f"{reroute['cluster_bootstrap_ci_low']:.4f} to {reroute['cluster_bootstrap_ci_high']:.4f}",
             corrected_significance=f"directional upper tail q {reroute['q_value_upper_bh']:.3f}; lower tail p {reroute['permutation_p_lower']:.6f}",
-            effect_size_interpretation="Within target state compositions differ, but remain closer than matched cross target compositions after conditioning on magnitude.",
+            effect_size_interpretation="Within target state compositions differ, but remain closer than cross-target compositions under the frozen pair-derived magnitude strata.",
             sensitivity_and_influence="The opposite direction holds for every state pair; existing module resolution, seed and state deletion sensitivities remain unchanged.",
-            evidence_gained="Added a log ratio geometry and a magnitude matched falsification null.",
-            remaining_limitation="Guide and donor resolved module compositions are unavailable and the result is conditional on the frozen 30 component basis.",
+            evidence_gained="Added a log-ratio geometry and a pair-stratified falsification null.",
+            remaining_limitation="Guide and donor resolved module compositions are unavailable; matching strata are fixed from observed pairs, the null median is treated as fixed in the bootstrap, and the result is conditional on the frozen 30 component basis.",
             final_status="mixed",
             materially_improves_manuscript=True,
         ),
@@ -98,13 +106,13 @@ def main() -> None:
         row(
             result_family="Cross state and cross system conservation",
             extension_action="Reuse internal decomposition and stop external extension",
-            original_estimate=f"mean conserved core fraction {core['estimate']:.4f}",
+            original_estimate=f"mean target-level arithmetic-component energy fraction {core['estimate']:.4f}",
             original_denominator=f"{int(core['targets'])} nonzero targets within the full 4399 target cohort",
             strengthened_estimate=f"guide delta R2 {core_ranges['mean_guide_concordance']:.4f}; donor {core_ranges['mean_donor_concordance']:.4f}; K562 {core_ranges['k562_concordance']:.4f}",
             strengthened_denominator="3720 guide, 948 donor and 1204 K562 evaluable targets",
-            confidence_interval=f"core fraction {core['ci_low']:.4f} to {core['ci_high']:.4f}; every predictive delta interval crosses zero",
-            corrected_significance="core structure supported; predictive additions unresolved after BH correction",
-            effect_size_interpretation="A conserved component is measurable within CD4 states but does not improve held out guide, donor or K562 prediction.",
+            confidence_interval=f"arithmetic-component energy fraction {core['ci_low']:.4f} to {core['ci_high']:.4f}; every predictive delta interval crosses zero",
+            corrected_significance="arithmetic component supported internally; predictive additions unresolved after BH correction",
+            effect_size_interpretation="A shared arithmetic component is measurable within CD4 states but does not improve held out guide, donor or K562 prediction.",
             sensitivity_and_influence="Target held out, leave one state, matched target and fixed component resolution checks are complete.",
             evidence_gained="No new external evidence passed the frozen data gate.",
             remaining_limitation="The independent T cell comparison has eight targets and complete external component vectors are unavailable.",
@@ -147,7 +155,7 @@ def main() -> None:
             result_family="Molecular regulatory support",
             extension_action="Reuse complete evidence tiers and stop direct occupancy extension",
             original_estimate=f"support association with transfer gain {molecular_gain['estimate']:.4f}",
-            original_denominator="124798 edges from 284 regulators and 715 regulator state combinations",
+            original_denominator=f"{len(eligible_molecular)} eligible regulator-state combinations across {eligible_molecular['target_gene'].nunique()} regulators, including {len(eligible_molecular) - len(nonnull_molecular)} null-response combinations; the tested association used {len(nonnull_molecular)} nonnull summaries clustered across {int(molecular_gain['n'])} regulators; {int(nonnull_molecular['significant_response_edges'].sum())} edge rows arose from those nonnull combinations",
             strengthened_estimate=f"guide delta R2 {molecular_ranges['guide_concordance']:.4f}; K562 delta R2 {molecular_ranges['k562_replication']:.4f}",
             strengthened_denominator="162 guide and 99 K562 target comparisons",
             confidence_interval=f"support association {molecular_gain['ci_low']:.4f} to {molecular_gain['ci_high']:.4f}; both predictive delta intervals cross zero",
@@ -163,7 +171,7 @@ def main() -> None:
             result_family="Natural genetic concordance",
             extension_action="Reuse corrected bundle preserving audit",
             original_estimate=f"direction agreement {natural['estimate']:.4f}",
-            original_denominator=f"{int(natural['pairs'])} pairs, {int(natural['snps'])} variants, {int(natural['mediators'])} mediators and {int(natural['source_chromosomes'])} source chromosomes",
+            original_denominator=f"{int(natural['pairs'])} pairs, {int(natural['snps'])} variants, {int(natural['mediators'])} mediators, {int(natural['trans_genes'])} trans genes and {int(natural['source_chromosomes'])} source chromosomes",
             strengthened_estimate="No new fit; corrected audit result retained",
             strengthened_denominator="425 identity eligible pairs from 31312 preselection associations",
             confidence_interval=f"{natural['bootstrap_ci_low']:.4f} to {natural['bootstrap_ci_high']:.4f}",
@@ -177,31 +185,31 @@ def main() -> None:
         ),
         row(
             result_family="Disease convergence and locus causal triangulation",
-            extension_action="Reuse complete denominator and stop unavailable genome wide extension",
+            extension_action="Cluster-paired disease uncertainty and complete locus gates",
             original_estimate=f"transfer augmented minus size state AUROC {disease['transfer_minus_size_state_auroc']:.4f}; 0 of {int(disease['amplified_disease_tests'])} amplified tests pass FDR",
             original_denominator=f"{int(disease['diseases'])} diseases, {int(disease['clusters'])} programmes and {len(loci)} eligible loci",
-            strengthened_estimate="locus gate counts 4 of 7, 4 of 7 and 3 of 7; no mediation claim",
-            strengthened_denominator="3 frozen loci with all alternate genes and unavailable gates retained",
-            confidence_interval="No eligible corrected enrichment or mediation interval supports convergence",
-            corrected_significance="disease prediction failed; genome wide confirmation unavailable after 0 of 7 GWAS passed schema gates",
-            effect_size_interpretation="Transfer features do not improve broad disease prediction and no locus passes the causal chain.",
-            sensitivity_and_influence="Matched negative diseases and loci, alternate genes, MHC exclusion and seven causal gates are retained.",
-            evidence_gained="Complete gate accounting prevents partial locus evidence from being interpreted as mediation.",
-            remaining_limitation="Complete ancestry matched regional GWAS, LD and immune cis eQTL inputs are unavailable.",
+            strengthened_estimate=f"paired AUROC difference {disease_auroc['estimate']:.4f}; locus gate counts 4 of 7, 4 of 7 and 3 of 7; no mediation claim",
+            strengthened_denominator="1708 disease-program rows from 75 response clusters and 14 diseases; 3 nominated-gene loci",
+            confidence_interval=f"paired AUROC difference {disease_auroc['ci_low']:.4f} to {disease_auroc['ci_high']:.4f}",
+            corrected_significance=f"paired two-sided q {disease_auroc['q_two_sided']:.4f}; genome-wide confirmation unavailable after 0 of 7 GWAS passed schema gates",
+            effect_size_interpretation="Transfer features did not improve broad disease discrimination. The negative AUROC estimate and interval did not establish reverse superiority after correction, and no locus passes the causal chain.",
+            sensitivity_and_influence="Response-cluster bootstrap and model-label swaps retain every disease-program row; matched negative diseases and all seven nominated-gene locus gates are retained.",
+            evidence_gained="Paired uncertainty rejects an improvement claim and narrows the reverse estimate, while complete gate accounting prevents partial locus evidence from being interpreted as mediation.",
+            remaining_limitation="Matched negative-locus analysis is unresolved because matching fields are missing; alternate-gene locus coverage was not assembled; complete ancestry-matched regional GWAS, LD and immune cis-eQTL inputs are unavailable.",
             final_status="failed",
-            materially_improves_manuscript=False,
+            materially_improves_manuscript=True,
         ),
         row(
             result_family="Specification curve robustness and evidence synthesis",
             extension_action="Deterministic synthesis without new testing",
             original_estimate=f"buffering support {scalar.loc['buffering', 'q_supported_fraction']:.3f}; transfer gain {scalar.loc['transfer_gain', 'q_supported_fraction']:.3f}; cross system conservation {validation.loc['cross_system_conservation', 'q_supported_fraction']:.3f}; natural genetics {validation.loc['natural_genetic_concordance', 'q_supported_fraction']:.3f}",
             original_denominator="17280 scalar, 180 rerouting and 1008 validation specifications",
-            strengthened_estimate="one supported stability extension, one opposite direction rerouting falsification and one failed GRN superiority extension",
+            strengthened_estimate="supported transfer stability and held-state buffering, an opposite-direction rerouting falsification, failed GRN superiority and no supported disease-prediction improvement",
             strengthened_denominator="all 10 result families with source specific denominators",
             confidence_interval="Source analysis intervals retained without recycling correlated evidence",
             corrected_significance="No new omnibus significance test; each source family retains its frozen multiplicity correction",
             effect_size_interpretation="The combined evidence supports stable within system transfer ranking and buffering, while limiting excess rerouting, general GRN superiority, portability and disease claims.",
-            sensitivity_and_influence="All unavailable, underpowered, negative and contradictory branches are retained and no additional thresholds or datasets were searched.",
+            sensitivity_and_influence="All unavailable, underpowered, negative and contradictory branches are retained and no additional thresholds or datasets were searched after the frozen candidate and schema screens.",
             evidence_gained="A single auditable table aligns estimates, denominators, uncertainty, multiplicity, stopping rules and manuscript impact.",
             remaining_limitation="Independent external perturbation, complete occupancy and genome wide disease resources remain unavailable.",
             final_status="mixed",
