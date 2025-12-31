@@ -1,0 +1,23 @@
+{
+  "targets": 4399,
+  "target_state_rows": 13197,
+  "nonzero_targets": 3965,
+  "zero_energy_targets": 434,
+  "signed_consensus_targets": 1464,
+  "state_nonzero": {
+    "Rest": 3066,
+    "Stim8hr": 3113,
+    "Stim48hr": 3191
+  },
+  "maximum_energy_identity_error": 2.842170943040401e-14,
+  "mean_core_fraction": 0.4325474415311012,
+  "matched_null_mean": 0.3345049542310027,
+  "matched_null_p": 0.001,
+  "maximum_absolute_leave_one_target_change": 0.00014291057576504285,
+  "source_sha256_verified": true,
+  "original_freeze_manifest_sha256": "71748531284446530727e3c0108c1a21ffec10a4b6f4cfcd067d02dbf65b9c12",
+  "freeze_manifest_sha256": "dfa541944edc805225cef0e4bceadf09e0f9ceb3aef2f9feaf970159d9c7eb32",
+  "provenance_qc": "Added a newline-independent cohort hash without changing the frozen cohort or analysis values.",
+  "elapsed_seconds": 37.79107749997638,
+  "interpretation": "Mean component is a descriptive energy projection. Biological conservation also requires signed consensus and held-out or independent reproducibility."
+}

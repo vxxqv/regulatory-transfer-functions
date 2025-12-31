@@ -1,0 +1,16 @@
+{
+  "tests": "tests/test_state_response_decomposition.py and tests/test_context_dynamics.py",
+  "passed": 9,
+  "independent_source_targets": 25,
+  "raw_correlations_reproduced": 6,
+  "heldout_loss_comparisons_reproduced": 3,
+  "all_target_energy_identities_verified": 4399,
+  "all_state_energy_identities_verified": 13197,
+  "all_component_resolutions_verified": [10, 20, 30],
+  "invalidated_results": 0,
+  "model_fitting_runs": 1,
+  "review_correction": "Matched-null direction reconciled and bootstrap prediction FDR added from stored results without model refitting.",
+  "unavailable_branches_recorded": 5,
+  "final_figure": "S26",
+  "figure_visual_qc": "pass"
+}

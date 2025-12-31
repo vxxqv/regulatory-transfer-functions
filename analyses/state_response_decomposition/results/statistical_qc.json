@@ -1,0 +1,6 @@
+{
+  "model_refits": 0,
+  "source_values_changed": false,
+  "correction": "Association direction is relative to the matched null, not the raw zero-null correlation. Prediction comparisons include FDR from centered target-bootstrap tests.",
+  "intervals_reproduced": true
+}

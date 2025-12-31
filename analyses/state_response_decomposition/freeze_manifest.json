@@ -1,0 +1,24 @@
+{
+  "status": "retrospective extension frozen before new decomposition outcomes",
+  "targets": 4399,
+  "config_sha256": "e8e15cda15cfa906c2a6156d8730b06d395dec84d3637c4c184a300d1a577bdd",
+  "cohort_sha256": "f59cecc97aeb34e269b8d14fa410374583a6f15bc44f873d53614cdd550c1a47",
+  "canonical_cohort_sha256": "b4cb275bfd27d04b26b72c34eb9af7c2d697af09e27244ee14f3a402df658d9b",
+  "sources": {
+    "data/interim/gwt_vectors/rows.parquet": "ad1ff11af7c34db7baae8eb24971e0f698a0a73ba70d70255def1851f0acdf9c",
+    "data/interim/gwt_vectors/genes.parquet": "2a87aa6bc012ea3f374d85546eb3d235c7efd9b8c063d34c5d2b8a488340ddf4",
+    "data/interim/gwt_vectors/normalized_significant_logfc.npz": "d759799345804582aa0bc5829fb7cc4534f2322bc8b3b0bf696723fe5589f58b",
+    "analyses/primary/results/transfer_phenotypes.parquet": "4327ea47df56278e92a60c8e4a26c41f5ff2d8f4e4786108e23e8998d0f97b3f",
+    "analyses/primary/results/context_switching.parquet": "8431f325c278e9cedf6c456ad917aa12fdddc0b492d03290f5a274fa28877a7a",
+    "analyses/vectors/results/contextual_transfer_tensor.parquet": "d644893577cc5a78a0bda649584d21e608f3e105f78ed865a6d0328b541a8099",
+    "analyses/vectors/results/context_rerouting_pairs.parquet": "b3845ac971b20991a0be5635d00d56c2593b67c746a8c9c517adc9c16e58c745",
+    "analyses/vectors/results/network_gain_rows.parquet": "d31cb32ec00b4474b8736d146d2709eeec378cf0575b0fd5338b48503ae1a608",
+    "analyses/vectors/results/reference_module_loadings.parquet": "85a083525b34f2fa321eb43f7d71a42270ee5469306b4cf16cc56403b34739ef",
+    "analyses/context_dynamics/results/tf_activity_association.parquet": "9d29b2c48974e656f4b07ddd2b268c824ed524d66bbbd833ee2b173c5b640d7f",
+    "analyses/context_dynamics/results/independent_state_validation.csv": "629fdf478520d152ac87253f640d9d710ce7590c340882effdb3470219792fc6",
+    "analyses/replication/results/k562_replication_rows.parquet": "d6ea5c21f8a331a23b13e437c96566dbb3d93e285aaf0c04a03cbe83b6f817d6",
+    "analyses/external_benchmark/results/all_eligible_target_predictions.parquet": "6e9cc451eec7815bc3431f87d04b2387d17184b164ea30799808f40cf262b6b1",
+    "analyses/guide_dose_response/results/eligible_guide_rows.csv": "35b9dd87b0812d449533e276bda0951a1110d5376ea75d2bd61f267706e0aa15"
+  },
+  "outcomes_examined_before_freeze": false
+}

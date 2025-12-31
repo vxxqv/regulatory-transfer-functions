@@ -1,0 +1,38 @@
+state_response_decomposition:
+  version: 1
+  seed: 2026091307
+  states: [Rest, Stim8hr, Stim48hr]
+  expected_targets: 4399
+  expected_rows: 13197
+  cohort: exactly one observation in each required state
+  primary_representation: normalized_significant_logfc
+  core_definition: arithmetic mean of the three signed gene response vectors
+  signed_consensus_sensitivity: per gene minimum absolute response only when all three states have the same nonzero sign
+  interpretation: mean-component energy is descriptive; conservation requires held-out state and signed-consensus support
+  energy_definition: 3 * squared core norm plus sum of squared state residual norms
+  zero_energy: retain with undefined fractions; never impute a response
+  sensitivity_components: [10, 20, 30]
+  component_fit: uncentered truncated SVD; fit only training targets; nested first components
+  folds: 5
+  bootstrap_replicates: 1000
+  permutations: 999
+  match_quantiles: 5
+  match_covariates: [mean_n_downstream, mean_cis_magnitude]
+  minimum_correlation_targets: 30
+  minimum_prediction_targets: 100
+  minimum_external_tcell_targets: 20
+  ridge_alpha: 10.0
+  prediction_covariates: [mean_target_expression, mean_cis_magnitude, mean_n_downstream, mean_target_cells, mean_guides]
+  prediction_outcomes: [mean_guide_concordance, mean_donor_concordance, k562_concordance]
+  association_outcomes: [mean_guide_concordance, mean_donor_concordance, k562_concordance, rerouting, tf_motif_range, rpe1_negative_transfer]
+  fdr_alpha: 0.05
+  interval: target bootstrap percentile 95 percent
+  null: independently permute stimulated target identities within frozen covariate strata
+  leave_one_state: predict held-out signed response from the mean of the other two states
+  leave_one_target: exact influence on cohort mean core fraction
+  stopping_rules:
+    - stop a branch below its target minimum and retain the complete denominator
+    - no external core-vector comparison without mapped external signed response vectors
+    - no independent T-cell replication claim from the existing eight-target comparison
+    - no chromatin or causal mechanism claim from response-derived motif scores
+    - no additional resolutions, seeds, thresholds, or models selected after outcomes

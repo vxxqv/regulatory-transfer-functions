@@ -1,0 +1,6 @@
+branch	targets	minimum_targets	status	reason
+independent_Tcell_state_replication	8	20.0	underpowered	Existing eight-target Th1/Th2 summary is previously inspected; no new independent signed T-cell perturbation matrix is supplied.
+K562_core_vs_residual_vectors	1237		unavailable	Frozen inputs contain whole-response correlation summaries, not gene-aligned external signed vectors.
+RPE1_core_vs_residual_vectors	312		unavailable	Frozen inputs contain inspected model predictions, not gene-aligned external signed vectors.
+independent_chromatin_enhancer_cascade_validation	0		unavailable	No frozen target-state matched occupancy, accessibility, enhancer or cascade matrix is provided to this block. Motif range is response-derived.
+component_specific_guide_and_donor_replication	0		unavailable	Guide and donor correlation summaries cannot identify component-specific signed response vectors.
