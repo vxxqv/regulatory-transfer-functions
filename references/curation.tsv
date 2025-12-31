@@ -7,47 +7,47 @@ doi	citekey	year	title	decision	reason
 10.1016/j.cell.2019.05.013		2019	Tracing Oncogene Rearrangements in the Mutational History of Lung Adenocarcinoma	exclude	unrelated cancer history study
 10.1016/j.cell.2022.05.013	Replogle2022Mapping	2022	Mapping information-rich genotype-phenotype landscapes with genome-scale Perturb-seq	include	included after topical and metadata review
 10.1016/j.cell.2026.08.002	Zhu2026Genome	2026	Genome-scale perturb-seq in primary human CD4+ T cells maps context-specific regulators of T cell programs and human immune traits	include	included after topical and metadata review
-10.1016/j.csbj.2025.02.028	MonfortLanzas2025Machine	2025	Machine learning to dissect perturbations in complex cellular systems	include	included after topical and metadata review
+10.1016/j.csbj.2025.02.028	MonfortLanzas2025Machine	2025	Machine learning to dissect perturbations in complex cellular systems	exclude	not cited in final manuscript
 10.1016/j.molcel.2021.11.017		2022	The long noncoding RNA glycoLINC assembles a lower glycolytic metabolon to promote glycolysis	exclude	unrelated metabolic lncRNA study
 10.1038/nbt.3450	Korkmaz2016Functional	2016	Functional genetic screens for enhancer elements in the human genome using CRISPR-Cas9	include	included after topical and metadata review
 10.1038/nmeth.4177	Datlinger2017Pooled	2017	Pooled CRISPR screening with single-cell transcriptome readout	include	included after topical and metadata review
 10.1038/s41467-019-10216-x	Duan2019Model	2019	Model-based understanding of single-cell CRISPR screening	include	included after topical and metadata review
-10.1038/s41467-020-14362-5	Li2020Interrogation	2020	Interrogation of enhancer function by enhancer-targeting CRISPR epigenetic editing	include	included after topical and metadata review
+10.1038/s41467-020-14362-5	Li2020Interrogation	2020	Interrogation of enhancer function by enhancer-targeting CRISPR epigenetic editing	exclude	not cited in final manuscript
 10.1038/s41586-020-2493-4	Anon2020Expanded	2020	Expanded encyclopaedias of DNA elements in the human and mouse genomes	include	included after topical and metadata review
 10.1038/s41586-021-03446-x	Nasser2021Genome	2021	Genome-wide enhancer maps link risk variants to disease genes	include	included after topical and metadata review
 10.1038/s41586-022-05688-9	Kamimoto2023Dissecting	2023	Dissecting cell identity via network inference and in silico gene perturbation	include	included after topical and metadata review
 10.1038/s41586-023-06139-9	Theodoris2023Transfer	2023	Transfer learning enables predictions in network biology	include	included after topical and metadata review
 10.1038/s41586-024-08314-y	Arce2025Central	2025	Central control of dynamic gene circuits governs T cell rest and activation	include	included after topical and metadata review
-10.1038/s41586-025-09313-3	Baglaenko2025Precisely	2025	Precisely defining disease variant effects in CRISPR-edited single cells	include	included after topical and metadata review
+10.1038/s41586-025-09313-3	Baglaenko2025Precisely	2025	Precisely defining disease variant effects in CRISPR-edited single cells	exclude	not cited in final manuscript
 10.1038/s41587-019-0336-3	Moon2019Visualizing	2019	Visualizing structure and transitions in high-dimensional biological data	include	included after topical and metadata review
 10.1038/s41587-020-0605-1		2021	Cell type prioritization in single-cell data	exclude	not required for the stated analyses
-10.1038/s41587-021-01001-7	Lotfollahi2022Mapping	2022	Mapping single-cell data to reference atlases by transfer learning	include	included after topical and metadata review
+10.1038/s41587-021-01001-7	Lotfollahi2022Mapping	2022	Mapping single-cell data to reference atlases by transfer learning	exclude	not cited in final manuscript
 10.1038/s41587-023-01905-6	Roohani2024Predicting	2024	Predicting transcriptional outcomes of novel multigene perturbations with GEARS	include	included after topical and metadata review
 10.1038/s41588-019-0538-0	Fulco2019Activity	2019	Activity-by-contact model of enhancer-promoter regulation from thousands of CRISPR perturbations	include	included after topical and metadata review
 10.1038/s41588-021-00778-2	Papalexi2021Characterizing	2021	Characterizing the molecular regulation of inhibitory immune checkpoints with multimodal single-cell screens	include	included after topical and metadata review
 10.1038/s41588-021-00913-z	Vsa2021Large	2021	Large-scale cis- and trans-eQTL analyses identify thousands of genetic loci and polygenic scores that regulate blood gene expression	include	included after topical and metadata review
-10.1038/s41592-018-0229-2	Lopez2018Deep	2018	Deep generative modeling for single-cell transcriptomics	include	included after topical and metadata review
+10.1038/s41592-018-0229-2	Lopez2018Deep	2018	Deep generative modeling for single-cell transcriptomics	exclude	not cited in final manuscript
 10.1038/s41592-019-0494-8	Lotfollahi2019scGen	2019	scGen predicts single-cell perturbation responses	include	included after topical and metadata review
 10.1038/s41592-019-0667-5	Browaeys2020NicheNet	2020	NicheNet: modeling intercellular communication by linking ligands to target genes	include	included after topical and metadata review
-10.1038/s41592-021-01252-x	Avsec2021Effective	2021	Effective gene expression prediction from sequence by integrating long-range interactions	include	included after topical and metadata review
-10.1038/s41592-023-02040-5	Dong2023Causal	2023	Causal identification of single-cell experimental perturbation effects with CINEMA-OT	include	included after topical and metadata review
-10.1038/s41592-024-02201-0	Cui2024scGPT	2024	scGPT: toward building a foundation model for single-cell multi-omics using generative AI	include	included after topical and metadata review
+10.1038/s41592-021-01252-x	Avsec2021Effective	2021	Effective gene expression prediction from sequence by integrating long-range interactions	exclude	not cited in final manuscript
+10.1038/s41592-023-02040-5	Dong2023Causal	2023	Causal identification of single-cell experimental perturbation effects with CINEMA-OT	exclude	not cited in final manuscript
+10.1038/s41592-024-02201-0	Cui2024scGPT	2024	scGPT: toward building a foundation model for single-cell multi-omics using generative AI	exclude	not cited in final manuscript
 10.1038/s41592-024-02216-7	Yao2024Multicenter	2024	Multicenter integrated analysis of noncoding CRISPRi screens	include	included after topical and metadata review
 10.1038/s41598-019-41695-z	Traag2019From	2019	From Louvain to Leiden: guaranteeing well-connected communities	include	included after topical and metadata review
 10.1038/s42003-023-05594-4	Ishikawa2023RENGE	2023	RENGE infers gene regulatory networks using time-series single-cell RNA-seq data with CRISPR perturbations	include	included after topical and metadata review
 10.1073/pnas.0506580102	Subramanian2005Gene	2005	Gene set enrichment analysis: A knowledge-based approach for interpreting genome-wide expression profiles	include	included after topical and metadata review
 10.1093/bioinformatics/btaa692	LopezDelisle2021pyGenomeTracks	2021	pyGenomeTracks: reproducible plots for multivariate genomic datasets	include	included after topical and metadata review
-10.1093/bioinformatics/btac757	Fang2023GSEApy	2023	GSEApy: a comprehensive package for performing gene set enrichment analysis in Python	include	included after topical and metadata review
-10.1093/nar/gkab1061	Varadi2022AlphaFold	2022	AlphaFold Protein Structure Database: massively expanding the structural coverage of protein-sequence space with high-accuracy models	include	included after topical and metadata review
+10.1093/bioinformatics/btac757	Fang2023GSEApy	2023	GSEApy: a comprehensive package for performing gene set enrichment analysis in Python	exclude	not cited in final manuscript
+10.1093/nar/gkab1061	Varadi2022AlphaFold	2022	AlphaFold Protein Structure Database: massively expanding the structural coverage of protein-sequence space with high-accuracy models	exclude	not cited in final manuscript
 10.1093/nar/gkad1025	Milacic2024Reactome	2024	The Reactome Pathway Knowledgebase 2024	include	included after topical and metadata review
 10.1093/nar/gkae1072		2025	miRTarBase 2025: updates to the collection of experimentally validated microRNA-target interactions	exclude	microRNA resource not used in the workflow
-10.1093/nar/gkae1113	Szklarczyk2025STRING	2025	The STRING database in 2025: protein networks with directionality of regulation	include	included after topical and metadata review
-10.1093/nar/gkae1128	Buniello2025Open	2025	Open Targets Platform: facilitating therapeutic hypotheses building in drug discovery	include	included after topical and metadata review
-10.1093/nar/gkae777	Yang2025PerturbDB	2025	PerturbDB for unraveling gene functions and regulatory networks	include	included after topical and metadata review
-10.1093/nar/gkae858	Wei2025PerturBase	2025	PerturBase: a comprehensive database for single-cell perturbation data analysis and visualization	include	included after topical and metadata review
-10.1101/2023.12.12.571389	Huang2023Sequential	2023	Sequential Optimal Experimental Design of Perturbation Screens Guided by Multi-modal Priors	include	included after topical and metadata review
-10.1101/2025.06.11.658833	Yi2025LazyNet	2025	LazyNet: Interpretable ODE Modeling of Sparse CRISPR Single-Cell Screens Reveals New Biological Insights	include	included after topical and metadata review
-10.1111/1467-9868.00346	Storey2002Direct	2002	A Direct Approach to False Discovery Rates	include	included after topical and metadata review
+10.1093/nar/gkae1113	Szklarczyk2025STRING	2025	The STRING database in 2025: protein networks with directionality of regulation	exclude	not cited in final manuscript
+10.1093/nar/gkae1128	Buniello2025Open	2025	Open Targets Platform: facilitating therapeutic hypotheses building in drug discovery	exclude	not cited in final manuscript
+10.1093/nar/gkae777	Yang2025PerturbDB	2025	PerturbDB for unraveling gene functions and regulatory networks	exclude	not cited in final manuscript
+10.1093/nar/gkae858	Wei2025PerturBase	2025	PerturBase: a comprehensive database for single-cell perturbation data analysis and visualization	exclude	not cited in final manuscript
+10.1101/2023.12.12.571389	Huang2023Sequential	2023	Sequential Optimal Experimental Design of Perturbation Screens Guided by Multi-modal Priors	exclude	not cited in final manuscript
+10.1101/2025.06.11.658833	Yi2025LazyNet	2025	LazyNet: Interpretable ODE Modeling of Sparse CRISPR Single-Cell Screens Reveals New Biological Insights	exclude	not cited in final manuscript
+10.1111/1467-9868.00346	Storey2002Direct	2002	A Direct Approach to False Discovery Rates	exclude	not cited in final manuscript
 10.1111/j.2517-6161.1995.tb02031.x	Benjamini1995Controlling	1995	Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing	include	included after topical and metadata review
 10.1111/rssb.12388	Wang2020Simple	2020	A Simple New Approach to Variable Selection in Regression, with Application to Genetic Fine Mapping	include	included after topical and metadata review
 10.1126/science.aax4438	Norman2019Exploring	2019	Exploring genetic interaction manifolds constructed from rich single-cell phenotypes	include	included after topical and metadata review
@@ -63,5 +63,16 @@ doi	citekey	year	title	decision	reason
 10.1371/journal.pgen.1010299	Zou2022Fine	2022	Fine-mapping from summary data with the “Sum of Single Effects” model	include	included after topical and metadata review
 10.15252/msb.202211517	Lotfollahi2023Predicting	2023	Predicting cellular responses to complex perturbations in high-throughput screens	include	included after topical and metadata review
 10.21105/joss.00861	McInnes2018UMAP	2018	UMAP: Uniform Manifold Approximation and Projection	include	included after topical and metadata review
-10.21203/rs.3.rs-7304871/v1	Goyal2025Fluctuation	2025	Fluctuation structure predicts genome-wide perturbation outcomes	include	included after topical and metadata review
+10.21203/rs.3.rs-7304871/v1	Goyal2025Fluctuation	2025	Fluctuation structure predicts genome-wide perturbation outcomes	exclude	not cited in final manuscript
 10.64898/2026.03.09.710372	Moonen2026Genome	2026	Genome-scale mapping of variant, enhancer and gene function in primary human CD4+ T cells	include	included after topical and metadata review
+10.1038/s41592-019-0690-6	Pratapa2020Benchmarking	2020	Benchmarking algorithms for gene regulatory network inference from single-cell transcriptomic data	include	primary GRN benchmark method
+10.1186/s13059-017-1285-0	Burren2017Chromosome	2017	Chromosome contacts in activated T cells identify autoimmune disease candidate genes	include	primary CD4 promoter-contact source
+10.1101/gr.240663.118	GarciaAlonso2019Benchmark	2019	Benchmark and integration of resources for the estimation of human transcription factor activities	include	primary DoRothEA resource and activity benchmark
+10.1093/nar/gkx1013	Han2018TRRUST	2018	TRRUST v2: an expanded reference database of human and mouse transcriptional regulatory interactions	include	primary curated regulatory resource
+10.1093/database/bav095	Liu2015RegNetwork	2015	RegNetwork: an integrated database of transcriptional and post-transcriptional regulatory networks in human and mouse	include	primary curated regulatory resource
+10.1093/nar/gkad841	MullerDott2023Expanding	2023	Expanding the coverage of regulons from high-confidence prior knowledge for accurate estimation of transcription factor activities	include	primary CollecTRI resource
+10.1093/nar/gkh012	Sandelin2004JASPAR	2004	JASPAR: an open-access database for eukaryotic transcription factor binding profiles	include	primary motif resource
+10.1093/nar/gkj143	Matys2006TRANSFAC	2006	TRANSFAC and its module TRANSCompel: transcriptional gene regulation in eukaryotes	include	primary motif resource
+10.1111/j.2517-6161.1982.tb01195.x	Aitchison1982Statistical	1982	The Statistical Analysis of Compositional Data	include	primary compositional data method
+10.1016/0197-2456(86)90046-2	DerSimonian1986MetaAnalysis	1986	Meta-analysis in clinical trials	include	primary random-effects estimator
+10.5281/zenodo.22804222	Patni2026Regulatory	2026	Regulatory Transfer Functions	include	version 1.1.0 software release collection cited for reproducibility
