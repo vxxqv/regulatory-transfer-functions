@@ -1,0 +1,20 @@
+{
+  "targets": 4399,
+  "state_profiles": 13197,
+  "missing_profiles": 0,
+  "zero_full_profiles": 3827,
+  "zero_masked_profiles": 5275,
+  "targets_zero_in_all_states": 434,
+  "retained_non_target_genes": 5883,
+  "decoder_predictions": 39591,
+  "primary_information_pass": false,
+  "h12_h17_confirmatory_tests_run": 0,
+  "conditional_tests": 9,
+  "conditional_bh_family_size": 9,
+  "full_degree_matched_null_available": false,
+  "guide_donor_replication_available": false,
+  "external_association_available": false,
+  "analysis_wall_time_seconds": 79.09995890001301,
+  "peak_memory_mb": null,
+  "output_storage_mb": 4.956192970275879
+}

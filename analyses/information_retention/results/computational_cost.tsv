@@ -1,0 +1,10 @@
+state	model	wall_time_seconds
+Rest	nearest_centroid	10.375808599987067
+Rest	RNA_fingerprint_cosine	9.038527900003828
+Rest	frozen_module_decoder	7.875381899997592
+Stim8hr	nearest_centroid	8.750925300002564
+Stim8hr	RNA_fingerprint_cosine	8.121153499989305
+Stim8hr	frozen_module_decoder	8.19867809995776
+Stim48hr	nearest_centroid	8.84558520000428
+Stim48hr	RNA_fingerprint_cosine	8.166641900024842
+Stim48hr	frozen_module_decoder	8.315185200015549

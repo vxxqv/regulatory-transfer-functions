@@ -1,0 +1,14 @@
+gate	numerator	denominator	status	reason
+complete_state_accounting	4399	4399	available	All frozen target classes retained
+class_known_state_validation	4399	4399	available	Two training-state summaries per class; one held-out-state summary
+independent_profiles_per_class	0	4399	unavailable	Three sampled-state summaries do not establish three independent guide/donor profiles
+complete_generic_template_removal	0	4399	unavailable	Library-size, stress and proliferation templates absent; unseen-state-specific mean removal not identifiable
+guide_or_donor_information_replication	0	4399	unavailable	Aggregate correlations are not response vectors
+external_profile_information	0	4399	unavailable	K562 concordance summaries do not define external decoder profiles
+regulator_family_outcome	0	4399	unavailable	No independent frozen family labels
+functional_module_outcome	0	4399	unavailable	Response-derived modules cannot be independent decoder labels
+ridge_multinomial	0	4399	not_run_gate_failed	Confirmatory model stopped before fitting because mandatory inputs are absent
+full_network_degree_matched_null	0	4399	unavailable	Assigned frozen inputs lack independent network-degree annotation
+equivalence_stability	0	4399	unavailable	Profile reliability, 20/40 loadings, negative-gene controls and full stability checks absent
+external_composition_association	0	4399	unavailable	Deferred until external and equivalence gates pass
+primary_information_pass	0	1	not_passed	Required adjustment, guide/donor replication and independent external association do not pass

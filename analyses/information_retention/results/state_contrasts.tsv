@@ -1,0 +1,4 @@
+from_state	to_state	targets	difference_nats	ci_low	ci_high	p_value	test	scope	q_value
+Rest	Stim8hr	4399	0.08503787079192136	0.03219886751837095	0.13410999231648948	0.000999000999000999	two_sided_centered_target_bootstrap	conditional_diagnostic_only	0.0014985014985014985
+Stim8hr	Stim48hr	4399	-0.09309086584165682	-0.146024208754445	-0.04091755367038943	0.000999000999000999	two_sided_centered_target_bootstrap	conditional_diagnostic_only	0.0014985014985014985
+Rest	Stim48hr	4399	-0.008052995049735449	-0.06634232482759762	0.05008982005475882	0.7712287712287712	two_sided_centered_target_bootstrap	conditional_diagnostic_only	0.7712287712287712

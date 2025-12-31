@@ -1,0 +1,7 @@
+hypothesis	block	directional_expectation	status_at_freeze	decision	targets_accounted	p_value	q_value	reason
+H12	information_retention	distal responses retain identity information after cis and generic-template removal	not_tested	unavailable	4399			Required generic templates and independent replicate profiles absent; only conditional sampled-state decoding estimated
+H13	information_retention	buffering reduces magnitude more than identity information	not_tested	unavailable	4399			Fully adjusted replicated information unavailable; magnitude and subgroup diagnostic scores retained without H13 claim
+H14	information_retention	rerouting preserves information while changing its carrying module	not_tested	unavailable	4399			Fully adjusted information and reliability-resolved carrying-module comparisons unavailable
+H15	information_retention	information retention differs across the three states	not_tested	unavailable	4399			Conditional state contrasts estimated, but full required adjustment and independent replication unavailable
+H16	information_retention	shared equivalence class predicts external redundancy	not_tested	unavailable	4399			Reliable stable equivalence classes and eligible external redundancy outcomes unavailable
+H17	information_retention	distinct information channels converging on one module predict emergence or synergy	not_tested	unavailable	4399			Reliable information channels and eligible external emergence/synergy outcomes unavailable

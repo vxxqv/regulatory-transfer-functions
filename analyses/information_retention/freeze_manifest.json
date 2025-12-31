@@ -1,0 +1,100 @@
+{
+  "status": "frozen_before_conditional_decoding_outcomes",
+  "seed": 20260913,
+  "expansion_freeze_sha256": "8ecac4fe01c2e82fdc0b2d4a453d8c8a4469d25ac472ada456a01d0daed1677e",
+  "canonical_specification_sha256": "e65bb139fbc24b14cee80cb30932fedf6684d06e77ddb432c10ea9f7b452f978",
+  "source_hash_rule": "Exact source bytes must match the parent expansion freeze; no newline normalization of source artifacts",
+  "artifacts": [
+    {
+      "path": "config/analysis.yaml",
+      "sha256": "1b2bcc9fbbd35bcbdbe6110153b0946179a57731e7c713be8fba60d9b69c2dda",
+      "bytes": 1471
+    },
+    {
+      "path": "config/cell_systems_expansion.yaml",
+      "sha256": "6cadafe6f6c1860066d6177aabad7dcf7eb9157d8df891c4da0797d6228f6100",
+      "bytes": 14021
+    },
+    {
+      "path": "analyses/cell_systems_expansion/target_folds.tsv",
+      "sha256": "d0352b81284eb74a427f27ad2cd474d2e275a725ba77351493552fc8bda1c6ad",
+      "bytes": 37249
+    },
+    {
+      "path": "analyses/cell_systems_expansion/hypotheses.tsv",
+      "sha256": "10aa063188192456c8a3782b246acaac7e085d0692dfc25d5ff90859bcc37829",
+      "bytes": 1840
+    },
+    {
+      "path": "data/interim/gwt_vectors/rows.parquet",
+      "sha256": "ad1ff11af7c34db7baae8eb24971e0f698a0a73ba70d70255def1851f0acdf9c",
+      "bytes": 2516576
+    },
+    {
+      "path": "data/interim/gwt_vectors/genes.parquet",
+      "sha256": "2a87aa6bc012ea3f374d85546eb3d235c7efd9b8c063d34c5d2b8a488340ddf4",
+      "bytes": 230012
+    },
+    {
+      "path": "data/interim/gwt_vectors/normalized_significant_logfc.npz",
+      "sha256": "d759799345804582aa0bc5829fb7cc4534f2322bc8b3b0bf696723fe5589f58b",
+      "bytes": 5679020
+    },
+    {
+      "path": "data/interim/gwt_vectors/audit.json",
+      "sha256": "89779d5526a3b316db54f5472f8c43d981747ba0cc76a38d9befe0bb5849f033",
+      "bytes": 328
+    },
+    {
+      "path": "analyses/primary/results/transfer_phenotypes.parquet",
+      "sha256": "4327ea47df56278e92a60c8e4a26c41f5ff2d8f4e4786108e23e8998d0f97b3f",
+      "bytes": 1991787
+    },
+    {
+      "path": "analyses/vectors/results/contextual_transfer_tensor.parquet",
+      "sha256": "d644893577cc5a78a0bda649584d21e608f3e105f78ed865a6d0328b541a8099",
+      "bytes": 5959719
+    },
+    {
+      "path": "analyses/vectors/results/context_rerouting_pairs.parquet",
+      "sha256": "b3845ac971b20991a0be5635d00d56c2593b67c746a8c9c517adc9c16e58c745",
+      "bytes": 374850
+    },
+    {
+      "path": "analyses/vectors/results/reference_module_loadings.parquet",
+      "sha256": "85a083525b34f2fa321eb43f7d71a42270ee5469306b4cf16cc56403b34739ef",
+      "bytes": 3040851
+    },
+    {
+      "path": "analyses/state_response_decomposition/results/target_decomposition.parquet",
+      "sha256": "9314524e1449e57c283abefecf842a753a7807ceb381edaa333f8e278c39dc5a",
+      "bytes": 598182
+    },
+    {
+      "path": "analyses/guide_concordance/results/eligible_pairs.parquet",
+      "sha256": "3cdd5aac0c8dd06695924fe30ecf58be1d3877a965d636796000b3dfe82268f0",
+      "bytes": 4573913
+    },
+    {
+      "path": "analyses/guide_concordance/results/hypothesis_tests.csv",
+      "sha256": "62f14107cdfb73b869c65964cc8f5e00338044735605470faf6f1aba4c414796",
+      "bytes": 4497
+    },
+    {
+      "path": "analyses/replication/results/k562_replication_rows.parquet",
+      "sha256": "d6ea5c21f8a331a23b13e437c96566dbb3d93e285aaf0c04a03cbe83b6f817d6",
+      "bytes": 507884
+    }
+  ],
+  "previously_known_availability": {
+    "guide_and_donor_profile_vectors": false,
+    "external_profile_vectors": false,
+    "library_size_direction": false,
+    "generic_stress_template": false,
+    "proliferation_template": false,
+    "independent_regulator_family_labels": false,
+    "independent_functional_module_labels": false,
+    "independent_network_degree_annotation": false,
+    "twenty_and_forty_module_loadings": false
+  }
+}

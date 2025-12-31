@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "seed": 20260913,
+  "scope": "Availability-gated information-retention analysis and conditional cross-state identity diagnostic",
+  "hypotheses": ["H12", "H13", "H14", "H15", "H16", "H17"],
+  "states": ["Rest", "Stim8hr", "Stim48hr"],
+  "expected_targets": 4399,
+  "full_hypothesis_gate": "All required generic templates, independent profiles and frozen outcome labels must exist before a confirmatory model is fitted.",
+  "conditional_diagnostic": {
+    "eligibility": "Every target in the frozen complete-state cohort, including zero detected-response profiles",
+    "validation": "Leave one state out; every target class has two other-state training profiles; nested tuning swaps the two training states",
+    "identity_label": "Exact frozen target gene symbol; no gene names, target identifiers or target-specific missingness indicators are predictors",
+    "features": "Frozen significant signed cis-normalized response coefficients; globally remove every feature matching a cohort target symbol, not only each row's cis gene",
+    "representations": ["non_target_gene_response", "frozen_30_module_projection"],
+    "nuisance_directions": ["intercept", "cis_magnitude", "log1p_target_baseMean", "log1p_n_cells_target", "n_guides", "training_state_indicator"],
+    "nuisance_fit": "OLS response-on-covariates using training profiles only; remove the orthonormal span of fitted nuisance directions from training and test responses",
+    "state_average_boundary": "Training-state mean directions are removed. An unobserved held-out-state-specific mean direction is not claimed to be removed.",
+    "missing_covariates": "Training-median imputation with fixed zero fallback only when a training covariate is entirely unavailable",
+    "models": ["label_prior", "nearest_centroid", "RNA_fingerprint_cosine", "frozen_module_decoder"],
+    "centroid": "Arithmetic mean of the two training profiles of each target",
+    "centroid_score": "Negative squared residual distance divided by median positive training squared residual norm",
+    "fingerprint_score": "Cosine of residual query and target centroid; zero residual norm gives zero score for all classes",
+    "frozen_module_decoder": "Cosine decoder in the unchanged 30-module loading basis after the common gene mask; this full-cohort basis is descriptive, not an independent validation basis",
+    "inverse_temperature_grid": [0.0, 0.1, 0.3, 1.0, 3.0, 10.0, 30.0],
+    "selection": "Minimum mean inner-state log loss; ties choose the smallest inverse temperature; no outer-state tuning",
+    "score": "log(K) + log predicted probability of the correct target, in nats, with K=4399",
+    "zero_profiles": "Retain in the denominator. Prior probabilities replace no observations; zero vectors are detected-response zeros, not biological absence.",
+    "interpretation": "Finite-sample conditional decoding score, an empirical variational lower-bound estimate for this balanced sampled-state task, not total molecular information or a causal entropy estimate"
+  },
+  "inference": {
+    "bootstrap_replicates": 1000,
+    "bootstrap_unit": "target, retaining all three states",
+    "permutation_replicates": 1000,
+    "conditional_permutation": "Permute query target labels within held-out state, target-expression quintile and response-degree quintile; equal covariate values stay in the same bin",
+    "network_degree_boundary": "No independent network-degree annotation is supplied among the assigned frozen inputs. The full prespecified degree-matched null is unavailable; the partial matched diagnostic is not substituted for it.",
+    "permutation_tail": "One-sided observed decoding score greater than the matched-label null",
+    "permutation_scope": "Fixed trained decoder, evaluating cross-state identity alignment; no claim of a full model-refitting randomization test",
+    "bh_family": "Nine conditional diagnostic state-by-nonprior-decoder tests, separate from the unavailable H12-H17 confirmatory family",
+    "state_contrasts": "Three paired state differences for the fixed RNA-fingerprint comparator; two-sided centered target bootstrap and separate BH family",
+    "calibration": "Ten equal-width confidence bins; descriptive top-label calibration slope and intercept; posterior label-set coverage at 50, 80 and 95 percent; these are not conformal prediction intervals",
+    "influence": "Leave-one-target change in mean conditional score; no refitting claim",
+    "minimum_group_targets": 20
+  },
+  "stopping": {
+    "validated_outputs": "Do not refit or alter existing transfer models, classes or module bases",
+    "ridge_multinomial": "Do not fit the confirmatory regularized multinomial model or its regularization grid while the required generic-template and independent-profile gates fail",
+    "equivalence_classes": "Do not estimate without profile-resolved reliability, the 20/30/40 resolution inputs, negative genes and all frozen 80-percent stability checks",
+    "external": "H16-H17 remain unavailable until the deferred input contract and equivalence gates are satisfied",
+    "primary_information_pass": "False unless required adjustment, positive lower-bound interval, guide/donor replication and corrected independent external association all pass"
+  }
+}

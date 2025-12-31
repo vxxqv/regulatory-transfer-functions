@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "hypotheses": ["H16", "H17"],
+  "status": "unavailable_not_estimated",
+  "required_before_outcome_access": [
+    "Frozen guide- or donor-resolved signed response vectors with controls and independent uncertainty units",
+    "Library-size, generic-stress and proliferation templates with pre-outcome source hashes",
+    "Frozen independent regulator-family and functional-module label maps",
+    "Frozen module loadings at 20, 30 and 40 resolutions and matched negative-gene definitions",
+    "Reliability-adjusted equivalence classes passing every frozen 80-percent stability check",
+    "Eligible external single and double perturbations, fixed CD4 target mappings and outcome-independent dataset roles"
+  ],
+  "pair_table_fields": [
+    "dataset", "target_a", "target_b", "pair_id", "pair_fold",
+    "intervention", "eligibility_status", "exclusion_reason",
+    "independent_replicate_count", "single_a_norm", "single_b_norm",
+    "single_a_cells", "single_b_cells", "pair_cells", "control_cells",
+    "redundancy_estimate", "redundancy_standard_error",
+    "emergence_estimate", "emergence_standard_error",
+    "synergy_estimate", "synergy_standard_error", "outcome_source_sha256"
+  ],
+  "equivalence_table_fields": [
+    "target_a", "target_b", "equivalence_class_id",
+    "reliability_adjusted_distance", "equivalence_p", "equivalence_q",
+    "bootstrap_stability", "state_stability", "resolution_stability",
+    "template_removal_stability", "negative_gene_stability",
+    "matched_size_null_stability", "all_stability_gates_pass",
+    "frozen_before_external_outcomes"
+  ],
+  "validation": "Use the parent expansion's frozen pair/target splits and original H16-H17 definitions. Do not select classes, targets, modules or thresholds using external outcomes.",
+  "prohibited_substitutions": [
+    "Aggregate guide correlations as profile-resolved reliability",
+    "Three sampled-state summaries as independently replicated equivalence classes",
+    "Same-response module assignment as an independent classification label",
+    "Previously inspected K562 or RPE1 summaries as untouched external evidence"
+  ]
+}
