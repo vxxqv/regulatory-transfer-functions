@@ -50,7 +50,7 @@ thresholds:
   source: transfer_class
   buffered_quantile: 0.10
   amplified_quantile: 0.90
-  state_specific: true
+  state_specific: false
 density:
   estimator: gaussian_kde
   bandwidth_rule: scott
@@ -84,6 +84,7 @@ displacement:
   estimator: median_signed_change
   standardization: pooled_complete_cohort_standard_deviation_by_axis
   null: destination_target_permutation_within_baseline_cis_quintile_and_guide_support
+  test: two_sided_empirical_tail_relative_to_matched_null
   minimum_permutation_stratum: 8
 trajectories:
   required_states:
@@ -116,14 +117,14 @@ render:
   parallel_scale: 0.84
   population_point_size: 3.4
   population_outline_size: 4.4
-  population_opacity_far: 0.12
-  population_opacity_near: 0.30
-  contour_opacity: 0.24
+  population_opacity_far: 0.21
+  population_opacity_near: 0.44
+  contour_opacity: 0.40
   threshold_plane_opacity: 0.018
-  ellipsoid_opacity: 0.13
+  ellipsoid_opacity: 0.20
   trajectory_tube_radius: 0.0045
   arrow_scale: 0.055
-  anti_aliasing: ssaa
+  anti_aliasing: two_fold_render_supersampling
   depth_peeling: true
   lighting:
     ambient: 0.74

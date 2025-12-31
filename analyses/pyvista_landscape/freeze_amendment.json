@@ -1,0 +1,13 @@
+{
+  "amendments": [
+    "Use the pooled transfer thresholds already defined by the primary model rather than newly derived state-specific thresholds.",
+    "Use two-sided empirical tails relative to the condition-stratified matched-target permutation null rather than absolute distances from zero."
+  ],
+  "classification_changed": false,
+  "current_config_sha256": "f01c675b749de6ff20213b70f418cf3cc0f869581fefcf6ec03be93708abde69",
+  "discovered_by": "independent source-correspondence test",
+  "model_refit": false,
+  "original_frozen_config_sha256": "613578c0319535aa300f3cb30eec38ea955fcd45714b6f403bba83d143e0b253",
+  "reason": "The primary transfer_class field was assigned from pooled percentiles, and the matched null has a nonzero condition shift that must define the empirical reference distribution.",
+  "scope": "reference planes, threshold table, and permutation P values; no phenotype values, selected targets, bootstrap estimates, or fitted models changed"
+}

@@ -1,0 +1,62 @@
+{
+  "bootstrap_replicates": 1000,
+  "complete_targets": 4399,
+  "coordinate_imputation": false,
+  "correlation_decisions": {
+    "Rest": "unresolved",
+    "Stim48hr": "unresolved",
+    "Stim8hr": "supported_negative"
+  },
+  "density_vertices": 4324,
+  "displacement_decisions": {
+    "unresolved": 9
+  },
+  "finite_xyz_rows": 6708,
+  "missing_rerouting_rows": 6489,
+  "missingness_status": {
+    "rerouting_complete": 6708,
+    "rerouting_missing_both_pairs": 4623,
+    "rerouting_missing_one_pair": 1866
+  },
+  "permutation_replicates": 1000,
+  "selected_targets": [
+    {
+      "selected_class": "amplified",
+      "target": "ATAD5",
+      "target_id": "ENSG00000176208",
+      "trajectory_number": 1
+    },
+    {
+      "selected_class": "buffered",
+      "target": "NICOL1",
+      "target_id": "ENSG00000243449",
+      "trajectory_number": 2
+    },
+    {
+      "selected_class": "stable_core",
+      "target": "SETDB1",
+      "target_id": "ENSG00000143379",
+      "trajectory_number": 3
+    },
+    {
+      "selected_class": "strongly_rerouted",
+      "target": "MCCC1",
+      "target_id": "ENSG00000078070",
+      "trajectory_number": 4
+    }
+  ],
+  "source_rows": 13197,
+  "source_subset_sha256": "cb3baee90847eaa604f824a108b2a5eeb2ed2992e046b29a4f00676defd00110",
+  "state_rows": {
+    "Rest": 4399,
+    "Stim48hr": 4399,
+    "Stim8hr": 4399
+  },
+  "trajectory_rows": 12,
+  "trajectory_states_per_target": {
+    "ENSG00000078070": 3,
+    "ENSG00000143379": 3,
+    "ENSG00000176208": 3,
+    "ENSG00000243449": 3
+  }
+}
