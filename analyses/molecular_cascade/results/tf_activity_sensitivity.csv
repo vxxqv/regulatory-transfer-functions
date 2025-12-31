@@ -1,0 +1,3 @@
+analysis,regulators,signed_edges,median_regulon_targets,score_rows,methods
+DoRothEA A primary,90,2634,11.0,715,weighted_mean;univariate_linear_model
+DoRothEA A-B sensitivity,90,2634,11.0,715,weighted_mean;univariate_linear_model

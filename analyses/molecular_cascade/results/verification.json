@@ -1,0 +1,10 @@
+{
+  "frozen_inputs_verified": 27,
+  "matched_sets_with_five_controls": true,
+  "caliper_enforced": true,
+  "molecular_tiers_exclude_validation_outcomes": true,
+  "state_summary_uses_identical_targets": true,
+  "state_rerouting_requires_two_evaluable_pairs": true,
+  "edge_effect_unit": "log2_fold_change_divided_by_max_absolute_cis_effect_or_0.1",
+  "source_values_changed": false
+}

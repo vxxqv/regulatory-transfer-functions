@@ -1,0 +1,6 @@
+factor,curated_degree,motif_degree,distance_to_egr1,selection
+SP3,48,798,0.27257279438937526,five_nearest_molecular_degree_controls_before_screen
+USF1,43,763,0.31630877906962773,five_nearest_molecular_degree_controls_before_screen
+HIF1A,67,920,0.3452373512584412,five_nearest_molecular_degree_controls_before_screen
+CREB1,45,1404,0.48669203676857953,five_nearest_molecular_degree_controls_before_screen
+CEBPB,33,703,0.4959835186978189,five_nearest_molecular_degree_controls_before_screen

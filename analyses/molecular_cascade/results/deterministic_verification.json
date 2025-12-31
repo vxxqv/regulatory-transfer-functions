@@ -1,0 +1,177 @@
+[
+  {
+    "index": "ENSG00000005339_Rest",
+    "response_row": 3061,
+    "matrix_nonzero": 1561,
+    "evidence_rows": 1561,
+    "match": true
+  },
+  {
+    "index": "ENSG00000005339_Stim48hr",
+    "response_row": 3062,
+    "matrix_nonzero": 1956,
+    "evidence_rows": 1956,
+    "match": true
+  },
+  {
+    "index": "ENSG00000005339_Stim8hr",
+    "response_row": 3063,
+    "matrix_nonzero": 2968,
+    "evidence_rows": 2968,
+    "match": true
+  },
+  {
+    "index": "ENSG00000008441_Stim8hr",
+    "response_row": 8462,
+    "matrix_nonzero": 39,
+    "evidence_rows": 39,
+    "match": true
+  },
+  {
+    "index": "ENSG00000015171_Rest",
+    "response_row": 15109,
+    "matrix_nonzero": 2,
+    "evidence_rows": 2,
+    "match": true
+  },
+  {
+    "index": "ENSG00000015171_Stim48hr",
+    "response_row": 15110,
+    "matrix_nonzero": 0,
+    "evidence_rows": 0,
+    "match": true
+  },
+  {
+    "index": "ENSG00000015171_Stim8hr",
+    "response_row": 15111,
+    "matrix_nonzero": 3,
+    "evidence_rows": 3,
+    "match": true
+  },
+  {
+    "index": "ENSG00000020633_Rest",
+    "response_row": 11072,
+    "matrix_nonzero": 8,
+    "evidence_rows": 8,
+    "match": true
+  },
+  {
+    "index": "ENSG00000023287_Rest",
+    "response_row": 10569,
+    "matrix_nonzero": 391,
+    "evidence_rows": 391,
+    "match": true
+  },
+  {
+    "index": "ENSG00000023287_Stim48hr",
+    "response_row": 10570,
+    "matrix_nonzero": 580,
+    "evidence_rows": 580,
+    "match": true
+  },
+  {
+    "index": "ENSG00000023287_Stim8hr",
+    "response_row": 10571,
+    "matrix_nonzero": 901,
+    "evidence_rows": 901,
+    "match": true
+  },
+  {
+    "index": "ENSG00000025156_Rest",
+    "response_row": 5896,
+    "matrix_nonzero": 4,
+    "evidence_rows": 4,
+    "match": true
+  },
+  {
+    "index": "ENSG00000025156_Stim48hr",
+    "response_row": 5897,
+    "matrix_nonzero": 13,
+    "evidence_rows": 13,
+    "match": true
+  },
+  {
+    "index": "ENSG00000025156_Stim8hr",
+    "response_row": 5898,
+    "matrix_nonzero": 4,
+    "evidence_rows": 4,
+    "match": true
+  },
+  {
+    "index": "ENSG00000028277_Rest",
+    "response_row": 9767,
+    "matrix_nonzero": 1,
+    "evidence_rows": 1,
+    "match": true
+  },
+  {
+    "index": "ENSG00000028277_Stim48hr",
+    "response_row": 9768,
+    "matrix_nonzero": 15,
+    "evidence_rows": 15,
+    "match": true
+  },
+  {
+    "index": "ENSG00000028277_Stim8hr",
+    "response_row": 9769,
+    "matrix_nonzero": 5,
+    "evidence_rows": 5,
+    "match": true
+  },
+  {
+    "index": "ENSG00000028839_Rest",
+    "response_row": 12848,
+    "matrix_nonzero": 23,
+    "evidence_rows": 23,
+    "match": true
+  },
+  {
+    "index": "ENSG00000028839_Stim48hr",
+    "response_row": 12849,
+    "matrix_nonzero": 57,
+    "evidence_rows": 57,
+    "match": true
+  },
+  {
+    "index": "ENSG00000028839_Stim8hr",
+    "response_row": 12850,
+    "matrix_nonzero": 25,
+    "evidence_rows": 25,
+    "match": true
+  },
+  {
+    "index": "ENSG00000029153_Rest",
+    "response_row": 978,
+    "matrix_nonzero": 0,
+    "evidence_rows": 0,
+    "match": true
+  },
+  {
+    "index": "ENSG00000029153_Stim48hr",
+    "response_row": 979,
+    "matrix_nonzero": 0,
+    "evidence_rows": 0,
+    "match": true
+  },
+  {
+    "index": "ENSG00000029153_Stim8hr",
+    "response_row": 980,
+    "matrix_nonzero": 1,
+    "evidence_rows": 1,
+    "match": true
+  },
+  {
+    "index": "ENSG00000033800_Rest",
+    "response_row": 9405,
+    "matrix_nonzero": 92,
+    "evidence_rows": 92,
+    "match": true
+  },
+  {
+    "index": "ENSG00000049768_Rest",
+    "response_row": 4863,
+    "matrix_nonzero": 2,
+    "evidence_rows": 2,
+    "match": true
+  }
+]

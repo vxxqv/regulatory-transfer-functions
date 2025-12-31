@@ -1,0 +1,11 @@
+central_result,eligible_target_states,hypothesis,estimate,ci_low,ci_high,q_value,decision,evidential_boundary
+transfer_gain,715,Regulatory support increases with transfer gain,0.36704977496551616,0.26740842608526194,0.46033948166731864,0.0036630036630036626,passed,
+amplification,715,Amplified responses have stronger regulatory support than buffered responses,0.02522888283988927,0.0012357260804705277,0.04218605197867488,0.04212454212454212,passed,
+buffering,715,Amplified responses have stronger regulatory support than buffered responses,0.02522888283988927,0.0012357260804705277,0.04218605197867488,0.04212454212454212,passed,shared amplification-buffering contrast
+rerouting,715,Rerouting increases with higher-order cascade support,-0.21407797125741926,-0.31656369286832486,-0.11081787501397954,0.0036630036630036626,failed,
+context_switching,715,Early responses are enriched for directly occupied edges,,,,,unavailable,
+cross_system_conservation,715,Regulatory support predicts K562 response-vector reproducibility,0.18665395347987437,0.010634773612132295,0.35870781022306414,0.04807692307692308,passed,
+natural_genetic_concordance,715,Regulatory support predicts natural-genetic direction concordance,-0.26027397260273977,-0.3539709977912225,-0.10168141592920367,0.004296875,underpowered,
+disease_convergence,715,Disease-convergent programs have stronger regulatory support,0.03227044957891718,-0.03759248931759676,0.12803569170108295,0.43712273641851107,unresolved,
+external_benchmarking,715,Signed RPE1 verification,,,,,unavailable,"RPE1 benchmark retained a scalar target endpoint, not compatible signed target-gene vectors"
+guide_level_dose_response,715,Regulatory support predicts cross-guide concordance,0.323769644233693,0.18231574830803707,0.4540272583731357,0.0036630036630036626,passed,

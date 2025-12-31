@@ -1,0 +1,13 @@
+estimand,status,reason
+TFTG corroboration,unavailable,no frozen versioned machine-readable snapshot was acquired
+TF occupancy outside CTCF in Rest,unavailable,no released state-compatible primary CD4 TF occupancy experiment was identified
+Stim8hr and Stim48hr occupancy,unavailable,the compatible CTCF experiment is resting-state only
+state-specific ATAC and H3K27ac change,unavailable,the frozen peak resources do not form a matched three-state series
+RPE1 signed direction validation,unavailable,the frozen benchmark output retains scalar target endpoints
+guide-resolved effect vectors,unavailable,the public guide table contains pair summaries rather than gene-level vectors
+guide-resolved module activity,unavailable,gene-level guide vectors were not released
+guide-resolved transfer gain,unavailable,gene-level guide vectors were not released
+guide-resolved rerouting,unavailable,gene-level guide vectors were not released
+guide-resolved disease convergence,unavailable,gene-level guide vectors were not released
+donor-by-guide validation,unavailable,joint donor-by-guide effects were not released
+guide-to-trans cis mediation,underpowered,two guide doses per target-state do not identify mediation

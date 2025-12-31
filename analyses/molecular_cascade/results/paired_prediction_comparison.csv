@@ -1,0 +1,3 @@
+dataset,targets,target_states,delta_r2,ci_low,ci_high,p_value,interval,selection,q_value,decision
+guide_concordance,162,339,0.04276757319936697,-0.020153202126069688,0.10065970047794554,0.18581418581418582,paired_target_bootstrap_95,fixed_ridge_no_tuning,0.3196803196803197,unresolved
+k562_replication,99,277,-0.42178059105022403,-1.4147279613625439,0.030583055271678008,0.3196803196803197,paired_target_bootstrap_95,fixed_ridge_no_tuning,0.3196803196803197,unresolved

@@ -1,0 +1,42 @@
+{
+  "status": "retrospective_extension_fixed_before_new_cascade_tests",
+  "seed": 20260913,
+  "purpose": "Correct implementation discrepancies and test all eligible secondary factors, including the requested GATA3-EGR1 hypothesis.",
+  "corrections": [
+    "Convert Ensembl one-based transcription start sites to zero-based BED coordinates.",
+    "Enforce the existing matching caliper on every control in a matched set.",
+    "Choose a secondary path by absolute intermediate response and alphabetical tie breaking, without ranking by signed agreement.",
+    "Use a centred regression t statistic for the univariate linear model activity score.",
+    "Exclude guide and K562 outcome evidence from molecular evidence-type counts and predictive features.",
+    "Fit feature imputation and scaling inside each target-held-out training fold.",
+    "Use target-clustered inference and require the confidence interval to exclude the null before a supported decision.",
+    "Label motif and curated evidence as regulatory support, never as directly occupied regulation."
+  ],
+  "secondary_factor_screen": {
+    "population": "Every eligible perturbed factor-state crossed with every measured eligible secondary factor with a primary signed regulon of at least five genes or a motif set of at least ten genes.",
+    "test": "Two-sided Fisher competitive enrichment against all measured distal genes, reported as an exploratory screen; strong claims additionally require matched support, compatible direction, two molecular evidence types and independent perturbation.",
+    "fdr_family": "All source-state-secondary-resource rows together",
+    "negative_factors": "Five nearest factors to EGR1 in standardized log primary-regulon degree and motif-set size, ties alphabetical, excluding EGR1 and GATA3.",
+    "targeted_sources": "GATA3 and the same five degree-matched negative perturbed factors, every observed state.",
+    "matched_test": "Use the frozen source-specific expression, chromatin, GC, interval, distance, degree and state matched gene sets, retaining only complete five-control sets within the existing 3.0 caliper.",
+    "matched_permutations": 1000,
+    "independent_programme_minimum_genes": 20,
+    "minimum_matched_cases": 20,
+    "missing_effect_rule": "A zero in the thresholded response matrix means no retained significant response, not a measured zero effect."
+  },
+  "prediction": {
+    "model": "Ridge alpha 10, target-hashed 10 folds from the frozen configuration",
+    "features": "Existing cis, expression, cell-count, response-degree and state covariates; molecular support, higher-order support, molecular-only Tier 2/3, signed agreement and unstandardized source-regulon weighted mean",
+    "intervals": "Absolute residual quantiles from the training data, labelled empirical intervals without conformal coverage claims",
+    "paired_target_bootstrap": 1000,
+    "minimum_targets": 20,
+    "no_tuning": true
+  },
+  "stopping_rules": [
+    "No direct-occupancy comparison when the compatible occupied TF has no eligible perturbation response.",
+    "No independent programme-replication claim with fewer than 20 retained genes in either programme.",
+    "No state-specific chromatin or occupancy claim from unmatched peak collections.",
+    "No causal cascade or mediation claim from cross-sectional response summaries.",
+    "No additional resource downloads or validated primary model refits."
+  ]
+}

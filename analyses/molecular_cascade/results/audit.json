@@ -1,0 +1,48 @@
+{
+  "activity_limitation": "Scores use the frozen significant-effect matrix; absent entries are thresholded, not full measured effects.",
+  "curated_regulators": 640,
+  "degree_rewiring_replicates": 250,
+  "design_status": "retrospective_prespecified_extension",
+  "deterministic_rows_reproduced": 25,
+  "direct_regulation_claims": 0,
+  "direct_support_fraction_definition": "legacy column name: motif, curated, promoter or enhancer support; not proof of direct regulation",
+  "edge_class_counts": {
+    "higher-order cascade": 7389,
+    "motif-supported": 3716,
+    "one-step TF cascade": 388,
+    "unsupported indirect": 113305
+  },
+  "eligible_null_response_target_states": 115,
+  "eligible_regulator_target_states": 715,
+  "eligible_regulators": 284,
+  "evidence_tier_counts": {
+    "Tier 2": 36,
+    "Tier 3": 2490,
+    "Tier 4": 122272
+  },
+  "extension_rules_sha256": "5f65c696adabcf077d2ca25bcaae2ea49b45c78ac166bd76de9d8ebb18637430",
+  "hypothesis_decisions": {
+    "failed": 1,
+    "passed": 6,
+    "unavailable": 1,
+    "underpowered": 1,
+    "unresolved": 3
+  },
+  "matched_case_control_rows": 439260,
+  "matched_permutation_replicates": 1000,
+  "motif_regulators": 214,
+  "pchic": {
+    "eligible_called_rows": 198729,
+    "failed_liftover_rows": 49,
+    "lifted_rows": 198680,
+    "liftover_rate": 0.9997534330671417,
+    "source_rows": 291535
+  },
+  "primary_curated_edges_observed": 477,
+  "primary_target_state_denominator": 15807,
+  "response_edge_denominator": 124798,
+  "secondary_screen_rows": 126811,
+  "secondary_screen_status": "exploratory_complete_denominator",
+  "source_freeze_sha256": "eafc5c8c5410e055875846045042fd7f6c05cb8133434b9567967f51bcc0efa8",
+  "unavailable_estimands": 12
+}

@@ -1,0 +1,7 @@
+{
+  "eligible_called_rows": 198729,
+  "failed_liftover_rows": 49,
+  "lifted_rows": 198680,
+  "liftover_rate": 0.9997534330671417,
+  "source_rows": 291535
+}

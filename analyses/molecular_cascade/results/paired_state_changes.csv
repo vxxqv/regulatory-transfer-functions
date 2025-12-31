@@ -1,0 +1,19 @@
+metric,first_state,second_state,targets,mean_difference,ci_low,ci_high,p_value,design,q_value,decision
+Regulatory support proxy,Rest,Stim8hr,134,-0.0012510615145204,-0.0194598678460354,0.0206193323674979,0.919080919080919,matched_target_state_label_swap_not_longitudinal_causation,0.9240759240759241,unresolved
+Regulatory support proxy,Stim8hr,Stim48hr,134,-0.0128609092010754,-0.0283568032034059,0.0021872407119874,0.0919080919080919,matched_target_state_label_swap_not_longitudinal_causation,0.41358641358641357,unresolved
+Regulatory support proxy,Rest,Stim48hr,134,-0.0141119707155958,-0.0297989267781125,0.0005536602512469,0.09090909090909091,matched_target_state_label_swap_not_longitudinal_causation,0.41358641358641357,unresolved
+Supported cascade depth,Rest,Stim8hr,47,0.0491435054762742,-0.006936115583273,0.1087962064740097,0.08491508491508491,matched_target_state_label_swap_not_longitudinal_causation,0.41358641358641357,unresolved
+Supported cascade depth,Stim8hr,Stim48hr,47,-0.0119345968137444,-0.0528275634749217,0.0318093122652382,0.5614385614385614,matched_target_state_label_swap_not_longitudinal_causation,0.9240759240759241,unresolved
+Supported cascade depth,Rest,Stim48hr,47,0.0372089086625297,-0.0128315557321649,0.09592120639578,0.22477522477522477,matched_target_state_label_swap_not_longitudinal_causation,0.6743256743256744,unresolved
+Signed agreement,Rest,Stim8hr,23,0.0144735699083525,-0.0642021927348014,0.1039002211556558,0.7562437562437563,matched_target_state_label_swap_not_longitudinal_causation,0.9240759240759241,unresolved
+Signed agreement,Stim8hr,Stim48hr,23,-0.0524278524118677,-0.1551215141156797,0.0687427263965786,0.4005994005994006,matched_target_state_label_swap_not_longitudinal_causation,0.9240759240759241,unresolved
+Signed agreement,Rest,Stim48hr,23,-0.0379542825035152,-0.1568908860480951,0.0696559130074954,0.5644355644355644,matched_target_state_label_swap_not_longitudinal_causation,0.9240759240759241,unresolved
+Module coherence,Rest,Stim8hr,134,-0.0038601458072662,-0.022696953266859,0.0144029464572668,0.6923076923076923,matched_target_state_label_swap_not_longitudinal_causation,0.9240759240759241,unresolved
+Module coherence,Stim8hr,Stim48hr,134,-0.0020026231650263,-0.0215179547667503,0.016891436651349,0.8231768231768232,matched_target_state_label_swap_not_longitudinal_causation,0.9240759240759241,unresolved
+Module coherence,Rest,Stim48hr,134,-0.0058627687394618,-0.0264000389724969,0.0146582582965493,0.5804195804195804,matched_target_state_label_swap_not_longitudinal_causation,0.9240759240759241,unresolved
+Module rerouting,Rest,Stim8hr,134,-0.001404664662977,-0.0168305077499124,0.0116505431040168,0.8401598401598401,matched_target_state_label_swap_not_longitudinal_causation,0.9240759240759241,unresolved
+Module rerouting,Stim8hr,Stim48hr,134,0.0021476669106501,-0.0130839989381429,0.0159751781056923,0.7832167832167832,matched_target_state_label_swap_not_longitudinal_causation,0.9240759240759241,unresolved
+Module rerouting,Rest,Stim48hr,134,0.0007430022476731,-0.0156223111633674,0.0147032380930292,0.9240759240759241,matched_target_state_label_swap_not_longitudinal_causation,0.9240759240759241,unresolved
+Transfer gain,Rest,Stim8hr,134,0.2387609860999136,0.0656427946247441,0.3996775584077388,0.007992007992007992,matched_target_state_label_swap_not_longitudinal_causation,0.14385614385614387,unresolved
+Transfer gain,Stim8hr,Stim48hr,134,-0.0452749330274155,-0.2374162259300151,0.1482143943352185,0.6263736263736264,matched_target_state_label_swap_not_longitudinal_causation,0.9240759240759241,unresolved
+Transfer gain,Rest,Stim48hr,134,0.193486053072498,-0.0588561803085319,0.4222414368741312,0.13186813186813187,matched_target_state_label_swap_not_longitudinal_causation,0.4747252747252747,unresolved
