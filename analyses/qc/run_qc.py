@@ -74,11 +74,13 @@ def main() -> None:
     args = parse_args()
     repo_root = Path(__file__).resolve().parents[2]
     sys.path.insert(0, str(repo_root))
+    from figures.publication_style import apply as apply_publication_style
     from src.models.empirical_transfer import quality_filter
     from src.qc.summary_qc import audit_counts
 
     config = yaml.safe_load(args.config.read_text(encoding="utf-8"))
     colors = yaml.safe_load(args.colors.read_text(encoding="utf-8"))["states"]
+    apply_publication_style()
     plt.rcParams.update(
         {
             "font.family": "Arial",
