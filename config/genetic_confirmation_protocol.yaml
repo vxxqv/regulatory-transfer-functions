@@ -1,0 +1,350 @@
+version: 1
+freeze_date: 2026-09-14
+parent_freeze: config/independent_confirmation.yaml
+status: outcome_blind_protocol_locked
+decision: READY_FOR_CHECKSUM_DOWNLOAD
+sequential_checksum_download_ready: true
+outcome_opening_authorized: false
+outcome_files_opened_during_protocol_lock: 0
+
+scope:
+  positive_disease_count: 5
+  selected_negative_disease_count: 2
+  screened_negative_disease_count: 5
+  objective: independent_molecular_and_genetic_confirmation
+  novelty_gate: each_branch_must_add_independent_evidence_or_resolve_a_central_uncertainty
+  results_gate: each_branch_must_report_effect_uncertainty_denominator_calibration_and_fixed_decision
+  stop_without_substitution_if: [availability_gate_fails, minimum_power_gate_fails, schema_gate_fails, checksum_gate_fails, novelty_gate_fails, results_gate_fails]
+  favorable_results_required: false
+
+baseline_ld:
+  provider: Broad Institute Alkes Group
+  official_record: https://doi.org/10.5281/zenodo.10515792
+  release: baseline-LD_v2.2
+  genome_build: GRCh37
+  ancestry: European
+  chromosomes: autosomes_1_to_22
+  annotations_archive:
+    file: 1000G_Phase3_baselineLD_v2.2_ldscores.tgz
+    url: https://storage.googleapis.com/broad-alkesgroup-public/LDSCORE/1000G_Phase3_baselineLD_v2.2_ldscores.tgz
+    md5: b261e0caf06a003e7522938e01b3d349
+  frequencies_archive:
+    file: 1000G_Phase3_frq.tgz
+    url: https://storage.googleapis.com/broad-alkesgroup-public/LDSCORE/1000G_Phase3_frq.tgz
+    md5: ac29686ffd5b6378789857a522ebca77
+  plink_reference_archive:
+    file: 1000G_Phase3_plinkfiles.tgz
+    url: https://storage.googleapis.com/broad-alkesgroup-public/LDSCORE/1000G_Phase3_plinkfiles.tgz
+    md5: a7773ab485827b533cb300c76356d76b
+  weights_archive:
+    file: 1000G_Phase3_weights_hm3_no_MHC.tgz
+    url: https://storage.googleapis.com/broad-alkesgroup-public/LDSCORE/1000G_Phase3_weights_hm3_no_MHC.tgz
+    md5: a98ac0f089ee285177544a3e6e721ca3
+  regression_snp_list:
+    file: hm3_no_MHC.list.txt
+    url: https://storage.googleapis.com/broad-alkesgroup-public/LDSCORE/hm3_no_MHC.list.txt
+    md5: 65a34c68833eb4a764d0707b5505b508
+  version_record:
+    file: readme_baseline_versions.txt
+    url: https://storage.googleapis.com/broad-alkesgroup-public/LDSCORE/readme_baseline_versions.txt
+    md5: 9a800a186e8aa0449865d81a1ba4a00e
+  primary_flags: [overlap_annot, print_coefficients, print_delete_vals]
+  regression_snps: HapMap3_no_MHC
+  weight_ld: 1000G_Phase3_weights_hm3_no_MHC
+  frequency_files: 1000G_Phase3_frq
+  outcome_tunable_alternatives_allowed: false
+
+positive_diseases:
+  - {candidate_id: IMMUNE002, trait: asthma, accession: GCST90475259, cases: 26657, controls: 289011, effective_n: 97623.66}
+  - {candidate_id: IMMUNE007, trait: Hashimoto_thyroiditis, accession: GCST90627754, cases: 15106, controls: 1405552, effective_n: 59781.51}
+  - {candidate_id: IMMUNE009, trait: multiple_sclerosis, accession: GCST90475833, cases: 2762, controls: 447721, effective_n: 10980.26}
+  - {candidate_id: IMMUNE013, trait: type_1_diabetes, accession: GCST90475661, cases: 16971, controls: 418767, effective_n: 65240.07}
+  - {candidate_id: IMMUNE014, trait: ulcerative_colitis, accession: GCST90476067, cases: 5229, controls: 442102, effective_n: 20671.51}
+
+negative_disease_selection:
+  provider: EMBL-EBI_GWAS_Catalog
+  source_publication_pmid: 39024449
+  population: European_United_States_MVP
+  effective_n_formula: 4/(1/cases+1/controls)
+  positive_effective_n_range: [10980.26, 97623.66]
+  allowed_range_ratio: [0.90, 1.20]
+  allowed_effective_n_range: [9882.23, 117148.39]
+  direct_phenotype_required: true
+  dense_full_statistics_required: true
+  required_format: GWAS-SSF_v1.0_gzip_TSV
+  required_variant_scale: 44.3_million_imputed_variants
+  prohibited_phenotypes: [family_history, biomarker, medication_use, symptom_only, broad_proxy, autoimmune, infectious, neoplastic]
+  fixed_families:
+    - family: structural_hernia
+      anchor: maximum_positive_effective_n
+      candidates: [GCST90476059, GCST90476060, GCST90476062, GCST90476063]
+      selected: GCST90476060
+    - family: gastric_motility
+      anchor: minimum_positive_effective_n
+      candidates: [GCST90478363]
+      selected: GCST90478363
+  ranking: absolute_natural_log_ratio_to_family_anchor_ascending
+  tie_break: accession_ascending
+  replacements_after_outcome_opening_allowed: false
+  interpretation: disease_specificity_falsification_not_proof_of_absent_immune_biology
+  comorbidity_rule: any_enrichment_in_a_selected_control_fails_the_specificity_gate_and_is_reported_without_replacement
+  locked_disease_continuation_rule: every_schema_eligible_locked_disease_is_analyzed_and_reported_regardless_of_earlier_negative_control_results
+  negative_control_outcome_can_stop_later_disease_opening: false
+  disease_pipeline_stop_causes: [checksum_failure, schema_failure, unavailable_locked_resource]
+
+program_annotation_freeze:
+  status: locked_before_any_disease_outcome
+  verification_order: before_first_negative_GWAS
+  manifest_sha256: 54579caf9c69001aa2f70edf352f59b8eb1235f537231a698c580afbc0224ef8
+  manifest_rule: relative_path_tab_lowercase_SHA256_newline_sorted_by_relative_path
+  files:
+    - path: analyses/context_dynamics/results/switch_scores.parquet
+      role: context_switching_program_annotation
+      bytes: 250772
+      sha256: 8431f325c278e9cedf6c456ad917aa12fdddc0b492d03290f5a274fa28877a7a
+    - path: analyses/molecular_cascade/results/edge_evidence_matrix.parquet
+      role: direct_and_secondary_regulatory_evidence_annotation
+      bytes: 1867568
+      sha256: 463185e912e5370b5fdd49afd44789f3ff87cc91000e2cfb3730835f0f337785
+    - path: analyses/primary/results/transfer_phenotypes.parquet
+      role: transfer_class_and_signed_response_annotation
+      bytes: 1991787
+      sha256: 4327ea47df56278e92a60c8e4a26c41f5ff2d8f4e4786108e23e8998d0f97b3f
+    - path: analyses/state_response_decomposition/results/target_state_decomposition.parquet
+      role: conserved_core_and_state_residual_annotation
+      bytes: 713649
+      sha256: 576e9d12e22aa4f790d4f4f535de3f40480911857ee8959c705a5a51a2174863
+    - path: analyses/vectors/results/reference_module_loadings.parquet
+      role: fixed_module_loading_annotation
+      bytes: 3040851
+      sha256: 85a083525b34f2fa321eb43f7d71a42270ee5469306b4cf16cc56403b34739ef
+  freeze_before_disease_outcome: true
+  rebuild_after_disease_outcome_allowed: false
+  disease_or_locus_fields_allowed_in_program_definition: false
+
+negative_region_matching:
+  candidate_pool: nonoverlapping_windows_tiled_before_association_statistics_are_joined
+  controls_per_locus: 10
+  minimum_controls_for_estimable_locus: 5
+  exact_match: [chromosome]
+  exclude_mhc: true
+  exclude_blacklist_overlap: true
+  minimum_distance_from_any_index_locus_bp: 2000000
+  matching_without_replacement_within_disease: true
+  reuse_across_diseases: false
+  distance: standardized_manhattan
+  tie_break: [chromosome_ascending, start_ascending]
+  no_caliper_expansion: true
+  variables:
+    maf: {caliper: absolute_difference, maximum: 0.02, source: 1000G_EUR}
+    locus_size: {caliper: ratio, minimum: 0.80, maximum: 1.25, unit: bp}
+    ld_score: {caliper: ratio, minimum: 0.80, maximum: 1.25, source: baseline-LD_v2.2}
+    gene_density: {caliper: absolute_difference, maximum: 2.0, unit: genes_per_Mb}
+    distance_to_tss: {caliper: absolute_log10_difference, maximum: 0.25, transform: log10_bp_plus_1}
+    accessibility: {caliper: absolute_difference, maximum: 0.05, unit: accessible_fraction}
+    mappability: {caliper: absolute_difference, maximum: 0.05, source: Umap_100bp, unit: mean_fraction}
+  association_values_forbidden_in_matching: true
+  significance_values_forbidden_in_matching: true
+
+liftover:
+  assay: GSE118189_ATAC
+  source_build: hg19
+  target_build: GRCh38
+  input_coordinates: BED_0_based_half_open
+  forward_chain:
+    file: hg19ToHg38.over.chain.gz
+    url: https://hgdownload.soe.ucsc.edu/goldenPath/hg19/liftOver/hg19ToHg38.over.chain.gz
+    md5: 35887f73fe5e2231656504d1f6430900
+  reciprocal_chain:
+    file: hg38ToHg19.over.chain.gz
+    url: https://hgdownload.soe.ucsc.edu/goldenPath/hg38/liftOver/hg38ToHg19.over.chain.gz
+    md5: ff3031d93792f4cbb86af44055efd903
+  primary:
+    min_match: 0.95
+    minimum_length_retention: 0.95
+    minimum_reciprocal_overlap_fraction: 0.95
+  sensitivity:
+    min_match: 0.99
+    minimum_length_retention: 0.99
+    minimum_reciprocal_overlap_fraction: 0.99
+  multiple_mapping: reject
+  split_mapping: reject
+  chromosome_change: reject
+  accepted_chromosomes: [chr1, chr2, chr3, chr4, chr5, chr6, chr7, chr8, chr9, chr10, chr11, chr12, chr13, chr14, chr15, chr16, chr17, chr18, chr19, chr20, chr21, chr22, chrX]
+  source_blacklist_before_mapping: true
+  target_blacklist_after_mapping: true
+  blacklist_release_commit: 61a04d2c5e49341d76735d485c61f0d1177d08a8
+  denominators: [input_intervals, input_bp, source_blacklisted, unmapped, split_or_multimapped, chromosome_changed, length_failed, reciprocal_failed, target_blacklisted, accepted_intervals, accepted_bp]
+  substitutions_allowed: false
+
+checksums:
+  provider_checksum_required_when_available: true
+  provider_checksum_must_verify: true
+  local_sha256_required_for_every_file: true
+  local_sha256_scope: exact_downloaded_bytes
+  record: [source_url, file_name, expected_bytes, observed_bytes, provider_algorithm, provider_checksum, provider_verification, local_sha256, downloaded_utc]
+  checksum_manifest_sha256_required: true
+  mismatch_action: stop_file_and_dependent_branch
+  redownload_attempts: 1
+  substitutions_allowed: false
+
+dataset_roles:
+  immutable_after_lock: true
+  order:
+    - {open: 1, accession: GCST90478363, role: negative_disease_low_neff}
+    - {open: 2, accession: GCST90476060, role: negative_disease_high_neff}
+    - {open: 3, accession: GCST90475259, role: positive_asthma}
+    - {open: 4, accession: GCST90627754, role: positive_hashimoto}
+    - {open: 5, accession: GCST90475833, role: positive_multiple_sclerosis}
+    - {open: 6, accession: GCST90475661, role: positive_type_1_diabetes}
+    - {open: 7, accession: GCST90476067, role: positive_ulcerative_colitis}
+    - {open: 8, accession: QTD000689, role: eqtl_rest_sumstats}
+    - {open: 9, accession: QTD000689_SUSIE, role: eqtl_rest_finemap}
+    - {open: 10, accession: QTD000693, role: eqtl_stim16_sumstats}
+    - {open: 11, accession: QTD000693_SUSIE, role: eqtl_stim16_finemap}
+    - {open: 12, accession: QTD000690, role: eqtl_stim40_sumstats}
+    - {open: 13, accession: QTD000690_SUSIE, role: eqtl_stim40_finemap}
+    - {open: 14, accession: GSE118189, role: atac_state_annotation}
+    - {open: 15, accession: GSE244035_MATRIX, role: h3k27ac_state_matrix}
+    - {open: 16, accession: GSE244035_RAW, role: h3k27ac_state_peaks}
+  excluded_fixed:
+    - {accession: QTS000040, reason: subtype_role_and_state_mapping_unresolved_before_outcomes}
+  role_change_after_opening_allowed: false
+
+locus_derivation:
+  timing: after_each_schema_eligible_GWAS_is_opened
+  genome_wide_significance_p_below: 5.0e-8
+  clumping_r2: 0.1
+  clumping_window_kb: 1000
+  primary_boundary: LD_block
+  sensitivity_boundary_kb: 500
+  matched_negative_locus_timing: after_index_locus_derivation
+  matched_negative_locus_inputs: frozen_covariates_and_calipers_only
+  outcome_magnitude_or_rank_used_for_matching: false
+
+post_opening_schema:
+  required_fields: [chromosome, base_pair_location, effect_allele, other_allele, standard_error, p_value, sample_size, effect_allele_frequency_or_minor_allele_frequency]
+  effect_field: exactly_one_of_beta_or_odds_ratio
+  imputed_variant_field: info_required
+  allele_rule: uppercase_biallelic_ACGT
+  odds_ratio_rule: positive_then_natural_log
+  standard_error_rule: finite_and_above_zero
+  p_value_rule: finite_above_zero_and_at_most_one
+  sample_size_rule: per_variant_or_locked_study_sample_size_above_zero
+  frequency_rule: minor_allele_frequency_above_zero_and_at_most_0.5
+  imputation_quality_minimum: 0.80
+  ambiguous_palindrome_rule: reject_if_minor_allele_frequency_above_0.42
+  duplicate_variant_key_maximum_fraction: 0.001
+  maximum_unresolved_effect_direction_fraction: 0.05
+  minimum_expected_dense_variant_coverage_fraction: 0.90
+  candidate_stop_rules: [missing_required_field, truncated_file, missing_chromosome, duplicate_fraction_exceeded, unresolved_direction_fraction_exceeded, dense_coverage_failed, checksum_failed]
+  locus_minimum_shared_variants: 100
+  locus_minimum_shared_coverage_fraction: 0.80
+  locus_stop_rules: [incomplete_GWAS_coverage, incomplete_eQTL_coverage, incomplete_LD_coverage, allele_harmonization_failed]
+  substitutions_allowed: false
+
+analysis_order:
+  steps:
+    - verify_frozen_CD4_program_annotation_paths_hashes_and_manifest
+    - verify_download_checksums_and_immutable_roles
+    - execute_negative_diseases_through_complete_pipeline
+    - define_MHC_excluded_GWAS_loci
+    - derive_matched_negative_loci_with_frozen_covariates_and_calipers
+    - competitive_gene_set_enrichment
+    - stratified_LD_score_regression
+    - locus_fine_mapping
+    - GWAS_cis_eQTL_colocalization
+    - chromatin_enhancer_and_perturbation_convergence
+    - causal_instrument_gates
+    - mediation_only_for_passed_gates
+    - MHC_included_sensitivity
+    - matched_negative_controls_and_rewiring
+    - multiplicity_correction
+    - complete_denominator_and_decision
+  alternatives_after_outcome_inspection_allowed: false
+
+methods:
+  competitive_enrichment:
+    engine: MAGMA_v1.10
+    gene_window: {upstream_bp: 10000, downstream_bp: 10000}
+    model: competitive_gene_set
+    primary_tail: one_sided_positive
+    report_two_sided: true
+    covariates: [gene_size, snp_density, gene_expression, expression_specificity, local_ld_score, response_degree, network_degree]
+  partitioned_heritability:
+    engine: LDSC_v1.0.1
+    model: stratified_LD_score_regression
+    primary: MHC_excluded
+    sensitivity: MHC_included
+    custom_annotations: [state_matched_ATAC, state_matched_H3K27ac, direct_program, secondary_program, buffered_program, rerouted_program, conserved_core_program]
+    baseline: baseline-LD_v2.2
+    munging: {info_minimum: 0.90, maf_minimum: 0.01, SNPs: HapMap3_no_MHC}
+  fine_mapping:
+    engine: susieR_v0.14.2
+    method: susie_rss
+    credible_set_coverage: 0.95
+    maximum_effects: 10
+    estimate_residual_variance: false
+    LD_reference: 1000G_NYGC_3202_unrelated_EUR_GRCh38
+    require_LD_consistency_diagnostic: true
+  colocalization:
+    engine: coloc_v6.0.1
+    method: coloc_susie
+    priors: {p1: 0.0001, p2: 0.0001, p12: 0.00001}
+    minimum_PP4: 0.80
+    minimum_PP4_to_PP3_ratio: 3.0
+    approximate_Bayes_factor_fallback_allowed: false
+  mhc:
+    primary: excluded
+    sensitivity: included
+    GRCh38: {chromosome: 6, start: 25000000, end: 34000000}
+  multiple_testing:
+    method: Benjamini_Hochberg
+    alpha: 0.05
+    families: [competitive_enrichment, partitioned_heritability, colocalization, causal_tests, mediation, negative_controls]
+  causal_gates:
+    minimum_instrument_F: 10
+    minimum_colocalization_PP4: 0.80
+    minimum_PP4_to_PP3_ratio: 3.0
+    steiger_direction_required: true
+    cochran_Q_p_minimum: 0.05
+    egger_intercept_p_minimum: 0.05
+    leave_one_instrument_direction_stable: true
+    alternate_gene_test_required: true
+    matched_negative_locus_test_required: true
+    mediation_claim_if_any_gate_fails: false
+
+retention_and_capacity:
+  snapshot_utc: 2026-09-13T21:16:03Z
+  free_bytes: 182042304512
+  safety_margin_fraction: 0.25
+  safety_margin_bytes: 45510576128
+  source_file_budget_bytes: 56937355656
+  locked_summary_budget_bytes: 8000000000
+  maximum_stage_temporary_bytes: 36000000000
+  tool_cache_budget_bytes: 2000000000
+  planned_peak_before_safety_bytes: 102937355656
+  planned_peak_with_safety_bytes: 148447931784
+  remaining_headroom_bytes: 33594372728
+  budget_fits: true
+  source_files_never_deleted: true
+  reference_acquisition_order: [baseline_LD, genome_build_references, chromosome_1_to_22_LD, outcome_files_in_locked_order]
+  chromosome_order: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
+  stage_temporary_components:
+    - {stage: schema_and_harmonization, peak_bytes: 12000000000}
+    - {stage: competitive_enrichment, peak_bytes: 10000000000}
+    - {stage: partitioned_heritability, peak_bytes: 20000000000}
+    - {stage: fine_mapping_and_colocalization, peak_bytes: 36000000000}
+  temporary_retirement_gate: locked_summary_exists_and_numerical_checks_pass_and_source_hashes_are_recorded_and_temporary_is_reproducible
+  delete_source_files: false
+  stop_if_free_bytes_below_safety_margin: true
+
+final_gate:
+  pre_outcome_protocol_complete: true
+  resource_roles_complete: true
+  negative_control_denominator_complete: true
+  peak_budget_fits_snapshot: true
+  decision: READY_FOR_CHECKSUM_DOWNLOAD
+  readiness_scope: later_sequential_checksum_download_action
+  transfer_authorization_encoded: false
+  outcome_opening_requires: [all_downloads_complete, provider_checksums_verified_when_available, local_SHA256_complete, checksum_manifest_hashed, role_order_reconfirmed]
