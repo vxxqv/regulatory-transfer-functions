@@ -70,6 +70,18 @@ Matched permutations preserve prespecified expression, cell-count, response-degr
 
 For each family, robustness is summarized as the proportion of valid specifications with the expected direction, the proportion supported at Q below 0.05, the median and full range of estimates, and the worst-case deletion result. A conclusion is labeled broad when at least 80% of valid specifications have the expected direction and at least 50% remain supported after correction, mixed when direction stability is at least 60% but corrected support is below 50%, narrow when fewer than 60% share the expected direction or support is confined to one setting of a dimension, and unresolved when power or required identifiers are insufficient. The complete curve is displayed; favorable specifications are not filtered.
 
+## Orthogonal causal triangulation and mediation
+
+The causal-triangulation denominator is every locus in the frozen deep-locus panel that has a statistical credible set, an Open Targets locus-to-gene candidate measured in the primary CD4 screen, and an immune-mediated disease association. Eligibility is evaluated without reference to whether downstream evidence is favorable. The initial denominator is therefore three loci: GATA3-asthma, STAT3-inflammatory bowel disease, and PTPN22-rheumatoid arthritis. Any later expansion must be labeled exploratory and must report both the original and expanded denominators.
+
+Each locus is evaluated against distinct evidence gates: statistical fine-mapping; GWAS and cis-eQTL colocalization; credible-set overlap with active CD4 chromatin; enhancer-to-gene evidence; significant perturbational cis effect; a signed downstream perturbation program; and concordant trans-eQTL direction. Evidence absence is not evidence of convergence. A causal-chain designation requires every gate to pass without a material directional contradiction.
+
+Colocalization requires a shared-variant posterior probability of at least 0.80, or an explicitly comparable source-specific threshold, and adequate regional variant coverage. Enhancer-to-gene support requires either experimental perturbation evidence or at least two concordant orthogonal links among activity-by-contact, promoter capture Hi-C, co-accessibility, or curated locus-to-gene evidence. Chromatin overlap must use a 95% credible-set variant and a CD4-relevant accessible or H3K27ac-marked element. Perturbational cis and downstream evidence must use the frozen CD4 estimands and signed programs.
+
+Two-step mediation is attempted only when independent or conditionally independent instruments are available for both the variant-to-cis and cis-to-distal steps, alleles can be harmonized, colocalization passes, and instrument strength is adequate. The primary estimand is the product of the two step-specific effects. Sensitivity analyses test heterogeneity, horizontal pleiotropy, Steiger directionality, leave-one-instrument influence, alternate candidate genes, and matched negative loci. Colocalization-aware Mendelian randomization must condition interpretation on the probability of a shared causal variant.
+
+No mediation claim is made if colocalization fails, if fewer than the prespecified number of valid instruments remain, if allele harmonization is ambiguous, if horizontal pleiotropy or heterogeneity invalidates the model, or if directionality favors the reverse path. Such loci are retained and graded unresolved or unsupported. Evidence tiers, full gate results, instrument exclusions, negative controls, and the complete locus denominator are reported in `config/causal_triangulation.yaml` outputs.
+
 ## Negative controls
 
 - Target-label permutations within expression and cell-count strata.

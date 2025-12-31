@@ -1,0 +1,70 @@
+{
+  "artifacts": [
+    {
+      "bytes": 3310,
+      "path": "config/causal_triangulation.yaml",
+      "sha256": "90a710c66264e6258618679b180fd795c85c87d2f1e291413e526d5e999ec224"
+    },
+    {
+      "bytes": 13358,
+      "path": "docs/protocol.md",
+      "sha256": "2738c630db0fa243d4d3efaddc9c3f4455d9a0894cf377715a2d048b51cafa0a"
+    },
+    {
+      "bytes": 825,
+      "path": "analyses/loci/results/locus_summary.csv",
+      "sha256": "6458d001878ea4c40636535cc352b8d6bf248800547177a5091057708b11fd83"
+    },
+    {
+      "bytes": 5525,
+      "path": "analyses/loci/results/credible_set_variants.csv",
+      "sha256": "90407399abf218c14cfb5c810cf5ffcf55ef8b2f0e97601203986ec0ba37105d"
+    },
+    {
+      "bytes": 8039,
+      "path": "analyses/loci/results/l2g_features.csv",
+      "sha256": "ebcaf3c761f6a71c09d204f6b2c55f098cee2bd1b14cc6e4e35420de9342d3b2"
+    },
+    {
+      "bytes": 10439,
+      "path": "analyses/loci/results/transfer_programs.csv",
+      "sha256": "70c94fd4f17f3c3bd6bae06b7daafc446a4767bf56540f5f9a96aa032e1a73ce"
+    },
+    {
+      "bytes": 1991787,
+      "path": "analyses/primary/results/transfer_phenotypes.parquet",
+      "sha256": "4327ea47df56278e92a60c8e4a26c41f5ff2d8f4e4786108e23e8998d0f97b3f"
+    },
+    {
+      "bytes": 55109,
+      "path": "analyses/natural_genetics/results/directional_pairs.parquet",
+      "sha256": "051522e495325176813f31d6be6774c5d6bcb24daae30b8df89bd58f96e0e430"
+    }
+  ],
+  "eligible_loci": [
+    {
+      "gene": "GATA3",
+      "lead_rsid": "rs3824660",
+      "locus": "gata3",
+      "study_locus_id": "08084ba2089ac9106beddbae944e4e56",
+      "trait": "asthma"
+    },
+    {
+      "gene": "STAT3",
+      "lead_rsid": "rs3736161",
+      "locus": "stat3",
+      "study_locus_id": "374aec5062abfe605b8a0d984c4efd1e",
+      "trait": "inflammatory bowel disease"
+    },
+    {
+      "gene": "PTPN22",
+      "lead_rsid": "rs2476601",
+      "locus": "ptpn22",
+      "study_locus_id": "b00610bcfd2485c4decb85fac85fbcdd",
+      "trait": "rheumatoid arthritis"
+    }
+  ],
+  "eligible_locus_denominator": 3,
+  "freeze_date": "2026-09-12",
+  "status": "frozen_before_triangulation_retrieval"
+}

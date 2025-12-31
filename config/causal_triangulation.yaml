@@ -1,0 +1,113 @@
+analysis:
+  name: orthogonal_causal_triangulation_and_mediation
+  status: frozen_before_triangulation_retrieval
+  freeze_date: 2026-09-12
+  seed: 20260912
+  alpha: 0.05
+  correction: benjamini_hochberg_within_evidence_family
+
+eligibility:
+  require_frozen_deep_locus_panel: true
+  require_statistical_credible_set: true
+  require_l2g_candidate_measured_in_cd4: true
+  require_immune_mediated_disease: true
+  eligible_loci:
+    - locus: gata3
+      gene: GATA3
+      trait: asthma
+      study_locus_id: 08084ba2089ac9106beddbae944e4e56
+      lead_rsid: rs3824660
+    - locus: stat3
+      gene: STAT3
+      trait: inflammatory_bowel_disease
+      study_locus_id: 374aec5062abfe605b8a0d984c4efd1e
+      lead_rsid: rs3736161
+    - locus: ptpn22
+      gene: PTPN22
+      trait: rheumatoid_arthritis
+      study_locus_id: b00610bcfd2485c4decb85fac85fbcdd
+      lead_rsid: rs2476601
+
+evidence_gates:
+  statistical_fine_mapping:
+    credible_set: 0.95
+  gwas_cis_eqtl_colocalization:
+    minimum_shared_variant_posterior: 0.80
+    require_adequate_regional_coverage: true
+  credible_set_chromatin_overlap:
+    require_cd4_accessibility_or_h3k27ac: true
+    credible_set: 0.95
+  enhancer_to_gene:
+    experimental_perturbation_sufficient: true
+    otherwise_minimum_concordant_orthogonal_links: 2
+    allowed_links:
+      - activity_by_contact
+      - promoter_capture_hic
+      - coaccessibility
+      - curated_locus_to_gene
+  perturbational_cis:
+    require_source_significance: true
+    use_frozen_on_target_z_score: true
+  signed_downstream_program:
+    require_nonzero_signed_program: true
+    use_frozen_cd4_programs: true
+  trans_eqtl_direction:
+    require_harmonized_effect_allele: true
+    require_direction_concordance: true
+
+mediation:
+  model: two_step_product_of_coefficients
+  require_colocalization_gate: true
+  minimum_independent_instruments_per_step: 3
+  minimum_f_statistic: 10
+  harmonization:
+    remove_ambiguous_palindromic_variants: true
+    align_effect_alleles: true
+  estimators:
+    - inverse_variance_weighted
+    - weighted_median
+    - mr_egger
+  sensitivities:
+    - cochran_q_heterogeneity
+    - egger_intercept_horizontal_pleiotropy
+    - steiger_directionality
+    - leave_one_instrument
+    - alternate_gene
+    - matched_negative_locus
+  no_claim_conditions:
+    - colocalization_failed
+    - inadequate_instrument_count
+    - weak_instruments
+    - ambiguous_harmonization
+    - material_heterogeneity
+    - horizontal_pleiotropy
+    - reverse_direction_supported
+
+matched_negative_loci:
+  match_on:
+    - credible_set_size_bin
+    - minor_allele_frequency_bin
+    - local_gene_density_bin
+    - target_expression_bin
+  per_eligible_locus: 10
+
+evidence_tiers:
+  tier_1_convergent_causal_chain:
+    require_all_evidence_gates: true
+    require_mediation_valid: true
+  tier_2_convergent_without_valid_mediation:
+    require_all_evidence_gates: true
+    require_mediation_valid: false
+  tier_3_partial:
+    minimum_passed_gates: 4
+    allow_directional_contradiction: false
+  tier_4_unsupported_or_contradictory:
+    maximum_passed_gates: 3
+    or_any_directional_contradiction: true
+
+reporting:
+  report_full_denominator: true
+  report_every_gate: true
+  report_missing_evidence: true
+  report_all_instrument_exclusions: true
+  prohibit_mediation_claim_on_failed_assumptions: true
