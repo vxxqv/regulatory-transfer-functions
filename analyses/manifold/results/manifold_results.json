@@ -1,0 +1,13 @@
+{
+  "chance_balanced_accuracy": 0.3333333333333333,
+  "components": 30,
+  "evaluable_nonzero_rows": 11264,
+  "oof_state_accuracy": 0.4699041193181818,
+  "oof_state_balanced_accuracy": 0.4637629031121311,
+  "phate_landmarks": 2000,
+  "phate_neighbors": 15,
+  "rows": 15807,
+  "targets": 6105,
+  "umap_neighbors": 30,
+  "zero_response_rows": 4543
+}
