@@ -1,0 +1,8 @@
+locus,condition,displayed_program_genes,median_signed_effect,positive_fraction
+gata3,Rest,20,-0.17052241,0.2
+gata3,Stim48hr,20,-0.186488695,0.05
+gata3,Stim8hr,20,-0.118086738,0.1
+ptpn22,Stim48hr,1,-0.014674318,0.0
+stat3,Rest,20,-0.21150914999999998,0.25
+stat3,Stim48hr,20,-0.22653531999999998,0.1
+stat3,Stim8hr,20,-0.16599551499999998,0.15

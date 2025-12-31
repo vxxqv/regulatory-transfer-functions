@@ -1,0 +1,3 @@
+analysis,status,eligible_strata,reason
+ancestry-stratified transfer,unavailable,0,individual-level ancestry labels were not present in the frozen public perturbation summaries
+ancestry-stratified locus evidence,unavailable,0,the three source credible sets did not provide a harmonized ancestry field for comparative estimation
