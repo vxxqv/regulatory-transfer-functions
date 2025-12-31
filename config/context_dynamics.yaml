@@ -1,0 +1,13 @@
+context_dynamics:
+  seed: 20260912
+  states:
+    - Rest
+    - Stim8hr
+    - Stim48hr
+  selected_targets: 12
+  tensor_modules: 10
+  stable_cis_cv_maximum: 0.10
+  stable_cis_examples: 4
+  tf_activity_minimum_measured_genes: 10
+  tf_activity_maximum_measured_genes: 2000
+  bootstrap_replicates: 2000

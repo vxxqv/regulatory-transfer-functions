@@ -1,0 +1,22 @@
+{
+  "alluvial_target": "PLCG1",
+  "complete_three_state_targets": 4399,
+  "independent_state_bootstrap_ci": [
+    -0.79746835443038,
+    0.8285714285714284
+  ],
+  "independent_state_spearman_p": 0.9108491685195836,
+  "independent_state_spearman_rho": -0.04761904761904763,
+  "independent_state_targets": 8,
+  "independent_state_underpowered": true,
+  "selected_switch_targets": 12,
+  "stable_cis_eligible_targets": 1114,
+  "tf_activity_bootstrap_ci": [
+    0.058323750345214934,
+    0.11903466300140284
+  ],
+  "tf_activity_spearman_p": 2.083631933415949e-09,
+  "tf_activity_spearman_rho": 0.09017180753509735,
+  "tf_activity_targets": 4399,
+  "tf_motif_denominator": 214
+}
