@@ -1,0 +1,19 @@
+{
+  "high_confidence_shared_rows": 1777,
+  "median_correlation_delta": 0.3040571572285428,
+  "median_observed_correlation": 0.3106275225541776,
+  "median_random_correlation": 0.0037914661850924,
+  "moderate_shared_rows": 3796,
+  "private_or_inverted_rows": 3,
+  "random_correlation_interval_95": [
+    -0.0452231440145118,
+    0.07290641627439634
+  ],
+  "rows": 5640,
+  "target_cluster_bootstrap_ci_95": [
+    0.2976313741951233,
+    0.31149700643232625
+  ],
+  "target_sign_flip_p": 9.999000099990002e-05,
+  "targets": 1880
+}
