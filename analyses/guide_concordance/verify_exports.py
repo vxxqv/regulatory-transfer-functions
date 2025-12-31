@@ -19,6 +19,7 @@ def main():
         w, h = image.size
         image.crop((int(w * .45), int(h * .79), int(w * .97), int(h * .97))).save(WORK / f"{label}_footer_crop.png")
         image.crop((0, int(h * .3), int(w * .47), int(h * .57))).save(WORK / f"{label}_cis_crop.png")
+        image.crop((0, int(h * .605), int(w * .49), int(h * .87))).save(WORK / f"{label}_molecular_crop.png")
         image.resize((780, 960)).save(WORK / f"{label}_final_size.png")
     print(json.dumps({"svg_raster_layers": 0, "pdf_image_objects": 0, "crop_scale": "native pixels; no resampling", "final_size_pixels": [780, 960]}))
 

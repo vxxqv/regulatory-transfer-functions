@@ -121,15 +121,28 @@ def molecular_support(source, rows):
     return rows.merge(support, on=KEY, how="left", validate="one_to_one"), True
 
 
-def cluster_fit(frame, predictor, outcome, covars, cfg, rng, name, permutation="matched"):
+def target_demean(values, targets):
+    frame = pd.DataFrame(values)
+    return (frame - frame.groupby(np.asarray(targets)).transform("mean")).to_numpy()
+
+
+def cluster_fit(frame, predictor, outcome, covars, cfg, rng, name, permutation="matched", target_control=False):
     columns = [predictor, outcome] + covars
     data = frame.dropna(subset=columns).copy().reset_index(drop=True)
+    if target_control:
+        counts = data.groupby("target").size()
+        data = data.loc[data.target.isin(counts[counts >= 2].index)].reset_index(drop=True)
     n_targets = data.target.nunique()
-    base = {"analysis": name, "predictor": predictor, "outcome": outcome, "n_rows": len(data), "n_targets": n_targets}
+    base = {"analysis": name, "predictor": predictor, "outcome": outcome, "n_rows": len(data), "n_targets": n_targets, "estimator": "target_controlled" if target_control else "pooled", "evaluation_scale": "within-target deviations" if target_control else "absolute outcome"}
     if n_targets < cfg["eligibility"]["minimum_targets_pooled"] or data[predictor].nunique() < 2:
         return {**base, "status": "underpowered"}, pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
     if predictor.startswith("molecular") and data.loc[data[predictor].gt(0), "target"].nunique() < cfg["eligibility"]["minimum_targets_evidence_group"]:
         return {**base, "status": "underpowered_supported_group"}, pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
+    if target_control:
+        varying = data.groupby("target")[predictor].agg(lambda x: float(np.ptp(x)) > 1e-12)
+        base["varying_targets"] = int(varying.sum())
+        if varying.sum() < cfg["eligibility"]["minimum_targets_evidence_group"]:
+            return {**base, "status": "underpowered_within_target_variation"}, pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
     state = pd.get_dummies(data.culture_condition, dtype=float, drop_first=True).to_numpy()
     cov = data[covars].to_numpy(float)
     csd = cov.std(axis=0)
@@ -138,6 +151,15 @@ def cluster_fit(frame, predictor, outcome, covars, cfg, rng, name, permutation="
     x = data[predictor].to_numpy(float)
     y = data[outcome].to_numpy(float)
     design = np.column_stack([np.ones(len(data)), x, cov, state])
+    if target_control:
+        design = target_demean(design, data.target)
+        y = target_demean(y, data.target).ravel()
+        x = design[:, 1]
+        state = target_demean(state, data.target)
+        nuisance = np.delete(design, 1, axis=1)
+        residual_x = x - nuisance @ np.linalg.lstsq(nuisance, x, rcond=None)[0]
+        if np.dot(residual_x, residual_x) < 1e-12:
+            return {**base, "status": "unidentified_after_target_and_state_control"}, pd.DataFrame(), pd.DataFrame(), pd.DataFrame()
     beta = np.linalg.lstsq(design, y, rcond=None)[0]
     groups, group_codes = np.unique(data.target, return_inverse=True)
     p = design.shape[1]
@@ -176,8 +198,11 @@ def cluster_fit(frame, predictor, outcome, covars, cfg, rng, name, permutation="
     predictions = []
     for fold, (train, test) in enumerate(folds.split(data, groups=data.target)):
         for kind, predictors in [("quality_baseline", [c for c in covars]), ("with_predictor", [predictor] + covars)]:
-            train_values = data.iloc[train][predictors].to_numpy(float)
-            test_values = data.iloc[test][predictors].to_numpy(float)
+            all_values = data[predictors].to_numpy(float)
+            if target_control:
+                all_values = target_demean(all_values, data.target)
+            train_values = all_values[train]
+            test_values = all_values[test]
             mean, sd = train_values.mean(axis=0), train_values.std(axis=0)
             sd[sd == 0] = 1
             train_values = np.column_stack([(train_values - mean) / sd, state[train]])
@@ -185,13 +210,13 @@ def cluster_fit(frame, predictor, outcome, covars, cfg, rng, name, permutation="
             model = Ridge(alpha=1.0).fit(train_values, y[train])
             preds = model.predict(test_values)
             for i, pred in zip(test, preds):
-                predictions.append({"analysis": name, "model": kind, "fold": fold, "target": data.target.iloc[i], "culture_condition": data.culture_condition.iloc[i], "observed": y[i], "prediction": pred})
+                predictions.append({"analysis": name, "model": kind, "fold": fold, "target": data.target.iloc[i], "culture_condition": data.culture_condition.iloc[i], "observed": y[i], "prediction": pred, "estimator": base["estimator"], "evaluation_scale": base["evaluation_scale"]})
     pred = pd.DataFrame(predictions)
     influence = []
     for g, target in enumerate(groups):
         val = np.linalg.lstsq(a.sum(axis=0) - a[g], b.sum(axis=0) - b[g], rcond=None)[0][1]
         influence.append({"analysis": name, "target": target, "leave_one_target_coefficient": val, "change": val - beta[1]})
-    result = {**base, "status": "estimated", "coefficient": beta[1], "ci_low": ci[0], "ci_high": ci[1], "permutation_p": pvalue, "null_replicates": len(null), "bootstrap_replicates": len(boot), "adjustment": ";".join(covars) + ";state", "supported_targets": data.loc[data[predictor].gt(0), "target"].nunique()}
+    result = {**base, "status": "estimated", "coefficient": beta[1], "ci_low": ci[0], "ci_high": ci[1], "permutation_p": pvalue, "null_replicates": len(null), "bootstrap_replicates": len(boot), "adjustment": ";".join(covars) + ";state" + (";target_fixed_effects" if target_control else ""), "supported_targets": data.loc[data[predictor].gt(0), "target"].nunique()}
     draws = pd.DataFrame({"analysis": name, "replicate": np.arange(len(null)), "null_coefficient": null})
     return result, draws, pred, pd.DataFrame(influence)
 

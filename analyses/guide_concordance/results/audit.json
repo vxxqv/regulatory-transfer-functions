@@ -15,7 +15,15 @@
   "amendment_sha256": "f6385effd29e01aa78f2cb98961b9c40687c2305bfaffb51cc775d1e3ee1eea7",
   "tests": [
     {
+      "analysis": "paired_cis_count",
+      "decision": "supported_positive"
+    },
+    {
       "analysis": "molecular_support_fraction:correlation_all",
+      "decision": "unresolved"
+    },
+    {
+      "analysis": "molecular_support_fraction:correlation_all:target_controlled",
       "decision": "unresolved"
     },
     {
@@ -23,7 +31,15 @@
       "decision": "underpowered"
     },
     {
+      "analysis": "molecular_support_fraction:correlation_signif:target_controlled",
+      "decision": "underpowered"
+    },
+    {
       "analysis": "molecular_support_fraction:frac_sign_agreement_signif_union",
+      "decision": "underpowered"
+    },
+    {
+      "analysis": "molecular_support_fraction:frac_sign_agreement_signif_union:target_controlled",
       "decision": "underpowered"
     },
     {
@@ -31,7 +47,15 @@
       "decision": "unresolved"
     },
     {
+      "analysis": "molecular_any_fraction:correlation_all:target_controlled",
+      "decision": "unresolved"
+    },
+    {
       "analysis": "molecular_any_fraction:correlation_signif",
+      "decision": "underpowered"
+    },
+    {
+      "analysis": "molecular_any_fraction:correlation_signif:target_controlled",
       "decision": "underpowered"
     },
     {
@@ -39,8 +63,23 @@
       "decision": "underpowered"
     },
     {
-      "analysis": "paired_cis_count",
+      "analysis": "molecular_any_fraction:frac_sign_agreement_signif_union:target_controlled",
+      "decision": "underpowered"
+    },
+    {
+      "analysis": "paired_cis_count:target_controlled",
       "decision": "supported_positive"
     }
-  ]
+  ],
+  "final_molecular_sha256": "463185e912e5370b5fdd49afd44789f3ff87cc91000e2cfb3730835f0f337785",
+  "primary_estimator": "target_controlled",
+  "target_control_spec_sha256": "85ef7810459350abdc50404f38ee5dc5d2d08049aef6112af5ff2ec0cb9d2a36",
+  "unchanged_output_hashes": {
+    "state_summaries.csv": "78cdd34d09e476313d6793ed337eae7cd2d1cc683d1089dc4c17462d0f42b6e7",
+    "denominators.csv": "3a05975726b401478e7928b2317b9acb1e3edf9d55888452ce69bce7ac65b744",
+    "matched_state_comparisons.csv": "b1d764fbccd00674e2a220ec2a20f1cb1d415ae596774e960b19d91a7c05b95b",
+    "matched_state_nulls.parquet": "7a09a1478c5045766a4d048a8aa49f9ab2af523a978300fc57baefc8ec52f565",
+    "measurement_error_sensitivity.csv": "e6755114867067d7542d2903a57ab5e5626586c65eaff71eaaccc4f8f97afe54",
+    "availability_gates.csv": "1ab5dcb4af6b681e04aff0059186cb3c6710391c74b352440826e79fd29ca70e"
+  }
 }

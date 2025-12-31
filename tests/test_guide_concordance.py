@@ -7,6 +7,9 @@ import numpy as np
 import pandas as pd
 import pytest
 from scipy.stats import false_discovery_control
+from scipy import sparse
+from scipy.sparse.linalg import lsmr
+import hashlib
 
 ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "analyses/guide_concordance/results"
@@ -62,6 +65,12 @@ def test_no_outcome_leakage_in_molecular_predictors():
     if not path.exists():
         pytest.skip("Frozen molecular evidence source required")
     edges = pd.read_parquet(path)
+    expected_hash = "463185e912e5370b5fdd49afd44789f3ff87cc91000e2cfb3730835f0f337785"
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == expected_hash
+    audit = json.loads((RESULTS / "audit.json").read_text())
+    manifest = json.loads((ROOT / "analyses/guide_concordance/freeze_manifest.json").read_text())
+    assert audit["final_molecular_sha256"] == expected_hash
+    assert next(x["sha256"] for x in manifest["inputs"] if x["path"].endswith("edge_evidence_matrix.parquet")) == expected_hash
     selected = sorted(edges.target_gene.unique())[::max(1, edges.target_gene.nunique() // 20)]
     edges = edges[edges.target_gene.isin(selected)].copy()
     count = edges[["curated_edge", "motif_supported"]].astype(int).sum(axis=1)
@@ -103,6 +112,40 @@ def test_independent_paired_coefficient_by_residualization():
     independent = np.dot(residual_x, residual_y) / np.dot(residual_x, residual_x)
     results = pd.read_csv(RESULTS / "hypothesis_tests.csv")
     assert np.isclose(independent, results.loc[results.analysis == "paired_cis_count", "coefficient"].iloc[0], atol=1e-8)
+
+
+def test_target_control_matches_explicit_sparse_fixed_effects():
+    data = pd.read_parquet(RESULTS / "eligible_pairs.parquet")
+    covars = ["delta_gc_fraction", "delta_log1p_tss_distance", "delta_library_flag", "delta_bidirectional_promoter", "delta_secondary_alignment", "delta_log1p_cells"]
+    data = data.dropna(subset=["cis_difference", "count_difference"] + covars)
+    counts = data.groupby("target").size()
+    data = data.loc[data.target.isin(counts[counts >= 2].index)].reset_index(drop=True)
+    target_code, targets = pd.factorize(data.target)
+    fixed_effects = sparse.csr_matrix((np.ones(len(data)), (np.arange(len(data)), target_code)), shape=(len(data), len(targets)))
+    features = np.column_stack([data.cis_difference, data[covars], pd.get_dummies(data.culture_condition, dtype=float, drop_first=True)])
+    design = sparse.hstack([sparse.csr_matrix(features), fixed_effects], format="csr")
+    explicit = lsmr(design, data.count_difference, atol=1e-12, btol=1e-12, maxiter=10000)[0][0]
+    tests = pd.read_csv(RESULTS / "hypothesis_tests.csv")
+    row = tests.loc[tests.analysis == "paired_cis_count:target_controlled"].iloc[0]
+    assert np.isclose(explicit, row.coefficient, atol=1e-7)
+    assert len(targets) == row.n_targets == 4855
+    assert "target_fixed_effects" in row.adjustment
+    predictions = pd.read_parquet(RESULTS / "target_held_out_predictions.parquet")
+    controlled = predictions[predictions.estimator == "target_controlled"]
+    assert np.allclose(controlled.groupby(["analysis", "model", "target"])["observed"].mean(), 0, atol=1e-12)
+    assert set(controlled.evaluation_scale) == {"within-target deviations"}
+
+
+def test_unaffected_outputs_and_pooled_effect_preserved():
+    audit = json.loads((RESULTS / "audit.json").read_text())
+    for name, expected in audit["unchanged_output_hashes"].items():
+        assert hashlib.sha256((RESULTS / name).read_bytes()).hexdigest() == expected
+    tests = pd.read_csv(RESULTS / "hypothesis_tests.csv")
+    pooled = tests[tests.analysis == "paired_cis_count"].iloc[0]
+    assert np.isclose(pooled.coefficient, .9135196623674151)
+    assert np.isclose(pooled.ci_low, .7883182631390189)
+    assert np.isclose(pooled.ci_high, 1.0420555668258336)
+    assert audit["primary_estimator"] == "target_controlled"
 
 
 def test_unavailable_estimands_remain_unavailable():

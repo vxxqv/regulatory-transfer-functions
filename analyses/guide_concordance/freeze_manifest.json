@@ -56,12 +56,12 @@
     {
       "path": "analyses/molecular_cascade/results/edge_evidence_matrix.parquet",
       "available": true,
-      "sha256": "022b83b24541cb0deac8490017bf90d95a53191460519325a8853d2655ec1ad3"
+      "sha256": "463185e912e5370b5fdd49afd44789f3ff87cc91000e2cfb3730835f0f337785"
     },
     {
       "path": "analyses/molecular_cascade/results/audit.json",
       "available": true,
-      "sha256": "4e3ef9c4dbbfbc40c5868174be6a074c0d03586710097266a91297718c50e50f"
+      "sha256": "9b90a827e7a000fef25a71d042fdb452a3b769ff645bdacb5b36174405612e5c"
     },
     {
       "path": "analyses/guide_dose_response/results/audit.json",
@@ -148,5 +148,22 @@
       "available": true,
       "sha256": "f402c281bbd15d3e36f9a922c8011b0a892890b4d0b8ab47ba1ef9dc90b9f723"
     }
-  ]
+  ],
+  "molecular_update": {
+    "source_commit": "1d5f9488",
+    "reason": "Final molecular-cascade evidence replaces preliminary matrix after independent audit",
+    "superseded_inputs": [
+      {
+        "path": "analyses/molecular_cascade/results/edge_evidence_matrix.parquet",
+        "available": true,
+        "sha256": "022b83b24541cb0deac8490017bf90d95a53191460519325a8853d2655ec1ad3"
+      },
+      {
+        "path": "analyses/molecular_cascade/results/audit.json",
+        "available": true,
+        "sha256": "4e3ef9c4dbbfbc40c5868174be6a074c0d03586710097266a91297718c50e50f"
+      }
+    ],
+    "target_control_spec_sha256": "85ef7810459350abdc50404f38ee5dc5d2d08049aef6112af5ff2ec0cb9d2a36"
+  }
 }

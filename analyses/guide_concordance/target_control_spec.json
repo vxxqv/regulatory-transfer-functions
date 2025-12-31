@@ -1,0 +1,17 @@
+{
+  "design": "audit correction frozen before examining revised molecular outcomes",
+  "source_commit": "1d5f9488",
+  "final_molecular_sha256": "463185e912e5370b5fdd49afd44789f3ff87cc91000e2cfb3730835f0f337785",
+  "seed": 25914,
+  "primary_estimator": "within-target least squares with target-demeaned predictors, outcome, state indicators and guide-quality covariates",
+  "comparison_estimator": "original pooled model with state and guide-quality covariates",
+  "target_eligibility": "at least two eligible states; nonzero within-target predictor variation required for identification",
+  "power_rule": "at least 100 contributing targets and at least 20 with nonzero within-target predictor variation",
+  "numerical_tolerance": 1e-12,
+  "bootstrap": "2000 target-cluster resamples of demeaned sufficient statistics",
+  "permutations": "1000 target-block matched permutations or target-consistent guide-label swaps, retaining prior null definitions",
+  "fdr": "BH at 0.05 across estimated pooled and target-controlled molecular and paired-cis tests; underpowered tests retain missing p-values",
+  "validation": "identical target-held-out folds for baseline and augmented models; within-target deviations are centered using observed states within each target and evaluate relative deviations, not absolute response prediction",
+  "interpretation": "Target control addresses stable target-level confounding but does not establish causality, mediation, or guide-level replication.",
+  "unchanged": "eligibility thresholds, molecular-only predictor definitions, guide summaries, matched-state comparisons, measurement-error summaries, original paired pooled model and all original guide source data"
+}
