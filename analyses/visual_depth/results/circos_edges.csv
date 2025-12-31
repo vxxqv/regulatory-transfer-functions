@@ -1,0 +1,22 @@
+source,target,source_type,target_type,status,weight,evidence_tier,condition
+rs3824660,GATA3,variant,gene,available,0.4496459637453133,tier_4_unsupported_or_contradictory,locus
+GATA3,Program 25,gene,program,available,3.1820174320279584,tier_4_unsupported_or_contradictory,Rest
+Program 25,disease link unavailable,program,disease,unavailable,0.0,tier_4_unsupported_or_contradictory,Rest
+GATA3,Program 25,gene,program,available,3.3731054191307153,tier_4_unsupported_or_contradictory,Stim48hr
+Program 25,disease link unavailable,program,disease,unavailable,0.0,tier_4_unsupported_or_contradictory,Stim48hr
+rs3736161,STAT3,variant,gene,available,0.0415528255932921,tier_3_partial,locus
+STAT3,Program 106,gene,program,available,2.34531032590552,tier_3_partial,Rest
+Program 106,disease link unavailable,program,disease,unavailable,0.0,tier_3_partial,Rest
+STAT3,Program 90,gene,program,available,2.5219993932380285,tier_3_partial,Stim48hr
+Program 90,disease link unavailable,program,disease,unavailable,0.0,tier_3_partial,Stim48hr
+STAT3,Program 79,gene,program,available,2.3912448684186898,tier_3_partial,Stim8hr
+Program 79,rheumatoid arthritis,program,disease,available,2.73511572133031,tier_3_partial,Stim8hr
+Program 79,asthma,program,disease,available,2.73511572133031,tier_3_partial,Stim8hr
+Program 79,celiac disease,program,disease,available,2.5323361926975467,tier_3_partial,Stim8hr
+Program 79,Hashimoto's thyroiditis,program,disease,available,2.5323361926975467,tier_3_partial,Stim8hr
+Program 79,autoimmune disease,program,disease,available,2.5323361926975467,tier_3_partial,Stim8hr
+Program 79,systemic lupus erythematosus,program,disease,available,2.1765646214019383,tier_3_partial,Stim8hr
+Program 79,ulcerative colitis,program,disease,available,1.3785645179913433,tier_3_partial,Stim8hr
+Program 79,multiple sclerosis,program,disease,available,1.3368332668875198,tier_3_partial,Stim8hr
+rs2476601,PTPN22,variant,gene,available,0.9996845345178752,tier_4_unsupported_or_contradictory,locus
+PTPN22,program unavailable,gene,program,unavailable,0.0,tier_4_unsupported_or_contradictory,all

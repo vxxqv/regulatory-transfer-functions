@@ -1,0 +1,23 @@
+{
+  "bipartite_edges": 121,
+  "circos_edges": 21,
+  "volcano_all_tested_genes": true,
+  "volcano_exemplars": [
+    [
+      "GATA3",
+      "Rest",
+      "amplified"
+    ],
+    [
+      "RELB",
+      "Stim48hr",
+      "buffered"
+    ],
+    [
+      "NFAT5",
+      "Rest",
+      "context_switching"
+    ]
+  ],
+  "volcano_rule": "adjusted p value <= 0.10"
+}
