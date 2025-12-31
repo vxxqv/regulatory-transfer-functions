@@ -1,0 +1,21 @@
+version: 2
+seed: 20260920
+input_sha256: 355b9e174af1966238500a910ff848c624e52bd8348f5ce966247e1edae21c34
+prior_inspection: aggregate model and fold metrics only
+hypothesis: The frozen transfer-augmented and size-and-state models differ in cluster-held-out disease discrimination.
+eligible_denominator: 1708 real disease-program rows from 75 response clusters and 14 diseases
+models: [size_state, transfer_augmented]
+metrics: [auroc, average_precision, brier]
+effect_direction:
+  auroc: transfer_augmented_minus_size_state
+  average_precision: transfer_augmented_minus_size_state
+  brier: size_state_minus_transfer_augmented
+bootstrap_replicates: 2000
+permutation_replicates: 2000
+uncertainty: response-cluster bootstrap
+null: response-cluster model-label swaps
+multiplicity: two-sided absolute paired permutation tests with Benjamini-Hochberg correction across the three frozen metrics
+minimum_power: at least 50 clusters and both outcome classes
+decision_rule: Superiority in either direction requires a 95 percent interval excluding zero in that direction and a two-sided q below 0.05.
+stopping_rule: Reuse frozen out-of-fold predictions without model refitting or subgroup selection.
+audit_correction: Directional tails cannot support reverse superiority because aggregate model metrics were inspected before this extension. The release analysis therefore uses direction-neutral two-sided tests.

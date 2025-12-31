@@ -1,0 +1,14 @@
+{
+  "bootstrap_replicates": 2000,
+  "config": "config/disease_model_uncertainty.yaml",
+  "config_sha256": "9c9df76e1c3ab74d02f2d67ff9bf11a509d27d2d3ab41164b7886dff5b2c471e",
+  "input": "analyses/disease/results/disease_model_rows.parquet",
+  "input_sha256": "355b9e174af1966238500a910ff848c624e52bd8348f5ce966247e1edae21c34",
+  "outputs": [
+    "analyses/disease/results/model_uncertainty.csv",
+    "analyses/disease/results/model_null_distribution.parquet",
+    "analyses/disease/results/disease_uncertainty_audit.json"
+  ],
+  "permutation_replicates": 2000,
+  "seed": 20260920
+}
