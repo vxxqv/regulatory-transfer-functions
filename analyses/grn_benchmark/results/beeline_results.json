@@ -1,0 +1,9 @@
+{
+  "all_candidate_edges_reported": true,
+  "bootstrap_estimand": "mean_of_target_specific_metrics_among_targets_with_both_edge_classes",
+  "bootstrap_replicates": 2000,
+  "datasets": 5,
+  "gold_used_for_training_or_selection": false,
+  "methods": 4,
+  "unavailable_records": 1
+}
