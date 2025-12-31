@@ -59,9 +59,18 @@ def cross_fitted_modules(
         model = TruncatedSVD(n_components=usable_components, random_state=seed + fold)
         model.fit(matrix[train_index])
         held_out_scores = model.transform(matrix[test_index])
-        reconstruction = sparse.csr_matrix(held_out_scores @ model.components_)
         scores[test_index, :usable_components] = held_out_scores.astype(np.float32)
-        reconstruction_cosine[test_index] = row_cosine(matrix[test_index], reconstruction)
+        # TruncatedSVD components are orthonormal. The dot product between a row
+        # and its projection is therefore the squared score norm, which lets us
+        # compute projection cosine without materializing a dense reconstruction.
+        score_norm = np.linalg.norm(held_out_scores, axis=1)
+        row_norm = np.sqrt(np.asarray(matrix[test_index].multiply(matrix[test_index]).sum(axis=1)).ravel())
+        reconstruction_cosine[test_index] = np.divide(
+            score_norm,
+            row_norm,
+            out=np.zeros_like(score_norm),
+            where=row_norm > 0,
+        )
         fold_records.append(
             {
                 "fold": fold,
