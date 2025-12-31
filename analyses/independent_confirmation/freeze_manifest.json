@@ -1,0 +1,218 @@
+{
+  "candidate_registry_has_outcome_rows": false,
+  "exclude_every_previously_inspected_dataset_or_outcome": true,
+  "excluded_systems": [
+    "CD4",
+    "K562",
+    "RPE1",
+    "Th1",
+    "Th2"
+  ],
+  "freeze_date": "2026-09-13",
+  "frozen_files": [
+    {
+      "canonical_lf_bytes": 18873,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "config/independent_confirmation.yaml",
+      "sha256": "42f7f63116442736529d66f84c8a891b3425a089eef128916d37a8ba1ebbb69a"
+    },
+    {
+      "canonical_lf_bytes": 4636,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "analyses/independent_confirmation/README.md",
+      "sha256": "02eb0c3b90d020c4ca3458f851ddc9cd44598f37a6a4f4b09dca681e7d242463"
+    },
+    {
+      "canonical_lf_bytes": 5174,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "analyses/independent_confirmation/freeze.py",
+      "sha256": "80c18f35b49a4b767ac68a30fea36c1675738bfd29823df209e12c4c33ace783"
+    },
+    {
+      "canonical_lf_bytes": 8087,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "analyses/independent_confirmation/hypotheses.tsv",
+      "sha256": "baf0ece4b06b7c53cbeab78e12e4c259032ddebcc563ccff00e1457fa41ae8fe"
+    },
+    {
+      "canonical_lf_bytes": 1933,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "analyses/independent_confirmation/dataset_roles.tsv",
+      "sha256": "e13e49f2f417f77557094d9ee23169a3d259f066614ec044774f160545caa49e"
+    },
+    {
+      "canonical_lf_bytes": 1146,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "analyses/independent_confirmation/candidate_manifest_template.tsv",
+      "sha256": "7000af27794777ae7c3abee121aecc8485f6f85759c9bd7da570e07406c9afc3"
+    },
+    {
+      "canonical_lf_bytes": 17699,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "tests/test_independent_confirmation_freeze.py",
+      "sha256": "a52ca92ee065bc53d9324d302954a631e6b6f7ac77f24088512b31e8dbbf7ac0"
+    }
+  ],
+  "git_commit_before_freeze_commit": "7016d0950d53086528bc9ba586256616c9cf62a7",
+  "hashing_policy": {
+    "binary": "SHA256 of exact bytes",
+    "manifest_self_hash": "excluded to avoid recursion",
+    "paths": "repository-relative POSIX paths only",
+    "text": "SHA256 of UTF-8 text normalized to LF; raw, LF, and CRLF are equivalent"
+  },
+  "immutable_fields": [
+    "candidate_id",
+    "dataset_accession",
+    "dataset_version",
+    "provisional_metadata_sha256",
+    "mapping_sha256",
+    "dataset_role",
+    "selection_rank",
+    "selection_locked_utc",
+    "outcomes_inspected_before_freeze",
+    "outcome_unopened"
+  ],
+  "metadata_only_screening": true,
+  "new_external_outcomes_opened": false,
+  "phase": "independent_confirmation",
+  "prior_eight_target_th1_th2_definitive_replication_allowed": false,
+  "reused_cd4_artifacts": [
+    {
+      "canonical_lf_bytes": 1471,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "config/analysis.yaml",
+      "sha256": "1b2bcc9fbbd35bcbdbe6110153b0946179a57731e7c713be8fba60d9b69c2dda"
+    },
+    {
+      "canonical_lf_bytes": 14021,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "config/cell_systems_expansion.yaml",
+      "sha256": "6cadafe6f6c1860066d6177aabad7dcf7eb9157d8df891c4da0797d6228f6100"
+    },
+    {
+      "canonical_lf_bytes": 2665,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "config/external_benchmark.yaml",
+      "sha256": "46ba07567226734b58bb6bc0f6b98eb62c157dcf0d69ffad3e4b341fe898c3e6"
+    },
+    {
+      "canonical_lf_bytes": 2307,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "config/guide_concordance.yaml",
+      "sha256": "6ec1a37d3c630e449ece20bf42628b7a903912506aa7e40f6eaf15c1e60b721b"
+    },
+    {
+      "canonical_lf_bytes": 525,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "config/guide_dose_response.yaml",
+      "sha256": "35dadb9960dd6ffe92e5f1d36b9d09a225015a3a169166811be2d803b9e254b4"
+    },
+    {
+      "canonical_lf_bytes": 4420,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "config/molecular_cascade.yaml",
+      "sha256": "5e938ad1b0c19030851ed32eda9b88d7f8467d4948aeaed8e3051af91aecaa99"
+    },
+    {
+      "canonical_lf_bytes": 3310,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "config/causal_triangulation.yaml",
+      "sha256": "90a710c66264e6258618679b180fd795c85c87d2f1e291413e526d5e999ec224"
+    },
+    {
+      "canonical_lf_bytes": 3481,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "analyses/external_benchmark/freeze.py",
+      "sha256": "7c69112322e8fbeb7518b1cffb24fd030e6b7bc1bcc45af677560e604d6967b4"
+    },
+    {
+      "canonical_lf_bytes": 2992,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "analyses/external_benchmark/freeze_manifest.json",
+      "sha256": "8d2af82ad95f26e0aeea01c1e013dc19ab6634bc600d6384b35b8539ac21a6e1"
+    },
+    {
+      "canonical_lf_bytes": 51673,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "analyses/external_benchmark/target_folds.tsv",
+      "sha256": "13406abd9a86c277b8532ab61a7e5678b239b046a87897907821abcdb7df6541"
+    },
+    {
+      "canonical_lf_bytes": 10228,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "analyses/cell_systems_expansion/freeze_manifest.json",
+      "sha256": "c4b95488a09c5bf63c39b245c4bf1a5808c450fc751b36af7fc0b54edd48386f"
+    },
+    {
+      "canonical_lf_bytes": 37249,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "analyses/cell_systems_expansion/target_folds.tsv",
+      "sha256": "d0352b81284eb74a427f27ad2cd474d2e275a725ba77351493552fc8bda1c6ad"
+    },
+    {
+      "exact_bytes": 1991787,
+      "hash_mode": "binary_exact_sha256",
+      "path": "analyses/primary/results/transfer_phenotypes.parquet",
+      "sha256": "4327ea47df56278e92a60c8e4a26c41f5ff2d8f4e4786108e23e8998d0f97b3f"
+    },
+    {
+      "exact_bytes": 250772,
+      "hash_mode": "binary_exact_sha256",
+      "path": "analyses/primary/results/context_switching.parquet",
+      "sha256": "8431f325c278e9cedf6c456ad917aa12fdddc0b492d03290f5a274fa28877a7a"
+    },
+    {
+      "exact_bytes": 5959719,
+      "hash_mode": "binary_exact_sha256",
+      "path": "analyses/vectors/results/contextual_transfer_tensor.parquet",
+      "sha256": "d644893577cc5a78a0bda649584d21e608f3e105f78ed865a6d0328b541a8099"
+    },
+    {
+      "exact_bytes": 374850,
+      "hash_mode": "binary_exact_sha256",
+      "path": "analyses/vectors/results/context_rerouting_pairs.parquet",
+      "sha256": "b3845ac971b20991a0be5635d00d56c2593b67c746a8c9c517adc9c16e58c745"
+    },
+    {
+      "exact_bytes": 2883127,
+      "hash_mode": "binary_exact_sha256",
+      "path": "analyses/vectors/results/network_gain_rows.parquet",
+      "sha256": "d31cb32ec00b4474b8736d146d2709eeec378cf0575b0fd5338b48503ae1a608"
+    },
+    {
+      "exact_bytes": 3040851,
+      "hash_mode": "binary_exact_sha256",
+      "path": "analyses/vectors/results/reference_module_loadings.parquet",
+      "sha256": "85a083525b34f2fa321eb43f7d71a42270ee5469306b4cf16cc56403b34739ef"
+    },
+    {
+      "canonical_lf_bytes": 6134,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "analyses/baselines/run_baselines.py",
+      "sha256": "d960cd65c7598c34922464442bde7bf77a7dd999c8c097e90dab7245fba85210"
+    },
+    {
+      "exact_bytes": 641457,
+      "hash_mode": "binary_exact_sha256",
+      "path": "analyses/baselines/results/oof_predictions.parquet",
+      "sha256": "f5539a9c4c65b22eb7d1bcd265fca55bdde02e9975402ab6a0c12b4dd061bd3c"
+    },
+    {
+      "canonical_lf_bytes": 14891,
+      "hash_mode": "text_utf8_lf_sha256",
+      "path": "analyses/external_benchmark/run_benchmark.py",
+      "sha256": "d32f9016fea3c4e6b67438c6285947588bf57a13a00f0aef789cc02581cbeccf"
+    }
+  ],
+  "status": "frozen_before_independent_outcome_inspection",
+  "target_folds": {
+    "folds": 10,
+    "path": "analyses/external_benchmark/target_folds.tsv",
+    "regenerate": false,
+    "rule": "1_plus_first_16_hex_sha256_target_gene_modulo_10"
+  },
+  "two_stage_dataset_hash_process": {
+    "before_outcome_opening": "final_full_file_sha256_and_verified_provider_checksum",
+    "before_selection": "provisional_metadata_sha256"
+  }
+}

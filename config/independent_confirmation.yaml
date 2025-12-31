@@ -1,0 +1,543 @@
+version: 1
+freeze_date: 2026-09-13
+status: frozen_before_independent_outcome_inspection
+phase_name: independent_confirmation
+
+scope:
+  objective: independent_data_confirmation_of_transfer_state_dose_molecular_and_disease_claims
+  human_only: true
+  genetic_perturbation_transcriptomics_only: true
+  outcomes_must_remain_unopened_until_all_gates_pass: true
+  selection_must_be_outcome_blind: true
+  metadata_only_screening_allowed: true
+  metadata_only_screening_fields:
+    - accession
+    - study_version
+    - publication
+    - species
+    - tissue
+    - cell_type
+    - perturbation_modality
+    - assay
+    - activation_states
+    - control_design
+    - guide_assignment_availability
+    - donor_label_availability
+    - replicate_design
+    - target_count
+    - cell_count
+    - gene_count
+    - genome_build
+    - identifier_scheme
+    - processed_file_availability
+    - provider_checksum
+    - license
+  metadata_screening_prohibitions:
+    - expression_matrix_values
+    - response_vector_values
+    - differential_expression_values
+    - effect_sizes
+    - p_values
+    - q_values
+    - outcome_rankings
+    - outcome_figures
+
+dataset_selection:
+  registry: analyses/independent_confirmation/candidate_manifest_template.tsv
+  roles: analyses/independent_confirmation/dataset_roles.tsv
+  role_values:
+    - development_source
+    - previously_inspected_excluded
+    - metadata_only_candidate
+    - untouched_portability_confirmation
+    - independent_primary_t_cell_replication
+    - guide_by_donor_reconstruction
+    - state_compatible_molecular_evidence
+    - genome_wide_disease_genetics
+    - negative_control
+  immutable_after_selection_fields:
+    - candidate_id
+    - dataset_accession
+    - dataset_version
+    - provisional_metadata_sha256
+    - mapping_sha256
+    - dataset_role
+    - selection_rank
+    - selection_locked_utc
+    - outcomes_inspected_before_freeze
+    - outcome_unopened
+  two_stage_hash_process:
+    stage_1_before_selection:
+      name: provisional_metadata_hash
+      algorithm: sha256
+      input: exact_metadata_inventory_used_for_eligibility_and_ranking
+      required: true
+      outcome_content_forbidden: true
+    stage_2_before_outcome_opening:
+      name: final_release_checksum
+      algorithm: sha256
+      require_full_file_sha256: true
+      require_provider_checksum_when_available: true
+      require_provider_checksum_verification: true
+      record_file_size_bytes: true
+      opening_allowed_only_after_checksum_and_role_lock: true
+  selection_order:
+    - all_block_specific_eligibility_gates_pass_descending
+    - independent_cohort_and_provider_provenance_descending
+    - mapped_cd4_target_count_descending
+    - common_response_gene_count_descending
+    - repeated_unit_count_descending
+    - dataset_accession_ascending
+  exclusion_registry_rule: exclude_any_dataset_or_outcome_marked_inspected_in_data_manifest_or_existing_analysis_outputs
+
+global_exclusions:
+  systems:
+    - GSE314342_CD4
+    - Replogle_K562
+    - Replogle_RPE1
+    - GSE314342_Th1_Th2_eight_target_validation
+  portability_confirmation_forbidden_systems:
+    - CD4
+    - K562
+    - RPE1
+    - Th1
+    - Th2
+  previously_inspected_outcomes_excluded: true
+  metadata_only_screened_but_outcome_unopened_may_be_reconsidered: true
+  prior_th1_th2_definitive_replication_allowed: false
+
+inference:
+  alpha: 0.05
+  confidence_level: 0.95
+  multiplicity: benjamini_hochberg_within_prespecified_family
+  seeds:
+    dataset_selection: 20260913
+    target_bootstrap: 20260914
+    guide_bootstrap: 20260915
+    donor_bootstrap: 20260916
+    clustered_bootstrap: 20260917
+    matched_permutation: 20260918
+    degree_rewiring: 20260919
+    model_fit: 20260920
+    calibration: 20260921
+  resamples:
+    default: 1000
+    target_bootstrap: 1000
+    guide_bootstrap: 1000
+    donor_bootstrap: 1000
+    clustered_bootstrap: 1000
+    matched_permutations: 1000
+    degree_preserving_rewirings: 1000
+    refinement:
+      allowed_only_if_absolute_q_distance_from_0_05_at_most: 0.005
+      increment: 1000
+      maximum: 10000
+      same_seed_stream_required: true
+      no_other_adaptive_increase_allowed: true
+  decision_labels:
+    - pass
+    - fail
+    - unavailable
+  required_result_fields:
+    - effect_size
+    - confidence_interval
+    - numerator
+    - denominator
+    - calibration
+    - falsification_context
+    - raw_p_value
+    - q_value
+    - decision_rule
+    - decision
+  favorable_p_value_is_sufficient: false
+
+novelty_and_result_gate:
+  part_1_novelty:
+    require_one:
+      - independent_evidence_source
+      - materially_distinct_prespecified_test
+  part_2_result_capability:
+    must_be_capable_of_changing_or_narrowing_central_conclusion: true
+    required_outputs:
+      - effect_size
+      - uncertainty
+      - denominator
+      - calibration_or_falsification_context
+      - decision_rule
+  stop_without_substitution_if:
+    - redundant_method
+    - outcome_selected_dataset
+    - weak_nominal_only_result
+    - branch_cannot_change_interpretation
+  favorable_p_value_alone_is_a_good_result: false
+
+untouched_portability_confirmation:
+  dataset_role: untouched_portability_confirmation
+  eligibility:
+    species: Homo_sapiens
+    require_genetic_perturbation: true
+    require_transcriptomic_readout: true
+    require_processed_counts_or_signed_response_vectors: true
+    require_non_targeting_controls: true
+    require_unambiguous_target_mapping: true
+    minimum_overlapping_cd4_targets: 100
+    minimum_response_genes: 500
+    minimum_cells_per_target: 50
+    alternative_to_cell_minimum: author_validated_pseudobulk_uncertainty
+    outcome_blind_selection: true
+    require_outcome_unopened: true
+    exclude_systems: [CD4, K562, RPE1, Th1, Th2]
+    exclude_every_previously_inspected_dataset_or_outcome: true
+  frozen_cd4_reuse:
+    target_folds:
+      folds: 10
+      rule: 1_plus_first_16_hex_sha256_target_gene_modulo_10
+      artifact: analyses/external_benchmark/target_folds.tsv
+      regenerate: false
+    preprocessing: identical_to_frozen_cd4_external_benchmark
+    response_definition: identical_to_frozen_cd4_external_benchmark
+    identical_splits_for_every_model_and_ablation: true
+    feature_selection: source_cd4_training_data_only
+    tuning: nested_within_source_training_folds_only
+    heldout_outcomes_forbidden_for:
+      - preprocessing
+      - feature_selection
+      - tuning
+      - covariate_shift_fit
+      - calibration_fit
+  models:
+    primary:
+      - frozen_cd4_transfer
+      - without_vector
+    competitive_baselines:
+      - global_mean
+      - simple_covariates
+      - ridge
+      - sparse_nonlinear
+      - standard_network_propagation
+      - graph_readout
+    full_feature_blocks: [simple, proximal, scalar_transfer, context, vector, network]
+    without_vector_feature_blocks: [simple, proximal, scalar_transfer, context, network]
+  covariate_shift:
+    required: true
+    method: cross_fitted_density_ratio_weighting
+    fit_inputs: source_and_holdout_covariates_only
+    heldout_outcomes_used: false
+    weight_truncation_quantiles: [0.01, 0.99]
+    report_unadjusted_sensitivity: true
+  inference:
+    primary_endpoint: heldout_target_level_r2
+    paired_comparison_unit: target
+    interval: paired_target_bootstrap
+    calibration_slope_acceptable: [0.80, 1.20]
+    maximum_absolute_calibration_intercept_sd: 0.10
+    coverage_levels: [0.50, 0.80, 0.95]
+    maximum_absolute_coverage_error: 0.05
+    fixed_target_strata:
+      - source_target_expression_quintile
+      - source_response_degree_quintile
+      - source_network_degree_quintile
+      - source_response_magnitude_quintile
+      - source_transfer_class
+    minimum_targets_per_estimable_stratum: 20
+    reproducibility_rule: positive_difference_in_every_estimable_level_and_no_q_below_0_05_reverse_level
+  primary_pass:
+    model: without_vector
+    comparator: best_competitive_baseline_selected_on_source_only
+    require_paired_95_ci_excludes_zero_above: true
+    require_within_family_q_below: 0.05
+    require_acceptable_calibration: true
+    require_acceptable_coverage: true
+    require_fixed_strata_reproducibility: true
+
+independent_primary_t_cell_state_replication:
+  dataset_role: independent_primary_t_cell_replication
+  dataset_count_minimum: 2
+  independence_definition:
+    distinct_study_accession: true
+    nonoverlapping_participant_or_donor_cohort: true
+    same_study_releases_count_once: true
+  per_dataset_eligibility:
+    species: Homo_sapiens
+    require_primary_t_cells: true
+    require_genetic_perturbation: true
+    minimum_matched_activation_states: 2
+    require_non_targeting_controls: true
+    minimum_frozen_mapped_targets: 50
+    minimum_cells_per_target_state: 30
+    alternative_to_cell_minimum: validated_pseudobulk_uncertainty
+    minimum_common_genes: 500
+    mapping_frozen_before_outcomes: true
+    minimum_repeated_units: 3
+    allowed_repeated_units: [donor, biological_replicate, independent_cell_pool]
+    repeated_units_must_span_each_state: true
+    require_outcome_unopened: true
+  excluded_from_definitive_replication:
+    - GSE314342_Th1_Th2_eight_target_validation
+  endpoints:
+    primary: matched_target_cross_state_core_membership_agreement
+    secondary:
+      - matched_target_state_specific_effect_concordance
+      - transfer_class_agreement
+      - rerouting_direction_agreement
+      - calibration_slope
+      - interval_coverage
+  validation:
+    target_held_out: true
+    donor_or_replicate_held_out: true
+    dataset_held_out: true
+  primary_pass:
+    require_two_independent_datasets: true
+    require_positive_effect_each_dataset: true
+    require_pooled_clustered_95_ci_excludes_zero: true
+    require_within_family_q_below: 0.05
+    require_no_q_below_0_05_opposite_dataset: true
+
+guide_by_donor_reconstruction:
+  dataset_role: guide_by_donor_reconstruction
+  outcome_opening_gate:
+    require_raw_or_processed_guide_assignments: true
+    require_donor_labels: true
+    require_non_targeting_controls: true
+    require_target_state_mapping: true
+    minimum_distinct_supported_guide_efficacies: 3
+    minimum_donors_for_donor_heldout_claim: 3
+    minimum_cells_per_guide_donor: 30
+    minimum_response_genes: 500
+  models:
+    - "null"
+    - linear
+    - restricted_cubic_spline
+    - isotonic
+    - breakpoint
+    - hill
+  validation:
+    - donor_held_out
+    - guide_held_out
+  required_sensitivities:
+    - measurement_error
+    - calibration
+    - guide_bootstrap
+    - donor_bootstrap
+    - matched_guide_permutations
+  controls:
+    - non_targeting_controls
+    - negative_control_genes
+  matched_guide_permutation_strata:
+    - target
+    - state
+    - donor
+    - guide_cell_count_quintile
+    - guide_gc_quintile
+    - guide_efficiency_missingness
+  multiplicity: benjamini_hochberg_within_guide_dose_family
+  claim_prohibitions:
+    threshold_or_saturation_with_fewer_than_three_supported_doses: true
+    donor_generalization_with_fewer_than_three_donors: true
+    target_state_claim_below_30_cells_per_guide_donor: true
+  primary_pass:
+    endpoint: heldout_response_error_improvement_over_linear
+    require_best_nonlinear_model_selected_in_training_only: true
+    require_guide_and_donor_heldout_directional_agreement: true
+    require_paired_95_ci_excludes_zero: true
+    require_within_family_q_below: 0.05
+    require_calibration_acceptable: true
+    require_negative_controls_null: true
+
+state_compatible_molecular_evidence:
+  dataset_role: state_compatible_molecular_evidence
+  eligibility:
+    require_verified_genome_build: true
+    require_verified_identifiers: true
+    require_peak_quality: true
+    require_primary_t_cell_state_compatibility: true
+    require_time_compatibility: true
+    require_source_provenance: true
+  factor_freeze:
+    perturbed_tf_rule: every_frozen_mapped_perturbed_target_annotated_as_tf
+    secondary_tf_rule: every_tf_with_prespecified_signed_downstream_tf_effect_before_occupancy_inspection
+    factor_lists_frozen_before_occupancy_inspection: true
+    privileged_pair_forbidden: GATA3_EGR1
+    no_named_pair_privileged: true
+  eligible_resources:
+    - state_matched_ChIP_seq
+    - state_matched_CUT_and_RUN
+    - state_matched_ATAC_seq
+    - state_matched_H3K27ac
+    - promoter_capture_HiC
+    - validated_enhancer_to_gene_links
+    - JASPAR
+    - HOCOMOCO
+    - DoRothEA
+    - decoupleR
+    - RegNetwork
+    - TRRUST
+    - TFTG
+    - CollecTRI
+    - OmniPath
+    - independent_genetic_perturbations
+  correlated_curated_databases_count_as_one_evidence_type: true
+  matched_background_covariates:
+    - expression
+    - accessibility
+    - gc_content
+    - interval_length
+    - peak_count
+    - regulator_target_distance
+    - response_degree
+    - network_degree
+  evidence_tiers:
+    tier_1:
+      require_state_compatible_occupancy: true
+      require_active_chromatin: true
+      require_physical_or_validated_enhancer_link: true
+      require_signed_perturbation_edge: true
+      require_independent_perturbation_support: true
+      allow_directional_conflict: false
+    tier_2:
+      minimum_distinct_evidence_types: 3
+      require_signed_edge: true
+      allow_directional_conflict: false
+    tier_3:
+      minimum_distinct_evidence_types: 2
+      directional_conflict_must_be_reported: true
+    tier_4:
+      definition: unsupported_or_single_correlated_evidence_type
+    unavailable:
+      definition: required_compatible_assay_or_provenance_absent
+  hypotheses:
+    direct_edge: state_compatible_occupancy_and_active_chromatin_predict_same_state_signed_direct_response
+    cascade_timing: primary_tf_effect_precedes_secondary_tf_activity_then_downstream_response_at_compatible_times
+  nulls:
+    matched_permutations: 1000
+    degree_preserving_rewirings: 1000
+    matched_permutation_unit: regulator_target_edge
+    rewiring_preserves: [regulator_out_degree, target_in_degree, sign_distribution, state]
+  primary_pass:
+    endpoint: guide_and_target_heldout_directional_concordance_tier_1_or_2_vs_matched_unsupported
+    require_clustered_95_ci_excludes_zero: true
+    require_within_family_q_below: 0.05
+    require_matched_permutation_q_below: 0.05
+    require_rewiring_q_below: 0.05
+    require_directional_conflicts_reported: true
+
+genome_wide_disease_genetics:
+  dataset_role: genome_wide_disease_genetics
+  opening_gate:
+    require_complete_gwas_summary_statistics: true
+    require_ancestry_label: true
+    require_ancestry_matched_ld_reference: true
+    require_immune_cell_eqtls: true
+    require_state_relevant_chromatin: true
+  genome_wide_locus_eligibility:
+    require_autosomal_or_x_chromosome_variant: true
+    require_effect_allele_harmonization: true
+    require_minor_allele_frequency: true
+    require_imputation_quality_if_imputed: true
+    minimum_imputation_quality: 0.8
+    genome_wide_significance_p_below: 5.0e-8
+    clumping_r2: 0.1
+    clumping_window_kb: 1000
+    locus_boundary: ld_block_then_500kb_sensitivity
+  credible_sets:
+    posterior_mass: 0.95
+    require_complete_locus_coverage: true
+  colocalization:
+    priors: {p1: 1.0e-4, p2: 1.0e-4, p12: 1.0e-5}
+    minimum_pp4: 0.80
+    require_pp4_over_pp3_ratio: 3.0
+  mhc:
+    primary_analysis: excluded
+    sensitivity_analysis: included
+    grch38_region: {chromosome: 6, start: 25000000, end: 34000000}
+  competitive_gene_set_covariates:
+    - gene_size
+    - snp_density
+    - gene_expression
+    - expression_specificity
+    - local_ld_score
+    - response_degree
+    - network_degree
+  partitioned_heritability_covariates:
+    - baseline_ld_model
+    - state_matched_atac
+    - state_matched_h3k27ac
+    - gene_density
+    - gc_content
+    - mappability
+  alternate_genes:
+    rule: every_gene_in_credible_set_linkage_window_or_supported_by_independent_locus_to_gene_evidence
+    freeze_before_program_outcomes: true
+  negative_controls:
+    - matched_negative_diseases
+    - matched_negative_loci
+    - matched_negative_genes
+    - matched_negative_programs
+    - matched_negative_genomic_regions
+  instruments:
+    minimum_f_statistic: 10
+    require_steiger_directionality: true
+    require_no_material_cochran_q_heterogeneity: true
+    heterogeneity_q_minimum: 0.05
+    require_no_horizontal_pleiotropy: true
+    egger_intercept_q_minimum: 0.05
+    require_leave_one_instrument_stability: true
+  mediation:
+    allowed_only_if_all_colocalization_instrument_directionality_heterogeneity_and_pleiotropy_assumptions_pass: true
+    claim_if_any_assumption_fails: false
+  primary_pass:
+    endpoint: competitive_program_enrichment_in_genome_wide_immune_disease_signal
+    require_effect_95_ci_excludes_zero: true
+    require_within_family_q_below: 0.05
+    require_colocalized_locus_support: true
+    require_negative_controls_null: true
+    require_mhc_excluded_primary: true
+
+integrated_evidence_portability:
+  hypothesis: molecularly_supported_programs_have_stronger_guide_concordance_cross_state_core_membership_untouched_external_portability_information_retention_and_disease_relevance_than_matched_unsupported_programs
+  outcomes:
+    - guide_concordance
+    - cross_state_core_membership
+    - untouched_external_portability
+    - information_retention
+    - disease_relevance
+  comparator: covariate_only
+  validation:
+    target_held_out: true
+    feature_selection_source_only: true
+    clustered_bootstrap_unit: target
+    calibration_required: true
+  nulls:
+    matched_permutations: 1000
+    degree_preserving_rewirings: 1000
+    match_covariates:
+      - expression
+      - accessibility
+      - response_degree
+      - network_degree
+      - guide_count
+      - donor_count
+  multiplicity: benjamini_hochberg_within_integrated_evidence_family
+  leave_one_resource_analyses: required_for_every_evidence_resource_and_correlated_resource_group
+  primary_pass:
+    require_supported_minus_unsupported_positive_for_all_five_outcomes: true
+    require_joint_clustered_95_ci_excludes_zero: true
+    require_within_family_q_below: 0.05
+    require_calibration_acceptable: true
+    require_matched_permutation_q_below: 0.05
+    require_rewiring_q_below: 0.05
+    require_leave_one_resource_direction_stable: true
+
+stopping_rules:
+  - stop_candidate_if_metadata_gate_fails
+  - stop_candidate_if_provisional_metadata_hash_missing
+  - stop_before_outcome_opening_if_final_full_file_or_provider_checksum_gate_fails
+  - stop_if_dataset_role_or_target_mapping_changes_after_lock
+  - stop_untouched_claim_for_any_previously_inspected_dataset_or_outcome
+  - stop_definitive_state_replication_if_fewer_than_two_independent_datasets_pass
+  - stop_donor_generalization_if_fewer_than_three_donors_pass
+  - stop_threshold_or_saturation_claim_if_fewer_than_three_supported_guide_efficacies_pass
+  - stop_molecular_claim_if_genome_build_identifiers_peak_quality_state_time_or_provenance_fail
+  - stop_mediation_claim_if_any_required_assumption_fails
+  - stop_branch_if_novelty_and_result_gate_fails_without_substitution
+  - report_fail_or_unavailable_without_replacing_the_prespecified_endpoint

@@ -1,0 +1,9 @@
+dataset_key	dataset_or_scope	system	immutable_role	outcomes_inspected_before_freeze	outcome_unopened	eligible_for_untouched_portability	eligible_for_definitive_primary_t_cell_replication	exclusion_rule	reason
+GSE314342_CD4	GSE314342 primary CD4 Perturb-seq	CD4	development_source	true	false	false	false	permanent	Development data and outcomes were inspected before this freeze.
+GSE314342_Th1_Th2_eight_target	GSE314342 eight-target Th1 and Th2 validation	Th1_Th2	previously_inspected_excluded	true	false	false	false	permanent	Prior eight-target comparison is not definitive independent state replication.
+GSE314342_IL10_IL21_arrayed	GSE314342 IL10 and IL21 arrayed validation	CD4	previously_inspected_excluded	true	false	false	false	permanent	Prior project validation outcome was inspected before this freeze.
+Replogle_K562	Replogle K562 CRISPRi Perturb-seq	K562	previously_inspected_excluded	true	false	false	false	permanent	Development replication outcome was inspected before this freeze.
+Replogle_RPE1	Replogle RPE1 CRISPRi Perturb-seq	RPE1	previously_inspected_excluded	true	false	false	false	permanent	Former holdout outcome was inspected before this freeze.
+ALL_PROJECT_OUTCOMES_INSPECTED_BEFORE_FREEZE	Any dataset or outcome marked inspected in the data manifest or an existing analysis output	any	previously_inspected_excluded	true	false	false	false	registry_enforced	Every previously inspected outcome is excluded even if not named separately here.
+METADATA_ONLY_SCREENED_POOL	Existing metadata audit records with no outcome access	any	metadata_only_candidate	false	true	conditional	conditional	re_screen_required	May be reconsidered only under current outcome-blind gates and two-stage hashes.
+FUTURE_METADATA_ONLY_CANDIDATE	Candidate discovered after this freeze from metadata only	any	metadata_only_candidate	false	true	conditional	conditional	all_gates_required	Role and mapping become immutable before outcome access.
