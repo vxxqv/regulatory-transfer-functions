@@ -82,8 +82,11 @@ rule prepare_encode_crispri:
 
 rule figure_1:
     input:
-        "figures/fig01/figure_data/nodes.tsv",
-        "figures/fig01/figure_data/edges.tsv"
+        "analyses/primary/results/transfer_phenotypes.parquet",
+        "analyses/primary/results/context_switching.parquet",
+        "analyses/primary/results/matched_gain_control_histogram.csv",
+        "analyses/primary/results/transfer_calibration.csv",
+        "analyses/manifold/results/response_manifold.parquet"
     output:
         "figures/fig01/fig01.pdf"
     shell:

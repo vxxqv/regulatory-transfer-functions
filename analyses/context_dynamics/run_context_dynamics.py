@@ -1,4 +1,4 @@
-"""Build frozen context-dynamics tables for Figure 5."""
+"""Build frozen context-dynamics tables for Figure 4."""
 
 from __future__ import annotations
 

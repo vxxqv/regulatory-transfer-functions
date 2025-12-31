@@ -1,4 +1,4 @@
-"""Create matched-null gain and target-bootstrap calibration summaries for Figure 2."""
+"""Create matched-null gain and target-bootstrap calibration summaries for Figure 1."""
 
 from __future__ import annotations
 

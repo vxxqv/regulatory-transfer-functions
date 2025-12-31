@@ -1,4 +1,4 @@
-"""Run the frozen response-network decomposition for Figure 3."""
+"""Run the frozen response-network decomposition for Figure 2."""
 
 from __future__ import annotations
 
