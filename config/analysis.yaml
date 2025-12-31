@@ -1,0 +1,70 @@
+study:
+  title: Regulatory Transfer Functions
+  genome_build: GRCh38
+  gene_identifier: Ensembl
+  seed: 20260912
+
+primary_resource:
+  accession: GSE314342
+  source_commit: aa5c84a973c0e1a090b0072dc5b080bf7fbbed38
+  conditions:
+    - Rest
+    - Stim8hr
+    - Stim48hr
+
+quality_control:
+  require_ontarget_significant: true
+  exclude_low_target_expression: true
+  exclude_neighboring_gene_knockdown: true
+  exclude_distal_offtarget: true
+  minimum_guides: 2
+  minimum_cells: 200
+
+transfer_phenotypes:
+  response: log1p_n_downstream
+  cis_magnitude: absolute_ontarget_effect_size
+  empirical_residual_covariates:
+    - cis_magnitude
+    - log1p_target_baseMean
+    - log1p_n_cells_target
+    - n_guides
+    - culture_condition
+  cross_validation:
+    method: GroupKFold
+    groups: target_contrast
+    folds: 10
+  tails:
+    amplified_quantile: 0.90
+    buffered_quantile: 0.10
+  uncertainty:
+    bootstrap_unit: target_contrast
+    replicates: 2000
+
+context_switching:
+  minimum_conditions: 3
+  primary_metric: residual_range
+  secondary_metric: cluster_entropy
+
+multiplicity:
+  method: benjamini_hochberg
+  alpha: 0.05
+  families:
+    - transfer_architecture
+    - context_switching
+    - natural_genetics
+    - disease_enrichment
+    - replication
+
+negative_controls:
+  permutations: 1000
+  degree_preserving_rewirings: 1000
+  target_matched_permutations: 1000
+
+figures:
+  background: white
+  formats:
+    - pdf
+    - svg
+    - png
+  raster_dpi: 600
+  font_family: Arial
