@@ -1,0 +1,13 @@
+{
+  "bootstrap_replicates": 2000,
+  "matched_null_amplified_rate_ci": [
+    0.10476213070158791,
+    0.1072942367305624
+  ],
+  "matched_null_amplified_rate_mean": 0.10602340735117352,
+  "matched_strata": 174,
+  "observed_amplified_rate": 0.10001897893338395,
+  "permutations": 1000,
+  "rows": 15807,
+  "singleton_strata": 14
+}
