@@ -6,7 +6,7 @@ The study separates confirmatory analyses from exploratory extensions. Every fig
 
 ## Status
 
-Analysis in progress. Numerical results and manuscript claims remain provisional until all prespecified validation gates pass.
+The frozen analysis, external challenge, robustness analyses, figures, and manuscript source are complete. Final submission files are built only after repository-wide verification. A Zenodo release is not created until the author explicitly authorizes it.
 
 ## Structure
 
@@ -17,6 +17,7 @@ Analysis in progress. Numerical results and manuscript claims remain provisional
 - `analyses`: primary, sensitivity, negative-control, and replication analyses
 - `figures`: main and supplementary figure programs and figure data
 - `tables`: manuscript and supplementary tables
+- `manuscript`: article and supplementary-information sources
 - `tests`: unit, schema, statistical, and figure checks
 - `docs`: protocol, claim ledger, novelty audit, and reproduction notes
 
