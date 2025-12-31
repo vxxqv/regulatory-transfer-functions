@@ -1,0 +1,7 @@
+estimand,status,reason
+donor-held-out guide-dose validation,unavailable,"donor-specific effects were released only at target level, not jointly by guide"
+signed response norm by guide,unavailable,guide-level signed coefficient vectors were not released
+module activity and rerouting by guide,unavailable,guide-level signed coefficient vectors were not released
+disease-program convergence by guide,unavailable,disease programs were defined at target-state level
+non-targeting trans-response control,unavailable,the released guide-response table contains paired targeting guides only
+cis mediation,not tested,two guide doses per target and no joint donor-specific guide effects do not identify mediation

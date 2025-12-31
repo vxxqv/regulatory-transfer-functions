@@ -1,0 +1,7 @@
+culture_condition,high_confidence_no_effect_guides,guides,median_downstream,median_dose
+Rest,False,8484,1.0,0.886828312434083
+Rest,True,516,0.0,0.027319625139238454
+Stim48hr,False,9551,1.0,0.8609423647111757
+Stim48hr,True,585,0.0,0.023275475288650014
+Stim8hr,False,9509,1.0,0.8858163472869401
+Stim8hr,True,485,0.0,0.026639044903441725

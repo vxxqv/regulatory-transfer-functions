@@ -1,0 +1,10 @@
+hypothesis,culture_condition,decision,basis
+positive guide-dose association,Rest,passed,all three pre-specified dose definitions
+positive guide-dose association,Stim48hr,passed,all three pre-specified dose definitions
+positive guide-dose association,Stim8hr,passed,all three pre-specified dose definitions
+nonlinear dose response,Rest,unresolved,no nonlinear family passed FDR and bootstrap criteria
+nonlinear dose response,Stim48hr,unresolved,no nonlinear family passed FDR and bootstrap criteria
+nonlinear dose response,Stim8hr,passed_small_effect,hill
+target-specific threshold or saturation,all,underpowered,two guide doses per eligible target-state
+donor-held-out guide-dose replication,all,unavailable,no joint guide-by-donor effects
+cis mediation,all,not_tested,identification assumptions failed

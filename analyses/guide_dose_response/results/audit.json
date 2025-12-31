@@ -1,0 +1,20 @@
+{
+  "donor_held_out_estimable": false,
+  "eligible_guide_rows": 29130,
+  "eligible_target_states": 14565,
+  "models": [
+    "null",
+    "linear",
+    "spline",
+    "isotonic",
+    "breakpoint",
+    "hill"
+  ],
+  "states": [
+    "Rest",
+    "Stim48hr",
+    "Stim8hr"
+  ],
+  "target_specific_nonlinearity_estimable": 0,
+  "targets": 5756
+}
