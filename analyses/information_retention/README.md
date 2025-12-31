@@ -4,7 +4,7 @@ This block retains all 4,399 complete-state targets and 13,197 matched state sum
 
 ## Design
 
-The expansion freeze and the local specification precede these decoder outcomes. Sixteen exact input hashes are checked against the expansion manifest. Existing transfer values, classes and module loadings are unchanged.
+The expansion freeze and the local specification precede these decoder outcomes. Sixteen input hashes are checked against the expansion manifest, allowing only LF versus CRLF checkout equivalence for text while requiring exact binary bytes. Existing transfer values, classes and module loadings are unchanged.
 
 Target identity is a class-known prediction task: each held-out state has two other-state training profiles for every target. The two training states are swapped for inner temperature selection. No held-out profile contributes to nuisance fitting, centroid construction or temperature selection. Unseen-class target-held-out classification would be invalid here. The supplied ten target folds are retained for accounting, not misrepresented as identity-decoder splits.
 

@@ -1,0 +1,16 @@
+{
+  "revision": "worktree_line_endings",
+  "scope": "verification_only",
+  "analysis_outputs_changed": false,
+  "original_freeze_manifest_sha256": "8ecac4fe01c2e82fdc0b2d4a453d8c8a4469d25ac472ada456a01d0daed1677e",
+  "rule": "A text artifact passes only when its raw, LF-canonical or CRLF-canonical bytes reproduce the original frozen hash and byte count; binary artifacts retain exact-byte verification.",
+  "reason": "Git may materialize tracked text as CRLF in Windows worktrees although the committed and frozen content is LF.",
+  "preserved": [
+    "artifact order",
+    "artifact hashes",
+    "frozen hypotheses",
+    "frozen thresholds",
+    "frozen splits",
+    "analysis results"
+  ]
+}

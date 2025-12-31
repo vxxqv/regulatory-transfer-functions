@@ -23,6 +23,7 @@ SOURCES = [
     "analyses/guide_concordance/results/hypothesis_tests.csv",
     "analyses/replication/results/k562_replication_rows.parquet",
 ]
+TEXT_SUFFIXES = {".csv", ".json", ".md", ".py", ".toml", ".tsv", ".txt", ".yaml", ".yml"}
 
 
 def sha(path, canonical=False):
@@ -32,6 +33,15 @@ def sha(path, canonical=False):
     return hashlib.sha256(data).hexdigest()
 
 
+def hash_candidates(path):
+    data = path.read_bytes()
+    candidates = [data]
+    if path.suffix.lower() in TEXT_SUFFIXES:
+        lf = data.replace(b"\r\n", b"\n")
+        candidates.extend([lf, lf.replace(b"\n", b"\r\n")])
+    return {hashlib.sha256(value).hexdigest(): len(value) for value in candidates}
+
+
 def verify(source):
     expansion = source / "analyses/cell_systems_expansion/freeze_manifest.json"
     manifest = json.loads(expansion.read_text())
@@ -39,11 +49,15 @@ def verify(source):
     records = []
     for rel in SOURCES:
         expected = entries[rel]["sha256"]
-        actual = sha(source / rel)
-        if actual != expected:
+        if expected not in hash_candidates(source / rel):
             raise ValueError(f"Frozen source mismatch: {rel}")
-        records.append({"path": rel, "sha256": actual, "bytes": (source / rel).stat().st_size})
-    return records, sha(expansion)
+        records.append(entries[rel])
+    expansion_candidates = hash_candidates(expansion)
+    local_freeze = HERE / "freeze_manifest.json"
+    expected_expansion = json.loads(local_freeze.read_text())["expansion_freeze_sha256"] if local_freeze.exists() else sha(expansion)
+    if expected_expansion not in expansion_candidates:
+        raise ValueError("Frozen expansion manifest mismatch")
+    return records, expected_expansion
 
 
 def main():
@@ -56,7 +70,7 @@ def main():
         "seed": 20260913,
         "expansion_freeze_sha256": expansion_hash,
         "canonical_specification_sha256": sha(HERE / "specification.json", True),
-        "source_hash_rule": "Exact source bytes must match the parent expansion freeze; no newline normalization of source artifacts",
+        "source_hash_rule": "Text artifacts accept only raw, LF-canonical or CRLF-canonical byte equivalence; binary artifacts require exact bytes",
         "artifacts": records,
         "previously_known_availability": {
             "guide_and_donor_profile_vectors": False,

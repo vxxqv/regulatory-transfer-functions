@@ -9,10 +9,16 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "config/cell_systems_expansion.yaml"
 FREEZE = ROOT / "analyses/cell_systems_expansion"
+TEXT_SUFFIXES = {".csv", ".json", ".md", ".py", ".toml", ".tsv", ".txt", ".yaml", ".yml"}
 
 
-def sha256(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+def hash_candidates(path):
+    data = path.read_bytes()
+    candidates = [data]
+    if path.suffix.lower() in TEXT_SUFFIXES:
+        lf = data.replace(b"\r\n", b"\n")
+        candidates.extend([lf, lf.replace(b"\n", b"\r\n")])
+    return {hashlib.sha256(value).hexdigest(): len(value) for value in candidates}
 
 
 def test_freeze_manifest_and_artifacts():
@@ -27,8 +33,9 @@ def test_freeze_manifest_and_artifacts():
     assert set(path.relative_to(ROOT).as_posix() for path in (ROOT / "config").glob("*.yaml")) <= paths
     for record in manifest["artifacts"]:
         path = ROOT / record["path"]
-        assert path.stat().st_size == record["bytes"]
-        assert sha256(path) == record["sha256"]
+        candidates = hash_candidates(path)
+        assert record["sha256"] in candidates
+        assert candidates[record["sha256"]] == record["bytes"]
 
 
 def test_target_splits_and_hypotheses():

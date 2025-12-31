@@ -3,7 +3,7 @@
   "seed": 20260913,
   "expansion_freeze_sha256": "8ecac4fe01c2e82fdc0b2d4a453d8c8a4469d25ac472ada456a01d0daed1677e",
   "canonical_specification_sha256": "e65bb139fbc24b14cee80cb30932fedf6684d06e77ddb432c10ea9f7b452f978",
-  "source_hash_rule": "Exact source bytes must match the parent expansion freeze; no newline normalization of source artifacts",
+  "source_hash_rule": "Text artifacts accept only raw, LF-canonical or CRLF-canonical byte equivalence; binary artifacts require exact bytes",
   "artifacts": [
     {
       "path": "config/analysis.yaml",
