@@ -1,0 +1,161 @@
+seed: 20260913
+design:
+  status: retrospective_prespecified_extension
+  freeze_boundary: before_regulatory_resources_are_joined_to_frozen_outcomes
+  primary_states:
+    - Rest
+    - Stim8hr
+    - Stim48hr
+  state_time_hours:
+    Rest: 0
+    Stim8hr: 8
+    Stim48hr: 48
+  pchic_state_column:
+    Rest: Total_CD4_NonActivated
+    Stim8hr: Total_CD4_Activated
+    Stim48hr: Total_CD4_Activated
+eligibility:
+  require_primary_qc: true
+  require_regulator_in_curated_or_motif_resource: true
+  response_edge_rule: nonzero_in_frozen_significant_logfc_matrix
+  guide_minimum_pairs: 20
+  activity_minimum_regulon_targets: 5
+  motif_minimum_targets: 10
+  motif_maximum_targets: 2000
+regulatory_resources:
+  primary_curated_sources:
+    - DoRothEA-A
+    - TRRUST
+    - RegNetwork
+  corroborating_sources:
+    - CollecTRI
+    - DoRothEA
+  motif_resource: TRANSFAC_and_JASPAR_PWMs_human_terms
+  tftg_status: unavailable_no_frozen_versioned_snapshot
+  overlapping_sources_are_independent: false
+genome_harmonization:
+  analysis_build: GRCh38
+  pchic_source_build: GRCh37
+  liftover_chain: hg19ToHg38.over.chain.gz
+  require_same_chromosome: true
+  require_both_interval_endpoints: true
+chromatin:
+  promoter_upstream_bp: 2000
+  promoter_downstream_bp: 500
+  pchic_primary_call_threshold: 5.0
+  pchic_sensitivity_thresholds:
+    - 5.0
+    - 6.0
+    - 7.5
+  active_chromatin_primary_rule: atac_and_h3k27ac
+  occupancy_compatible_target: CTCF
+  occupancy_compatible_state: Rest
+  occupancy_other_states: unavailable
+edge_classification:
+  precedence:
+    - enhancer-linked
+    - promoter-bound
+    - motif-supported
+    - one-step TF cascade
+    - higher-order cascade
+    - unsupported indirect
+  one_step_rule: signed_curated_source_to_response_edge
+  higher_order_rule: source_response_tf_then_signed_curated_tf_to_response_edge
+evidence_tiers:
+  tier_1:
+    requires:
+      - compatible_tf_occupancy
+      - active_chromatin
+      - physical_or_validated_enhancer_link
+      - signed_crispr_response
+      - independent_guide_concordance
+      - no_directional_contradiction
+  tier_2:
+    minimum_distinct_types: 3
+    requires_signed_curated_edge: true
+  tier_3:
+    minimum_distinct_types: 2
+  tier_4:
+    label: unsupported_or_single_source
+motif_background:
+  controls_per_case: 5
+  covariates:
+    - baseline_expression
+    - atac_peak_count
+    - h3k27ac_peak_count
+    - gene_gc_percent
+    - gene_interval_length
+    - regulator_target_distance
+    - curated_in_degree
+    - curated_out_degree
+  exact_match:
+    - culture_condition
+    - chromosome_class
+  standardized_distance_caliper: 3.0
+inference:
+  fdr: 0.05
+  bootstrap_replicates: 1000
+  matched_permutation_replicates: 1000
+  degree_rewiring_replicates: 250
+  confidence_level: 0.95
+  bootstrap_unit: target_gene
+  activity_methods:
+    - weighted_mean
+    - univariate_linear_model
+  activity_consensus: mean_within_regulator_standardized_score
+  activity_top_per_target_state: 5
+  dorothea_primary_confidence: A
+  dorothea_sensitivity_confidence:
+    - A
+    - B
+  target_holdout_folds: 10
+robustness:
+  leave_one_units:
+    - factor
+    - state
+    - dataset
+    - target
+  alternative_promoter_upstream_bp:
+    - 1000
+    - 2000
+    - 5000
+  alternative_active_chromatin_rules:
+    - atac_and_h3k27ac
+    - atac_or_h3k27ac
+  external_direction_dataset: K562
+  rpe1_direction_status: unavailable_scalar_endpoint_only
+guide_concordance:
+  metrics:
+    - cis_knockdown_significance
+    - full_vector_pearson
+    - significant_union_pearson
+    - significant_union_sign_agreement
+    - significant_gene_count
+  unavailable_metrics:
+    - guide_resolved_effect_magnitude_vector
+    - guide_resolved_module_activity
+    - guide_resolved_transfer_gain
+    - guide_resolved_rerouting
+    - guide_resolved_disease_convergence
+    - donor_by_guide_effects
+  minimum_guides: 2
+  minimum_union_genes: 3
+  concordant_sign_threshold: 0.60
+  concordant_correlation_threshold: 0.10
+central_results:
+  - transfer_gain
+  - amplification
+  - buffering
+  - rerouting
+  - context_switching
+  - cross_system_conservation
+  - natural_genetic_concordance
+  - disease_convergence
+  - external_benchmarking
+  - guide_level_dose_response
+claims:
+  direct_regulation_requires_tier_1: true
+  mediation_requires_existing_causal_gates: true
+  cross_sectional_time_is_longitudinal_causation: false
+  report_all_eligible_targets: true
+  report_null_contradictory_unavailable_underpowered: true

@@ -5,6 +5,7 @@ networkx==3.5
 numpy==2.5.3
 pandas==2.3.3
 pyarrow==22.0.0
+pyliftover==0.4.1
 PyYAML==6.0.3
 scikit-learn==1.8.0
 scipy==1.17.0
