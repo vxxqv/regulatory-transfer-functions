@@ -1,0 +1,19 @@
+{
+  "binomial_p_descriptive": 0.002627112989067091,
+  "bonferroni_trans_direction_agreement": 0.50920245398773,
+  "bonferroni_trans_pairs": 163,
+  "direction_agreement": 0.5669642857142857,
+  "matched_permutation_null_median": 0.45714285714285713,
+  "matched_permutation_p_upper": 0.08391608391608392,
+  "matched_rho_null_median": -0.08725771571910229,
+  "matched_rho_permutation_p_upper": 0.07492507492507493,
+  "mediators": 41,
+  "pairs": 448,
+  "score_spearman_rho": 0.15768917911426772,
+  "snp_cluster_bootstrap_ci_95": [
+    0.4793155342058851,
+    0.6502689662194265
+  ],
+  "snps": 86,
+  "trans_genes": 169
+}

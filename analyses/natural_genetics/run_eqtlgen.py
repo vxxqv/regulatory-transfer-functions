@@ -11,7 +11,8 @@ import numpy as np
 import pandas as pd
 import yaml
 from scipy import sparse
-from scipy.stats import binomtest
+from scipy.stats import binomtest, spearmanr
+from statsmodels.stats.multitest import multipletests
 
 
 def parse_args() -> argparse.Namespace:
@@ -97,6 +98,11 @@ def main() -> None:
             condition_tests["Zscore_cis"].to_numpy()
         ) * np.sign(condition_tests["perturbation_effect"].to_numpy())
         condition_tests["observed_direction"] = np.sign(aligned_trans_z)
+        condition_tests["observed_trans_z"] = aligned_trans_z
+        condition_tests["predicted_transfer_score"] = (
+            -np.sign(condition_tests["Zscore_cis"].to_numpy())
+            * condition_tests["perturbation_effect"].to_numpy()
+        )
         condition_tests["direction_match"] = (
             condition_tests["predicted_direction"] == condition_tests["observed_direction"]
         ).astype(int)
@@ -118,11 +124,20 @@ def main() -> None:
 
     rng = np.random.default_rng(seed)
     null = np.empty(args.permutations, dtype=float)
+    null_rho = np.empty(args.permutations, dtype=float)
+    conditions = list(config["primary_resource"]["conditions"])
+    null_by_condition = {
+        condition: np.empty(args.permutations, dtype=float) for condition in conditions
+    }
+    null_rho_by_condition = {
+        condition: np.empty(args.permutations, dtype=float) for condition in conditions
+    }
     candidate_rows = {
         key: group.index.to_numpy(dtype=int)
         for key, group in rows.groupby(["culture_condition", "degree_bin"])
     }
     observed_direction = pairs["observed_direction"].to_numpy()
+    observed_trans_z = pairs["observed_trans_z"].to_numpy()
     gene_columns = pairs["gene_column"].to_numpy(dtype=int)
     cis_sign = np.sign(pairs["Zscore_cis"].to_numpy())
     strata = list(zip(pairs["condition"], pairs["degree_bin"], strict=True))
@@ -132,27 +147,79 @@ def main() -> None:
         )
         randomized_effect = np.asarray(matrix[randomized_rows, gene_columns]).ravel()
         randomized_prediction = -cis_sign * np.sign(randomized_effect)
+        randomized_score = -cis_sign * randomized_effect
         evaluable = randomized_effect != 0
         null[permutation] = (
             np.mean(randomized_prediction[evaluable] == observed_direction[evaluable])
             if evaluable.any()
             else np.nan
         )
+        null_rho[permutation] = (
+            spearmanr(randomized_score[evaluable], observed_trans_z[evaluable]).statistic
+            if evaluable.sum() >= 3
+            else np.nan
+        )
+        for condition in conditions:
+            condition_mask = (pairs["condition"].to_numpy() == condition) & evaluable
+            null_by_condition[condition][permutation] = (
+                np.mean(
+                    randomized_prediction[condition_mask] == observed_direction[condition_mask]
+                )
+                if condition_mask.any()
+                else np.nan
+            )
+            null_rho_by_condition[condition][permutation] = (
+                spearmanr(
+                    randomized_score[condition_mask], observed_trans_z[condition_mask]
+                ).statistic
+                if condition_mask.sum() >= 3
+                else np.nan
+            )
 
     agreement = float(pairs["direction_match"].mean())
     ci_low, ci_high = cluster_bootstrap_interval(
         pairs, "SNP", "direction_match", replicates=2000, seed=seed + 1
     )
-    condition_summary = (
-        pairs.groupby("condition", as_index=False)
-        .agg(
-            pairs=("direction_match", "size"),
-            snps=("SNP", "nunique"),
-            mediators=("Gene_cis", "nunique"),
-            direction_agreement=("direction_match", "mean"),
+    condition_records = []
+    for condition, group in pairs.groupby("condition", sort=True):
+        state_low, state_high = cluster_bootstrap_interval(
+            group, "SNP", "direction_match", replicates=2000, seed=seed + 2
         )
-        .sort_values("condition")
-    )
+        state_agreement = float(group["direction_match"].mean())
+        state_rho = float(
+            spearmanr(group["predicted_transfer_score"], group["observed_trans_z"]).statistic
+        )
+        state_null = null_by_condition[condition]
+        state_null_rho = null_rho_by_condition[condition]
+        condition_records.append(
+            {
+                "condition": condition,
+                "pairs": len(group),
+                "snps": group["SNP"].nunique(),
+                "mediators": group["Gene_cis"].nunique(),
+                "direction_agreement": state_agreement,
+                "snp_cluster_ci_low": state_low,
+                "snp_cluster_ci_high": state_high,
+                "matched_null_median": float(np.nanmedian(state_null)),
+                "matched_permutation_p": float(
+                    (1 + np.sum(state_null >= state_agreement))
+                    / (1 + np.sum(np.isfinite(state_null)))
+                ),
+                "score_spearman_rho": state_rho,
+                "matched_rho_null_median": float(np.nanmedian(state_null_rho)),
+                "matched_rho_permutation_p": float(
+                    (1 + np.sum(state_null_rho >= state_rho))
+                    / (1 + np.sum(np.isfinite(state_null_rho)))
+                ),
+            }
+        )
+    condition_summary = pd.DataFrame(condition_records)
+    condition_summary["matched_permutation_q"] = multipletests(
+        condition_summary["matched_permutation_p"], method="fdr_bh"
+    )[1]
+    condition_summary["matched_rho_permutation_q"] = multipletests(
+        condition_summary["matched_rho_permutation_p"], method="fdr_bh"
+    )[1]
     chromosome_holdout = (
         pairs.groupby("SNPChr_cis", as_index=False)
         .agg(
@@ -170,11 +237,27 @@ def main() -> None:
         "mediators": int(pairs["Gene_cis"].nunique()),
         "trans_genes": int(pairs["Gene_trans"].nunique()),
         "direction_agreement": agreement,
+        "score_spearman_rho": float(
+            spearmanr(pairs["predicted_transfer_score"], pairs["observed_trans_z"]).statistic
+        ),
         "snp_cluster_bootstrap_ci_95": [ci_low, ci_high],
         "binomial_p_descriptive": float(exact.pvalue),
         "matched_permutation_null_median": float(np.nanmedian(null)),
         "matched_permutation_p_upper": float(
             (1 + np.sum(null >= agreement)) / (1 + np.sum(np.isfinite(null)))
+        ),
+        "matched_rho_null_median": float(np.nanmedian(null_rho)),
+        "matched_rho_permutation_p_upper": float(
+            (
+                1
+                + np.sum(
+                    null_rho
+                    >= spearmanr(
+                        pairs["predicted_transfer_score"], pairs["observed_trans_z"]
+                    ).statistic
+                )
+            )
+            / (1 + np.sum(np.isfinite(null_rho)))
         ),
         "bonferroni_trans_pairs": int(len(sensitivity)),
         "bonferroni_trans_direction_agreement": (
@@ -182,9 +265,10 @@ def main() -> None:
         ),
     }
     pairs.to_parquet(args.output / "directional_pairs.parquet", index=False)
-    pd.DataFrame({"direction_agreement": null}).to_parquet(
-        args.output / "matched_null.parquet", index=False
-    )
+    null_table = {"overall": null, "overall_rho": null_rho}
+    null_table.update(null_by_condition)
+    null_table.update({f"{key}_rho": value for key, value in null_rho_by_condition.items()})
+    pd.DataFrame(null_table).to_parquet(args.output / "matched_null.parquet", index=False)
     condition_summary.to_csv(args.output / "condition_summary.csv", index=False)
     chromosome_holdout.to_csv(args.output / "chromosome_holdout.csv", index=False)
     (args.output / "natural_genetics_results.json").write_text(
