@@ -5,7 +5,6 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 from scipy import sparse
-from scipy.spatial.distance import jensenshannon
 from sklearn.decomposition import TruncatedSVD
 from sklearn.model_selection import GroupKFold
 
@@ -28,11 +27,17 @@ def module_energy(scores: np.ndarray) -> np.ndarray:
 
 def js_divergence(left: np.ndarray, right: np.ndarray) -> np.ndarray:
     """Return row-aligned Jensen-Shannon divergence on base 2, bounded by 0 and 1."""
-    values = np.zeros(left.shape[0], dtype=float)
+    values = np.full(left.shape[0], np.nan, dtype=float)
     for index, (left_row, right_row) in enumerate(zip(left, right, strict=True)):
         if left_row.sum() > 0 and right_row.sum() > 0:
-            distance = jensenshannon(left_row, right_row, base=2.0)
-            values[index] = float(distance**2)
+            p = np.asarray(left_row, dtype=np.float64)
+            q = np.asarray(right_row, dtype=np.float64)
+            p = p / p.sum()
+            q = q / q.sum()
+            midpoint = 0.5 * (p + q)
+            left_term = np.sum(p[p > 0] * np.log2(p[p > 0] / midpoint[p > 0]))
+            right_term = np.sum(q[q > 0] * np.log2(q[q > 0] / midpoint[q > 0]))
+            values[index] = float(np.clip(0.5 * (left_term + right_term), 0.0, 1.0))
     return values
 
 

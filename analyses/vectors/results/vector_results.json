@@ -1,0 +1,14 @@
+{
+  "components": 30,
+  "evaluable_state_pairs": 8168,
+  "genes": 10282,
+  "median_module_js_divergence": 0.41041342128193187,
+  "median_oof_reconstruction_cosine": 0.04080689325928688,
+  "median_response_cosine": 0.15001174807548523,
+  "nonzero_response_coefficients": 1018711,
+  "rerouting_metric_spearman_p": 0.0,
+  "rerouting_metric_spearman_rho": 0.5465551796722556,
+  "rows": 15807,
+  "state_pairs": 14101,
+  "targets": 6105
+}

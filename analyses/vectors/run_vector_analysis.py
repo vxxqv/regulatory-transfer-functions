@@ -84,16 +84,26 @@ def main() -> None:
     pairs = aligned_state_pairs(rows, states)
     left_index = pairs["left_index"].to_numpy(dtype=int)
     right_index = pairs["right_index"].to_numpy(dtype=int)
-    pairs["response_cosine"] = row_cosine(matrix[left_index], matrix[right_index])
-    pairs["module_js_divergence"] = js_divergence(energies[left_index], energies[right_index])
     left_norm = row_metrics.loc[left_index, "response_norm"].to_numpy()
     right_norm = row_metrics.loc[right_index, "response_norm"].to_numpy()
-    pairs["absolute_log2_gain_ratio"] = np.abs(
-        np.log2((right_norm + np.finfo(float).eps) / (left_norm + np.finfo(float).eps))
-    )
+    pair_evaluable = (left_norm > 0) & (right_norm > 0)
+    pairs["left_has_response"] = left_norm > 0
+    pairs["right_has_response"] = right_norm > 0
+    pairs["pair_evaluable"] = pair_evaluable
+    response_cosine = row_cosine(matrix[left_index], matrix[right_index])
+    response_cosine[~pair_evaluable] = np.nan
+    pairs["response_cosine"] = response_cosine
+    module_js = js_divergence(energies[left_index], energies[right_index])
+    module_js[~pair_evaluable] = np.nan
+    pairs["module_js_divergence"] = module_js
+    gain_ratio = np.full(len(pairs), np.nan, dtype=float)
+    gain_ratio[pair_evaluable] = np.abs(np.log2(right_norm[pair_evaluable] / left_norm[pair_evaluable]))
+    pairs["absolute_log2_gain_ratio"] = gain_ratio
     pairs.to_parquet(args.output / "context_rerouting_pairs.parquet", index=False)
 
-    correlation = spearmanr(pairs["module_js_divergence"], 1.0 - pairs["response_cosine"])
+    correlation = spearmanr(
+        pairs["module_js_divergence"], 1.0 - pairs["response_cosine"], nan_policy="omit"
+    )
     audit = {
         "rows": int(len(rows)),
         "targets": int(rows["target_contrast"].nunique()),
@@ -102,6 +112,7 @@ def main() -> None:
         "components": int(args.components),
         "median_oof_reconstruction_cosine": float(np.median(reconstruction_cosine)),
         "state_pairs": int(len(pairs)),
+        "evaluable_state_pairs": int(pair_evaluable.sum()),
         "median_response_cosine": float(pairs["response_cosine"].median()),
         "median_module_js_divergence": float(pairs["module_js_divergence"].median()),
         "rerouting_metric_spearman_rho": float(correlation.statistic),
