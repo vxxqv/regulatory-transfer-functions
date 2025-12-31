@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "status": "frozen before targeted strengthening outcomes",
+  "outcomes_examined_before_freeze": false,
+  "new_computations": [
+    "hierarchical transfer stability",
+    "CLR Aitchison rerouting sensitivity",
+    "paired GRN contrasts and calibration"
+  ],
+  "stopped_families": [
+    "guide dose and concordance",
+    "cross-system conservation",
+    "external transportability",
+    "molecular regulatory support",
+    "natural-genetic concordance",
+    "disease and locus convergence"
+  ],
+  "inputs": [
+    {
+      "path": "config/strengthening_extensions.yaml",
+      "bytes": 11315,
+      "sha256": "592a42ad8f95fcb6f12a5cd90520e7c889c1abff2775ba558f39c6c8b282a240"
+    },
+    {
+      "path": "analyses/primary/results/transfer_phenotypes.parquet",
+      "bytes": 1991787,
+      "sha256": "4327ea47df56278e92a60c8e4a26c41f5ff2d8f4e4786108e23e8998d0f97b3f"
+    },
+    {
+      "path": "analyses/primary/results/primary_results.json",
+      "bytes": 2049,
+      "sha256": "3f9cef3af92535e056237d19021fdc4e3ccd1cd41393f39650b589ba6cb07d29"
+    },
+    {
+      "path": "analyses/multiverse/results/scalar_family_summary.csv",
+      "bytes": 490,
+      "sha256": "b1664683308e9fbeddc6ef725a29a67c155d8472cc65757571ab9cf2521dc4e6"
+    },
+    {
+      "path": "analyses/multiverse/results/rerouting_specifications.parquet",
+      "bytes": 19433,
+      "sha256": "d71a087b975ecdaf816950ea6a4cdb0751e4de455f13972183e0588b8046f275"
+    },
+    {
+      "path": "analyses/multiverse/results/validation_family_summary.csv",
+      "bytes": 514,
+      "sha256": "e87599fbb45e4ef0100eadb116155bf70e9b49949f159323a41ddca16feda0a2"
+    },
+    {
+      "path": "analyses/vectors/results/contextual_transfer_tensor.parquet",
+      "bytes": 5959719,
+      "sha256": "d644893577cc5a78a0bda649584d21e608f3e105f78ed865a6d0328b541a8099"
+    },
+    {
+      "path": "analyses/vectors/results/context_rerouting_pairs.parquet",
+      "bytes": 374850,
+      "sha256": "b3845ac971b20991a0be5635d00d56c2593b67c746a8c9c517adc9c16e58c745"
+    },
+    {
+      "path": "analyses/vectors/results/network_gain_rows.parquet",
+      "bytes": 2883127,
+      "sha256": "d31cb32ec00b4474b8736d146d2709eeec378cf0575b0fd5338b48503ae1a608"
+    },
+    {
+      "path": "analyses/molecular_cascade/results/target_state_evidence.parquet",
+      "bytes": 1989241,
+      "sha256": "49310902c401942ff9495890c78a0b575bd5ee96e3d22a0df922413acff69913"
+    },
+    {
+      "path": "analyses/molecular_cascade/results/curated_regulatory_edges.parquet",
+      "bytes": 183260,
+      "sha256": "3a30956ac924650e8955bd30fbabb62b68c8df2c613ddb31cf773b81d5a30989"
+    },
+    {
+      "path": "analyses/guide_concordance/results/audit.json",
+      "bytes": 3246,
+      "sha256": "b0dda1d64e9e507df029d1d3a1bf60555cb8f86640642f667f18cb776d854bb1"
+    },
+    {
+      "path": "analyses/state_response_decomposition/results/audit.json",
+      "bytes": 1276,
+      "sha256": "fdf15dfb278c0e9c7047b8f77373575148ce727369d36aedaa4aa177afd9d5ad"
+    },
+    {
+      "path": "analyses/external_benchmark/results/benchmark_results.json",
+      "bytes": 891,
+      "sha256": "5c6bb3cb9aabb49ec76cf4a998b19f5c347d8d99bf2a853721a195b1d0a0ca2e"
+    },
+    {
+      "path": "analyses/transportability/results/system_availability.csv",
+      "bytes": 988,
+      "sha256": "d76ca3f402f19b4d128f51ae9379dfd2a2af720856e442a20b848e92a2f2e2b7"
+    },
+    {
+      "path": "analyses/grn_benchmark/results/all_candidate_edges.parquet",
+      "bytes": 42274908,
+      "sha256": "dec71e235ae4fdfdad9112992a401063c55ac11a93037fde575795b81707b5d4"
+    },
+    {
+      "path": "analyses/grn_benchmark/results/method_results.csv",
+      "bytes": 5383,
+      "sha256": "3ab3478cdba305519e804722fcc1972802512888f9732482a90d8397f227580c"
+    },
+    {
+      "path": "analyses/natural_genetics/results_audit_corrected/natural_genetics_results.json",
+      "bytes": 1077,
+      "sha256": "aaa094ee3370faa001dfb224c97454b7561dfba6973a78340e9400549ec0fa49"
+    },
+    {
+      "path": "analyses/disease/results/disease_results.json",
+      "bytes": 448,
+      "sha256": "b5fedab6a21f08b5bd78c22932f31a23f711e2c8a338545e078f3cde3718dc76"
+    },
+    {
+      "path": "analyses/causal_triangulation/results/causal_triangulation_results.json",
+      "bytes": 1023,
+      "sha256": "ab345b67fff71a72591e24192bfa1fbab9dc839aaeea358c16469e6c48d5f2d3"
+    },
+    {
+      "path": "analyses/independent_confirmation/results/hypothesis_decisions.tsv",
+      "bytes": 6361,
+      "sha256": "8d1051710abf6ace0cfd78df931264dda61e00e6920e8b496d5b82d507907af6"
+    }
+  ]
+}

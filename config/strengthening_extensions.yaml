@@ -1,0 +1,181 @@
+version: 1
+seed: 20260912
+alpha: 0.05
+confidence_level: 0.95
+bootstrap_replicates: 1000
+permutation_replicates: 1000
+correction: benjamini_hochberg_within_family
+report_statuses: [supported, mixed, failed, unresolved, unavailable, underpowered]
+
+families:
+  transfer_gain_buffering:
+    action: run_targeted_extension
+    hypothesis: Target-level transfer propensity and tail membership remain stable after covariate adjustment and hierarchical shrinkage.
+    eligible_denominator: 15807 target-state rows from 6105 targets
+    outcome: transfer_z with target-level state-adjusted mean as the classification estimand
+    estimator: cross-fitted linear fixed effects followed by empirical-Bayes target random-intercept shrinkage
+    covariates:
+      - state
+      - cis_magnitude
+      - log1p_target_expression
+      - log1p_cell_count
+      - guide_count
+      - guide_concordance
+      - donor_concordance
+      - mean_guide_knockdown
+      - curated_out_degree
+    response_degree_rule: stratify stability by response-degree quintile because response degree defines the transfer outcome and is not a valid adjustment covariate
+    comparison: unshrunken state-adjusted target estimate
+    null: target-label permutation within state-availability and response-degree strata
+    uncertainty: target bootstrap
+    multiplicity_family: transfer_strengthening
+    minimum_power: at least 1000 targets and at least 100 targets in each tail
+    measurement_error_sensitivity: residual variance multipliers [1.0, 1.25, 1.5]
+    stopping_rule: stop if fewer than 1000 targets remain or variance components are not finite
+    decision_criterion: supported if rank correlation lower confidence bound is above 0.60 and both tail-retention lower confidence bounds are above 0.50
+    fixed_alternatives: reuse scalar multiverse without refitting
+
+  signed_rerouting_context:
+    action: run_targeted_extension
+    hypothesis: State-pair programme composition remains more different than a magnitude-matched target permutation null under a log-ratio geometry.
+    eligible_denominator: 8168 evaluable state pairs across 3696 targets
+    outcome: normalized Aitchison distance across 30 frozen module-energy parts
+    estimator: centered log-ratio distance with multiplicative zero replacement delta equal to 1 divided by 1800
+    covariates:
+      - state_pair
+      - absolute_log2_gain_ratio
+      - mean_response_norm
+    comparison: condition-stratified matched-target permutation
+    null: permute right-state target within state pair, gain quintile, and response-norm quintile
+    uncertainty: target bootstrap of observed-minus-null-median distance
+    multiplicity_family: rerouting_strengthening_overall_and_three_state_pairs
+    minimum_power: at least 1000 evaluable pairs overall and 250 per state pair
+    stopping_rule: stop if closure or finite-coordinate checks fail
+    decision_criterion: supported if the overall lower confidence bound is above zero and q is below 0.05
+    fixed_alternatives: reuse existing module-resolution, seed, and leave-one-state analyses
+    scalar_context_rule: retain the failed scalar context-switching conclusion
+
+  guide_dose_concordance:
+    action: reuse_no_refit
+    hypothesis: Stronger guide perturbation is associated with greater distal response at population level.
+    eligible_denominator: 29130 guide rows, 14565 target-state pairs, and 5756 targets
+    outcome: paired downstream-gene count difference and released guide concordance summaries
+    estimator: existing within-target repeated-measures and guide-held-out models
+    covariates: [guide_quality, target, state, proximal_expression, cell_count]
+    comparison: quality-only null
+    null: matched guide-label permutation within target-state pair
+    uncertainty: target bootstrap
+    multiplicity_family: guide_dose_and_concordance
+    minimum_power: at least 100 targets; at least 4 supported doses for target-specific nonlinearity
+    stopping_rule: retain unavailable donor, signed-vector, rerouting, disease, mediation, and leave-one-guide estimands
+    decision_criterion: reuse frozen decisions
+
+  cross_state_cross_system:
+    action: reuse_internal_stop_external
+    hypothesis: Conserved-core membership improves reproducibility beyond source observability covariates.
+    eligible_denominator: 4399 targets and 13197 target-state rows
+    outcome: core energy fraction and held-out signed cosine
+    estimator: existing target-held-out state decomposition
+    covariates: [expression, cis_strength, response_degree, cell_count, guide_count]
+    comparison: covariates without core fraction
+    null: matched target permutation
+    uncertainty: target bootstrap
+    multiplicity_family: state_decomposition
+    minimum_power: 20 independently perturbed T-cell targets with gene-aligned signed vectors
+    stopping_rule: stop external extension because the independent T-cell denominator is 8 and external component vectors are unavailable
+    decision_criterion: reuse internal estimates and label external replication underpowered or unavailable
+
+  external_transportability:
+    action: stop_unavailable
+    hypothesis: A CD4-developed reduced model improves prediction in an untouched perturbation dataset.
+    eligible_denominator: 490 RPE1 targets for inspected development only; zero untouched eligible targets
+    outcome: target-held-out external response burden
+    estimator: frozen reduced portability model with identical target folds
+    covariates: [expression, cis_strength, response_degree, network_degree, molecular_support, conserved_core]
+    comparison: simple covariates, ridge, sparse nonlinear, network propagation, and graph readout
+    null: matched feature permutation and degree-preserving rewiring
+    uncertainty: paired target bootstrap
+    multiplicity_family: external_confirmation
+    minimum_power: one untouched dataset with at least 20 mapped targets and complete outcome checksum
+    stopping_rule: do not fit because no untouched dataset passed the availability gate
+    decision_criterion: unavailable
+    rpe1_rule: do not relabel RPE1 as untouched
+
+  grn_benchmark:
+    action: run_targeted_extension
+    hypothesis: Finite-horizon transfer does not outperform the frozen best simple comparator on paired target-macro metrics.
+    eligible_denominator: 4 estimable datasets, 16 method-dataset rows, and 4814312 candidate method-edge rows
+    outcome: target-macro AUROC, AUPRC, early precision ratio, and rank-bin calibration
+    estimator: paired target bootstrap and random-effects dataset synthesis
+    covariates: [dataset]
+    comparison_by_dataset:
+      hESC: pseudotime_lagged_correlation
+      hHep: pseudotime_lagged_correlation
+      mDC: absolute_pearson
+      mHSC-E: pseudotime_lagged_correlation
+    null: paired target difference equal to zero
+    uncertainty: paired target bootstrap with 2000 replicates
+    multiplicity_family: grn_paired_metrics
+    minimum_power: at least 100 evaluable targets per dataset
+    stopping_rule: no new method and no relaxation for mESC
+    decision_criterion: superiority requires q below 0.05 and a lower confidence bound above zero in at least 3 of 4 datasets without corrected opposite effects
+
+  molecular_regulatory_support:
+    action: reuse_no_refit
+    hypothesis: Convergent molecular support predicts reproducibility and signed propagation.
+    eligible_denominator: 284 regulators, 715 regulator-state rows, and 124798 response edges
+    outcome: evidence tier, guide concordance, K562 concordance, signed direction, and disease convergence
+    estimator: existing tiered evidence and target-held-out prediction
+    covariates: [expression, accessibility, distance, peak_count, response_degree, network_degree]
+    comparison: matched unsupported edges
+    null: matched backgrounds, target-block permutation, and degree-preserving rewiring
+    uncertainty: target bootstrap
+    multiplicity_family: molecular_cascade
+    minimum_power: 20 targets per tier and compatible factor occupancy
+    stopping_rule: no new direct-regulation or timing test without state-compatible factor occupancy
+    decision_criterion: reuse complete tier and conflict decisions
+
+  natural_genetic_concordance:
+    action: reuse_no_refit
+    hypothesis: Perturbational and trans-eQTL directions agree beyond matched null expectation.
+    eligible_denominator: 425 identity-eligible pairs, 81 variants, 40 mediators, 165 trans genes, and 19 source chromosomes
+    outcome: direction agreement and signed-score correlation
+    estimator: existing chromosome-cluster bootstrap and matched permutation audit
+    covariates: [state_availability, expression, cell_count, response_degree]
+    comparison: matched identity permutation
+    null: source-chromosome-aware matched null
+    uncertainty: 2000 chromosome-cluster bootstraps
+    multiplicity_family: fixed_16_natural_genetic_slots
+    minimum_power: at least 100 identity-eligible pairs and 10 source chromosomes
+    stopping_rule: do not add network-degree strata because the existing matching cells are already sparse
+    decision_criterion: reuse corrected audit decision
+
+  disease_locus_convergence:
+    action: reuse_existing_stop_new_genome_wide
+    hypothesis: Mechanistically supported programmes capture immune-disease genetics under complete causal gates.
+    eligible_denominator: 14 diseases, 75 programmes, and 3 eligible deep loci
+    outcome: competitive enrichment, held-out prediction, locus gates, and mediation eligibility
+    estimator: existing matched disease models and seven-gate locus triangulation
+    covariates: [programme_size, gene_size, expression, accessibility, response_degree, network_degree, state]
+    comparison: matched diseases, loci, genes, programmes, and genomic regions
+    null: matched negative controls and regional sensitivity
+    uncertainty: cluster-held-out intervals and locus-level gate accounting
+    multiplicity_family: disease_and_locus
+    minimum_power: at least one schema-eligible complete GWAS with ancestry-matched LD and immune-cell eQTL coverage
+    stopping_rule: stop because zero of seven locked GWAS passed the schema gate
+    decision_criterion: retain negative disease prediction and zero mediation claims
+
+  specification_evidence_synthesis:
+    action: synthesize_only
+    hypothesis: Existing conclusions remain aligned after the three targeted extensions without recycling correlated evidence as independent support.
+    eligible_denominator: 17280 scalar results, 180 rerouting specifications, and 1008 validation specifications
+    outcome: original and strengthened estimate, denominator, interval, corrected result, influence, evidence gain, limitation, and final status
+    estimator: deterministic result-family synthesis
+    covariates: none
+    comparison: original frozen result versus highest-value extension
+    null: retain each source analysis null
+    uncertainty: retain each source analysis interval
+    multiplicity_family: no new inferential family for descriptive synthesis
+    minimum_power: source analysis must pass its own frozen gate
+    stopping_rule: do not recompute a completed family or substitute for an unavailable one
+    decision_criterion: materially improved only when precision, mechanism, calibration, robustness, or independent validation increases
