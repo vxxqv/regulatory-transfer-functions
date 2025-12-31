@@ -38,18 +38,29 @@ def metrics(labels: np.ndarray, scores: np.ndarray) -> dict[str, float]:
     }
 
 
-def target_bootstrap(edges: pd.DataFrame, replicates: int, seed: int) -> dict[str, tuple[float, float]]:
-    targets = edges["target"].unique()
-    by_target = {target: block.index.to_numpy() for target, block in edges.groupby("target")}
+def target_bootstrap(edges: pd.DataFrame, replicates: int, seed: int) -> dict[str, float]:
+    """Bootstrap target-macro metrics without repeatedly expanding edge rows."""
+    target_records = []
+    for target, block in edges.groupby("target", sort=True):
+        labels = block["gold"].to_numpy(dtype=int)
+        if labels.sum() == 0 or labels.sum() == len(labels):
+            continue
+        target_records.append({"target": target, **metrics(labels, block["score"].to_numpy(dtype=float))})
+    target_table = pd.DataFrame(target_records)
+    if target_table.empty:
+        return {"bootstrap_targets": 0}
     rng = np.random.default_rng(seed)
-    values = {"auroc": [], "auprc": [], "early_precision_ratio": []}
-    for _ in range(replicates):
-        draw = rng.choice(targets, len(targets), replace=True)
-        index = np.concatenate([by_target[target] for target in draw])
-        result = metrics(edges.loc[index, "gold"].to_numpy(), edges.loc[index, "score"].to_numpy())
-        for key in values:
-            values[key].append(result[key])
-    return {key: tuple(np.quantile(value, [0.025, 0.975])) for key, value in values.items()}
+    draw = rng.integers(0, len(target_table), size=(replicates, len(target_table)))
+    result = {"bootstrap_targets": int(len(target_table))}
+    for key in ["auroc", "auprc", "early_precision_ratio"]:
+        values = target_table[key].to_numpy(dtype=float)
+        target_macro = values.mean()
+        bootstrap = values[draw].mean(axis=1)
+        low, high = np.quantile(bootstrap, [0.025, 0.975])
+        result[f"target_macro_{key}"] = float(target_macro)
+        result[f"target_macro_{key}_ci_low"] = float(low)
+        result[f"target_macro_{key}_ci_high"] = float(high)
+    return result
 
 
 def select_genes(dataset: str, expression: pd.DataFrame, tf_set: set[str]) -> list[str]:
@@ -80,6 +91,7 @@ def main() -> None:
     all_edges = []
     summary_records = []
     selection_records = []
+    unavailable_records = []
     for dataset_index, (dataset, (species, network_file, tf_file)) in enumerate(PANEL.items()):
         expression = pd.read_csv(DATA / dataset / "ExpressionData.csv", index_col=0)
         expression.index = expression.index.astype(str)
@@ -100,6 +112,15 @@ def main() -> None:
         selection_records.append(
             {"dataset": dataset, "cells": x.shape[0], "selected_genes": len(genes), "regulators": len(regulators), "candidate_edges": len(regulators) * (len(genes) - 1)}
         )
+        if len(regulators) == 0:
+            unavailable_records.append(
+                {
+                    "dataset": dataset,
+                    "reason": "no transcription factors passed the frozen Bonferroni selection rule",
+                }
+            )
+            print(f"unavailable {dataset}: no eligible regulators", flush=True)
+            continue
 
         method_scores = {}
         start = time.perf_counter()
@@ -150,6 +171,16 @@ def main() -> None:
                         {"dataset": dataset, "method": method, "regulator": regulator, "target": target, "score": score_matrix[regulator_position, target_position], "gold": int((regulator, target) in gold)}
                     )
             edges = pd.DataFrame(rows)
+            if edges["gold"].nunique() < 2:
+                unavailable_records.append(
+                    {
+                        "dataset": dataset,
+                        "method": method,
+                        "reason": "candidate universe does not contain both gold-edge classes",
+                    }
+                )
+                all_edges.append(edges)
+                continue
             result = metrics(edges["gold"].to_numpy(), edges["score"].to_numpy())
             ci = target_bootstrap(edges, 2000, 20260912 + dataset_index * 10 + len(summary_records))
             wall, peak = timing[method]
@@ -160,8 +191,7 @@ def main() -> None:
                     "edges": len(edges),
                     "gold_edges": int(edges["gold"].sum()),
                     **result,
-                    **{f"{key}_ci_low": value[0] for key, value in ci.items()},
-                    **{f"{key}_ci_high": value[1] for key, value in ci.items()},
+                    **ci,
                     "wall_seconds": wall,
                     "peak_memory_mb": peak / 1024**2,
                 }
@@ -171,12 +201,15 @@ def main() -> None:
     pd.concat(all_edges, ignore_index=True).to_parquet(OUTPUT / "all_candidate_edges.parquet", index=False)
     pd.DataFrame(summary_records).to_csv(OUTPUT / "method_results.csv", index=False)
     pd.DataFrame(selection_records).to_csv(OUTPUT / "dataset_selection.csv", index=False)
+    pd.DataFrame(unavailable_records).to_csv(OUTPUT / "unavailable_datasets.csv", index=False)
     audit = {
         "datasets": len(PANEL),
         "methods": 4,
         "gold_used_for_training_or_selection": False,
         "all_candidate_edges_reported": True,
         "bootstrap_replicates": 2000,
+        "bootstrap_estimand": "mean_of_target_specific_metrics_among_targets_with_both_edge_classes",
+        "unavailable_records": len(unavailable_records),
     }
     (OUTPUT / "beeline_results.json").write_text(
         json.dumps(audit, indent=2, sort_keys=True) + "\n", encoding="utf-8"

@@ -6,7 +6,7 @@ import pandas as pd
 import pytest
 import yaml
 
-from analyses.grn_benchmark.run_beeline import finite_horizon
+from analyses.grn_benchmark.run_beeline import finite_horizon, target_bootstrap
 from analyses.multiverse.run_rerouting_multiverse import js
 from analyses.multiverse.run_scalar_multiverse import adjust_q, fold, multiplier_summary
 from analyses.multiverse.run_validation_multiverse import disease_predictions
@@ -105,3 +105,37 @@ def test_finite_horizon_operator_is_stabilized() -> None:
     propagated = finite_horizon(operator, depth=3)
     assert np.isfinite(propagated).all()
     assert propagated.shape == operator.shape
+
+
+def test_target_macro_bootstrap_is_reproducible() -> None:
+    edges = pd.DataFrame(
+        {
+            "target": np.repeat(["a", "b", "c"], 4),
+            "gold": np.tile([0, 0, 1, 1], 3),
+            "score": np.tile([0.1, 0.2, 0.8, 0.9], 3),
+        }
+    )
+    first = target_bootstrap(edges, 2000, 17)
+    second = target_bootstrap(edges, 2000, 17)
+    assert first == second
+    assert first["bootstrap_targets"] == 3
+    assert first["target_macro_auroc"] == 1.0
+
+
+def test_beeline_results_cover_all_estimable_edges_and_unavailable_dataset() -> None:
+    result_dir = ROOT / "analyses" / "grn_benchmark" / "results"
+    selection = pd.read_csv(result_dir / "dataset_selection.csv")
+    results = pd.read_csv(result_dir / "method_results.csv")
+    unavailable = pd.read_csv(result_dir / "unavailable_datasets.csv")
+    edges = pd.read_parquet(result_dir / "all_candidate_edges.parquet")
+    estimable = selection[selection["regulators"] > 0]
+    expected_edges = int(estimable["candidate_edges"].sum() * 4)
+    assert len(edges) == expected_edges
+    assert not edges.duplicated(["dataset", "method", "regulator", "target"]).any()
+    assert len(results) == len(estimable) * 4
+    assert results.filter(regex="^(auroc|auprc|early_precision_ratio)$").notna().all().all()
+    for metric in ["auroc", "auprc", "early_precision_ratio"]:
+        assert (results[f"target_macro_{metric}_ci_low"] <= results[f"target_macro_{metric}"]).all()
+        assert (results[f"target_macro_{metric}"] <= results[f"target_macro_{metric}_ci_high"]).all()
+    assert unavailable["dataset"].tolist() == ["mESC"]
+    assert selection.loc[selection["dataset"] == "mESC", "regulators"].item() == 0
