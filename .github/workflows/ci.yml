@@ -15,7 +15,7 @@ jobs:
       - run: pip install -r environments/requirements.txt
       - name: Verify tracked release artifacts
         run: >-
-          pytest -q -p no:cacheprovider
+          python -m pytest -q -p no:cacheprovider
           tests/test_release_schema.py
           tests/test_text_style.py
           tests/test_cell_systems_freeze.py
