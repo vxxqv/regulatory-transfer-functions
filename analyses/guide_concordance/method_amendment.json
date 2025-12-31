@@ -1,0 +1,10 @@
+{
+  "timing": "after schema and two-row source inspection, before model fitting or hypothesis tests",
+  "reason": "The supplied evidence tiers incorporate guide concordance and external perturbation concordance. Using these tiers to predict those outcomes would leak outcomes into predictors.",
+  "primary_predictor": "fraction of response edges supported by at least two molecular evidence types",
+  "sensitivity_predictor": "fraction supported by at least one molecular evidence type",
+  "molecular_evidence_types": ["curated_edge", "motif_supported", "physical_active_link or promoter_bound or enhancer_linked"],
+  "excluded_predictor_fields": ["guide_concordant", "k562_vector_concordant", "independent_evidence_types", "evidence_tier", "direction_status"],
+  "upstream_pvalue_note": "The inspected upstream notebook assigns correlation_all_pval from corr_pval, the significant-union calculation. All supplied correlation p-values are excluded from new inferential tests. Recomputing gene-level correlation p-values requires the unavailable guide vectors.",
+  "unchanged": "eligibility, source hashes, outcomes, seeds, resampling counts, minimum power and stopping rules"
+}

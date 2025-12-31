@@ -1,0 +1,46 @@
+{
+  "released_pairs": 26496,
+  "complete_denominator": 28935,
+  "primary_denominator": 15807,
+  "eligible_pairs": 14565,
+  "eligible_targets": 5756,
+  "significant_union_eligible": 2354,
+  "target_specific_underpowered": 26496,
+  "invalid_gene_set_rows": 0,
+  "shared_ntc_eligible_pairs": 14565,
+  "molecular_source_complete": true,
+  "outcome_leakage_excluded": true,
+  "supplied_correlation_pvalues_used": false,
+  "config_sha256": "6ec1a37d3c630e449ece20bf42628b7a903912506aa7e40f6eaf15c1e60b721b",
+  "amendment_sha256": "f6385effd29e01aa78f2cb98961b9c40687c2305bfaffb51cc775d1e3ee1eea7",
+  "tests": [
+    {
+      "analysis": "molecular_support_fraction:correlation_all",
+      "decision": "unresolved"
+    },
+    {
+      "analysis": "molecular_support_fraction:correlation_signif",
+      "decision": "underpowered"
+    },
+    {
+      "analysis": "molecular_support_fraction:frac_sign_agreement_signif_union",
+      "decision": "underpowered"
+    },
+    {
+      "analysis": "molecular_any_fraction:correlation_all",
+      "decision": "unresolved"
+    },
+    {
+      "analysis": "molecular_any_fraction:correlation_signif",
+      "decision": "underpowered"
+    },
+    {
+      "analysis": "molecular_any_fraction:frac_sign_agreement_signif_union",
+      "decision": "underpowered"
+    },
+    {
+      "analysis": "paired_cis_count",
+      "decision": "supported_positive"
+    }
+  ]
+}

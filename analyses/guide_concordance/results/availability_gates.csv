@@ -1,0 +1,11 @@
+estimand,status,reason
+guide-by-donor pseudobulk,unavailable,"No joint count matrix, donor labels and guide assignments among frozen inputs."
+"full and significant-union Spearman, cosine, rank, signed norm",unavailable,"Released vectors are target-state aggregates, not individual-guide coefficients."
+"guide-level module activity, transfer gain, buffering, rerouting and disease convergence",unavailable,No guide-resolution expression vectors; target summaries cannot substitute.
+donor effects and leave-one-donor validation,unavailable,Released donor robustness summaries do not identify donor-by-guide effects.
+leave-one-guide stability and target heterogeneity,underpowered,All released comparisons use two guides; removing one leaves no guide-pair estimate.
+negative-control trans genes and non-targeting trans vectors,unavailable,"Non-targeting cis summaries are available, but joint trans-effect controls are not."
+target-specific dose thresholds and cis mediation,underpowered,Two guides cannot identify a target dose-response shape or validate mediation assumptions.
+matched guide-vector permutation and guide-state vector shuffle,unavailable,"Without guide vectors, nulls for vector concordance cannot be reconstructed; predictor and paired-label nulls are reported separately."
+gene-level correlation uncertainty,unavailable,"Gene-level independence is implausible, upstream p-value assignment is questionable, and raw vectors are unavailable."
+edge-specific guide concordance,unavailable,Concordance is released at target-state grain; molecular comparisons operate at that same grain.

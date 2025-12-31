@@ -1,0 +1,7 @@
+comparison,outcome,from_state,to_state,n_targets,median_change,ci_low,ci_high,permutation_p,q_value,decision
+cis_absolute_difference:Rest:Stim8hr,cis_absolute_difference,Rest,Stim8hr,4128,0.0002971779249821005,-0.0010063375921908896,0.0020902417038770604,0.6293706293706294,1.0,unresolved
+cis_absolute_difference:Stim8hr:Stim48hr,cis_absolute_difference,Stim8hr,Stim48hr,4507,0.006182244728117237,0.003806452822205708,0.008197292049076044,0.000999000999000999,0.002997002997002997,supported_difference
+cis_absolute_difference:Rest:Stim48hr,cis_absolute_difference,Rest,Stim48hr,4068,0.006969862310607311,0.004196372119619318,0.009330110279546833,0.000999000999000999,0.002997002997002997,supported_difference
+count_absolute_difference:Rest:Stim8hr,count_absolute_difference,Rest,Stim8hr,4128,0.0,0.0,0.0,1.0,1.0,unresolved
+count_absolute_difference:Stim8hr:Stim48hr,count_absolute_difference,Stim8hr,Stim48hr,4507,0.0,0.0,0.0,1.0,1.0,unresolved
+count_absolute_difference:Rest:Stim48hr,count_absolute_difference,Rest,Stim48hr,4068,0.0,0.0,0.0,1.0,1.0,unresolved

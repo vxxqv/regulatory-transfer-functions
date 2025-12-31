@@ -1,0 +1,4 @@
+error_scale,n_pairs,coefficient_median,simulation_low,simulation_high,interval_type
+0.0,14385,0.9135196623674152,0.9135196623674152,0.9135196623674152,"measurement-error simulation range, not a sampling confidence interval"
+0.5,14385,0.893134129613655,0.8812164924674384,0.9078985829525934,"measurement-error simulation range, not a sampling confidence interval"
+1.0,14385,0.8404546162490631,0.8166667558933391,0.8651780871251301,"measurement-error simulation range, not a sampling confidence interval"

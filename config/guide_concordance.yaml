@@ -1,0 +1,49 @@
+design: retrospective extension frozen before guide-concordance outcome analysis
+seed: 25913
+states: [Rest, Stim8hr, Stim48hr]
+fdr: 0.05
+bootstrap_replicates: 2000
+permutation_replicates: 1000
+eligibility:
+  minimum_guide_cells: 100
+  minimum_ntc_expression: 0.05
+  minimum_guides_descriptive: 2
+  minimum_guides_target_inference: 3
+  minimum_donors: 3
+  minimum_targets_pooled: 100
+  minimum_targets_evidence_group: 20
+  minimum_significant_union: 10
+  maximum_missing_quality_fraction: 0.20
+validation:
+  target_held_out_folds: 5
+  target_bootstrap: true
+  matched_null_strata: [state, proximal_expression_quintile, response_degree_quintile]
+  measurement_error_scales: [0.0, 0.5, 1.0]
+  primary_evidence: fraction of response edges in Tier 2
+  sensitivity_evidence: fraction of response edges in Tier 2 or Tier 3
+  threshold_source: original guide-dose eligibility; no new effect threshold
+outcomes:
+  - released full-vector Pearson correlation
+  - released significant-union Pearson correlation
+  - released significant-union sign agreement
+  - absolute paired knockdown difference
+  - absolute log1p downstream-count difference
+  - signed paired cis-to-response agreement
+quality_covariates:
+  - log1p_min_guide_cells
+  - mean_gc_fraction
+  - mean_log1p_tss_distance
+  - any_library_flag
+  - any_bidirectional_promoter
+  - any_secondary_alignment
+hypotheses:
+  - Molecular support predicts higher released guide-vector concordance after quality and response-degree adjustment.
+  - Stronger within-pair cis knockdown is associated with a larger distal response count.
+  - Cis and response-count disagreement varies between sampled states within matched targets.
+stopping_rules:
+  - No guide-by-donor pseudobulk without joint counts, guide assignments, donor labels and non-targeting controls.
+  - No guide-level vector metric, module, transfer, buffering, rerouting or disease metric from target-aggregated vectors.
+  - No target-specific uncertainty, heterogeneity, threshold or mediation inference with fewer than three guides.
+  - No per-target p-value inference from upstream gene-wise correlation p-values.
+  - No evidence-tier analysis if source evidence matrix is incomplete or unhashable.
+  - Report every denominator, failed gate, missing metric and null comparison; stop unavailable branches.

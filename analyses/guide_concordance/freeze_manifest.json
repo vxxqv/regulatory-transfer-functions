@@ -1,0 +1,152 @@
+{
+  "design": "retrospective extension",
+  "status": "frozen before new guide-concordance outcome analysis",
+  "config_sha256": "6ec1a37d3c630e449ece20bf42628b7a903912506aa7e40f6eaf15c1e60b721b",
+  "inputs": [
+    {
+      "path": "work/upstream/GWT_perturbseq_analysis_2025/metadata/DE_by_guide.correlation_results.csv",
+      "available": true,
+      "sha256": "a7b6a439b08615b47db734793ac52eb19ed2f77dcc223ddca24e5651ad22ed7f"
+    },
+    {
+      "path": "work/upstream/GWT_perturbseq_analysis_2025/metadata/suppl_tables/guide_kd_efficiency.suppl_table.csv",
+      "available": true,
+      "sha256": "55970de2cbe2c498dbdc0c1e9faa2d123b4c0cde7cc7a01a7fbb9cd601a49d1d"
+    },
+    {
+      "path": "work/upstream/GWT_perturbseq_analysis_2025/metadata/sgrna_df_final.csv",
+      "available": true,
+      "sha256": "154f811030bad1147a37c0e5ed59ba6f56707bbf307b34364d136e081cc5cdc8"
+    },
+    {
+      "path": "data/interim/gwt_vectors/rows.parquet",
+      "available": true,
+      "sha256": "ad1ff11af7c34db7baae8eb24971e0f698a0a73ba70d70255def1851f0acdf9c"
+    },
+    {
+      "path": "data/interim/gwt_vectors/genes.parquet",
+      "available": true,
+      "sha256": "2a87aa6bc012ea3f374d85546eb3d235c7efd9b8c063d34c5d2b8a488340ddf4"
+    },
+    {
+      "path": "data/interim/gwt_vectors/normalized_significant_logfc.npz",
+      "available": true,
+      "sha256": "d759799345804582aa0bc5829fb7cc4534f2322bc8b3b0bf696723fe5589f58b"
+    },
+    {
+      "path": "analyses/primary/results/transfer_phenotypes.parquet",
+      "available": true,
+      "sha256": "4327ea47df56278e92a60c8e4a26c41f5ff2d8f4e4786108e23e8998d0f97b3f"
+    },
+    {
+      "path": "analyses/vectors/results/contextual_transfer_tensor.parquet",
+      "available": true,
+      "sha256": "d644893577cc5a78a0bda649584d21e608f3e105f78ed865a6d0328b541a8099"
+    },
+    {
+      "path": "analyses/vectors/results/context_rerouting_pairs.parquet",
+      "available": true,
+      "sha256": "b3845ac971b20991a0be5635d00d56c2593b67c746a8c9c517adc9c16e58c745"
+    },
+    {
+      "path": "analyses/disease/results/disease_model_rows.parquet",
+      "available": true,
+      "sha256": "355b9e174af1966238500a910ff848c624e52bd8348f5ce966247e1edae21c34"
+    },
+    {
+      "path": "analyses/molecular_cascade/results/edge_evidence_matrix.parquet",
+      "available": true,
+      "sha256": "022b83b24541cb0deac8490017bf90d95a53191460519325a8853d2655ec1ad3"
+    },
+    {
+      "path": "analyses/molecular_cascade/results/audit.json",
+      "available": true,
+      "sha256": "4e3ef9c4dbbfbc40c5868174be6a074c0d03586710097266a91297718c50e50f"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/audit.json",
+      "available": true,
+      "sha256": "38615de2564d4515ff1a7a9fe699e9c1497ade3d5d072a28f980171f202ecc80"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/eligible_guide_rows.csv",
+      "available": true,
+      "sha256": "35b9dd87b0812d449533e276bda0951a1110d5376ea75d2bd61f267706e0aa15"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/eligible_target_states.csv",
+      "available": true,
+      "sha256": "18cebbc9e7c14e31f9b1e310d96ebdb2882e0660c150d2959c2d41effe0a9bf6"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/fold_metrics.csv",
+      "available": true,
+      "sha256": "acd94a34c5a91d7b0d4cbcaac3c193a1e22c700cb0fa7a366415c61c8b9de36d"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/guide_held_out_predictions.parquet",
+      "available": true,
+      "sha256": "4981a1caa4949489d123971343f63094c2683ff7e091b40a7a8edb52423c3661"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/hypothesis_decisions.csv",
+      "available": true,
+      "sha256": "7f60be8210c24dc364deb2c027c84917ab6b1404554eeb746eab75429f3bbd26"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/matched_guide_permutation_summary.csv",
+      "available": true,
+      "sha256": "0209daeee9df75458672bd2a7ddf46741d550e0a7cacc1574accc6969570b6a7"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/matched_guide_permutations.csv",
+      "available": true,
+      "sha256": "623e77349fec85afd24411c9633eba9db335c1192475bcc55044d638e6b9f4b4"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/measurement_error_sensitivity.csv",
+      "available": true,
+      "sha256": "a5d72bc34948b03a656bd14375119303cbc3dcbb2aebedf45b77038b0e007f83"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/model_comparisons.csv",
+      "available": true,
+      "sha256": "b81415ab5ace1d02ab9629da2b0fbb3b802c4ad4cecb6324546201a4608a265c"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/model_metrics.csv",
+      "available": true,
+      "sha256": "be0f46aae7c72a3763728caacaa755b499da3413e28f9ba4b59f2f60ac7ea624"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/model_parameters.csv",
+      "available": true,
+      "sha256": "af4bde119019e368ea761254ec2d53b32a1b2b4bdad8efef2ba3ef597c11cf32"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/model_selection_uncertainty.csv",
+      "available": true,
+      "sha256": "1b4dbdc1c6bbedb6970603397baf45566d4d03c39f371122dec9b9192d770471"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/negative_controls.csv",
+      "available": true,
+      "sha256": "c1455ecf2d6be9180600563956c2422600fa4bcf236a907fae7be7ce5602c8c9"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/nonlinear_comparisons.csv",
+      "available": true,
+      "sha256": "acaed32fdc99427331fc7463e74cc7d5042f5b690755031ac20cdd662162ac24"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/state_curves.csv",
+      "available": true,
+      "sha256": "9aa6addced24aa6333e23e88eed290ba8699ade8f0483a98abe2c1fef4cd778c"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/unavailable_estimands.csv",
+      "available": true,
+      "sha256": "f402c281bbd15d3e36f9a922c8011b0a892890b4d0b8ab47ba1ef9dc90b9f723"
+    }
+  ]
+}

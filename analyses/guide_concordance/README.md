@@ -1,0 +1,19 @@
+# Guide concordance
+
+This extension reuses released paired-guide summaries and proximal knockdown estimates. Source hashes and analysis rules were recorded before new models. The original study uses two targeting guides per tested target-state and a significant-gene union defined by adjusted P < 0.1. That union is selected using either guide and is not an independent validation set.
+
+The 28,935-row denominator is the outer union of 26,496 released pairs and 15,807 primary target-states. Eligibility preserves the guide-dose analysis's 100-cell and 0.05 proximal-expression gates. There are 14,565 eligible pairs; 2,354 have at least ten genes in the significant union. Every row and exclusion remains in `results/all_target_states.parquet`.
+
+The supplied evidence tiers contain guide reproducibility, so they cannot predict it without circularity. `method_amendment.json` replaces them with molecular-only support and records the change before fitting. Curated databases are one evidence type. No guide correlation, independent perturbation correlation or CRISPR direction-agreement field enters the predictor. The molecular denominator is limited to perturbed regulators covered by the supplied evidence matrix.
+
+Models adjust for guide quality, cell count, proximal expression, response degree, proximal effect and state. Molecular coefficients use target bootstrap intervals and target-block permutations matched on state availability, expression and degree. The paired cis-to-count analysis uses within-pair differences, target bootstrap intervals and target-consistent guide-label swaps. It estimates an association, not mediation. Target-held-out ridge validation uses identical folds for the covariate baseline and augmented model. State comparisons use matched targets, paired label permutations and a separate six-comparison BH family. Measurement-error ranges are simulations, not confidence intervals.
+
+Upstream correlation P values are excluded: the inspected source notebook assigns the full-vector P-value field from the significant-union variable. Gene dependence also prevents treating those P values as target-level replication evidence. Released full-vector and significant-union correlation coefficients are retained unchanged.
+
+Raw joint counts, donor-by-guide labels, non-targeting trans vectors and guide-level coefficient vectors are absent from the frozen inputs. Consequently, guide-specific Spearman/cosine vectors, module activity, transfer, rerouting, disease programs, donor effects and negative-gene controls are unavailable. Two guides cannot identify target-specific heterogeneity, leave-one-guide stability, thresholds or mediation. These are explicit availability gates, not negative biological results. No target-aggregated vector was relabelled as a guide vector.
+
+## Reproduction
+
+Run `python analyses/guide_concordance/run_analysis.py --source-root PATH` with the original data layout and existing scientific environment. The script verifies frozen input hashes. Then run `python figures/supplement/S25/make_figure.py` and `pytest tests/test_guide_concordance.py`. Set `STUDY_SOURCE_ROOT` when the upstream inputs are held outside the checkout. `--summaries-only` refreshes descriptive summaries without refitting models.
+
+The complete results include excluded rows, unavailable estimands, resampling nulls, held-out predictions, calibration, measurement-error sensitivity and every leave-one-target coefficient. Do not infer reliable individual-guide or donor replication from these pooled summaries.
