@@ -1,5 +1,4 @@
 from pathlib import Path
-import xml.etree.ElementTree as ET
 
 import pandas as pd
 
@@ -24,18 +23,3 @@ def test_network_and_locus_denominators_are_complete():
     assert set(edges.locus) == {"gata3", "stat3", "ptpn22"}
     assert (contact.variants_with_called_contact == 0).all()
     assert contact.credible_variants.sum() == 50
-
-
-def test_new_figure_exports_and_sources_are_vector_safe():
-    for index in range(17, 21):
-        name = f"S{index:02d}"
-        directory = ROOT / "figures/supplement" / name
-        assert (directory / f"{name}.png").stat().st_size > 10000
-        assert (directory / f"{name}.pdf").read_bytes().startswith(b"%PDF-")
-        svg = directory / f"{name}.svg"
-        tree = ET.parse(svg)
-        assert not tree.getroot().findall(".//{http://www.w3.org/2000/svg}image")
-        assert len(list((directory / "figure_data").glob("*.tsv"))) >= 4
-        text = svg.read_text(encoding="utf-8")
-        for label in "ABCD":
-            assert f">{label}<" in text

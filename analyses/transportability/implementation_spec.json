@@ -1,5 +1,5 @@
 {
-  "status": "fixed implementation of the frozen Cell Systems transportability block",
+  "status": "fixed implementation of the frozen transportability block",
   "source_outcomes_previously_inspected": [
     "Replogle K562 CRISPRi",
     "Replogle RPE1 CRISPRi"

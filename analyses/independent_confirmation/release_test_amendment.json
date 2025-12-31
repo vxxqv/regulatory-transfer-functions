@@ -1,0 +1,9 @@
+{
+  "path": "tests/test_independent_confirmation_freeze.py",
+  "parent_sha256": "a52ca92ee065bc53d9324d302954a631e6b6f7ac77f24088512b31e8dbbf7ac0",
+  "parent_bytes": 17699,
+  "current_sha256": "7a84b55f393c8779ac8407caf68fc50e760c0e33c75b38eb2e4af9d80786dcdb",
+  "current_bytes": 18655,
+  "analysis_values_changed": false,
+  "reason": "Updated release integrity checks for separated source acquisition and release metadata amendments."
+}

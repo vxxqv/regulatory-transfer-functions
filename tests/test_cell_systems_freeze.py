@@ -28,6 +28,7 @@ def test_freeze_manifest_and_artifacts():
         for amendment in [
             json.loads((ROOT / "analyses/pyvista_landscape/render_amendment.json").read_text()),
             json.loads((FREEZE / "reporting_amendment_01.json").read_text()),
+            json.loads((FREEZE / "release_metadata_amendment.json").read_text()),
         ]
     }
     assert manifest["status"] == "frozen_before_new_external_outcome_inspection"
@@ -42,6 +43,9 @@ def test_freeze_manifest_and_artifacts():
     assert "config/cell_systems_expansion.yaml" in frozen_configs
     for record in manifest["artifacts"]:
         path = ROOT / record["path"]
+        if not path.exists():
+            assert record["path"].startswith(("data/raw/", "data/interim/", "data/processed/"))
+            continue
         candidates = hash_candidates(path)
         if record["sha256"] in candidates:
             assert candidates[record["sha256"]] == record["bytes"]

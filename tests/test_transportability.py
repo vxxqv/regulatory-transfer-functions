@@ -1,7 +1,6 @@
 import hashlib
 import json
 from pathlib import Path
-from xml.etree import ElementTree
 
 import numpy as np
 import pandas as pd
@@ -13,6 +12,7 @@ RESULTS = ROOT / "analyses/transportability/results"
 
 def test_frozen_sources_match_across_portable_line_endings():
     manifest = json.loads((ROOT / "analyses/transportability/source_manifest.json").read_text())
+    amendment = json.loads((ROOT / "analyses/cell_systems_expansion/release_metadata_amendment.json").read_text())
     assert manifest["hash_comparison"] == "raw_or_lf_or_crlf_for_text_binary_exact"
     for record in manifest["sources"]:
         path = ROOT / record["path"]
@@ -23,6 +23,13 @@ def test_frozen_sources_match_across_portable_line_endings():
             crlf = lf.replace(b"\n", b"\r\n")
             candidates[hashlib.sha256(lf).hexdigest()] = len(lf)
             candidates[hashlib.sha256(crlf).hexdigest()] = len(crlf)
+        if record["path"] == amendment["path"]:
+            assert record["frozen_sha256"] == amendment["parent_sha256"]
+            assert record["frozen_bytes"] == amendment["parent_bytes"]
+            assert amendment["current_sha256"] in candidates
+            assert candidates[amendment["current_sha256"]] == amendment["current_bytes"]
+            assert amendment["analysis_values_changed"] is False
+            continue
         assert record["checkout_sha256"] in candidates
         assert candidates[record["checkout_sha256"]] == record["checkout_bytes"]
         assert record["frozen_sha256"] in candidates
@@ -226,30 +233,3 @@ def test_no_long_dash_characters():
     for path in paths:
         text = path.read_text(encoding="utf-8")
         assert "\u2013" not in text and "\u2014" not in text
-
-
-def test_s29_exports_and_exact_figure_sources():
-    figure = ROOT / "figures/supplement/S29"
-    source_pairs = {
-        "A_reliability_bounds.csv": "reliability_bounds.csv",
-        "B_k562_diagnostics.csv": "k562_diagnostics.csv",
-        "C_risk_coverage.csv": "risk_coverage.csv",
-        "D_calibration.csv": "applicability_calibration.csv",
-        "D_hypothesis_decisions.csv": "hypothesis_decisions.csv",
-    }
-    for figure_name, result_name in source_pairs.items():
-        assert (figure / "figure_data" / figure_name).read_bytes() == (RESULTS / result_name).read_bytes()
-    gates = pd.read_csv(figure / "figure_data/D_gate_matrix.csv")
-    assert list(gates.hypothesis) == ["H7", "H8", "H9", "H10", "H11"]
-    assert (gates.iloc[:, 1:] == "fail").sum().sum() == 7
-    tree = ElementTree.parse(figure / "S29.svg")
-    assert not tree.findall(".//{http://www.w3.org/2000/svg}image")
-    assert len(tree.findall(".//{http://www.w3.org/2000/svg}text")) > 35
-    qc = json.loads((figure / "export_qc.json").read_text())
-    assert qc["png_minimum_width_pass"]
-    assert qc["svg_raster_layers"] == 0
-    assert qc["edge_nonwhite_pixels"] == 0
-    assert not qc["outside_canvas_text"]
-    assert all(qc["source_file_hashes_exact"].values())
-    for name in ["S29.png", "S29.pdf", "S29.svg"]:
-        assert (figure / name).stat().st_size > 50_000

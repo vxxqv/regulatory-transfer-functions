@@ -1,6 +1,6 @@
-# Methods to code crosswalk
+# Analysis to code crosswalk
 
-| Manuscript method | Configuration | Implementation | Frozen result |
+| Analysis | Configuration | Implementation | Frozen result |
 |---|---|---|---|
 | Primary transfer residual | `config/analysis.yaml` | `analyses/primary/run_primary.py` | `analyses/primary/results` |
 | Signed vectors and rerouting | `config/analysis.yaml` | `analyses/vectors/run_vector_analysis.py` | `analyses/vectors/results` |
@@ -20,6 +20,3 @@
 | Information retention | `analyses/information_retention/specification.json` | `analyses/information_retention/run_analysis.py` | `analyses/information_retention/results` |
 | Independent confirmation gates | frozen confirmation manifests | `analyses/independent_confirmation/run_genetic_confirmation.py` | `analyses/independent_confirmation/results` |
 | Compositionality availability audit | `config/cell_systems_expansion.yaml` | `analyses/compositionality/run_analysis.py` | `analyses/compositionality/results` |
-| Three-dimensional transfer landscape | `config/pyvista_transfer_landscape.yaml` | `figures/supplement/S24/make_figure.py` | `figures/supplement/S24` |
-| Figures | `config/colors.yaml` | `figures` | panel-level `figure_data` directories |
-| Figure QC | figure specifications | `analyses/figure_qc/run_figure_qc.py` | `analyses/figure_qc/results` |

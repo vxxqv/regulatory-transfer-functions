@@ -1,0 +1,9 @@
+{
+  "path": "config/cell_systems_expansion.yaml",
+  "parent_sha256": "6cadafe6f6c1860066d6177aabad7dcf7eb9157d8df891c4da0797d6228f6100",
+  "parent_bytes": 14021,
+  "current_sha256": "54b3597f6c1deb2ed45c29499f439e6aa6243ac7c4b45a23f1ed01dcbd787a9a",
+  "current_bytes": 14001,
+  "analysis_values_changed": false,
+  "reason": "Removed a publication positioning label from the public software metadata after analysis completion."
+}

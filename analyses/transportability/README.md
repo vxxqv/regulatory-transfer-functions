@@ -1,6 +1,6 @@
 # Transportability frontier
 
-This block evaluates H7-H11 under the frozen Cell Systems expansion rules. CD4 is the development source. K562 and RPE1 were inspected before the expansion freeze, and no new untouched external outcome dataset is available.
+This block evaluates H7-H11 under the frozen extended validation rules. CD4 is the development source. K562 and RPE1 were inspected before the validation freeze, and no new untouched external outcome dataset is available.
 
 The stored external outputs do not retain target-level guide, replicate, or split-half reliability for K562 or RPE1. Reliability-corrected concordance is therefore not point identified. The analysis reports bounded partial-identification regions under the frozen 0.10 to 1.00 reliability limits and does not divide an observed correlation by a single estimated reliability.
 

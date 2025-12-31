@@ -306,6 +306,6 @@ positioning_gate:
   primary_results: [compositionality.primary_pass, transportability.primary_pass, information_retention.primary_pass]
   minimum_primary_results_passed: 2
   external_replication_required: true
-  if_one_passes: position_for_JMB_or_strong_bioinformatics_journal
+  if_one_passes: eligible_for_primary_emphasis
   if_none_pass: report_failed_expansion_and_stop_exploratory_branches
   mechanistic_enrichment_alone_is_sufficient: false

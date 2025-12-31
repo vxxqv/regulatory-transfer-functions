@@ -7,6 +7,17 @@ authors:
     given-names: Vivaan
     affiliation: Independent Researcher
 license: MIT
-version: 0.1.0
-date-released: 2026-09-12
+version: 1.0.0
+date-released: 2026-09-17
 repository-code: "https://github.com/vxxqv/regulatory-transfer-functions"
+keywords:
+  - CRISPR interference
+  - Perturb-seq
+  - CD4 T cells
+  - gene regulatory networks
+  - transcriptional propagation
+  - state dependent regulation
+  - single cell transcriptomics
+  - systems biology
+  - perturbation biology
+  - reproducible research

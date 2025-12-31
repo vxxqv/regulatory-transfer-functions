@@ -1,4 +1,4 @@
-"""Freeze the Cell Systems expansion before new external outcomes are inspected."""
+"""Freeze the extended validation plan before new external outcomes are inspected."""
 
 from __future__ import annotations
 

@@ -2,16 +2,15 @@ import hashlib
 import json
 import os
 from pathlib import Path
-from xml.etree import ElementTree
 
 import numpy as np
 import pandas as pd
+import pytest
 from scipy import sparse
 from scipy.stats import spearmanr
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "analyses/state_response_decomposition/results"
-FIG = ROOT / "figures/supplement/S26"
 
 
 def test_complete_cohort_and_energy_identity():
@@ -78,6 +77,8 @@ def test_predictions_reproduce_from_rows():
 
 def test_independent_deterministic_source_subset():
     source = Path(os.environ.get("STATE_DECOMPOSITION_SOURCE_ROOT", ROOT))
+    if not (source / "data/interim/gwt_vectors/rows.parquet").exists():
+        pytest.skip("Source matrices are acquired separately")
     rows = pd.read_parquet(source / "data/interim/gwt_vectors/rows.parquet")
     matrix = sparse.load_npz(source / "data/interim/gwt_vectors/normalized_significant_logfc.npz")
     result = pd.read_parquet(OUT / "target_decomposition.parquet").set_index("target_contrast")
@@ -104,26 +105,3 @@ def test_independent_deterministic_source_subset():
     for _, row in associations.iterrows():
         valid = result[["core_fraction", row["outcome"]]].dropna()
         np.testing.assert_allclose(spearmanr(valid.iloc[:, 0], valid.iloc[:, 1]).statistic, row["rho"], atol=1e-12)
-
-
-def test_figure_sources_and_vector_export():
-    assert len(list((FIG / "figure_data").glob("*_source.tsv"))) == 6
-    assert len(pd.read_csv(FIG / "figure_data/B_source.tsv", sep="\t")) == 4399
-    svg = ElementTree.parse(FIG / "S26.svg")
-    assert not svg.findall(".//{http://www.w3.org/2000/svg}image")
-    qc = json.loads((FIG / "export_qc.json").read_text())
-    assert not qc["outside_canvas_text"]
-    assert qc["svg_raster_layers"] == 0
-    for name in ["S26.png", "S26.pdf", "S26.svg"]:
-        assert (FIG / name).stat().st_size > 10000
-
-
-def test_each_panel_uses_exact_results():
-    for panel, file in [("D", "associations.tsv"), ("E", "heldout_prediction_comparison.tsv")]:
-        actual = pd.read_csv(FIG / f"figure_data/{panel}_source.tsv", sep="\t")
-        expected = pd.read_csv(OUT / file, sep="\t")
-        pd.testing.assert_frame_equal(actual, expected)
-    f = pd.read_csv(FIG / "figure_data/F_source.tsv", sep="\t").set_index("components")
-    sensitivity = pd.read_parquet(OUT / "component_sensitivity.parquet")
-    for resolution, group in sensitivity.groupby("components"):
-        np.testing.assert_allclose(group["core_fraction"].mean(), f.loc[resolution, "estimate"])

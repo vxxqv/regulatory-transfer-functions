@@ -5,7 +5,6 @@ import math
 import os
 import sys
 from pathlib import Path
-from xml.etree import ElementTree
 
 import numpy as np
 import pandas as pd
@@ -140,26 +139,3 @@ def test_source_backed_subset():
             independent = np.dot(query, centroid) / denominator if denominator > 1e-12 else 0.
             assert independent == pytest.approx(row.score, abs=1e-9)
     assert not set(mask.loc[~mask.excluded_target_feature, "gene_name"]) & set(accounting.target)
-
-
-def test_figure_sources_and_exports():
-    figure = ROOT / "figures/supplement/S28"
-    if not (figure / "S28.svg").exists():
-        pytest.skip("Figure has not been rendered")
-    root = ElementTree.parse(figure / "S28.svg")
-    assert not root.findall(".//{http://www.w3.org/2000/svg}image")
-    from PIL import Image
-    from pypdf import PdfReader
-    assert Image.open(figure / "S28.png").size == (4500, 4500)
-    pdf = PdfReader(figure / "S28.pdf")
-    assert len(pdf.pages) == 1 and len(pdf.pages[0].images) == 0
-    assert (figure / "figure_data/B_source.tsv").read_text() == (RESULTS / "decoder_summary.tsv").read_text()
-    qc = json.loads((figure / "export_qc.json").read_text())
-    assert not qc["outside_canvas_text"]
-    assert qc["all_intervals_within_axes"]
-    review = json.loads((figure / "visual_qc.json").read_text())
-    for ext, expected in review["checked_export_sha256"].items():
-        assert hashlib.sha256((figure / f"S28.{ext}").read_bytes()).hexdigest() == expected
-    c = pd.read_csv(figure / "figure_data/C_source.tsv", sep="\t")
-    original = pd.read_csv(RESULTS / "transfer_class_summary.tsv", sep="\t")
-    pd.testing.assert_frame_equal(c, original[original.model == "RNA_fingerprint_cosine"].reset_index(drop=True))

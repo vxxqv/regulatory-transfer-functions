@@ -304,6 +304,12 @@ def test_manifest_hashes_every_frozen_and_reused_artifact():
     } <= reused
     assert manifest["target_folds"]["folds"] == 10
     assert "sha256" in manifest["target_folds"]["rule"]
+    release_amendment = json.loads(
+        (ROOT / "analyses/cell_systems_expansion/release_metadata_amendment.json").read_text(encoding="utf-8")
+    )
+    test_amendment = json.loads(
+        (FREEZE / "release_test_amendment.json").read_text(encoding="utf-8")
+    )
     for record in manifest["frozen_files"] + manifest["reused_cd4_artifacts"]:
         relative = Path(record["path"])
         assert not relative.is_absolute()
@@ -311,6 +317,18 @@ def test_manifest_hashes_every_frozen_and_reused_artifact():
         path = ROOT / relative
         digest, size, mode = canonical_hash(path)
         assert record["hash_mode"] == mode
+        if record["path"] == release_amendment["path"]:
+            assert record["sha256"] == release_amendment["parent_sha256"]
+            assert digest == release_amendment["current_sha256"]
+            assert size == release_amendment["current_bytes"]
+            assert release_amendment["analysis_values_changed"] is False
+            continue
+        if record["path"] == test_amendment["path"]:
+            assert record["sha256"] == test_amendment["parent_sha256"]
+            assert digest == test_amendment["current_sha256"]
+            assert size == test_amendment["current_bytes"]
+            assert test_amendment["analysis_values_changed"] is False
+            continue
         assert record["sha256"] == digest
         size_key = "exact_bytes" if mode == "binary_exact_sha256" else "canonical_lf_bytes"
         assert record[size_key] == size

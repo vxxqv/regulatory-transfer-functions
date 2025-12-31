@@ -32,7 +32,7 @@ There are 3,827 zero full-response profiles, increasing to 5,275 after the commo
 
 Library-size direction, stress/proliferation templates, independent guide/donor response vectors, external signed profiles and independent regulator-family labels are not supplied. Response-derived module labels cannot become independent decoder outcomes. Aggregate guide, donor and K562 correlations do not resolve profile-level information, reliability or measurement error.
 
-Reliable equivalence classes are not estimated from three state summaries. The required 20/30/40-resolution, negative-gene, template-removal and 80% stability checks are not identifiable. H16-H17 retain a deferred input contract. H12-H17 are all unavailable, not negative tests and not positive conclusions. The Cell Systems primary information gate remains false because complete adjustment, guide/donor replication and independent external association are missing.
+Reliable equivalence classes are not estimated from three state summaries. The required 20/30/40-resolution, negative-gene, template-removal and 80% stability checks are not identifiable. H16-H17 retain a deferred input contract. H12-H17 are all unavailable, not negative tests and not positive conclusions. The primary information gate remains false because complete adjustment, guide/donor replication and independent external association are missing.
 
 ## Reproduce
 
