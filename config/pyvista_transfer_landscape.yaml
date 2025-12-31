@@ -115,13 +115,13 @@ render:
   camera_view_up: [0.0, 0.0, 1.0]
   parallel_projection: true
   parallel_scale: 0.84
-  population_point_size: 3.4
-  population_outline_size: 4.4
-  population_opacity_far: 0.21
-  population_opacity_near: 0.44
-  contour_opacity: 0.40
+  population_point_size: 4.2
+  population_outline_size: 5.0
+  population_opacity_far: 0.28
+  population_opacity_near: 0.58
+  contour_opacity: 0.56
   threshold_plane_opacity: 0.018
-  ellipsoid_opacity: 0.20
+  ellipsoid_opacity: 0.24
   trajectory_tube_radius: 0.0045
   arrow_scale: 0.055
   anti_aliasing: two_fold_render_supersampling

@@ -1,0 +1,12 @@
+{
+  "amendment_id": "S24-RENDER-001",
+  "path": "config/pyvista_transfer_landscape.yaml",
+  "parent_sha256": "f01c675b749de6ff20213b70f418cf3cc0f869581fefcf6ec03be93708abde69",
+  "current_sha256": "ae7017444b6b1da2eb963e9ead7158e279381f0bcf6cdb679a65bae789ae35b8",
+  "current_bytes": 3642,
+  "scope": "render-only contrast and legibility settings",
+  "analysis_values_changed": false,
+  "selection_rules_changed": false,
+  "camera_changed": false,
+  "reason": "Independent full-resolution review found the population, density contours, centroid ellipsoids, bounding axes, and final-size text too faint or small."
+}

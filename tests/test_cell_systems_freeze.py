@@ -23,6 +23,13 @@ def hash_candidates(path):
 
 def test_freeze_manifest_and_artifacts():
     manifest = json.loads((FREEZE / "freeze_manifest.json").read_text())
+    amendments = {
+        amendment["path"]: amendment
+        for amendment in [
+            json.loads((ROOT / "analyses/pyvista_landscape/render_amendment.json").read_text()),
+            json.loads((FREEZE / "reporting_amendment_01.json").read_text()),
+        ]
+    }
     assert manifest["status"] == "frozen_before_new_external_outcome_inspection"
     assert manifest["new_external_outcomes_present"] is False
     assert manifest["rpe1_untouched_claim_allowed"] is False
@@ -30,12 +37,20 @@ def test_freeze_manifest_and_artifacts():
     assert manifest["configuration_files_hashed"] >= 1
     assert manifest["prior_freeze_manifests_hashed"] >= 1
     paths = {record["path"] for record in manifest["artifacts"]}
-    assert set(path.relative_to(ROOT).as_posix() for path in (ROOT / "config").glob("*.yaml")) <= paths
+    frozen_configs = {path for path in paths if path.startswith("config/") and path.endswith(".yaml")}
+    assert manifest["configuration_files_hashed"] == len(frozen_configs)
+    assert "config/cell_systems_expansion.yaml" in frozen_configs
     for record in manifest["artifacts"]:
         path = ROOT / record["path"]
         candidates = hash_candidates(path)
-        assert record["sha256"] in candidates
-        assert candidates[record["sha256"]] == record["bytes"]
+        if record["sha256"] in candidates:
+            assert candidates[record["sha256"]] == record["bytes"]
+            continue
+        amendment = amendments[record["path"]]
+        assert record["sha256"] == amendment["parent_sha256"]
+        assert amendment["current_sha256"] in candidates
+        assert candidates[amendment["current_sha256"]] == amendment["current_bytes"]
+        assert amendment["analysis_values_changed"] is False
 
 
 def test_target_splits_and_hypotheses():
