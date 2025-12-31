@@ -1,7 +1,7 @@
 {
   "title": "Regulatory Transfer Functions",
   "upload_type": "software",
-  "description": "Code and frozen data products for estimating transcriptional propagation after CRISPR interference in primary human CD4 T cells, with state resolved rerouting, external validation, regulatory network benchmarking, molecular evidence, and genetic evidence gates.",
+  "description": "Code and frozen data products for estimating transcriptional propagation after CRISPR interference in primary human CD4 T cells, with held-state buffering, state resolved rerouting, external validation, regulatory network benchmarking, cluster-paired disease uncertainty, molecular evidence, and genetic evidence gates.",
   "creators": [
     {
       "name": "Patni, Vivaan",
@@ -9,7 +9,7 @@
     }
   ],
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "keywords": [
     "CRISPR interference",
     "Perturb-seq",
@@ -30,6 +30,9 @@
     "dose response",
     "regulatory networks",
     "gene perturbation",
-    "reproducible research"
+    "reproducible research",
+    "model uncertainty",
+    "matched permutation",
+    "falsification analysis"
   ]
 }
