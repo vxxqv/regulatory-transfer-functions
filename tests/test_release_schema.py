@@ -17,10 +17,18 @@ def test_verified_manifest_rows_have_checksums() -> None:
 
 def test_figure_specification_has_every_planned_panel() -> None:
     specification = pd.read_csv(ROOT / "docs" / "figure-specification.tsv", sep="\t")
-    expected = {1: 6, 2: 7, 3: 7, 4: 7, 5: 7, 6: 7, 7: 6}
+    expected = {1: 7, 2: 7, 3: 7, 4: 7, 5: 7, 6: 6, 7: 5}
     observed = specification.groupby("figure")["panel"].nunique().to_dict()
     assert observed == expected
     assert not specification.duplicated(["figure", "panel"]).any()
+
+
+def test_manuscript_uses_final_figure_architecture() -> None:
+    manuscript = (ROOT / "manuscript" / "manuscript.md").read_text(encoding="utf-8")
+    for number in range(1, 8):
+        assert f"### Figure {number}." in manuscript
+    assert "Corresponding author details to be supplied" not in manuscript
+    assert "A permanent archive DOI will be added" not in manuscript
 
 
 def test_seed_and_state_dictionary_are_frozen() -> None:

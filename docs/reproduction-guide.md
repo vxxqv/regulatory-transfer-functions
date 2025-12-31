@@ -12,7 +12,7 @@ Create the declared Python environment from `environments/environment.yml` or in
 
 1. Verify the source and freeze manifests.
 2. Run the focused tests in `tests`.
-3. Run each main plotting script in `figures/fig01` through `figures/fig06`.
+3. Run each main plotting script in `figures/fig01` through `figures/fig07`.
 4. Run the supplementary plotting scripts in `figures/supplement`.
 5. Run `analyses/figure_qc/run_figure_qc.py`.
 6. Run `manuscript/build_supplement.py`.
@@ -25,7 +25,7 @@ The workflow file records the dependency order. A full rebuild requires the publ
 
 ## Expected outputs
 
-- Six main figures in PNG, PDF, and SVG.
+- Seven main figures in PNG, PDF, and SVG.
 - Supplementary Figures S1-S14, S16-S21, and S23 in the same formats.
 - Panel-level source tables for every figure.
 - Supplementary Tables S1-S8.
