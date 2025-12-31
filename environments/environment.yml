@@ -28,7 +28,7 @@ dependencies:
       - pyliftover==0.4.1
       - pooch==1.9.0
       - pyvista==0.49.0
-      - pyvista-validation==0.2.3
+      - pyvista-validation==0.2.2
       - pypdf==6.10.0
       - scooby==0.11.0
       - umap-learn==0.5.9.post2
