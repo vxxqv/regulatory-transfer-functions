@@ -6,13 +6,13 @@ The study separates confirmatory analyses from exploratory extensions. Every fig
 
 ## Status
 
-The frozen analysis, external challenge, robustness analyses, figures, and manuscript source are complete. Final submission files are built only after repository-wide verification. A Zenodo release is not created until the author explicitly authorizes it.
+The frozen analysis, external challenge, robustness analyses, figures, and source tables are complete and under final audit. Manuscript drafting and submission files remain author-led and are not release artifacts. A Zenodo release is not created until the author explicitly authorizes it.
 
 ## Structure
 
 - `config`: frozen analysis settings and statistical families
 - `data_manifest`: source inventory, checksums, and access decisions
-- `workflow`: reproducible workflow definitions
+- `workflow`: core ingestion and primary-analysis workflow definitions
 - `src`: ingestion, quality control, models, statistics, and visualization
 - `analyses`: primary, sensitivity, negative-control, and replication analyses
 - `figures`: main and supplementary figure programs and figure data

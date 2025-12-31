@@ -1,31 +1,34 @@
-source_table	locus	gene	trait	lead_rsid	credible_set_variants	cd4_atac_overlap_variants	nearest_cd4_atac_peak_bp	cd4_pchic_contact_variants	nearest_cd4_pchic_contact_bp	passed_gates	total_gates	evidence_tier	mediation_status	mediation_claim	primary_stop_reason	gate	status	value	evidence	analysis	reason
-locus_grades	gata3	GATA3	asthma	rs3824660	9.0	0.0	90.0	0.0	108305.0	3.0	7.0	tier_4_unsupported_or_contradictory	not_tested_assumptions_failed	False	not_all_evidence_gates_passed						
-locus_grades	stat3	STAT3	inflammatory bowel disease	rs3736161	40.0	0.0	149.0	0.0		4.0	7.0	tier_3_partial	not_tested_assumptions_failed	False	not_all_evidence_gates_passed						
-locus_grades	ptpn22	PTPN22	rheumatoid arthritis	rs2476601	1.0	0.0	22220.0	0.0	66475.0	3.0	7.0	tier_4_unsupported_or_contradictory	not_tested_assumptions_failed	False	not_all_evidence_gates_passed						
-evidence_gates	gata3	GATA3	asthma													statistical_fine_mapping	passed	0.4496459637453133	Open Targets credible set		
-evidence_gates	gata3	GATA3	asthma													gwas_cis_eqtl_colocalization	failed	0.0	Open Targets target-specific maximum H4		
-evidence_gates	gata3	GATA3	asthma													credible_set_cd4_chromatin_overlap	failed	0.0	ENCODE ENCSR841LHT IDR peaks		
-evidence_gates	gata3	GATA3	asthma													enhancer_to_gene	failed	0.8451496958732605	One rE2G feature and no credible-variant CD4 promoter contact do not meet the gate		
-evidence_gates	gata3	GATA3	asthma													perturbational_cis_effect	passed	-16.196718732294897	Frozen CD4 on-target z-score		
-evidence_gates	gata3	GATA3	asthma													signed_downstream_program	passed	60.0	Frozen signed CD4 program		
-evidence_gates	gata3	GATA3	asthma													trans_eqtl_direction_concordance	unresolved		eQTLGen lead-variant trans associations		
-evidence_gates	stat3	STAT3	inflammatory bowel disease													statistical_fine_mapping	passed	0.0415528255932921	Open Targets credible set		
-evidence_gates	stat3	STAT3	inflammatory bowel disease													gwas_cis_eqtl_colocalization	passed	0.964428186416626	Open Targets target-specific maximum H4		
-evidence_gates	stat3	STAT3	inflammatory bowel disease													credible_set_cd4_chromatin_overlap	failed	0.0	ENCODE ENCSR841LHT IDR peaks		
-evidence_gates	stat3	STAT3	inflammatory bowel disease													enhancer_to_gene	failed	0.0280619487166404	One rE2G feature and no credible-variant CD4 promoter contact do not meet the gate		
-evidence_gates	stat3	STAT3	inflammatory bowel disease													perturbational_cis_effect	passed	-14.569750579234713	Frozen CD4 on-target z-score		
-evidence_gates	stat3	STAT3	inflammatory bowel disease													signed_downstream_program	passed	60.0	Frozen signed CD4 program		
-evidence_gates	stat3	STAT3	inflammatory bowel disease													trans_eqtl_direction_concordance	unresolved		eQTLGen lead-variant trans associations		
-evidence_gates	ptpn22	PTPN22	rheumatoid arthritis													statistical_fine_mapping	passed	0.9996845345178752	Open Targets credible set		
-evidence_gates	ptpn22	PTPN22	rheumatoid arthritis													gwas_cis_eqtl_colocalization	failed	0.0	Open Targets target-specific maximum H4		
-evidence_gates	ptpn22	PTPN22	rheumatoid arthritis													credible_set_cd4_chromatin_overlap	failed	0.0	ENCODE ENCSR841LHT IDR peaks		
-evidence_gates	ptpn22	PTPN22	rheumatoid arthritis													enhancer_to_gene	failed	0.0	One rE2G feature and no credible-variant CD4 promoter contact do not meet the gate		
-evidence_gates	ptpn22	PTPN22	rheumatoid arthritis													perturbational_cis_effect	passed	-24.03907429053709	Frozen CD4 on-target z-score		
-evidence_gates	ptpn22	PTPN22	rheumatoid arthritis													signed_downstream_program	passed	1.0	Frozen signed CD4 program		
-evidence_gates	ptpn22	PTPN22	rheumatoid arthritis													trans_eqtl_direction_concordance	unresolved		eQTLGen lead-variant trans associations		
-unavailable_tests	gata3																not_tested			two_step_mediation	colocalization or minimum instrument assumptions failed
-unavailable_tests	stat3																not_tested			two_step_mediation	colocalization or minimum instrument assumptions failed
-unavailable_tests	ptpn22																not_tested			two_step_mediation	colocalization or minimum instrument assumptions failed
-unavailable_tests	gata3																unresolved			matched_negative_locus	MAF and local gene-density fields unavailable in the frozen source bundle
-unavailable_tests	stat3																unresolved			matched_negative_locus	MAF and local gene-density fields unavailable in the frozen source bundle
-unavailable_tests	ptpn22																unresolved			matched_negative_locus	MAF and local gene-density fields unavailable in the frozen source bundle
+source_table	locus	gene	trait	lead_rsid	credible_set_variants	cd4_atac_overlap_variants	cd4_atac_overlap_posterior	nearest_cd4_atac_peak_bp	cd4_h3k27ac_overlap_variants	cd4_h3k27ac_overlap_posterior	nearest_cd4_h3k27ac_peak_bp	cd4_chromatin_overlap_variants	cd4_chromatin_overlap_posterior	cd4_pchic_contact_variants	nearest_cd4_pchic_contact_bp	passed_gates	total_gates	evidence_tier	mediation_status	mediation_claim	primary_stop_reason	gate	status	value	evidence	analysis	reason
+locus_grades	gata3	GATA3	asthma	rs3824660	9.0	0.0	0.0	89.0	8.0	0.9363167361630598	0.0	8.0	0.93631673616306	0.0	108305.0	4.0	7.0	tier_3_partial	not_tested_assumptions_failed	False	gwas_cis_eqtl_colocalization;enhancer_to_gene;trans_eqtl_direction_concordance						
+locus_grades	stat3	STAT3	inflammatory bowel disease	rs3736161	40.0	0.0	0.0	148.0	17.0	0.3992716509382767	0.0	17.0	0.3992716509382766	0.0		4.0	7.0	tier_3_partial	not_tested_assumptions_failed	False	gwas_cis_eqtl_colocalization;enhancer_to_gene;trans_eqtl_direction_concordance						
+locus_grades	ptpn22	PTPN22	rheumatoid arthritis	rs2476601	1.0	0.0	0.0	22219.0	0.0	0.0	2087.0	0.0	0.0	0.0	66475.0	3.0	7.0	tier_4_unsupported_or_contradictory	not_tested_assumptions_failed	False	gwas_cis_eqtl_colocalization;credible_set_cd4_chromatin_overlap;enhancer_to_gene;trans_eqtl_direction_concordance						
+evidence_gates	gata3	GATA3	asthma																			statistical_fine_mapping	passed	0.4496459637453133	Open Targets 95% credible set		
+evidence_gates	gata3	GATA3	asthma																			gwas_cis_eqtl_colocalization	failed	0.0	Open Targets target-specific H4 plus required regional-coverage gate		
+evidence_gates	gata3	GATA3	asthma																			credible_set_cd4_chromatin_overlap	passed	8.0	95% credible set: ATAC 0 variants; H3K27ac 8 variants; combined posterior mass 0.936317		
+evidence_gates	gata3	GATA3	asthma																			enhancer_to_gene	failed	0.0	0 of 2 required orthogonal links; no enhancer perturbation assay		
+evidence_gates	gata3	GATA3	asthma																			perturbational_cis_effect	passed	-16.196718732294897	frozen CD4 on-target z-score with source significance required in every state		
+evidence_gates	gata3	GATA3	asthma																			signed_downstream_program	passed	60.0	nonzero effects in the frozen signed CD4 program		
+evidence_gates	gata3	GATA3	asthma																			trans_eqtl_direction_concordance	unresolved		no lead-variant trans associations overlapped the frozen signed program		
+evidence_gates	stat3	STAT3	inflammatory bowel disease																			statistical_fine_mapping	passed	0.0415528255932921	Open Targets 95% credible set		
+evidence_gates	stat3	STAT3	inflammatory bowel disease																			gwas_cis_eqtl_colocalization	unresolved	0.964428186416626	Open Targets target-specific H4 plus required regional-coverage gate		
+evidence_gates	stat3	STAT3	inflammatory bowel disease																			credible_set_cd4_chromatin_overlap	passed	17.0	95% credible set: ATAC 0 variants; H3K27ac 17 variants; combined posterior mass 0.399272		
+evidence_gates	stat3	STAT3	inflammatory bowel disease																			enhancer_to_gene	failed	0.0	0 of 2 required orthogonal links; no enhancer perturbation assay		
+evidence_gates	stat3	STAT3	inflammatory bowel disease																			perturbational_cis_effect	passed	-14.569750579234713	frozen CD4 on-target z-score with source significance required in every state		
+evidence_gates	stat3	STAT3	inflammatory bowel disease																			signed_downstream_program	passed	60.0	nonzero effects in the frozen signed CD4 program		
+evidence_gates	stat3	STAT3	inflammatory bowel disease																			trans_eqtl_direction_concordance	unresolved		no lead-variant trans associations overlapped the frozen signed program		
+evidence_gates	ptpn22	PTPN22	rheumatoid arthritis																			statistical_fine_mapping	passed	0.9996845345178752	Open Targets 95% credible set		
+evidence_gates	ptpn22	PTPN22	rheumatoid arthritis																			gwas_cis_eqtl_colocalization	failed	0.0	Open Targets target-specific H4 plus required regional-coverage gate		
+evidence_gates	ptpn22	PTPN22	rheumatoid arthritis																			credible_set_cd4_chromatin_overlap	failed	0.0	95% credible set: ATAC 0 variants; H3K27ac 0 variants; combined posterior mass 0.000000		
+evidence_gates	ptpn22	PTPN22	rheumatoid arthritis																			enhancer_to_gene	failed	0.0	0 of 2 required orthogonal links; no enhancer perturbation assay		
+evidence_gates	ptpn22	PTPN22	rheumatoid arthritis																			perturbational_cis_effect	passed	-24.03907429053709	frozen CD4 on-target z-score with source significance required in every state		
+evidence_gates	ptpn22	PTPN22	rheumatoid arthritis																			signed_downstream_program	passed	1.0	nonzero effects in the frozen signed CD4 program		
+evidence_gates	ptpn22	PTPN22	rheumatoid arthritis																			trans_eqtl_direction_concordance	unresolved		no lead-variant trans associations overlapped the frozen signed program		
+unavailable_tests	gata3																						unavailable			colocalization_regional_coverage	the frozen Open Targets feature export did not report regional variant coverage
+unavailable_tests	gata3																						not_tested			two_step_mediation	colocalization or minimum instrument assumptions failed
+unavailable_tests	gata3																						unresolved			matched_negative_locus	MAF and local gene-density fields were unavailable in the frozen source bundle
+unavailable_tests	stat3																						unavailable			colocalization_regional_coverage	the frozen Open Targets feature export did not report regional variant coverage
+unavailable_tests	stat3																						not_tested			two_step_mediation	colocalization or minimum instrument assumptions failed
+unavailable_tests	stat3																						unresolved			matched_negative_locus	MAF and local gene-density fields were unavailable in the frozen source bundle
+unavailable_tests	ptpn22																						unavailable			colocalization_regional_coverage	the frozen Open Targets feature export did not report regional variant coverage
+unavailable_tests	ptpn22																						not_tested			two_step_mediation	colocalization or minimum instrument assumptions failed
+unavailable_tests	ptpn22																						unresolved			matched_negative_locus	MAF and local gene-density fields were unavailable in the frozen source bundle

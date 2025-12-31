@@ -8,7 +8,10 @@ dependencies:
   - matplotlib=3.10.8
   - networkx=3.5
   - numpy=2.5.3
+  - openpyxl=3.1.5
   - pandas=2.3.3
+  - pillow=11.3.0
+  - psutil=7.0.0
   - pyarrow=22.0.0
   - pip
   - pyyaml=6.0.3
@@ -18,7 +21,9 @@ dependencies:
   - statsmodels=0.14.6
   - snakemake-minimal=9.13.7
   - pytest=8.4.2
+  - requests=2.32.5
   - pip:
+      - phate==1.0.11
       - platformdirs==4.4.0
       - pyliftover==0.4.1
       - pooch==1.9.0
@@ -26,4 +31,5 @@ dependencies:
       - pyvista-validation==0.2.3
       - pypdf==6.10.0
       - scooby==0.11.0
+      - umap-learn==0.5.9.post2
       - vtk==9.7.0

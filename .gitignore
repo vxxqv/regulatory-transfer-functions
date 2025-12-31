@@ -19,6 +19,9 @@ manuscript/validate_submission.py
 .codex-finalizer/
 .codex/
 tmp/
+analyses/independent_confirmation/results/.*.lock
+analyses/independent_confirmation/results/*.stdout.log
+analyses/independent_confirmation/results/*.stderr.log
 
 # Python
 __pycache__/

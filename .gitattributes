@@ -1,0 +1,26 @@
+* text=auto
+
+*.py text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.tsv text eol=lf whitespace=-trailing-space
+*.csv text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+*.cff text eol=lf
+*.svg text eol=lf whitespace=-trailing-space
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.pdf binary
+*.pptx binary
+*.docx binary
+*.parquet binary
+*.feather binary
+*.npz binary
+*.h5 binary
+*.h5ad binary
+*.zip binary

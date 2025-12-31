@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import unittest
+import subprocess
 from pathlib import Path
 
 
@@ -10,7 +11,9 @@ class TextStyleTests(unittest.TestCase):
         extensions = {".md", ".py", ".yaml", ".yml", ".tsv", ".txt", ".cff"}
         offenders = []
         excluded = {".git", "work", "data", "outputs"}
-        for path in root.rglob("*"):
+        tracked = subprocess.check_output(["git", "ls-files", "-z"], cwd=root).decode("utf-8").split("\0")
+        for relative_name in filter(None, tracked):
+            path = root / relative_name
             relative = path.relative_to(root)
             if any(part in excluded for part in relative.parts):
                 continue

@@ -12,21 +12,22 @@ Create the declared Python environment from `environments/environment.yml` or in
 
 1. Verify the source and freeze manifests.
 2. Run the focused tests in `tests`.
-3. Run each main plotting script in `figures/fig01` through `figures/fig07`.
+3. Run each main plotting script in `figures/fig01` through `figures/fig08`.
 4. Run the supplementary plotting scripts in `figures/supplement`.
 5. Run `analyses/figure_qc/run_figure_qc.py`.
-6. Run `manuscript/build_supplement.py`.
+6. Run `manuscript/build_supplement.py --tables-only`.
 
 This path reads existing frozen results and does not redownload data or refit models.
 
 ## Full rebuild
 
-The workflow file records the dependency order. A full rebuild requires the public source datasets listed in `data_manifest/sources.tsv`, substantially more time and memory, and access consistent with each source's terms. Confirmatory freeze manifests must be checked before processing the untouched RPE1 outcomes.
+The Snakefile records the core ingestion and primary-analysis dependency order. Extended analyses are run through the scripts listed in `docs/methods-code-crosswalk.md`; they are not all represented as Snakefile rules. A full rebuild requires the public source datasets listed in `data_manifest/sources.tsv`, substantially more time and memory, and access consistent with each source's terms. The historical external-benchmark freeze must be checked before reproducing the original RPE1 falsification analysis. RPE1 is now previously inspected and cannot serve as an untouched confirmation for later extensions.
 
 ## Expected outputs
 
-- Seven main figures in PNG, PDF, and SVG.
-- Supplementary Figures S1-S14, S16-S21, and S23 in the same formats.
+- Eight main figures in PNG, PDF, and SVG.
+- Supplementary Figures S1-S14, S16-S21, S23-S26, S28, and S29 in the same formats.
+- Machine-readable replacement evidence for omitted Figures S15, S22, and S27.
 - Panel-level source tables for every figure.
 - Supplementary Tables S1-S8.
 - Automated figure QC and software-test reports.

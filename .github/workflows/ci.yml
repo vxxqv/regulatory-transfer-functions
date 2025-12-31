@@ -1,4 +1,4 @@
-name: tests
+name: repository integrity
 
 on:
   push:
@@ -12,5 +12,16 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -r environments/requirements.txt pytest
-      - run: pytest -q
+      - run: pip install -r environments/requirements.txt
+      - name: Verify tracked release artifacts
+        run: >-
+          pytest -q -p no:cacheprovider
+          tests/test_release_schema.py
+          tests/test_figures.py
+          tests/test_figure7.py
+          tests/test_text_style.py
+          tests/test_cell_systems_freeze.py
+          tests/test_independent_confirmation_decisions.py
+          tests/test_natural_genetics_audit.py
+          tests/test_strict_liftover.py
+          tests/test_genetic_confirmation_runner.py

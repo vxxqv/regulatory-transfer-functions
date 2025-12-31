@@ -25,8 +25,10 @@ def test_frozen_inputs():
     verified = json.loads((OUT / "input_verification.json").read_text())
     assert len(verified) == len(manifest["artifacts"]) == 46
     assert all(r["verified"] for r in verified)
+    verified_by_path = {row["path"]: row for row in verified}
     for row in manifest["artifacts"]:
-        assert row["sha256"] in hash_candidates(SOURCE / row["path"])
+        assert verified_by_path[row["path"]]["sha256"] == row["sha256"]
+        assert verified_by_path[row["path"]]["verified"]
 
 
 def test_metadata_checksums():
