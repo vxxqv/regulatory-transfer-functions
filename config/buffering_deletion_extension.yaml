@@ -1,0 +1,20 @@
+version: 1
+seed: 20260921
+input_sha256: 4327ea47df56278e92a60c8e4a26c41f5ff2d8f4e4786108e23e8998d0f97b3f
+hypothesis: Targets selected from the lower residual tail in two states remain buffered in the held-out third state.
+eligible_denominator: targets with finite residuals in resting, 8-hour, and 48-hour states
+tail_fraction: 0.10
+estimator: mean held-out residual after lower-tail selection on the other two states
+matching: held-out target permutation within training response-degree and expression quintiles
+uncertainty: 2000 target-bootstrap replicates with threshold reselection
+null: 2000 matched target permutations
+multiplicity: benjamini_hochberg_across_pooled_and_three_held-out-state tests
+minimum_power: at least 100 selected targets overall and 30 per held-out state
+deletions:
+  leave_one_state: held-out-state estimates
+  leave_one_target: exact change in the pooled selected-target mean
+  leave_one_guide: unavailable from aggregate target-state rows
+  leave_one_donor: unavailable from aggregate target-state rows
+  leave_one_locus: not applicable to the buffering estimand
+decision_rule: Buffering is supported when the upper 95 percent confidence bound is below zero and the lower-tail matched-permutation q is below 0.05.
+stopping_rule: Do not refit the transfer model or select another tail cutoff.

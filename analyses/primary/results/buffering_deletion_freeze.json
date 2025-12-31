@@ -1,0 +1,9 @@
+{
+  "bootstrap_replicates": 2000,
+  "config": "config/buffering_deletion_extension.yaml",
+  "config_sha256": "b46ef3e27c08424feb3c19fe7df74405c85fc408a7ff8242508c2fae6fd30cf1",
+  "input": "analyses/primary/results/transfer_phenotypes.parquet",
+  "input_sha256": "4327ea47df56278e92a60c8e4a26c41f5ff2d8f4e4786108e23e8998d0f97b3f",
+  "permutation_replicates": 2000,
+  "seed": 20260921
+}
