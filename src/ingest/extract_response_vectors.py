@@ -55,10 +55,20 @@ def main() -> None:
         gene_table["gene_name"] = gene_name.to_numpy()
     gene_table.reset_index(drop=True).to_parquet(args.output / "genes.parquet", index=False)
 
-    cis_columns = var_names.get_indexer(selected["target_contrast"].astype(str))
+    target_ids = selected["target_contrast"].astype(str)
+    cis_columns = var_names.get_indexer(target_ids)
+    # One source annotation can use a newer Ensembl identifier than the feature
+    # axis while its row key retains the assayed identifier. Resolve this case
+    # deterministically and retain the mapping in the row metadata.
+    row_feature_ids = selected["index"].astype(str).str.extract(r"^(ENSG\d+)", expand=False)
+    fallback_columns = var_names.get_indexer(row_feature_ids)
+    use_fallback = (cis_columns < 0) & (fallback_columns >= 0)
+    cis_columns[use_fallback] = fallback_columns[use_fallback]
     if (cis_columns < 0).any():
         missing = selected.loc[cis_columns < 0, "target_contrast"].drop_duplicates().head(10).tolist()
         raise ValueError(f"Perturbed Ensembl IDs missing from measured genes: {missing}")
+    selected["cis_feature_id"] = np.where(use_fallback, row_feature_ids, target_ids)
+    selected["cis_feature_resolution"] = np.where(use_fallback, "row_key_fallback", "target_contrast")
 
     normalized_blocks: list[sparse.csr_matrix] = []
     metrics: list[pd.DataFrame] = []
@@ -130,6 +140,8 @@ def main() -> None:
         "matrix_nonzero": int(response.nnz),
         "matrix_density": float(response.nnz / (response.shape[0] * response.shape[1])),
         "significant_count_match_fraction": float(rows["significant_count_matches_source"].mean()),
+        "cis_row_key_fallback_rows": int(use_fallback.sum()),
+        "cis_row_key_fallback_targets": int(selected.loc[use_fallback, "target_contrast"].nunique()),
         "fdr": float(args.fdr),
     }
     (args.output / "audit.json").write_text(
