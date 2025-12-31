@@ -1,0 +1,4 @@
+locus,gene,trait,catalog_study,study_locus_id,fine_mapping_method,fine_mapping_confidence,credible_variants,lead_variant,lead_rsid,lead_posterior_probability,l2g_target,l2g_score
+gata3,GATA3,asthma,GCST90652529,08084ba2089ac9106beddbae944e4e56,SuSiE-inf,SuSiE fine-mapped credible set with out-of-sample LD,9,10_8062759_C_T,rs3824660,0.44964596374531335,GATA3,0.8656331300735474
+stat3,STAT3,inflammatory bowel disease,FINNGEN_R12_K11_IBD_STRICT,374aec5062abfe605b8a0d984c4efd1e,SuSie,SuSiE fine-mapped credible set with in-sample LD,40,17_42345817_C_G,rs3736161,0.0415528255932921,STAT3,0.7224166393280029
+ptpn22,PTPN22,rheumatoid arthritis,GCST000679,b00610bcfd2485c4decb85fac85fbcdd,SuSiE-inf,SuSiE fine-mapped credible set with out-of-sample LD,1,1_113834946_A_G,rs2476601,0.9996845345178751,PTPN22,0.9240956902503967

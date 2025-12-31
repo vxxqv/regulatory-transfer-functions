@@ -1,0 +1,94 @@
+locus,gene,trait,feature,value,shap_value
+gata3,GATA3,asthma,eQtlColocClppMaximum,0.0,-0.0003376654058229178
+gata3,GATA3,asthma,pQtlColocClppMaximum,0.0,-0.0005497466772794724
+gata3,GATA3,asthma,sQtlColocClppMaximum,0.0,-0.0009137896122410893
+gata3,GATA3,asthma,eQtlColocH4Maximum,0.0,-0.0007379736634902656
+gata3,GATA3,asthma,pQtlColocH4Maximum,0.0,-0.00042300665518268943
+gata3,GATA3,asthma,sQtlColocH4Maximum,0.0,-0.000664958031848073
+gata3,GATA3,asthma,eQtlColocClppMaximumNeighbourhood,0.0,-0.0011010498274117708
+gata3,GATA3,asthma,pQtlColocClppMaximumNeighbourhood,0.0,-0.00020668156503234059
+gata3,GATA3,asthma,sQtlColocClppMaximumNeighbourhood,0.0,-0.0004264226008672267
+gata3,GATA3,asthma,eQtlColocH4MaximumNeighbourhood,0.0,-0.0010451233247295022
+gata3,GATA3,asthma,pQtlColocH4MaximumNeighbourhood,0.0,-4.920313131151488e-06
+gata3,GATA3,asthma,sQtlColocH4MaximumNeighbourhood,0.0,-0.0004006292438134551
+gata3,GATA3,asthma,distanceSentinelFootprint,1.0,0.019084597006440163
+gata3,GATA3,asthma,distanceSentinelFootprintNeighbourhood,1.0,0.15868023037910461
+gata3,GATA3,asthma,distanceFootprintMean,0.9965748190879822,0.010176537558436394
+gata3,GATA3,asthma,distanceFootprintMeanNeighbourhood,1.0,0.026538485661149025
+gata3,GATA3,asthma,distanceTssMean,0.9953097701072693,0.023290695622563362
+gata3,GATA3,asthma,distanceTssMeanNeighbourhood,1.0,0.0657254308462143
+gata3,GATA3,asthma,distanceSentinelTss,0.9987598657608032,-0.008582665584981441
+gata3,GATA3,asthma,distanceSentinelTssNeighbourhood,1.0,0.11420182138681412
+gata3,GATA3,asthma,vepMaximum,0.3199999928474426,0.010916182771325111
+gata3,GATA3,asthma,vepMaximumNeighbourhood,1.0,0.08739019930362701
+gata3,GATA3,asthma,vepMean,0.03399284556508064,-6.718282384099439e-05
+gata3,GATA3,asthma,vepMeanNeighbourhood,1.0,0.06242845579981804
+gata3,GATA3,asthma,e2gMean,0.8451496958732605,0.015624147839844227
+gata3,GATA3,asthma,e2gMeanNeighbourhood,1.0,0.07305338233709335
+gata3,GATA3,asthma,geneCount500kb,15.0,0.025577539578080177
+gata3,GATA3,asthma,proteinGeneCount500kb,2.0,0.11519118398427963
+gata3,GATA3,asthma,credibleSetConfidence,0.75,-0.0005988922202959657
+gata3,GATA3,asthma,transPQtlColocH4Maximum,0.0,-0.000707450439222157
+gata3,GATA3,asthma,transPQtlColocH4MaximumNeighbourhood,0.0,-0.003109460463747382
+stat3,STAT3,inflammatory bowel disease,eQtlColocClppMaximum,0.023941930383443832,0.014108543284237385
+stat3,STAT3,inflammatory bowel disease,pQtlColocClppMaximum,0.020367171615362167,0.08712073415517807
+stat3,STAT3,inflammatory bowel disease,sQtlColocClppMaximum,0.006808687001466751,0.005677560809999704
+stat3,STAT3,inflammatory bowel disease,eQtlColocH4Maximum,0.964428186416626,0.013964170590043068
+stat3,STAT3,inflammatory bowel disease,pQtlColocH4Maximum,0.958283007144928,0.04144715517759323
+stat3,STAT3,inflammatory bowel disease,sQtlColocH4Maximum,0.8832253217697144,0.0028394809924066067
+stat3,STAT3,inflammatory bowel disease,eQtlColocClppMaximumNeighbourhood,1.0,0.019405096769332886
+stat3,STAT3,inflammatory bowel disease,pQtlColocClppMaximumNeighbourhood,1.0,0.06553354114294052
+stat3,STAT3,inflammatory bowel disease,sQtlColocClppMaximumNeighbourhood,1.0,0.0076046292670071125
+stat3,STAT3,inflammatory bowel disease,eQtlColocH4MaximumNeighbourhood,1.0,0.024621525779366493
+stat3,STAT3,inflammatory bowel disease,pQtlColocH4MaximumNeighbourhood,1.0,0.016189271584153175
+stat3,STAT3,inflammatory bowel disease,sQtlColocH4MaximumNeighbourhood,1.0,0.017774861305952072
+stat3,STAT3,inflammatory bowel disease,distanceSentinelFootprint,1.0,-0.002326453570276499
+stat3,STAT3,inflammatory bowel disease,distanceSentinelFootprintNeighbourhood,1.0,0.06972865760326385
+stat3,STAT3,inflammatory bowel disease,distanceFootprintMean,0.9964677095413208,0.00993757788091898
+stat3,STAT3,inflammatory bowel disease,distanceFootprintMeanNeighbourhood,1.0,0.019495204091072083
+stat3,STAT3,inflammatory bowel disease,distanceTssMean,0.9918006658554077,0.006442813668400049
+stat3,STAT3,inflammatory bowel disease,distanceTssMeanNeighbourhood,1.0,0.050520338118076324
+stat3,STAT3,inflammatory bowel disease,distanceSentinelTss,0.993209719657898,-0.0067752087488770485
+stat3,STAT3,inflammatory bowel disease,distanceSentinelTssNeighbourhood,1.0,0.13869397342205048
+stat3,STAT3,inflammatory bowel disease,vepMaximum,0.3199999928474426,0.005500236060470343
+stat3,STAT3,inflammatory bowel disease,vepMaximumNeighbourhood,1.0,0.040383826941251755
+stat3,STAT3,inflammatory bowel disease,vepMean,0.007590575609356165,-0.013090498745441437
+stat3,STAT3,inflammatory bowel disease,vepMeanNeighbourhood,1.0,0.012077313847839832
+stat3,STAT3,inflammatory bowel disease,e2gMean,0.028061948716640472,0.00886524561792612
+stat3,STAT3,inflammatory bowel disease,e2gMeanNeighbourhood,1.0,0.06821128726005554
+stat3,STAT3,inflammatory bowel disease,geneCount500kb,39.0,-0.005410738755017519
+stat3,STAT3,inflammatory bowel disease,proteinGeneCount500kb,19.0,-0.03352590277791023
+stat3,STAT3,inflammatory bowel disease,credibleSetConfidence,1.0,0.0009852210059762
+stat3,STAT3,inflammatory bowel disease,transPQtlColocH4Maximum,0.0,-0.0004906411631964147
+stat3,STAT3,inflammatory bowel disease,transPQtlColocH4MaximumNeighbourhood,0.0,-0.0014267346123233438
+ptpn22,PTPN22,rheumatoid arthritis,eQtlColocClppMaximum,0.0,-0.000676951662171632
+ptpn22,PTPN22,rheumatoid arthritis,pQtlColocClppMaximum,0.0,-0.0021366444416344166
+ptpn22,PTPN22,rheumatoid arthritis,sQtlColocClppMaximum,0.0,-0.0003521061735227704
+ptpn22,PTPN22,rheumatoid arthritis,eQtlColocH4Maximum,0.0,-0.0006576039013452828
+ptpn22,PTPN22,rheumatoid arthritis,pQtlColocH4Maximum,0.0,-0.0008857724023982882
+ptpn22,PTPN22,rheumatoid arthritis,sQtlColocH4Maximum,0.0,-0.00040396832628175616
+ptpn22,PTPN22,rheumatoid arthritis,eQtlColocClppMaximumNeighbourhood,0.0,-0.0012390456395223737
+ptpn22,PTPN22,rheumatoid arthritis,pQtlColocClppMaximumNeighbourhood,0.0,-0.0010583086404949427
+ptpn22,PTPN22,rheumatoid arthritis,sQtlColocClppMaximumNeighbourhood,0.0,-0.0005579190328717232
+ptpn22,PTPN22,rheumatoid arthritis,eQtlColocH4MaximumNeighbourhood,0.0,-0.0017499722307547927
+ptpn22,PTPN22,rheumatoid arthritis,pQtlColocH4MaximumNeighbourhood,0.0,-0.0004329232615418732
+ptpn22,PTPN22,rheumatoid arthritis,sQtlColocH4MaximumNeighbourhood,0.0,-0.0011313857976347208
+ptpn22,PTPN22,rheumatoid arthritis,distanceSentinelFootprint,1.0,0.03647641837596893
+ptpn22,PTPN22,rheumatoid arthritis,distanceSentinelFootprintNeighbourhood,1.0,0.16671937704086304
+ptpn22,PTPN22,rheumatoid arthritis,distanceFootprintMean,0.9999759793281555,0.030190370976924896
+ptpn22,PTPN22,rheumatoid arthritis,distanceFootprintMeanNeighbourhood,1.0,0.027889767661690712
+ptpn22,PTPN22,rheumatoid arthritis,distanceTssMean,0.9941557049751282,0.007338911760598421
+ptpn22,PTPN22,rheumatoid arthritis,distanceTssMeanNeighbourhood,0.9976755380630493,0.05783833935856819
+ptpn22,PTPN22,rheumatoid arthritis,distanceSentinelTss,0.9941797256469727,-0.011098875664174557
+ptpn22,PTPN22,rheumatoid arthritis,distanceSentinelTssNeighbourhood,0.9976755976676941,0.11737029999494553
+ptpn22,PTPN22,rheumatoid arthritis,vepMaximum,0.6800000071525574,0.1401592493057251
+ptpn22,PTPN22,rheumatoid arthritis,vepMaximumNeighbourhood,1.0,0.13791528344154358
+ptpn22,PTPN22,rheumatoid arthritis,vepMean,0.6797854900360107,0.05224611982703209
+ptpn22,PTPN22,rheumatoid arthritis,vepMeanNeighbourhood,1.0,0.08323047310113907
+ptpn22,PTPN22,rheumatoid arthritis,e2gMean,0.0,-0.0009528553346171975
+ptpn22,PTPN22,rheumatoid arthritis,e2gMeanNeighbourhood,0.0,-0.0015079656150192022
+ptpn22,PTPN22,rheumatoid arthritis,geneCount500kb,14.0,0.03274278715252876
+ptpn22,PTPN22,rheumatoid arthritis,proteinGeneCount500kb,8.0,0.0063756974413990974
+ptpn22,PTPN22,rheumatoid arthritis,credibleSetConfidence,0.75,-0.00029836571775376797
+ptpn22,PTPN22,rheumatoid arthritis,transPQtlColocH4Maximum,0.0,-0.00044184664147906005
+ptpn22,PTPN22,rheumatoid arthritis,transPQtlColocH4MaximumNeighbourhood,0.0,-0.0009485858026891947

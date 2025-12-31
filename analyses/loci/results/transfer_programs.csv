@@ -1,0 +1,122 @@
+locus,gene,trait,condition,transfer_class,transfer_residual,rank,downstream_gene,normalized_signed_effect
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,1,IRX3,-0.26140675
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,2,FOXP3,-0.2247829
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,3,NRP2,-0.21487242
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,4,CSF2RB,-0.20604949
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,5,WHRN,-0.20237313
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,6,ASB9,-0.18893975
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,7,EPHB1,0.18691331
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,8,FAM124B,-0.18688592
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,9,TOX,-0.18463086
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,10,C5AR2,-0.17646351
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,11,ZBTB16,-0.17430604
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,12,RGS6,0.16680945
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,13,GTF2IRD1,-0.16673878
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,14,S100P,-0.1630133
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,15,FRY,-0.15649968
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,16,ERN1,-0.15169129
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,17,IL9R,-0.1453447
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,18,HHLA2,0.14420365
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,19,PDE7B,-0.14319319
+gata3,GATA3,asthma,Rest,amplified,5.388826896219104,20,SLC26A4,0.14153846
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,1,PTGS2,-0.2760103
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,2,IL5,-0.25533256
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,3,IL10,-0.24491821
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,4,IL9R,-0.2431852
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,5,SLC12A8,-0.2408054
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,6,CCL1,-0.223198
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,7,EPGN,-0.20910096
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,8,IL3,-0.20646086
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,9,MMP25,-0.19802776
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,10,CHDH,-0.19504613
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,11,SOX4,-0.17793126
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,12,CSF2RB,-0.17744076
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,13,MAN1C1,-0.17679736
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,14,HOXB6,-0.17580971
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,15,CXCL10,-0.17524531
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,16,IL13,-0.16939987
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,17,TNFSF11,-0.16825245
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,18,IL17RB,-0.16824344
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,19,CACNA1D,-0.16806717
+gata3,GATA3,asthma,Stim48hr,amplified,5.653343695548101,20,CDO1,0.16670032
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,1,IL5,-0.25000405
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,2,IL13,-0.23905052
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,3,FOXP3,-0.22291015
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,4,CCR8,-0.21462627
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,5,SOX4,-0.17520152
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,6,IL10,-0.16527648
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,7,MB,-0.15649691
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,8,CKAP4,-0.14156531
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,9,HRH1,-0.12401366
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,10,EDARADD,-0.11941349
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,11,HNF1B,0.11702745
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,12,IL9R,-0.116759986
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,13,ADCY1,-0.11475406
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,14,EPHB1,0.11246651
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,15,GNA15,-0.10949887
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,16,CCR4,-0.10605031
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,17,CYBRD1,-0.10576035
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,18,S100P,-0.10498459
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,19,ZDHHC23,-0.104714826
+gata3,GATA3,asthma,Stim8hr,amplified,5.568606025822971,20,WHRN,-0.103439175
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,1,GNLY,-0.37731948
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,2,CD9,-0.3218129
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,3,ACE,-0.29006532
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,4,PCSK6,0.28487855
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,5,CLU,-0.2712499
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,6,SETBP1,-0.27056876
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,7,HMOX1,-0.24502398
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,8,NRP2,0.22446352
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,9,SCN9A,-0.22267678
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,10,ZBED2,-0.22017777
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,11,LGALSL,-0.21664666
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,12,EGFL6,0.21447115
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,13,TSPAN2,-0.21427947
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,14,CCL4,-0.20873883
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,15,REG4,0.20753407
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,16,PI16,-0.20212893
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,17,ZNRF1,-0.1967507
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,18,GZMB,-0.19321705
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,19,SIRPG,-0.19194229
+stat3,STAT3,inflammatory bowel disease,Rest,amplified,3.971842277484108,20,FOXP3,0.18825462
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,1,GNLY,-0.33464396
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,2,IL2,-0.28010815
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,3,IL10,-0.27500793
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,4,IL26,-0.26845223
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,5,FLT1,-0.25866577
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,6,RCAN2,-0.24415258
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,7,IL22,-0.2400034
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,8,HLX,-0.23832956
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,9,GNAI1,-0.23661993
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,10,DHRS2,-0.22776484
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,11,TNIP3,-0.2253058
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,12,XCL2,0.21909824
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,13,LRRC32,0.21869883
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,14,CXCL8,-0.21852802
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,15,NT5E,-0.21786009
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,16,FUT7,-0.21380003
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,17,GZMB,-0.21050641
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,18,LGMN,-0.20834346
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,19,NRP1,-0.2079322
+stat3,STAT3,inflammatory bowel disease,Stim48hr,amplified,4.226885198747423,20,PALLD,-0.19719228
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,1,IL22,-0.44551447
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,2,CXCL8,-0.36605194
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,3,IL10,-0.29338583
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,4,GNLY,-0.24429801
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,5,IL26,-0.228755
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,6,EMP1,-0.21078075
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,7,LGMN,-0.20782258
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,8,LRRC32,0.20662513
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,9,ZBTB16,0.18699767
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,10,SLC8A1,-0.18191949
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,11,TNIP3,-0.17954414
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,12,CLU,-0.16952643
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,13,TRGC1,0.16651861
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,14,FLT1,-0.1624646
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,15,GNAI1,-0.16241853
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,16,IL5,-0.1595285
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,17,ENPP2,-0.1537059
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,18,COL6A3,-0.15272275
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,19,STRIP2,-0.14523178
+stat3,STAT3,inflammatory bowel disease,Stim8hr,amplified,4.142877643313533,20,SHISA2,-0.13907126
+ptpn22,PTPN22,rheumatoid arthritis,Stim48hr,intermediate,-0.9469425822227352,1,AP4B1,-0.014674318

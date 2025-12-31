@@ -1,0 +1,12 @@
+{
+  "credible_variants": 50,
+  "genes_match_l2g": true,
+  "l2g_features": 93,
+  "loci": 3,
+  "program_edges": 121,
+  "states": [
+    "Rest",
+    "Stim48hr",
+    "Stim8hr"
+  ]
+}
