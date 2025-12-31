@@ -1,0 +1,117 @@
+benchmark:
+  name: external_benchmark_and_falsification_challenge
+  seed: 20260912
+  folds: 10
+  fold_assignment: sha256_target_modulo
+  bootstrap_replicates: 2000
+  permutation_replicates: 1000
+  network_rewirings: 1000
+  multiplicity_method: benjamini_hochberg
+  alpha: 0.05
+  minimally_relevant_delta_r2: 0.01
+
+development_replication:
+  dataset: Replogle_K562_CRISPRi_Perturb-seq
+  status: outcome_inspected_before_challenge_freeze
+  role: external_replication_only
+
+falsification_holdout:
+  dataset: Replogle_RPE1_CRISPRi_Perturb-seq
+  source: scPertEval_processed_release
+  assay: single_cell_RNA_sequencing
+  perturbation: CRISPRi
+  control_label: control
+  minimum_cells_per_target: 30
+  minimum_control_cells: 500
+  minimum_detected_genes: 200
+  differential_expression:
+    method: welch_t_test_on_log_normalized_expression
+    false_discovery_rate: 0.05
+    minimum_absolute_mean_difference: 0.10
+  primary_endpoint: log1p_differentially_expressed_genes
+  secondary_endpoints:
+    - response_l2_norm
+    - cross_system_response_cosine
+
+models:
+  - global_mean
+  - simple_covariates
+  - ridge
+  - sparse_nonlinear
+  - standard_network_propagation
+  - graph_readout
+  - frozen_cd4_transfer
+
+frozen_cd4_feature_blocks:
+  proximal:
+    - cis_magnitude
+    - log1p_target_baseMean
+    - log1p_n_cells_target
+    - n_guides
+  scalar_transfer:
+    - transfer_residual
+    - transfer_z
+    - transfer_class
+  context:
+    - residual_range
+    - residual_sd
+    - cluster_entropy
+    - cluster_switch
+  vector:
+    - module_scores_1_to_30
+  network:
+    - gamma_l2_debiased
+    - effective_response_dimension
+    - sign_balance
+    - dominant_module_fraction
+
+ablations:
+  - without_proximal
+  - without_scalar_transfer
+  - without_context
+  - without_vector
+  - without_network
+
+uncertainty:
+  bootstrap_unit: target_gene
+  coverage_levels:
+    - 0.50
+    - 0.80
+    - 0.95
+
+nulls:
+  matched_permutation_strata:
+    - target_expression_quintile
+    - external_response_degree_quintile
+  degree_preserving_rewiring: directed_edge_swap
+
+reporting:
+  retain_every_eligible_target: true
+  report_exclusions_with_reason: true
+  report_all_models_and_ablations: true
+  report_negative_and_underpowered: true
+  decision_labels:
+    - passed
+    - failed
+    - unresolved
+
+grn_benchmark:
+  release: BEELINE_v4
+  doi: 10.5281/zenodo.19009603
+  datasets:
+    - hESC
+    - hHep
+    - mDC
+    - mESC
+    - mHSC-E
+  reference: cell_type_matched_ChIP_seq
+  gold_standard_role: scoring_only
+  metrics:
+    - auprc
+    - auroc
+    - early_precision_ratio
+  methods:
+    - absolute_pearson
+    - pseudotime_lagged_correlation
+    - ridge_transition
+    - finite_horizon_transfer

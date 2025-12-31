@@ -1,0 +1,163 @@
+multiverse:
+  status: post_primary_frozen_sensitivity_analysis
+  freeze_date: 2026-09-12
+  seeds:
+    - 20260912
+    - 20260929
+    - 20261013
+    - 20261031
+    - 20261119
+  bootstrap_replicates: 2000
+  permutation_replicates: 1000
+  alpha: 0.05
+  correction: benjamini_hochberg_within_result_family
+
+preprocessing:
+  minimum_cells:
+    - 100
+    - 200
+    - 300
+  minimum_guides:
+    - 1
+    - 2
+    - 3
+  on_target_requirement:
+    - significant
+    - significant_and_absolute_z_at_least_2
+  exclude_neighboring_knockdown:
+    - true
+  exclude_distal_offtarget:
+    - true
+
+transfer_definitions:
+  - distal_gene_count_residual
+  - debiased_response_l2_gain
+  - significant_response_l1_gain
+
+model_families:
+  - ridge
+  - huber_regression
+  - sparse_nonlinear
+  - graph_readout
+
+covariate_sets:
+  minimal:
+    - cis_magnitude
+    - culture_condition
+  observability:
+    - cis_magnitude
+    - log1p_target_baseMean
+    - log1p_n_cells_target
+    - n_guides
+    - culture_condition
+  reproducibility:
+    - cis_magnitude
+    - log1p_target_baseMean
+    - log1p_n_cells_target
+    - n_guides
+    - guide_correlation_signif
+    - donor_correlation_hits_mean
+    - culture_condition
+  no_state:
+    - cis_magnitude
+    - log1p_target_baseMean
+    - log1p_n_cells_target
+    - n_guides
+
+tail_cutoffs:
+  - 0.05
+  - 0.10
+  - 0.15
+  - 0.20
+
+module_resolutions:
+  - 15
+  - 30
+  - 50
+
+central_results:
+  transfer_gain:
+    expected_direction: positive
+    dimensions:
+      - preprocessing
+      - transfer_definition
+      - model_family
+      - covariate_set
+      - cross_validation_seed
+  buffering:
+    expected_direction: negative
+    dimensions:
+      - preprocessing
+      - transfer_definition
+      - model_family
+      - covariate_set
+      - tail_cutoff
+      - cross_validation_seed
+  rerouting:
+    expected_direction: positive
+    dimensions:
+      - preprocessing
+      - module_resolution
+      - cross_validation_seed
+  context_switching:
+    expected_direction: positive
+    dimensions:
+      - preprocessing
+      - transfer_definition
+      - module_resolution
+      - cross_validation_seed
+  cross_system_conservation:
+    expected_direction: positive
+    dimensions:
+      - preprocessing
+      - transfer_definition
+      - tail_cutoff
+  natural_genetic_concordance:
+    expected_direction: positive
+    dimensions:
+      - preprocessing
+      - transfer_definition
+      - tail_cutoff
+  disease_convergence:
+    expected_direction: positive
+    dimensions:
+      - preprocessing
+      - transfer_definition
+      - covariate_set
+      - tail_cutoff
+      - module_resolution
+
+deletion_analyses:
+  - leave_one_donor
+  - leave_one_guide
+  - leave_one_state
+  - leave_one_target
+  - leave_one_locus
+
+negative_control_exposures:
+  - matched_permuted_transfer_labels
+  - sign_shuffled_transfer_scores
+  - degree_preserving_network_rewiring
+  - size_matched_random_modules
+
+negative_control_outcomes:
+  - detectability_matched_random_response_sets
+  - chromosome_shifted_trans_pairs
+  - locus_size_stratified_phenotype_permutation
+
+robustness_labels:
+  broad:
+    minimum_expected_direction_fraction: 0.80
+    minimum_q_supported_fraction: 0.50
+  mixed:
+    minimum_expected_direction_fraction: 0.60
+  narrow:
+    maximum_expected_direction_fraction_exclusive: 0.60
+  unresolved_on_missing_units_or_power: true
+
+reporting:
+  include_all_valid_specifications: true
+  include_failed_specifications: true
+  include_underpowered_specifications: true
+  identify_single_setting_dependence: true
+  complete_curve: true

@@ -1,0 +1,52 @@
+{
+  "artifacts": [
+    {
+      "bytes": 3523,
+      "path": "config/multiverse.yaml",
+      "sha256": "d5224dfa051d1a7f43bed15616fa7f533e281aee733bf5abba302c5b0c6688fc"
+    },
+    {
+      "bytes": 10552,
+      "path": "docs/protocol.md",
+      "sha256": "7c73b17ef4ec1ef378393fa123acea6d1712afaf0a5a9621b9f06309147e231f"
+    },
+    {
+      "bytes": 1991787,
+      "path": "analyses/primary/results/transfer_phenotypes.parquet",
+      "sha256": "4327ea47df56278e92a60c8e4a26c41f5ff2d8f4e4786108e23e8998d0f97b3f"
+    },
+    {
+      "bytes": 250772,
+      "path": "analyses/primary/results/context_switching.parquet",
+      "sha256": "8431f325c278e9cedf6c456ad917aa12fdddc0b492d03290f5a274fa28877a7a"
+    },
+    {
+      "bytes": 374850,
+      "path": "analyses/vectors/results/context_rerouting_pairs.parquet",
+      "sha256": "b3845ac971b20991a0be5635d00d56c2593b67c746a8c9c517adc9c16e58c745"
+    },
+    {
+      "bytes": 2883127,
+      "path": "analyses/vectors/results/network_gain_rows.parquet",
+      "sha256": "d31cb32ec00b4474b8736d146d2709eeec378cf0575b0fd5338b48503ae1a608"
+    },
+    {
+      "bytes": 507884,
+      "path": "analyses/replication/results/k562_replication_rows.parquet",
+      "sha256": "d6ea5c21f8a331a23b13e437c96566dbb3d93e285aaf0c04a03cbe83b6f817d6"
+    },
+    {
+      "bytes": 55109,
+      "path": "analyses/natural_genetics/results/directional_pairs.parquet",
+      "sha256": "051522e495325176813f31d6be6774c5d6bcb24daae30b8df89bd58f96e0e430"
+    },
+    {
+      "bytes": 109655,
+      "path": "analyses/disease/results/disease_model_rows.parquet",
+      "sha256": "355b9e174af1966238500a910ff848c624e52bd8348f5ce966247e1edae21c34"
+    }
+  ],
+  "freeze_date": "2026-09-12",
+  "primary_outcomes_existed_before_freeze": true,
+  "status": "post_primary_grid_frozen_before_multiverse_execution"
+}
