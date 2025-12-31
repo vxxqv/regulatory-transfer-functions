@@ -12,6 +12,7 @@ import pandas as pd
 import yaml
 from scipy import sparse
 from scipy.stats import spearmanr
+from sklearn.decomposition import TruncatedSVD
 
 
 def parse_args() -> argparse.Namespace:
@@ -46,23 +47,43 @@ def main() -> None:
     if matrix.shape[0] != len(rows):
         raise ValueError("Response matrix and row metadata disagree")
 
-    scores, reconstruction_cosine, folds_table = cross_fitted_modules(
+    oof_scores, reconstruction_cosine, folds_table = cross_fitted_modules(
         matrix,
         rows["target_contrast"].astype(str).to_numpy(),
         n_components=args.components,
         folds=folds,
         seed=seed,
     )
+    reference_model = TruncatedSVD(n_components=args.components, random_state=seed)
+    scores = reference_model.fit_transform(matrix)
     energies = module_energy(scores)
     dominant = np.argmax(energies, axis=1)
     row_metrics = rows.copy()
     row_metrics["response_norm"] = np.sqrt(np.asarray(matrix.multiply(matrix).sum(axis=1))).ravel()
     row_metrics["module_energy_captured"] = np.square(scores).sum(axis=1)
+    row_metrics["oof_module_energy_captured"] = np.square(oof_scores).sum(axis=1)
     row_metrics["dominant_module"] = dominant + 1
     row_metrics["dominant_module_fraction"] = energies[np.arange(len(rows)), dominant]
     row_metrics["oof_reconstruction_cosine"] = reconstruction_cosine
     row_metrics.to_parquet(args.output / "network_gain_rows.parquet", index=False)
     folds_table.to_csv(args.output / "module_folds.csv", index=False)
+
+    genes = pd.read_parquet(args.vectors / "genes.parquet")
+    loading_records = []
+    for component, loadings in enumerate(reference_model.components_, start=1):
+        loading_records.append(
+            pd.DataFrame(
+                {
+                    "feature_id": genes["feature_id"].astype(str),
+                    "gene_name": genes["gene_name"].astype(str),
+                    "module": component,
+                    "loading": loadings,
+                }
+            )
+        )
+    pd.concat(loading_records, ignore_index=True).to_parquet(
+        args.output / "reference_module_loadings.parquet", index=False
+    )
 
     tensor_records: list[pd.DataFrame] = []
     for component in range(args.components):
@@ -110,6 +131,7 @@ def main() -> None:
         "genes": int(matrix.shape[1]),
         "nonzero_response_coefficients": int(matrix.nnz),
         "components": int(args.components),
+        "reference_explained_variance": float(reference_model.explained_variance_ratio_.sum()),
         "median_oof_reconstruction_cosine": float(np.median(reconstruction_cosine)),
         "state_pairs": int(len(pairs)),
         "evaluable_state_pairs": int(pair_evaluable.sum()),
