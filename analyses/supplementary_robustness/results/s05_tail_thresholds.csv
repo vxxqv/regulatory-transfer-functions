@@ -1,0 +1,13 @@
+transfer_definition,result_family,tail_cutoff,median_estimate,supported_fraction,specifications
+debiased_response_l2_gain,buffering,0.05,-0.11214495475123676,1.0,960
+debiased_response_l2_gain,buffering,0.1,-0.09794837203410683,1.0,960
+debiased_response_l2_gain,buffering,0.15,-0.08561556700104847,1.0,960
+debiased_response_l2_gain,buffering,0.2,-0.07696136582565827,1.0,960
+distal_gene_count_residual,buffering,0.05,-0.9452916002249916,0.875,960
+distal_gene_count_residual,buffering,0.1,-0.8537993903796337,0.8760416666666667,960
+distal_gene_count_residual,buffering,0.15,-0.7738877429542979,0.875,960
+distal_gene_count_residual,buffering,0.2,-0.6976063996323968,0.875,960
+significant_response_l1_gain,buffering,0.05,-0.2797034169766299,0.625,960
+significant_response_l1_gain,buffering,0.1,-0.2749796416203182,0.625,960
+significant_response_l1_gain,buffering,0.15,-0.247677616016851,0.625,960
+significant_response_l1_gain,buffering,0.2,-0.23455993477964204,0.625,960

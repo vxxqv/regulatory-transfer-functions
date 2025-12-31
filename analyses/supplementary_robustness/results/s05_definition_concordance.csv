@@ -1,0 +1,4 @@
+transfer_definition,debiased_response_l2_gain,distal_gene_count_residual,significant_response_l1_gain
+debiased_response_l2_gain,1.0,0.4628037612982804,0.359665343626853
+distal_gene_count_residual,0.4628037612982804,1.0,0.9340646196693241
+significant_response_l1_gain,0.359665343626853,0.9340646196693241,1.0

@@ -1,0 +1,13 @@
+{
+  "module_graph_nodes": 30,
+  "network_depths": 6,
+  "rerouting_specifications": 180,
+  "scalar_specifications": 17280,
+  "scalar_unavailable": 1440,
+  "states": [
+    "Rest",
+    "Stim8hr",
+    "Stim48hr"
+  ],
+  "validation_specifications": 1008
+}
