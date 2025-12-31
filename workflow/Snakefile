@@ -3,6 +3,7 @@ configfile: "config/analysis.yaml"
 rule all:
     input:
         "analyses/primary/results/primary_results.json",
+        "analyses/qc/results/qc_summary.json",
         "data/interim/gwt_vectors/audit.json",
         "analyses/vectors/results/vector_results.json",
         "data/interim/eqtlgen/audit.json",
@@ -17,6 +18,14 @@ rule primary_summary:
         "analyses/primary/results/primary_results.json"
     shell:
         "python analyses/primary/run_primary.py --source-root {input.source}"
+
+rule primary_qc:
+    input:
+        source="work/upstream/GWT_perturbseq_analysis_2025"
+    output:
+        "analyses/qc/results/qc_summary.json"
+    shell:
+        "python analyses/qc/run_qc.py --source-root {input.source}"
 
 rule response_vectors:
     input:

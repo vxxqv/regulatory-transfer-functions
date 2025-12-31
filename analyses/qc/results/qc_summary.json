@@ -1,0 +1,13 @@
+{
+  "conditions": 3,
+  "designed_targets": 12654,
+  "donors": 4,
+  "guides": 26504,
+  "lane_low_quality_cell_sum": 210432,
+  "lanes": 284,
+  "primary_target_state_tests": 15807,
+  "primary_targets": 6105,
+  "raw_lane_cell_sum": 33610471,
+  "samples": 12,
+  "source_target_state_tests": 33983
+}
