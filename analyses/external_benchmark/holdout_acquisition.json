@@ -1,0 +1,17 @@
+{
+  "dataset": "Replogle RPE1 CRISPRi Perturb-seq",
+  "downloaded_after_freeze": true,
+  "file": "work/replogle22rpe1_processed_complete.h5ad",
+  "bytes": 1877364555,
+  "md5": "4b65533db6c9f29ef90bc8b7683d65de",
+  "sha256": "25cb5bad6cd7abd834baa191ffa4b0b414dbfe3f5c6b927999380d2d4bc3ae3d",
+  "server_generation": "1781495761846876",
+  "source_url": "https://storage.googleapis.com/scperteval/processed/replogle22rpe1_processed_complete.h5ad",
+  "schema_at_acquisition": {
+    "cells": 240774,
+    "genes": 8749,
+    "matrix_encoding": "csr_matrix",
+    "perturbation_field": "perturbation"
+  },
+  "server_digest_verified": true
+}

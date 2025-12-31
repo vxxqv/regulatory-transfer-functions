@@ -1,0 +1,4 @@
+hypothesis,primary_metric,estimate,ci_low,ci_high,minimally_relevant_effect,decision
+Frozen CD4 transfer features improve external RPE1 prediction beyond simple covariates,delta_r2,0.0412158315667886,-0.1489567653085087,0.1672858753245246,0.01,unresolved
+Frozen CD4 feature identity exceeds matched target-label permutations,delta_r2_over_simple_covariates,0.0352320913883896,-0.0266532672014141,0.1311007446050561,0.0,unresolved
+Observed CD4 module-neighbor topology exceeds degree-preserving rewiring,graph_r2,0.025590543239384,-0.1415526862214668,-0.0458583421779462,0.0,passed

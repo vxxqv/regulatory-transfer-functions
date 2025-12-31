@@ -1,0 +1,12 @@
+{
+  "cells": 240774,
+  "control_cells": 11485,
+  "effect_nonzero_entries": 143485,
+  "eligible_shared_targets": 490,
+  "excluded_targets": 1526,
+  "fdr": 0.05,
+  "genes": 8749,
+  "minimum_absolute_mean_difference": 0.1,
+  "minimum_cells": 30,
+  "perturbation_targets_total": 2016
+}
