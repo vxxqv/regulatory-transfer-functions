@@ -603,6 +603,17 @@ class GeneticAcquisitionTest(unittest.TestCase):
         self.assertEqual(manifest["completion_state"], "incomplete")
         self.assertEqual(len(manifest["entries"]), 19)
 
+    def test_manifest_only_preserves_verified_complete_manifest_bytes(self):
+        self.prepare_roster()
+        self.assertEqual(self.fixture.acquirer().run(), acquisition.EXIT_OK)
+        manifest_path = self.fixture.data_root / "checksum_manifest.json"
+        sidecar_path = manifest_path.with_name(manifest_path.name + ".sha256")
+        payload_before = manifest_path.read_bytes()
+        sidecar_before = sidecar_path.read_bytes()
+        self.assertEqual(self.fixture.acquirer().run(manifest_only=True), acquisition.EXIT_OK)
+        self.assertEqual(manifest_path.read_bytes(), payload_before)
+        self.assertEqual(sidecar_path.read_bytes(), sidecar_before)
+
     def test_manifest_only_requires_a_complete_local_roster(self):
         self.assertEqual(self.fixture.acquirer().run(manifest_only=True), acquisition.EXIT_INCOMPLETE)
         self.assertEqual(MockHandler.heads + MockHandler.gets, 0)

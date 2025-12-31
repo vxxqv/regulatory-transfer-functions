@@ -1,0 +1,39 @@
+{
+  "audit_utc": "2026-09-16T04:50:00Z",
+  "capacity": {
+    "free_bytes": 139746119680,
+    "headroom_bytes": 48235543552,
+    "required_bytes": 91510576128,
+    "status": "passed"
+  },
+  "manifest": {
+    "completion_state": "complete",
+    "entries": 82,
+    "physical_file_count": 82,
+    "total_bytes": 56935886245
+  },
+  "provider_checksums": {
+    "available_and_verified": 65,
+    "mismatches": 0,
+    "unavailable": 17
+  },
+  "residual_partial_files": 0,
+  "sha256": {
+    "acquisition_roster.json": "a76890edf41ce59bb0e855109a64485cdabeb5f9a03b83364b0af59b0ca0a042",
+    "checksum_manifest.json": "0c73963ebcf8cdb462197207f535c118af90a1abc83492572cf0862ffadf42cb"
+  },
+  "status": "passed",
+  "tests": {
+    "manifest_only_exit_code": 0,
+    "unit_tests_passed": 55,
+    "unit_tests_total": 55
+  },
+  "verification": {
+    "file_size_mismatches": 0,
+    "local_sha256_mismatches": 0,
+    "order_path_url_metadata_mismatches": 0,
+    "program_freeze_hash": "54579caf9c69001aa2f70edf352f59b8eb1235f537231a698c580afbc0224ef8",
+    "protocol_hash": "f2cd334f94dd156e6b9aabbaf8351343836f1a478634ac9a589c472315681318",
+    "resource_table_hash": "b77069177245f5ca6fc87a66f835da7a07b9fa91bfa642a6da82ca2e8ce742d4"
+  }
+}

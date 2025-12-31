@@ -1,0 +1,10 @@
+opening_order	resource_id	role	status	reason	substitution
+8	E01	eqtl_rest_sumstats	dependency_stopped	header verified; no schema-eligible GWAS remained for colocalization	none
+9	E02	eqtl_rest_finemap	dependency_stopped	no schema-eligible GWAS remained for colocalization	none
+10	E03	eqtl_stim16_sumstats	dependency_stopped	no schema-eligible GWAS remained for colocalization	none
+11	E04	eqtl_stim16_finemap	dependency_stopped	no schema-eligible GWAS remained for colocalization	none
+12	E05	eqtl_stim40_sumstats	dependency_stopped	no schema-eligible GWAS remained for colocalization	none
+13	E06	eqtl_stim40_finemap	dependency_stopped	no schema-eligible GWAS remained for colocalization	none
+14	C01	atac_state_annotation	availability_stopped	state-compatible active chromatin only; no factor occupancy and no independently eligible signed edge denominator	none
+15	C02	h3k27ac_state_matrix	availability_stopped	verified GRCh38 Rest and Stim48hr active-chromatin matrix, but histone acetylation is not factor occupancy; 4 of 8 perturbed factors overlap frozen CD4 targets and 0 overlap frozen signed edges	none
+16	C03	h3k27ac_state_peaks	availability_stopped	peak archive cannot supply the missing factor occupancy or exact 8-hour measurement required by H25 and H26	none

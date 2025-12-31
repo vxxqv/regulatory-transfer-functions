@@ -1,0 +1,8 @@
+{
+  "resource_id": "G02",
+  "source_sha256": "536e6141d935a1b85f4c962b71374f79801f593809f5746990a4fab2759a337d",
+  "status": "failed",
+  "stop_reasons": [
+    "imputation_quality_field_missing"
+  ]
+}

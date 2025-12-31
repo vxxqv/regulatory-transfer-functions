@@ -1,0 +1,25 @@
+{
+  "completed_utc": "2026-09-16T08:50:30Z",
+  "eligible_diseases": 0,
+  "manifest_sha256": "0c73963ebcf8cdb462197207f535c118af90a1abc83492572cf0862ffadf42cb",
+  "opened_diseases": 7,
+  "resources": [
+    {"resource_id": "N05", "role": "negative_disease_low_neff", "status": "failed_schema_gate", "stop_reason": "dense_coverage_failed", "audit_sha256": "ee994f068498adc242be3b72e04a06de903cff705945089d9ddfc9bc00ec19e4"},
+    {"resource_id": "N02", "role": "negative_disease_high_neff", "status": "failed_schema_gate", "stop_reason": "dense_coverage_failed", "audit_sha256": "6c087cbd67c06d997de9b65ec95a0670f59066dd45e4c82e865715a2e83b05ff"},
+    {"resource_id": "G01", "role": "positive_asthma", "status": "failed_schema_gate", "stop_reason": "dense_coverage_failed", "audit_sha256": "226485c39052ec2380585f1076aa13c6308579d863072763ffb7afc0f506c6e6"},
+    {"resource_id": "G02", "role": "positive_hashimoto", "status": "failed_schema_gate", "stop_reason": "imputation_quality_field_missing", "audit_sha256": "8657e14867f18a07b7b399230e03d69c756e3156a0a1cbcaf837bcc36b5b2cfa"},
+    {"resource_id": "G03", "role": "positive_multiple_sclerosis", "status": "failed_schema_gate", "stop_reason": "dense_coverage_failed", "audit_sha256": "8341f1742c86c4462569cd20e44c40cb293443569ccbe7fcb1328055a9fa9785"},
+    {"resource_id": "G04", "role": "positive_type_1_diabetes", "status": "failed_schema_gate", "stop_reason": "dense_coverage_failed", "audit_sha256": "187d512bcbe4a8a1838906c214b25ecf1179d3c86cda0759c43914feec3e69f2"},
+    {"resource_id": "G05", "role": "positive_ulcerative_colitis", "status": "failed_schema_gate", "stop_reason": "dense_coverage_failed", "audit_sha256": "dcc7729edb7f1af0be8e66c733b4c6e072e99e947d02327893ba1925cf068779"}
+  ],
+  "status": "complete_with_no_eligible_disease",
+  "substitution_allowed": false,
+  "unavailable_downstream_stages": [
+    "competitive_gene_set_enrichment",
+    "partitioned_heritability",
+    "locus_fine_mapping",
+    "GWAS_cis_eQTL_colocalization",
+    "causal_instrument_gates",
+    "mediation"
+  ]
+}

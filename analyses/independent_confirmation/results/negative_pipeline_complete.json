@@ -1,0 +1,38 @@
+{
+  "completed_utc": "2026-09-16T06:48:22Z",
+  "manifest_sha256": "0c73963ebcf8cdb462197207f535c118af90a1abc83492572cf0862ffadf42cb",
+  "resources": [
+    "N05",
+    "N02"
+  ],
+  "results": [
+    {
+      "downstream_stages": "not_eligible",
+      "resource_id": "N05",
+      "schema_audit_sha256": "ee994f068498adc242be3b72e04a06de903cff705945089d9ddfc9bc00ec19e4",
+      "status": "failed_schema_gate",
+      "stop_reasons": [
+        "dense_coverage_failed"
+      ],
+      "supporting_qc": [
+        "all 19709318 standard errors were nonfinite",
+        "zero harmonized rows"
+      ]
+    },
+    {
+      "downstream_stages": "not_eligible",
+      "resource_id": "N02",
+      "schema_audit_sha256": "6c087cbd67c06d997de9b65ec95a0670f59066dd45e4c82e865715a2e83b05ff",
+      "status": "failed_schema_gate",
+      "stop_reasons": [
+        "dense_coverage_failed"
+      ],
+      "supporting_qc": [
+        "all 19708436 standard errors were nonfinite",
+        "zero harmonized rows"
+      ]
+    }
+  ],
+  "status": "complete",
+  "substitution_allowed": false
+}

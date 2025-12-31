@@ -1,0 +1,32 @@
+{
+  "accessed_by": "primary analysis task",
+  "classification": "nonfatal schema-metadata opening-order deviation",
+  "command": "python -c <header-only schema probe; file list and exposed headers are recorded in protocol_deviation_DEV-001_headers.tsv>",
+  "data_rows_read": 0,
+  "deviation_id": "DEV-001",
+  "disposition": [
+    "stop all further positive-file access",
+    "complete N05 then N02 pipelines in the frozen order",
+    "resume positive files only after both negative pipelines",
+    "retain confirmatory specifications without substitution or tuning"
+  ],
+  "files": [
+    {"resource_id": "N05", "relative_path": "017_N05/GCST90478363.tsv.gz", "sha256": "e9127b728cd537b13b70c491b53f4e687b401c65ce4b832ecf1c06a7d9bba503", "logical_line_reads": 3, "unique_lines_exposed": 1, "displayed_utf8_bytes": 684},
+    {"resource_id": "N02", "relative_path": "018_N02/GCST90476060.tsv.gz", "sha256": "c85ca1fec5f306ab7bd4dc702fcbb241d4049cab5e4a7119df649eb842456928", "logical_line_reads": 3, "unique_lines_exposed": 1, "displayed_utf8_bytes": 684},
+    {"resource_id": "G01", "relative_path": "019_G01/GCST90475259.tsv.gz", "sha256": "280fba303116ca783aec662da701014f448d86af81329021074dad7e01c88a77", "logical_line_reads": 3, "unique_lines_exposed": 1, "displayed_utf8_bytes": 684},
+    {"resource_id": "G02", "relative_path": "020_G02/GCST90627754.tsv", "sha256": "536e6141d935a1b85f4c962b71374f79801f593809f5746990a4fab2759a337d", "logical_line_reads": 3, "unique_lines_exposed": 1, "displayed_utf8_bytes": 390},
+    {"resource_id": "G03", "relative_path": "021_G03/GCST90475833.tsv.gz", "sha256": "bbbd9f297dcedeb0be3cf769320d150834c27af241d4e5fb7d700c2a8f48a708", "logical_line_reads": 3, "unique_lines_exposed": 1, "displayed_utf8_bytes": 684},
+    {"resource_id": "G04", "relative_path": "022_G04/GCST90475661.tsv.gz", "sha256": "7bbb74bee61936430c0f5e0a1ffa0cfd4beb5e04e2fe311c6541fe9f39d99dd1", "logical_line_reads": 3, "unique_lines_exposed": 1, "displayed_utf8_bytes": 684},
+    {"resource_id": "G05", "relative_path": "023_G05/GCST90476067.tsv.gz", "sha256": "348605eccdc543340c682e49795d7b8fb46afe4543b96cc329dbaffd920c262a", "logical_line_reads": 3, "unique_lines_exposed": 1, "displayed_utf8_bytes": 684}
+  ],
+  "handle_bug": "A new handle was created inside each list-comprehension iteration, so the first header was returned three times instead of advancing to data rows.",
+  "manifest_sha256": "0c73963ebcf8cdb462197207f535c118af90a1abc83492572cf0862ffadf42cb",
+  "parameters_changed": false,
+  "positive_outcome_statistics_exposed": false,
+  "reconfirmation": {
+    "frozen_role_order": "matched",
+    "local_sha256": "matched for all seven files",
+    "thresholds_roles_mappings_hypotheses_changed": false
+  },
+  "timestamp_utc": "2026-09-16T04:51:00Z"
+}

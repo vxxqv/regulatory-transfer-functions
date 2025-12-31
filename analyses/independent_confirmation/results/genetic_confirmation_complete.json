@@ -1,0 +1,47 @@
+{
+  "acquisition": {
+    "bytes": 56935886245,
+    "files": 82,
+    "manifest_sha256": "0c73963ebcf8cdb462197207f535c118af90a1abc83492572cf0862ffadf42cb",
+    "provider_checksums_verified": 65,
+    "residual_partial_files": 0,
+    "status": "verified_complete"
+  },
+  "code": {
+    "acquisition_sha256": "73594020f2dc28a6b1940a51bf8752d1dd4986f1645066844968b819609665bf",
+    "schema_runner_sha256": "a68147e223c853587e242a548e017a12fc0328659f20ddddcf93e2a164f7577a"
+  },
+  "disease_genetics": {
+    "eligible_diseases": 0,
+    "failed_schema_gate": 7,
+    "locked_diseases": 7,
+    "status": "terminal_unavailable"
+  },
+  "downstream_decisions": {
+    "H25": "unavailable",
+    "H26": "unavailable",
+    "H27": "unavailable",
+    "H28": "unavailable",
+    "H29": "unavailable"
+  },
+  "integrity": {
+    "manifest_only_verification": "passed_before_finalization; verifier was corrected to preserve byte-identical complete manifests",
+    "protocol_deviations": 1,
+    "protocol_deviation_effect": "nonfatal header-only opening-order deviation; no scientific data rows or statistics were exposed",
+    "substitutions": 0,
+    "threshold_or_model_changes": 0
+  },
+  "outputs": {
+    "disease_pipeline_complete_sha256": "f95c6ff63e557c2695b0d5ded617014f4b08b26088ca09989e42221bfac1ab6e",
+    "hypothesis_decisions_sha256": "1e2f2ecb3698f92c1fd69df958443f1017415e3a0ab009b5b47d673af1564f4b",
+    "independent_schema_verification_sha256": "7c51c1f53f0ea5f63f7221d5a3b420a0a694c61feda99301892a940a5c6d6617",
+    "molecular_availability_audit_sha256": "d9d7bc6af1a50408fe36bbd77a49800c90a84d647bf52ef9f37596af7dbfe762"
+  },
+  "scientific_interpretation": "The locked inputs did not support the prespecified independent genetic or molecular confirmation hypotheses. This is a complete negative availability result, not evidence against the underlying biological hypotheses.",
+  "status": "complete_all_eligible_branches_reported",
+  "tests": {
+    "passed": 86,
+    "scientific_failures": 0,
+    "warning": "pytest cache directory was read-only; test execution and results were unaffected"
+  }
+}

@@ -1,0 +1,2 @@
+deviation_id	timestamp_utc	stage	classification	affected_resources	exposure	outcome_rows_read	parameter_changes	disposition
+DEV-001	2026-09-16T04:51:00Z	post-acquisition schema inspection	nonfatal schema-metadata opening-order deviation	N05;N02;G01;G02;G03;G04;G05	one unique header line per file displayed three times because each loop iteration reopened the file	0	0	positive-file access stopped; immutable hashes and role order reconfirmed; negative pipelines must finish before positive access resumes

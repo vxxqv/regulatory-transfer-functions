@@ -1510,8 +1510,24 @@ class GeneticInputAcquirer:
             error = AcquisitionError("A complete local acquisition roster is required for manifest-only verification", EXIT_INCOMPLETE)
             self._write_manifest("incomplete", error)
             return EXIT_INCOMPLETE
+        previous_payload = self.manifest_path.read_bytes() if self.manifest_path.exists() else None
+        previous_manifest = json.loads(previous_payload) if previous_payload is not None else None
         complete = self._reconcile(physicals, fill_missing=True)
         state = "complete" if complete else "incomplete"
+        if complete and previous_manifest is not None and previous_manifest.get("completion_state") == "complete":
+            def stable(value):
+                if isinstance(value, dict):
+                    return {key: stable(item) for key, item in value.items() if not key.endswith("_utc")}
+                if isinstance(value, list):
+                    return [stable(item) for item in value]
+                return value
+
+            candidate = dict(self.manifest)
+            candidate["completion_state"] = "complete"
+            candidate.pop("last_error", None)
+            if stable(candidate) == stable(previous_manifest):
+                self.manifest = previous_manifest
+                return EXIT_OK
         self._write_manifest(state)
         return EXIT_OK if state == "complete" else EXIT_INCOMPLETE
 

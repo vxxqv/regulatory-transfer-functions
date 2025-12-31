@@ -1,0 +1,66 @@
+{
+  "audit_scope": "locked disease GWAS schema decisions",
+  "decision": "verified_terminal_without_substitution",
+  "manifest_sha256": "0c73963ebcf8cdb462197207f535c118af90a1abc83492572cf0862ffadf42cb",
+  "resources": {
+    "G01": {
+      "audit_sha256": "226485c39052ec2380585f1076aa13c6308579d863072763ffb7afc0f506c6e6",
+      "coverage_fraction": 0.44347939,
+      "decision": "failed",
+      "independent_prefix_rows": 100000,
+      "prefix_finite_positive_standard_errors": 0,
+      "source_sha256": "280fba303116ca783aec662da701014f448d86af81329021074dad7e01c88a77"
+    },
+    "G02": {
+      "audit_sha256": "8657e14867f18a07b7b399230e03d69c756e3156a0a1cbcaf837bcc36b5b2cfa",
+      "decision": "failed",
+      "header_gate": "imputation_quality_field_missing",
+      "source_sha256": "536e6141d935a1b85f4c962b71374f79801f593809f5746990a4fab2759a337d"
+    },
+    "G03": {
+      "audit_sha256": "8341f1742c86c4462569cd20e44c40cb293443569ccbe7fcb1328055a9fa9785",
+      "coverage_fraction": 0.44359693,
+      "decision": "failed",
+      "independent_prefix_rows": 100000,
+      "prefix_finite_positive_standard_errors": 0,
+      "source_sha256": "bbbd9f297dcedeb0be3cf769320d150834c27af241d4e5fb7d700c2a8f48a708"
+    },
+    "G04": {
+      "audit_sha256": "187d512bcbe4a8a1838906c214b25ecf1179d3c86cda0759c43914feec3e69f2",
+      "coverage_fraction": 0.44486788,
+      "decision": "failed",
+      "independent_prefix_rows": 100000,
+      "prefix_finite_positive_standard_errors": 0,
+      "source_sha256": "7bbb74bee61936430c0f5e0a1ffa0cfd4beb5e04e2fe311c6541fe9f39d99dd1"
+    },
+    "G05": {
+      "audit_sha256": "dcc7729edb7f1af0be8e66c733b4c6e072e99e947d02327893ba1925cf068779",
+      "coverage_fraction": 0.44490163,
+      "decision": "failed",
+      "independent_prefix_rows": 100000,
+      "prefix_finite_positive_standard_errors": 0,
+      "source_sha256": "348605eccdc543340c682e49795d7b8fb46afe4543b96cc329dbaffd920c262a"
+    },
+    "N02": {
+      "decision": "failed",
+      "full_rows": 19708436,
+      "full_harmonized_rows": 0,
+      "terminal_gate": "dense_coverage_failed"
+    },
+    "N05": {
+      "audit_sha256": "ee994f068498adc242be3b72e04a06de903cff705945089d9ddfc9bc00ec19e4",
+      "coverage_fraction": 0.4449055982,
+      "decision": "failed",
+      "independent_prefix_rows": 100000,
+      "prefix_finite_positive_standard_errors": 0,
+      "source_sha256": "e9127b728cd537b13b70c491b53f4e687b401c65ce4b832ecf1c06a7d9bba503"
+    }
+  },
+  "verification_notes": [
+    "Source byte counts, local SHA256 values, and provider MD5 values where available matched the completed acquisition manifest.",
+    "Coverage and audit arithmetic were recomputed independently.",
+    "The four dense positive GWAS and N05 contained no finite positive standard errors in independently scanned 100000-row prefixes and zero harmonized rows in full audits.",
+    "The stored terminal decisions remain valid from independent frozen gates; no alternate datasets or thresholds were used.",
+    "Some schema result files predate later runner edits, so source, manifest, audit hashes, and independent recomputation provide the durable result binding."
+  ]
+}

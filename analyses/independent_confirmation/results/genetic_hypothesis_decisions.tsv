@@ -1,0 +1,6 @@
+hypothesis_id	status	complete_denominator	decision	reason
+H25	unavailable	8 externally perturbed H3K27ac factors; 4 overlap frozen CD4 targets; 0 eligible signed edges	unavailable	no locked resource measured state-compatible factor occupancy, and none of the four overlapping factors occurred in the frozen signed edge matrix
+H26	unavailable	Rest and Stim48hr H3K27ac states; no compatible 8-hour occupancy measurement	unavailable	the locked assays cannot establish the prespecified direct-edge, secondary-TF, and downstream-response order
+H27	unavailable	7 diseases; 0 schema eligible	unavailable	all seven locked GWAS failed prespecified schema gates before enrichment
+H28	unavailable	7 diseases; 0 schema eligible	unavailable	no schema-eligible GWAS remained for locus harmonization or instruments
+H29	unavailable	5 required component outcomes	unavailable	disease relevance lacked an eligible independent estimate

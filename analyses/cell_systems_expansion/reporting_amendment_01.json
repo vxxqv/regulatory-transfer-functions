@@ -1,0 +1,11 @@
+{
+  "amendment_id": "EXPANSION-REPORTING-001",
+  "path": "data_manifest/sources.tsv",
+  "parent_sha256": "fd493e2760e66f252e57ae4e3ef0731389ab373fa0d0ca72c65a1b423775c191",
+  "current_sha256": "fc491f086b9ae10fe13ac63a49df270d493e3bbada512125f8c4efceda4c5e8f",
+  "current_bytes": 11763,
+  "scope": "reporting-only RPE1 validation-role wording",
+  "analysis_values_changed": false,
+  "dataset_identity_changed": false,
+  "reason": "RPE1 was relabeled from untouched validation to the original prespecified falsification holdout and as previously inspected for later extensions."
+}

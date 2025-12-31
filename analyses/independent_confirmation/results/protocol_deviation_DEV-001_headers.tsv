@@ -1,0 +1,8 @@
+resource_id	header	logical_line_reads	unique_lines_exposed	data_rows_exposed
+N05	chromosome|base_pair_location|effect_allele|other_allele|odds_ratio|standard_error|effect_allele_frequency|p_value|rsid|ci_upper|ci_lower|alt|n|case_af|num_cases|control_af|num_controls|r2|q_pval|i2|direction	3	1	0
+N02	chromosome|base_pair_location|effect_allele|other_allele|odds_ratio|standard_error|effect_allele_frequency|p_value|rsid|ci_upper|ci_lower|alt|n|case_af|num_cases|control_af|num_controls|r2|q_pval|i2|direction	3	1	0
+G01	chromosome|base_pair_location|effect_allele|other_allele|odds_ratio|standard_error|effect_allele_frequency|p_value|rsid|ci_upper|ci_lower|alt|n|case_af|num_cases|control_af|num_controls|r2|q_pval|i2|direction	3	1	0
+G02	chromosome|base_pair_location|effect_allele|other_allele|beta|standard_error|effect_allele_frequency|p_value|variant_id|n	3	1	0
+G03	chromosome|base_pair_location|effect_allele|other_allele|odds_ratio|standard_error|effect_allele_frequency|p_value|rsid|ci_upper|ci_lower|alt|n|case_af|num_cases|control_af|num_controls|r2|q_pval|i2|direction	3	1	0
+G04	chromosome|base_pair_location|effect_allele|other_allele|odds_ratio|standard_error|effect_allele_frequency|p_value|rsid|ci_upper|ci_lower|alt|n|case_af|num_cases|control_af|num_controls|r2|q_pval|i2|direction	3	1	0
+G05	chromosome|base_pair_location|effect_allele|other_allele|odds_ratio|standard_error|effect_allele_frequency|p_value|rsid|ci_upper|ci_lower|alt|n|case_af|num_cases|control_af|num_controls|r2|q_pval|i2|direction	3	1	0

@@ -16,15 +16,15 @@ def test_frozen_sources_match_across_portable_line_endings():
     assert manifest["hash_comparison"] == "raw_or_lf_or_crlf_for_text_binary_exact"
     for record in manifest["sources"]:
         path = ROOT / record["path"]
-        assert hashlib.sha256(path.read_bytes()).hexdigest() == record["checkout_sha256"]
         raw = path.read_bytes()
-        candidates = {hashlib.sha256(raw).hexdigest()}
+        candidates = {hashlib.sha256(raw).hexdigest(): len(raw)}
         if path.suffix.lower() in {".json", ".md", ".tsv", ".txt", ".yaml", ".yml"}:
             lf = raw.replace(b"\r\n", b"\n")
-            candidates |= {
-                hashlib.sha256(lf).hexdigest(),
-                hashlib.sha256(lf.replace(b"\n", b"\r\n")).hexdigest(),
-            }
+            crlf = lf.replace(b"\n", b"\r\n")
+            candidates[hashlib.sha256(lf).hexdigest()] = len(lf)
+            candidates[hashlib.sha256(crlf).hexdigest()] = len(crlf)
+        assert record["checkout_sha256"] in candidates
+        assert candidates[record["checkout_sha256"]] == record["checkout_bytes"]
         assert record["frozen_sha256"] in candidates
         if record["matched_expansion_freeze"] is None:
             assert record["verification_status"] == "frozen_at_transport_start"

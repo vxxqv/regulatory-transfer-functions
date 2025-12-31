@@ -1,0 +1,47 @@
+{
+  "decision": "unavailable",
+  "hypotheses": {
+    "H25": "unavailable",
+    "H26": "unavailable"
+  },
+  "locked_resources": {
+    "C01": {
+      "assay": "ATAC-seq",
+      "genome_build": "hg19",
+      "role": "active_chromatin_only",
+      "sha256": "583b24da0ef1d29ca6c221cba1c3fe3ded35ca780428176de8962f91315f2d48"
+    },
+    "C02": {
+      "assay": "H3K27ac CUT&RUN matrix",
+      "genome_build": "GRCh38",
+      "perturbed_factors": ["ATXN7L3", "BATF", "MED11", "MED12", "MED24", "TAF5L", "USP22", "ZNF217"],
+      "role": "active_chromatin_only",
+      "sha256": "66d73b06fdd31dbbc0ccb8d482a717298a3e4732fcf30ba3b75403f364240888",
+      "states": ["Rest", "Stim48hr"]
+    },
+    "C03": {
+      "assay": "H3K27ac CUT&RUN peaks and signal",
+      "genome_build": "GRCh38",
+      "role": "active_chromatin_only",
+      "sha256": "8abf51cc8e5720568bb2dbe58d8efcb17ffe108a3ef516d78579deecc5117f9b",
+      "states": ["Rest", "Stim48hr"]
+    }
+  },
+  "denominators": {
+    "external_h3k27ac_perturbed_factors": 8,
+    "factors_overlapping_frozen_cd4_targets": 4,
+    "overlapping_factors": ["ATXN7L3", "MED12", "MED24", "USP22"],
+    "overlapping_factors_in_frozen_signed_edge_matrix": 0,
+    "state_compatible_factor_occupancy_resources": 0,
+    "exact_8_hour_molecular_resources": 0
+  },
+  "gates": {
+    "active_chromatin": "available",
+    "exact_timing": "failed",
+    "factor_occupancy": "failed",
+    "signed_edge_denominator": "failed"
+  },
+  "inspection_scope": "Resource headers and archive member names only; quantitative chromatin outcomes were not analyzed after the availability gate failed.",
+  "reason": "H25 requires compatible factor occupancy plus active chromatin and eligible signed edges. H26 requires an ordered compatible time series. The locked resources provide neither factor occupancy nor an exact 8-hour molecular state, and the overlapping factors have no rows in the frozen signed edge matrix.",
+  "substitution": "none"
+}

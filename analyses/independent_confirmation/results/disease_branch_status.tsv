@@ -1,0 +1,8 @@
+opening_order	resource_id	role	schema_status	raw_rows	harmonized_rows	terminal_reason	downstream_status	replacement
+1	N05	negative_disease_low_neff	failed	19709318	0	dense coverage failed at 44.49%; all standard errors nonfinite	not eligible	none
+2	N02	negative_disease_high_neff	failed	19708436	0	dense coverage failed at 44.49%; all standard errors nonfinite	not eligible	none
+3	G01	positive_asthma	failed	19646137	0	dense coverage failed at 44.35%; all standard errors nonfinite	not eligible	none
+4	G02	positive_hashimoto	failed	NA	NA	imputation quality field missing	not eligible	none
+5	G03	positive_multiple_sclerosis	failed	19651344	0	dense coverage failed at 44.36%; all standard errors nonfinite	not eligible	none
+6	G04	positive_type_1_diabetes	failed	19707647	0	dense coverage failed at 44.49%; all standard errors nonfinite	not eligible	none
+7	G05	positive_ulcerative_colitis	failed	19709142	0	dense coverage failed at 44.49%; all standard errors nonfinite	not eligible	none

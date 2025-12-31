@@ -1,0 +1,3 @@
+stage	resource_id	code_path	code_sha256	binding_status	note
+schema	N05	analyses/independent_confirmation/run_genetic_confirmation.py	NA	unavailable	runner was modified after completion; result remains bound to source and manifest hashes and independently verified
+schema	N02	analyses/independent_confirmation/run_genetic_confirmation.py	b758a95da94136e84070c32c34ece3b860ab32921cbb13414e21140c771386e0	bound	code hash captured after completion before further runner edits
