@@ -19,16 +19,23 @@ def main() -> None:
     if not parts:
         raise FileNotFoundError("No scalar multiverse shards found")
     table = pd.concat([pd.read_parquet(path) for path in parts], ignore_index=True)
-    if table["specification_id"].nunique() != 4320:
-        raise ValueError("The combined scalar multiverse does not contain all 4,320 base specifications")
+    unavailable_parts = sorted(OUTPUT.glob("scalar_unavailable_part*of*.csv"))
+    if not unavailable_parts:
+        raise FileNotFoundError("No scalar unavailable-specification shards found")
+    unavailable = pd.concat([pd.read_csv(path) for path in unavailable_parts], ignore_index=True)
+    result_ids = set(table["specification_id"].astype(int))
+    unavailable_ids = set(unavailable["specification_id"].astype(int))
+    expected_ids = set(range(1, 4321))
+    if result_ids & unavailable_ids:
+        raise ValueError("A scalar base specification appears in both result and unavailable tables")
+    if result_ids | unavailable_ids != expected_ids:
+        raise ValueError("The combined scalar multiverse does not account for all 4,320 base specifications")
     table = adjust_q(table.drop(columns=["q_value", "supported", "direction_expected"], errors="ignore"))
     table["direction_expected"] = np.where(
         table["expected_direction"] == "positive", table["estimate"] > 0, table["estimate"] < 0
     )
     table["supported"] = table["direction_expected"] & (table["q_value"] < 0.05)
     table.to_parquet(OUTPUT / "scalar_specifications.parquet", index=False)
-    unavailable_parts = sorted(OUTPUT.glob("scalar_unavailable_part*of*.csv"))
-    unavailable = pd.concat([pd.read_csv(path) for path in unavailable_parts], ignore_index=True)
     unavailable.to_csv(OUTPUT / "scalar_unavailable.csv", index=False)
     family = table.groupby("result_family").agg(
         specifications=("specification_id", "size"),
@@ -48,7 +55,9 @@ def main() -> None:
     )
     family.to_csv(OUTPUT / "scalar_family_summary.csv", index=False)
     audit = {
-        "base_specifications": int(table["specification_id"].nunique()),
+        "base_specifications": 4320,
+        "base_specifications_with_results": len(result_ids),
+        "base_specifications_unavailable": len(unavailable_ids),
         "result_rows": len(table),
         "unavailable_base_specifications": len(unavailable),
         "all_shards_combined": True,

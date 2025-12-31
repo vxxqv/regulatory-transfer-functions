@@ -1,0 +1,21 @@
+{
+  "artifacts": [
+    {
+      "bytes": 3553,
+      "path": "config/multiverse.yaml",
+      "sha256": "bd258b1ec15ce2244f91ab53a6c76d7c55f736fcf41b191af9362a1183d81c71"
+    },
+    {
+      "bytes": 15911,
+      "path": "analyses/multiverse/run_scalar_multiverse.py",
+      "sha256": "56c1fa017f91f9ca506c921827285119cf14c8ced889f0e54da6d0900c0ad040"
+    },
+    {
+      "bytes": 920,
+      "path": "analyses/multiverse/method_amendment_01.json",
+      "sha256": "afa18907cd1ca9ea77099fffead41eaeaca5fa5de97fdeb53c11157426d1cff3"
+    }
+  ],
+  "date": "2026-09-12",
+  "status": "frozen_before_corrected_rerun"
+}

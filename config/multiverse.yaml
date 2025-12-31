@@ -9,6 +9,7 @@ multiverse:
     - 20261119
   bootstrap_replicates: 2000
   permutation_replicates: 1000
+  context_null_replicates: 20
   alpha: 0.05
   correction: benjamini_hochberg_within_result_family
 

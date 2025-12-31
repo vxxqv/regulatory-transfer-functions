@@ -133,6 +133,7 @@ def main() -> None:
     main_config = yaml.safe_load((ROOT / "config/analysis.yaml").read_text(encoding="utf-8"))
     seeds = [int(value) for value in config["multiverse"]["seeds"]]
     replicates = int(config["multiverse"]["bootstrap_replicates"])
+    context_null_replicates = int(config["multiverse"]["context_null_replicates"])
     folds = int(main_config["transfer_phenotypes"]["cross_validation"]["folds"])
     raw_path = ROOT / "work/upstream/GWT_perturbseq_analysis_2025/metadata/suppl_tables/DE_stats.suppl_table.csv"
     raw = pd.read_csv(raw_path)
@@ -225,30 +226,71 @@ def main() -> None:
         scale = frame.groupby("culture_condition")["residual"].transform("std").replace(0, np.nan)
         frame["transfer_z_spec"] = frame["residual"] / scale
 
-        complete = frame.groupby("target_contrast")["culture_condition"].nunique()
-        complete = complete[complete == 3].index
-        switching = frame[frame["target_contrast"].isin(complete)].groupby("target_contrast")["transfer_z_spec"].agg(lambda x: x.max() - x.min())
-        switch = multiplier_summary(switching, pd.Series(switching.index, index=switching.index), seed + 2, replicates)
+        complete = frame.pivot_table(
+            index="target_contrast", columns="culture_condition", values="transfer_z_spec", aggfunc="first"
+        ).dropna()
+        observed_range = complete.max(axis=1) - complete.min(axis=1)
+        null_range = np.zeros(len(complete), dtype=float)
+        null_rng = np.random.default_rng(seed + 2)
+        matrix = complete.to_numpy(dtype=float)
+        for _ in range(context_null_replicates):
+            permuted = np.column_stack(
+                [null_rng.permutation(matrix[:, column]) for column in range(matrix.shape[1])]
+            )
+            null_range += permuted.max(axis=1) - permuted.min(axis=1)
+        null_range /= context_null_replicates
+        switching = observed_range - null_range
+        switch = multiplier_summary(
+            pd.Series(switching, index=complete.index),
+            pd.Series(complete.index, index=complete.index),
+            seed + 3,
+            replicates,
+        )
         records.append(
             {
                 **descriptor,
                 "result_family": "context_switching",
                 "tail_cutoff": np.nan,
                 "rows": len(switching),
+                "effect_measure": "observed_state_range_minus_state_matched_cross_target_null",
+                "null_replicates": context_null_replicates,
                 **switch,
                 "expected_direction": "positive",
             }
         )
         for tail in config["tail_cutoffs"]:
-            threshold = frame["transfer_z_spec"].quantile(float(tail))
-            selected = frame[frame["transfer_z_spec"] <= threshold]
-            buffered = multiplier_summary(selected["residual"], selected["target_contrast"], seed + int(tail * 1000), replicates)
+            residual_matrix = frame.pivot_table(
+                index="target_contrast", columns="culture_condition", values="residual", aggfunc="first"
+            ).dropna()
+            heldout_records = []
+            for heldout_state in residual_matrix.columns:
+                training_states = [state for state in residual_matrix.columns if state != heldout_state]
+                training_score = residual_matrix[training_states].mean(axis=1)
+                threshold = training_score.quantile(float(tail))
+                selected_targets = training_score[training_score <= threshold].index
+                heldout_records.append(
+                    pd.DataFrame(
+                        {
+                            "target_contrast": selected_targets,
+                            "heldout_state": heldout_state,
+                            "heldout_residual": residual_matrix.loc[selected_targets, heldout_state].to_numpy(),
+                        }
+                    )
+                )
+            selected = pd.concat(heldout_records, ignore_index=True)
+            buffered = multiplier_summary(
+                selected["heldout_residual"],
+                selected["target_contrast"],
+                seed + int(tail * 1000),
+                replicates,
+            )
             records.append(
                 {
                     **descriptor,
                     "result_family": "buffering",
                     "tail_cutoff": tail,
                     "rows": len(selected),
+                    "effect_measure": "two_state_selected_heldout_state_residual",
                     **buffered,
                     "expected_direction": "negative",
                 }

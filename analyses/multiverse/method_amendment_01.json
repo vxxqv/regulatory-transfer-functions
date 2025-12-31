@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-12",
+  "reason": "The first completed implementation audit showed that the buffering tail residual and raw context range had signs fixed by their definitions. They cannot support inferential claims.",
+  "replacement_buffering_statistic": "Select the lower residual tail using two states and estimate the residual in the held-out third state, repeated for every state.",
+  "replacement_context_statistic": "Subtract the mean range from 20 state-matched cross-target permutations from each target's observed state range.",
+  "invalidated_outputs": [
+    "scalar_specifications_part1of4.parquet",
+    "scalar_specifications_part2of4.parquet",
+    "scalar_specifications_part3of4.parquet",
+    "scalar_specifications_part4of4.parquet"
+  ],
+  "outcome_use_before_amendment": "No manuscript, figure, or scientific conclusion used the invalidated estimates.",
+  "status": "frozen_before_corrected_rerun"
+}
