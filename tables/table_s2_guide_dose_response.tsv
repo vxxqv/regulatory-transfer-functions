@@ -1,0 +1,34 @@
+source_table	hypothesis	culture_condition	decision	basis	model	delta_r2_vs_null	ci_low	ci_high	paired_error_p	q_value	supported	estimand	status	reason
+hypothesis_decisions	positive guide-dose association	Rest	passed	all three pre-specified dose definitions										
+hypothesis_decisions	positive guide-dose association	Stim48hr	passed	all three pre-specified dose definitions										
+hypothesis_decisions	positive guide-dose association	Stim8hr	passed	all three pre-specified dose definitions										
+hypothesis_decisions	nonlinear dose response	Rest	unresolved	no nonlinear family passed FDR and bootstrap criteria										
+hypothesis_decisions	nonlinear dose response	Stim48hr	unresolved	no nonlinear family passed FDR and bootstrap criteria										
+hypothesis_decisions	nonlinear dose response	Stim8hr	passed_small_effect	hill										
+hypothesis_decisions	target-specific threshold or saturation	all	underpowered	two guide doses per eligible target-state										
+hypothesis_decisions	donor-held-out guide-dose replication	all	unavailable	no joint guide-by-donor effects										
+hypothesis_decisions	cis mediation	all	not_tested	identification assumptions failed										
+model_comparisons		Rest				0.0	0.0	0.0	1.0	1.0	False			
+model_comparisons		Rest			linear	0.0232519781359823	0.0102631750307497	0.0360186066928074	2.6783004754621177e-05	4.820940855831812e-05	True			
+model_comparisons		Rest			spline	0.0302137129512756	0.0164480604362754	0.0441080924284796	0.0007742473230977	0.0009290967877173	True			
+model_comparisons		Rest			isotonic	0.0140030925035967	0.00997508990543	0.0179558683355856	8.738778308435723e-17	5.243266985061435e-16	True			
+model_comparisons		Rest			breakpoint	0.0237032108464965	0.0093981461028447	0.0369402332751037	0.0002715529907051	0.0003491395594779	True			
+model_comparisons		Rest			hill	0.0276581464347804	0.0139579123124555	0.0417562386893374	0.0001666052259025	0.000230684158942	True			
+model_comparisons		Stim48hr				0.0	0.0	0.0	1.0	1.0	False			
+model_comparisons		Stim48hr			linear	0.0713301449243462	0.0505129303540782	0.0908876670102672	2.9730107274313678e-05	4.864926644887692e-05	True			
+model_comparisons		Stim48hr			spline	0.0727415645569999	0.052846952916924	0.0929313113130846	5.240395293953247e-07	1.1790889411394806e-06	True			
+model_comparisons		Stim48hr			isotonic	0.0312653870611543	0.0257825484221795	0.0374589655427711	1.8863333971048537e-25	3.3954001147887375e-24	True			
+model_comparisons		Stim48hr			breakpoint	0.0710865652270424	0.0514728620775269	0.0916221663394729	4.006382655821859e-05	6.009573983732788e-05	True			
+model_comparisons		Stim48hr			hill	0.0746086253294235	0.0532577260984938	0.0953528815593376	6.863198053654275e-07	1.372639610730855e-06	True			
+model_comparisons		Stim8hr				0.0	0.0	0.0	1.0	1.0	False			
+model_comparisons		Stim8hr			linear	0.0441437138459706	0.0296437546317143	0.0601258845181537	3.694724986664914e-08	9.500721394281209e-08	True			
+model_comparisons		Stim8hr			spline	0.0462023526351864	0.0305530985308029	0.0623288185612817	1.5031161893020874e-10	6.764022851859394e-10	True			
+model_comparisons		Stim8hr			isotonic	0.0207322603029318	0.0161438423600466	0.0256217259366491	3.255888883805895e-22	2.9302999954253055e-21	True			
+model_comparisons		Stim8hr			breakpoint	0.0438709072931027	0.0298577299313483	0.0598889186747854	1.6578178849348555e-08	4.9734536548045675e-08	True			
+model_comparisons		Stim8hr			hill	0.0472461598721254	0.0307112221266997	0.0629020141686152	3.646573957833697e-09	1.3127666248201313e-08	True			
+unavailable_estimands												donor-held-out guide-dose validation	unavailable	donor-specific effects were released only at target level, not jointly by guide
+unavailable_estimands												signed response norm by guide	unavailable	guide-level signed coefficient vectors were not released
+unavailable_estimands												module activity and rerouting by guide	unavailable	guide-level signed coefficient vectors were not released
+unavailable_estimands												disease-program convergence by guide	unavailable	disease programs were defined at target-state level
+unavailable_estimands												non-targeting trans-response control	unavailable	the released guide-response table contains paired targeting guides only
+unavailable_estimands												cis mediation	not tested	two guide doses per target and no joint donor-specific guide effects do not identify mediation
