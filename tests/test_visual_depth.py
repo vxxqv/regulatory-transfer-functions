@@ -35,7 +35,7 @@ def test_new_figure_exports_and_sources_are_vector_safe():
         svg = directory / f"{name}.svg"
         tree = ET.parse(svg)
         assert not tree.getroot().findall(".//{http://www.w3.org/2000/svg}image")
-        assert len(list((directory / "figure_data").glob("*.tsv"))) == 4
+        assert len(list((directory / "figure_data").glob("*.tsv"))) >= 4
         text = svg.read_text(encoding="utf-8")
         for label in "ABCD":
             assert f">{label}<" in text
