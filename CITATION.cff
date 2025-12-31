@@ -9,7 +9,13 @@ authors:
 license: MIT
 version: 1.0.0
 date-released: 2026-09-17
+doi: 10.5281/zenodo.22804223
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.22804223
+    description: Archived release
 repository-code: "https://github.com/vxxqv/regulatory-transfer-functions"
+url: "https://doi.org/10.5281/zenodo.22804223"
 keywords:
   - CRISPR interference
   - Perturb-seq

@@ -1,5 +1,7 @@
 # Regulatory Transfer Functions
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22804223.svg)](https://doi.org/10.5281/zenodo.22804223)
+
 This repository contains the code and frozen data products used to estimate transcriptional propagation after CRISPR interference in primary human CD4 T cells. The workflow separates proximal perturbation strength from distal response, quantifies signed programme rerouting across cell states, and tests portability with external perturbation, regulatory network, molecular, and genetic evidence.
 
 ## Contents
@@ -21,6 +23,8 @@ python -m pytest
 ```
 
 Large upstream datasets are not duplicated. Their acquisition records and integrity checks are listed in `data_manifest/sources.tsv`. Frozen processed results are included where source terms permit redistribution.
+
+Version 1.0.0 is archived at [Zenodo](https://doi.org/10.5281/zenodo.22804223).
 
 ## Author
 
