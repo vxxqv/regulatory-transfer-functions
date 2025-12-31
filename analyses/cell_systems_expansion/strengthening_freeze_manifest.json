@@ -18,8 +18,8 @@
   "inputs": [
     {
       "path": "config/strengthening_extensions.yaml",
-      "bytes": 11315,
-      "sha256": "592a42ad8f95fcb6f12a5cd90520e7c889c1abff2775ba558f39c6c8b282a240"
+      "bytes": 11285,
+      "sha256": "a08f4a4eaa19da4182b08ee2a62d472b4d57fe03e012d8231cdcdf336d7d9d51"
     },
     {
       "path": "analyses/primary/results/transfer_phenotypes.parquet",

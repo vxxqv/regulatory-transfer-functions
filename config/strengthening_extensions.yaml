@@ -30,7 +30,7 @@ families:
     uncertainty: target bootstrap
     multiplicity_family: transfer_strengthening
     minimum_power: at least 1000 targets and at least 100 targets in each tail
-    measurement_error_sensitivity: residual variance multipliers [1.0, 1.25, 1.5]
+    measurement_error_sensitivity: [1.0, 1.25, 1.5]
     stopping_rule: stop if fewer than 1000 targets remain or variance components are not finite
     decision_criterion: supported if rank correlation lower confidence bound is above 0.60 and both tail-retention lower confidence bounds are above 0.50
     fixed_alternatives: reuse scalar multiverse without refitting
