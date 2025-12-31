@@ -1,0 +1,25 @@
+{
+  "amplified_exemplar": "GATA3",
+  "buffered_candidate_denominator": 477,
+  "buffered_comparator": "ERGIC2",
+  "combined_minus_covariates_ci": [
+    0.39132252425154307,
+    0.6815403919032333
+  ],
+  "combined_minus_covariates_r2": 0.5829760823527552,
+  "degree_null_replicates": 1000,
+  "degree_null_reused_not_recomputed": true,
+  "match_covariates": [
+    "cis_magnitude",
+    "target_baseMean",
+    "n_cells_target",
+    "n_guides"
+  ],
+  "motif_fdr_significant": 1,
+  "motif_library_human_eligible": 214,
+  "motif_tests_estimable": 214,
+  "motif_tests_total": 428,
+  "motif_tests_unavailable": 214,
+  "prediction_rows": 15807,
+  "prediction_targets": 6105
+}

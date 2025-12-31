@@ -1,0 +1,2 @@
+null,replicates,observed,null_median,null_95_low,null_95_high,one_sided_p,wall_seconds,q_value
+directed_degree_preserving_rewiring,1000,0.025590543239384,-0.0959338466496748,-0.1415526862214668,-0.0458583421779462,0.0009990009990009,298.74923770001624,0.0019980019980018

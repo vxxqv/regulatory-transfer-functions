@@ -1,0 +1,19 @@
+network_decomposition:
+  seed: 20260912
+  condition: Rest
+  amplified_exemplar: GATA3
+  matching_covariates:
+    - cis_magnitude
+    - target_baseMean
+    - n_cells_target
+    - n_guides
+  network_top_edges: 16
+  motif_gene_set_size: 250
+  motif_minimum_measured_genes: 10
+  motif_maximum_measured_genes: 2000
+  prediction_folds: 10
+  prediction_alpha: 10.0
+  bootstrap_replicates: 2000
+  multiplicity_alpha: 0.05
+  external_degree_null: analyses/external_benchmark/results/degree_preserving_rewiring_null.parquet
+  external_degree_summary: analyses/external_benchmark/results/null_summary.csv
