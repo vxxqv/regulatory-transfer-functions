@@ -1,0 +1,28 @@
+seed: 1847
+fdr: 0.05
+eligibility:
+  minimum_guide_cells: 100
+  minimum_ntc_expression: 0.05
+  guides_per_target_state: 2
+validation:
+  target_pair_folds: 5
+  bootstrap_replicates: 1000
+  permutation_replicates: 1000
+models:
+  - "null"
+  - linear
+  - spline
+  - isotonic
+  - breakpoint
+  - hill
+dose_definitions:
+  - knockdown_fraction
+  - standardized_difference
+  - t_scaled
+quality_covariates:
+  - gc_fraction
+  - log1p_guide_cells
+  - log1p_tss_distance
+  - library_flag
+  - bidirectional_promoter
+  - secondary_alignment
