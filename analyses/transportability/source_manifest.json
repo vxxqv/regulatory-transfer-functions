@@ -1,0 +1,105 @@
+{
+  "hash_comparison": "raw_or_lf_or_crlf_for_text_binary_exact",
+  "sources": [
+    {
+      "path": "config/cell_systems_expansion.yaml",
+      "checkout_bytes": 14332,
+      "checkout_sha256": "5e21e5cbde3d0479031fa98085fbd6aa2062ccbc7b210a694f34f7c769ede59d",
+      "frozen_bytes": 14021,
+      "frozen_sha256": "6cadafe6f6c1860066d6177aabad7dcf7eb9157d8df891c4da0797d6228f6100",
+      "matched_form": "lf",
+      "matched_expansion_freeze": true,
+      "verification_status": "matched_expansion_freeze"
+    },
+    {
+      "path": "analyses/cell_systems_expansion/freeze_manifest.json",
+      "checkout_bytes": 10513,
+      "checkout_sha256": "8ecac4fe01c2e82fdc0b2d4a453d8c8a4469d25ac472ada456a01d0daed1677e",
+      "frozen_bytes": 10513,
+      "frozen_sha256": "8ecac4fe01c2e82fdc0b2d4a453d8c8a4469d25ac472ada456a01d0daed1677e",
+      "matched_form": "raw",
+      "matched_expansion_freeze": null,
+      "verification_status": "frozen_at_transport_start"
+    },
+    {
+      "path": "analyses/primary/results/transfer_phenotypes.parquet",
+      "checkout_bytes": 1991787,
+      "checkout_sha256": "4327ea47df56278e92a60c8e4a26c41f5ff2d8f4e4786108e23e8998d0f97b3f",
+      "frozen_bytes": 1991787,
+      "frozen_sha256": "4327ea47df56278e92a60c8e4a26c41f5ff2d8f4e4786108e23e8998d0f97b3f",
+      "matched_form": "raw",
+      "matched_expansion_freeze": true,
+      "verification_status": "matched_expansion_freeze"
+    },
+    {
+      "path": "analyses/vectors/results/contextual_transfer_tensor.parquet",
+      "checkout_bytes": 5959719,
+      "checkout_sha256": "d644893577cc5a78a0bda649584d21e608f3e105f78ed865a6d0328b541a8099",
+      "frozen_bytes": 5959719,
+      "frozen_sha256": "d644893577cc5a78a0bda649584d21e608f3e105f78ed865a6d0328b541a8099",
+      "matched_form": "raw",
+      "matched_expansion_freeze": true,
+      "verification_status": "matched_expansion_freeze"
+    },
+    {
+      "path": "analyses/guide_concordance/results/all_target_states.parquet",
+      "checkout_bytes": 7836656,
+      "checkout_sha256": "62c841eedcf58fd3c0924081458ff74ccc6cf3558573524cf7e2e98d348fb6e9",
+      "frozen_bytes": 7836656,
+      "frozen_sha256": "62c841eedcf58fd3c0924081458ff74ccc6cf3558573524cf7e2e98d348fb6e9",
+      "matched_form": "raw",
+      "matched_expansion_freeze": null,
+      "verification_status": "frozen_at_transport_start"
+    },
+    {
+      "path": "analyses/molecular_cascade/results/edge_evidence_matrix.parquet",
+      "checkout_bytes": 1867568,
+      "checkout_sha256": "463185e912e5370b5fdd49afd44789f3ff87cc91000e2cfb3730835f0f337785",
+      "frozen_bytes": 1867568,
+      "frozen_sha256": "463185e912e5370b5fdd49afd44789f3ff87cc91000e2cfb3730835f0f337785",
+      "matched_form": "raw",
+      "matched_expansion_freeze": true,
+      "verification_status": "matched_expansion_freeze"
+    },
+    {
+      "path": "analyses/state_response_decomposition/results/target_decomposition.parquet",
+      "checkout_bytes": 598182,
+      "checkout_sha256": "9314524e1449e57c283abefecf842a753a7807ceb381edaa333f8e278c39dc5a",
+      "frozen_bytes": 598182,
+      "frozen_sha256": "9314524e1449e57c283abefecf842a753a7807ceb381edaa333f8e278c39dc5a",
+      "matched_form": "raw",
+      "matched_expansion_freeze": true,
+      "verification_status": "matched_expansion_freeze"
+    },
+    {
+      "path": "analyses/replication/results/k562_replication_rows.parquet",
+      "checkout_bytes": 507884,
+      "checkout_sha256": "d6ea5c21f8a331a23b13e437c96566dbb3d93e285aaf0c04a03cbe83b6f817d6",
+      "frozen_bytes": 507884,
+      "frozen_sha256": "d6ea5c21f8a331a23b13e437c96566dbb3d93e285aaf0c04a03cbe83b6f817d6",
+      "matched_form": "raw",
+      "matched_expansion_freeze": true,
+      "verification_status": "matched_expansion_freeze"
+    },
+    {
+      "path": "analyses/external_benchmark/results/all_eligible_target_predictions.parquet",
+      "checkout_bytes": 68450,
+      "checkout_sha256": "6e9cc451eec7815bc3431f87d04b2387d17184b164ea30799808f40cf262b6b1",
+      "frozen_bytes": 68450,
+      "frozen_sha256": "6e9cc451eec7815bc3431f87d04b2387d17184b164ea30799808f40cf262b6b1",
+      "matched_form": "raw",
+      "matched_expansion_freeze": true,
+      "verification_status": "matched_expansion_freeze"
+    },
+    {
+      "path": "analyses/external_benchmark/rpe1_prepared/eligible_targets.parquet",
+      "checkout_bytes": 31627,
+      "checkout_sha256": "feb198016d5f51cfb99f37f0db494d7dfcbae0804d5260bf26be8ecaf552bc39",
+      "frozen_bytes": 31627,
+      "frozen_sha256": "feb198016d5f51cfb99f37f0db494d7dfcbae0804d5260bf26be8ecaf552bc39",
+      "matched_form": "raw",
+      "matched_expansion_freeze": null,
+      "verification_status": "frozen_at_transport_start"
+    }
+  ]
+}

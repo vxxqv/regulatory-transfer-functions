@@ -1,0 +1,6 @@
+hypothesis,estimate,ci_low,ci_high,diagnostic_p,diagnostic_q,decision,reason,diagnostic
+H7,0.3106275225541776,0.3040883682286904,0.3165473583706429,,,unavailable,External target-level reliability is absent; the corrected median is only identified between the reported bounds.,Observed K562 median; corrected identified set 0.311 to 1.000.
+H8,0.0323217955710892,-0.011605386944854662,0.07145304051714874,0.03696303696303696,0.07392607392607392,unavailable,The rerouting comparison is observed-concordance only because K562 target reliability is absent.,unresolved
+H9,0.11881084311409604,0.0330522960752887,0.20395750752925318,0.008991008991008992,0.008991008991008992,unavailable,Only two previously inspected external systems with incompatible endpoints are available; leave-one-system-out validation requires three.,supported_positive
+H10,0.03694248076132056,-0.08538986274838262,0.15054045640764196,0.26573426573426573,0.5228105228105228,unavailable,RPE1 is a previously inspected developmental system and no untouched held-out system is available.,developmental risk-coverage comparison against random abstention
+H11,0.025784290298302943,-0.25290839684229477,0.5731200171973015,0.6013986013986014,0.6013986013986014,unavailable,"Molecular support can be compared with observed K562 concordance, but reliability-corrected portability is unavailable.",unresolved

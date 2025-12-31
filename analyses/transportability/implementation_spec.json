@@ -1,0 +1,84 @@
+{
+  "status": "fixed implementation of the frozen Cell Systems transportability block",
+  "source_outcomes_previously_inspected": [
+    "Replogle K562 CRISPRi",
+    "Replogle RPE1 CRISPRi"
+  ],
+  "confirmatory_holdout_available": false,
+  "compatible_external_systems": 2,
+  "minimum_systems_for_applicability": 3,
+  "reliability": {
+    "minimum_replicate_units": 3,
+    "minimum_reliability": 0.1,
+    "external_target_level_reliability_available": false,
+    "method": "partial identification under source and destination reliabilities bounded from 0.10 to 1.00",
+    "prohibit_naive_point_division": true
+  },
+  "k562_diagnostics": {
+    "outcome": "median observed signed-profile Pearson correlation across the three CD4 comparisons",
+    "rerouted": "top decile of complete-target mean rerouting under the existing S24 rule",
+    "invariant": "bottom decile of complete-target mean rerouting with constant transfer class under the existing S24 rule",
+    "molecular_predictor": "fraction of response edges with at least two of curated, motif, or active physical-link support",
+    "adjustment": [
+      "state",
+      "source target expression",
+      "source cis magnitude",
+      "source response degree",
+      "source guide concordance",
+      "curated network degree"
+    ],
+    "bootstrap_unit": "target",
+    "matched_permutation": [
+      "state availability",
+      "expression quintile",
+      "response-degree quintile",
+      "network-degree quintile"
+    ]
+  },
+  "rpe1_developmental_diagnostic": {
+    "primary_prediction": "frozen_cd4_transfer",
+    "sensitivity_prediction": "without_vector",
+    "outcome": "absolute error in log1p differentially expressed genes",
+    "applicability_model": "elastic net",
+    "alpha_grid": [0.001, 0.01, 0.1, 1.0],
+    "l1_ratio_grid": [0.0, 0.5, 1.0],
+    "outer_folds": "stored target-held-out folds",
+    "inner_folds": "five deterministic SHA256 target folds within each training set",
+    "calibration_split": "one deterministic SHA256 fifth of each outer training set",
+    "risk_coverage": [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+    "primary_coverage": 0.8,
+    "conformal_alpha": 0.1,
+    "selection_directions": {
+      "applicability": "ascending predicted error",
+      "response_magnitude": "descending source response norm",
+      "degree": "descending source response degree",
+      "uncertainty_only": "ascending disagreement between frozen full and vector-ablated predictions",
+      "reliability_only": "descending mean of available source guide and donor concordance"
+    },
+    "interpretation": "developmental only; not held-out-system confirmation"
+  },
+  "applicability_feature_provenance": {
+    "RPE1_baseline_only": [
+      "baseline_target_expression",
+      "expression_range_compatibility"
+    ],
+    "CD4_only": [
+      "guide_efficacy",
+      "source_guide_concordance",
+      "source_response_reliability",
+      "module_availability",
+      "target_degree"
+    ],
+    "RPE1_perturbation_outcomes_excluded": [
+      "on_target_mean_difference",
+      "log1p_differentially_expressed_genes",
+      "perturbed_response_norm"
+    ]
+  },
+  "guide_source": {
+    "path": "analyses/guide_concordance/results/all_target_states.parquet",
+    "summary": "final validated guide-concordance output; efficacy is the median absolute CD4 knockdown across guides and states",
+    "reliability_status": "underpowered_two_guides"
+  },
+  "decision_rule": "H7-H11 cannot pass without target-level external reliability where required, three compatible external systems for leave-one-system-out applicability, and a genuinely untouched external system"
+}

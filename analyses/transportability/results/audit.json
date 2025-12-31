@@ -1,0 +1,38 @@
+{
+  "k562_rows": 5640,
+  "k562_targets": 1880,
+  "rpe1_targets": 490,
+  "complete_state_targets": 4399,
+  "compatible_external_systems": 2,
+  "minimum_systems_required": 3,
+  "confirmatory_holdout_available": false,
+  "all_hypotheses_reported": [
+    "H7",
+    "H8",
+    "H9",
+    "H10",
+    "H11"
+  ],
+  "all_hypothesis_decisions": {
+    "unavailable": 5
+  },
+  "reliability_method": "bounded partial identification; no point division",
+  "rerouting_thresholds": {
+    "rerouting_low": 0.16800779959166762,
+    "rerouting_high": 0.5295728025098935,
+    "s24_eligible_targets": 2236
+  },
+  "bootstrap_replicates": 1000,
+  "permutation_replicates": 1000,
+  "rpe1_interpretation": "developmental only",
+  "rpe1_applicability_features": [
+    "baseline_target_expression",
+    "expression_range_compatibility",
+    "guide_efficacy",
+    "source_guide_concordance",
+    "source_response_reliability",
+    "module_availability",
+    "target_degree"
+  ],
+  "source_manifest_sha256": "a93a3b75517b23c5651715a269858f500fa77951d8be5c8d9315731110f3d17c"
+}

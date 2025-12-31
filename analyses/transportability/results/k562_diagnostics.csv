@@ -1,0 +1,3 @@
+analysis,predictor,outcome,rows,targets,swappable_targets,estimate,ci_low,ci_high,permutation_p,bootstrap_replicates,permutation_replicates,interpretation,q_value,diagnostic_decision
+H8_observed_K562,strongly_rerouted,logfc_pearson_r,402,134,126,0.0323217955710892,-0.011605386944854662,0.07145304051714874,0.03696303696303696,1000,1000,developmental observed-concordance diagnostic,0.07392607392607392,unresolved
+H11_observed_K562,molecular_support_fraction,logfc_pearson_r,263,99,47,0.025784290298302943,-0.25290839684229477,0.5731200171973015,0.6013986013986014,1000,1000,developmental observed-concordance diagnostic,0.6013986013986014,unresolved

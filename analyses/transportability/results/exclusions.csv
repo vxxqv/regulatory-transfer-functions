@@ -1,0 +1,5 @@
+branch,status,denominator,reason
+confirmatory external portability,unavailable,0,No new metadata-eligible untouched outcome dataset is available.
+leave-one-system-out applicability,underpowered,2,Three compatible external systems are required; K562 and RPE1 endpoints are not common.
+target-level reliability correction,unavailable,0,Neither external output retains three target-level reliability units.
+RPE1 signed-profile concordance,unavailable,490,"Stored RPE1 benchmark output retains response-count predictions, not target-level signed cross-system concordance."

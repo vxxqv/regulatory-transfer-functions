@@ -1,0 +1,17 @@
+feature,status,reason
+baseline_target_expression,available_RPE1,RPE1 control expression is retained before distal outcome evaluation.
+expression_range_compatibility,available_RPE1,Percentile-rank compatibility uses source and RPE1 control expression.
+guide_efficacy,available_source_summary,Median absolute CD4 guide knockdown is retained; RPE1 perturbation outcomes are excluded.
+source_guide_concordance,available_source_summary,Two-guide source summary is descriptive and below the reliability-unit gate.
+source_response_reliability,available_source_summary,Guide and donor summaries are combined for ranking only; no correction uses this score.
+baseline_transcriptomic_distance,unavailable,No compatible baseline transcriptome distance is retained for all systems.
+network_neighborhood_conservation,unavailable,No RPE1 or K562 matched regulatory-network conservation score is retained.
+module_availability,available_source_summary,Fraction of finite frozen CD4 module scores is retained.
+target_degree,available_source_summary,Mean CD4 distal response degree is retained.
+chromatin_accessibility_compatibility,unavailable,No matched RPE1 or K562 accessibility matrix is available.
+TF_occupancy_support,unavailable_compatibility,Source occupancy cannot establish external-state compatibility.
+enhancer_link_compatibility,unavailable,No external-state enhancer-link map is available.
+intervention_type,constant,Both external datasets are CRISPRi.
+assay_type,constant,Both retained external outcomes use transcriptomic assays.
+timepoint_compatibility,unavailable,External timepoint mapping is not comparable to all CD4 states.
+cell_state_similarity,unavailable,No frozen common-space cell-state similarity score is retained.

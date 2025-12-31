@@ -1,0 +1,8 @@
+system,role,estimator,replicate_units,status,reason
+CD4,development source,guide-to-guide,2.0,underpowered,Two targeting guides are below the frozen three-unit reliability gate.
+CD4,development source,donor-pair,,summary_only,"A mean donor concordance is retained, but target-level replicate estimates are not."
+K562,previously inspected external,response-vector,1.0,unavailable,One target-level cross-system correlation is retained without external replicate reliability.
+K562,previously inspected external,module-score,0.0,unavailable,No replicate module-score reliability is retained.
+RPE1,previously inspected external,response-vector,1.0,unavailable,Stored outcomes do not include split-half or replicate response reliability.
+RPE1,previously inspected external,module-score,0.0,unavailable,No target-level external module concordance is retained.
+future external,confirmatory holdout,all,0.0,unavailable,No metadata-eligible untouched external outcome dataset is available.
