@@ -1,0 +1,10 @@
+condition,covariate,all_qc_rows,median,low_rule,high_rule
+Rest,target_baseMean,5092,31.252702380624676,value <= median,value > median
+Rest,n_cells_target,5092,609.0,value <= median,value > median
+Rest,response_degree,5092,2.0,value <= median,value > median
+Stim8hr,target_baseMean,5291,39.66178910633589,value <= median,value > median
+Stim8hr,n_cells_target,5291,580.0,value <= median,value > median
+Stim8hr,response_degree,5291,2.0,value <= median,value > median
+Stim48hr,target_baseMean,5424,39.91257159115157,value <= median,value > median
+Stim48hr,n_cells_target,5424,606.0,value <= median,value > median
+Stim48hr,response_degree,5424,2.0,value <= median,value > median

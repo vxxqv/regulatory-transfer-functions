@@ -1,0 +1,6 @@
+stage,rows,snps
+cis_trans_merge,54807,3125
+measured_trans_gene,32186,2532
+excluded_unresolved_palindromic,3237,251
+excluded_other_unresolved_orientation,0,0
+pre_observed_effect_selection_universe,31312,1062

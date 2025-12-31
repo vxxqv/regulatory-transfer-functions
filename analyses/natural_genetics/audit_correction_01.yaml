@@ -1,0 +1,52 @@
+correction_id: NG-AUDIT-01
+status: retrospective_audit_correction_frozen_before_corrected_run
+freeze_date: 2026-09-16
+reason: >-
+  The original matched null sampled response rows independently, conditioned the
+  observed analysis on nonzero effects before permutation, and retained
+  strand-unresolved palindromic variants. The corrected design was fixed by an
+  independent audit before corrected outcomes were inspected.
+original_outputs:
+  preservation: retained_unchanged_in_analyses/natural_genetics/results
+  files:
+    chromosome_holdout.csv: 52d36edbb31cc1f55cf41cc9f03219bfbe2e4ac67a18145abcc08298ce1c8d17
+    condition_summary.csv: 1889d7a1ad4e01dc2b1c59d055e13ca0288f1fdcd1c6eb833759b8d018e049e7
+    directional_pairs.parquet: 051522e495325176813f31d6be6774c5d6bcb24daae30b8df89bd58f96e0e430
+    matched_null.parquet: ac33baaa412c1654a7ab78c70c76a1baba346b277e29c6b2230cb36a4117de2d
+    natural_genetics_results.json: 8c2adfb29dcacc1b79a7139507b221cd9c14d168eec8d8eb6225292ead99afcb
+inputs:
+  data/interim/gwt_vectors/rows.parquet: ad1ff11af7c34db7baae8eb24971e0f698a0a73ba70d70255def1851f0acdf9c
+  data/interim/gwt_vectors/genes.parquet: 2a87aa6bc012ea3f374d85546eb3d235c7efd9b8c063d34c5d2b8a488340ddf4
+  data/interim/gwt_vectors/normalized_significant_logfc.npz: d759799345804582aa0bc5829fb7cc4534f2322bc8b3b0bf696723fe5589f58b
+  data/interim/eqtlgen/cis_mediators.parquet: 38ad9ad8218cf9fef608c2dae89deef83c77c90fb3ea04e3191749b231d1371c
+  data/interim/eqtlgen/trans_associations.parquet: d275d3ab0dfa5ccd12ec62a488056c7335fd9a46bc8e1245d5dab48bf13bf48a
+design:
+  seed: 20260912
+  permutations: 1000
+  chromosome_cluster_bootstrap_replicates: 2000
+  universe: pre_observed_perturbation_effect_selection
+  palindrome_rule: exclude_all_AT_TA_CG_GC_variants_without_resolving_frequency
+  mapping_unit: complete_multistate_target_response_bundle
+  mapping_rule: uniform_bijection_within_frozen_stratum
+  mapping_scope: one_mapping_per_mediator_across_all_snps_genes_and_states
+  stratum_variables:
+    - exact_state_availability
+    - per_state_target_baseMean_low_high
+    - per_state_n_cells_target_low_high
+    - per_state_nonzero_response_degree_low_high
+  threshold_population: all_quality_control_passed_target_state_rows
+  bin_boundary: low_if_less_than_or_equal_to_median_high_if_greater
+  minimum_distinct_targets_to_permute: 5
+  fixed_points: allowed
+  small_strata: identity_mapping
+  eligibility: finite_nonzero_effect_reapplied_to_identity_and_every_permutation
+  subsets: [primary, bonferroni]
+  scopes: [overall, Rest, Stim8hr, Stim48hr]
+  metrics: [direction_agreement, score_spearman]
+  multiplicity:
+    method: benjamini_hochberg
+    family_slots: 16
+    unavailable_slots_retained_in_denominator: true
+  uncertainty_cluster: source_chromosome
+  influence: leave_one_source_chromosome_out_with_strata_and_mappings_frozen
+output: analyses/natural_genetics/results_audit_corrected

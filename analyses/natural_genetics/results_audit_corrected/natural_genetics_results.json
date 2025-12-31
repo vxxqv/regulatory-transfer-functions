@@ -1,0 +1,27 @@
+{
+  "chromosome_cluster_bootstrap_replicates": 2000,
+  "correction_id": "NG-AUDIT-01",
+  "hypothesis_available_slots": 13,
+  "hypothesis_family_slots": 16,
+  "identity_eligible_pairs": 425,
+  "identity_ineligible_zero_or_nonfinite_pairs": 30887,
+  "permutable_strata": 198,
+  "permutations": 1000,
+  "pre_effect_selection_rows": 31312,
+  "primary_overall_direction_agreement": 0.5858823529411765,
+  "primary_overall_direction_ci_95": [
+    0.48034234445596485,
+    0.7637730974005636
+  ],
+  "primary_overall_direction_permutation_p": 0.14385614385614387,
+  "primary_overall_direction_q_fixed_16": 0.4603396603396604,
+  "primary_overall_score_permutation_p": 0.13886113886113885,
+  "primary_overall_score_q_fixed_16": 0.4603396603396604,
+  "primary_overall_score_spearman": 0.20242085916217342,
+  "seed": 20260912,
+  "small_identity_strata": 233,
+  "status": "retrospective_audit_correction",
+  "targets_in_mapping_universe": 6105,
+  "unresolved_palindromic_rows_excluded_before_state_expansion": 3237,
+  "unresolved_palindromic_snps_excluded": 251
+}

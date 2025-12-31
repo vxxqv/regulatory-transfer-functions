@@ -1,0 +1,29 @@
+{
+  "amendment_sha256": "ee3f64d83624b8fc4844daa7dcfebe4e02dfe44d6c7d2ffb3d66cf59bd82511f",
+  "available_slots_require_all_scheduled_null_replicates_finite": true,
+  "correction_id": "NG-AUDIT-01",
+  "identity_and_permutation_eligibility_symmetric": true,
+  "input_hashes_verified": true,
+  "loco_mappings_and_strata_frozen": true,
+  "mapping_bundle_integrity_all_replicates": true,
+  "null_replicate_denominators_stored": true,
+  "one_mapping_per_mediator_all_associations_states": true,
+  "original_outputs_verified_unchanged": true,
+  "output_hashes": {
+    "association_universe.parquet": "e4dc9e5f94128cc6d6a5b0de04c103937c0278fd25c7cc759fb8967dd570f320",
+    "chromosome_cluster_bootstrap.parquet": "6581fb9ee97ab4871fb4f6f9a2b2ec76e8e000ccacb4e295907c9be52c02270d",
+    "directional_pairs.parquet": "8da61949aebb1237406324326263baf18eb40b4f0ee29d5a8905afb8c959daec",
+    "hypothesis_tests.csv": "3271725e5327ba0a9b4a537c3b8471c6486b99a9c8c5f56436779003e2e15f56",
+    "input_exclusion_flow.csv": "44c40fcd0334fe95cc8ec852a5e0a52e99d69d460eb46cf43aeb2cbea8e29ab9",
+    "leave_one_source_chromosome_out.csv": "51526ee7d20336b489c56332b637f9e7a25083b145dd7f36b530305d4755e382",
+    "matched_null.parquet": "378a002e72373113322c111f12f0163d5dcffc2acfe182249ef3e53cb1bd7114",
+    "natural_genetics_results.json": "aaa094ee3370faa001dfb224c97454b7561dfba6973a78340e9400549ec0fa49",
+    "permutation_mediator_mappings.parquet": "1d713cfb984452200c93d0beb405887c316416a33ed2ca241f6110d88eeb8b0e",
+    "stratum_summary.csv": "aed74ef3d6bfcaef2b044b90761ac3d36a0936e2c41dabbedde8369a42448d8f",
+    "stratum_thresholds.csv": "95e034bded91e9a34d60c64a1717c930488c039c4d86a876ded90b6c963dd6f1",
+    "target_state_rows.parquet": "89ad10dc8564b01fa126d86b96960f59621f31e364773f8c91ceffd9919a3ad7",
+    "target_strata.csv": "ceece23e173d1cc779449f492fd9b2b84cddb7d4b8b7caa26ecbcc57a4216347"
+  },
+  "row_order_rule": "stable lexical target and stratum ordering before seeded bijections",
+  "script_sha256": "404fc5f2413b3b3b9f27d2c452ba9fb83237e9deb1363fd6a316a6e827a73fe3"
+}
