@@ -6,6 +6,19 @@ data/independent_confirmation/genetics/
 work/
 outputs/
 submission/
+manuscript/build_documents.py
+manuscript/build_graphical_abstract.py
+manuscript/build_graphical_abstract_pptx.mjs
+manuscript/highlights.txt
+manuscript/manuscript.md
+manuscript/supplementary_information.md
+manuscript/prepare_powerpoint_candidate.py
+manuscript/validate_submission.py
+.chart-data-*/
+.codex-build/
+.codex-finalizer/
+.codex/
+tmp/
 
 # Python
 __pycache__/
