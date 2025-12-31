@@ -1,0 +1,76 @@
+{
+  "cluster_switch": {
+    "switching_targets": 80,
+    "targets_with_all_three_cluster_assignments": 121
+  },
+  "complete_three_state_targets": 4399,
+  "condition_residual_test": {
+    "kruskal_h": 0.3515205343542677,
+    "p_value": 0.8388190516939051
+  },
+  "cross_state_transfer_correlations": {
+    "Rest_vs_Stim48hr": {
+      "n": 4399,
+      "p_value": 0.0,
+      "rho": 0.5731634973189573
+    },
+    "Rest_vs_Stim8hr": {
+      "n": 4399,
+      "p_value": 0.0,
+      "rho": 0.6345410449701568
+    },
+    "Stim8hr_vs_Stim48hr": {
+      "n": 4399,
+      "p_value": 0.0,
+      "rho": 0.625902485764663
+    }
+  },
+  "cross_validation_folds": 10,
+  "median_context_switch": {
+    "ci_95_high": 0.5934907639996099,
+    "ci_95_low": 0.5595922907145714,
+    "estimate": 0.5723733522962557,
+    "null_definition": "condition-stratified independent target reassignment",
+    "observed_statistic": 0.5723733522962557,
+    "permutation_null_median": 1.229545628135964,
+    "permutation_p_lower": 0.000999000999000999,
+    "permutation_p_upper": 1.0
+  },
+  "out_of_fold_r2": 0.08770141003465104,
+  "primary_rows": 15807,
+  "primary_targets": 6105,
+  "source_rows": 33983,
+  "source_targets": 11526,
+  "technical_and_reproducibility_checks": {
+    "cis_magnitude": {
+      "n": 15807,
+      "p_value": 9.624523843703487e-17,
+      "rho": -0.06602393247287071
+    },
+    "donor_reproducibility": {
+      "n": 2300,
+      "p_value": 4.274325305412656e-127,
+      "rho": 0.4705934322647237
+    },
+    "guide_reproducibility": {
+      "n": 13674,
+      "p_value": 1.3306518297739096e-87,
+      "rho": 0.16847146352390663
+    },
+    "target_cells": {
+      "n": 15807,
+      "p_value": 0.14483937918111875,
+      "rho": 0.011597217377618905
+    },
+    "target_expression": {
+      "n": 15807,
+      "p_value": 1.9646765907740155e-21,
+      "rho": -0.07551391772950905
+    }
+  },
+  "transfer_class_counts": {
+    "amplified": 1581,
+    "buffered": 1581,
+    "intermediate": 12645
+  }
+}

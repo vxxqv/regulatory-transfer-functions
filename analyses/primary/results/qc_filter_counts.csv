@@ -1,0 +1,10 @@
+criterion,rows_passing,targets_passing,fraction_rows
+all_rows,33983,11526,1.0
+ontarget_significant,21221,7912,0.6244592884677633
+adequate_target_expression,26177,9166,0.7702969131624636
+no_neighboring_gene_knockdown,31364,10823,0.9229320542624253
+no_distal_offtarget,33550,11488,0.9872583350498779
+minimum_guides,30121,10342,0.8863549421769709
+minimum_cells,30515,10490,0.8979489744872436
+complete_covariates,28133,9498,0.8278551040225995
+primary_analysis_set,15807,6105,0.4651443368743195
