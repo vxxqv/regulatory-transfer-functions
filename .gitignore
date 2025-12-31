@@ -2,6 +2,7 @@
 data/raw/
 data/interim/
 data/processed/
+data/independent_confirmation/genetics/
 work/
 outputs/
 
