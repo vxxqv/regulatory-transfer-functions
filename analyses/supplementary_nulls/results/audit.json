@@ -1,0 +1,10 @@
+{
+  "chromosomes": 19,
+  "context_label_permutations": 1000,
+  "degree_rewirings": 1000,
+  "directional_pairs": 448,
+  "feature_label_permutations": 1000,
+  "matched_genetic_permutations": 1000,
+  "negative_disease_tests": 366,
+  "sign_flips": 10000
+}
