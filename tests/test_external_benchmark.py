@@ -1,5 +1,6 @@
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 
@@ -63,3 +64,36 @@ def test_causal_denominator_and_mediation_stops_are_complete() -> None:
     assert (gates.groupby("locus")["gate"].nunique() == 7).all()
     assert not grades["mediation_claim"].any()
     assert (grades["mediation_status"] == "not_tested_assumptions_failed").all()
+    observed = grades.set_index("locus")
+    assert observed["passed_gates"].to_dict() == {"gata3": 4, "stat3": 4, "ptpn22": 3}
+    assert observed.loc["gata3", "cd4_h3k27ac_overlap_variants"] == 8
+    assert observed.loc["stat3", "cd4_h3k27ac_overlap_variants"] == 17
+    assert observed.loc["ptpn22", "cd4_h3k27ac_overlap_variants"] == 0
+    assert np.isclose(observed.loc["gata3", "cd4_h3k27ac_overlap_posterior"], 0.9363167362)
+    assert np.isclose(observed.loc["stat3", "cd4_h3k27ac_overlap_posterior"], 0.3992716509)
+
+
+def test_causal_gates_implement_frozen_or_coverage_and_two_link_rules() -> None:
+    results = ROOT / "analyses/causal_triangulation/results"
+    gates = pd.read_csv(results / "evidence_gates.csv")
+    matrix = gates.pivot(index="locus", columns="gate", values="status")
+    assert matrix["credible_set_cd4_chromatin_overlap"].to_dict() == {
+        "gata3": "passed",
+        "ptpn22": "failed",
+        "stat3": "passed",
+    }
+    assert matrix["gwas_cis_eqtl_colocalization"].to_dict() == {
+        "gata3": "failed",
+        "ptpn22": "failed",
+        "stat3": "unresolved",
+    }
+    assert matrix["enhancer_to_gene"].eq("failed").all()
+    coloc = pd.read_csv(results / "colocalization_gate_components.csv").set_index("locus")
+    assert coloc["regional_coverage_status"].eq("unavailable").all()
+    assert bool(coloc.loc["stat3", "shared_variant_posterior_pass"])
+    links = pd.read_csv(results / "enhancer_link_components.csv")
+    assert not links["status"].eq("supported").any()
+    unavailable = pd.read_csv(results / "unavailable_tests.csv")
+    coverage = unavailable[unavailable["analysis"] == "colocalization_regional_coverage"]
+    assert len(coverage) == 3
+    assert coverage["status"].eq("unavailable").all()

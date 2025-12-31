@@ -1,1 +1,4 @@
-locus,sum,count,p_value,q_value
+locus,matches,count,direction_fraction,p_value,q_value,status
+gata3,0,0,,,,unresolved
+stat3,0,0,,,,unresolved
+ptpn22,0,0,,,,unresolved

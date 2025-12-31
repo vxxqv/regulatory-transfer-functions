@@ -1,12 +1,22 @@
 {
   "called_contact_rows": 0,
+  "chain_bytes": 227698,
+  "chain_path": "work/regulatory_inputs/hg19ToHg38.over.chain.gz",
+  "chain_sha256": "5c0598e500ceb5a78c73086929e8ef993aec309bcafb595139b53d440b125a1d",
+  "distance_definition": "number of intervening bases; adjacent intervals have distance zero",
   "doi": "10.1186/s13059-017-1285-0",
+  "eligible_gene_lifted_rows": 58,
+  "eligible_gene_source_rows": 58,
+  "failed_liftover_rows": 0,
   "frozen_credible_variants": 50,
   "interaction_call_rule": "CHiCAGO score greater than 5 in either CD4 state",
-  "mapping_service": "Ensembl REST GRCh38 to GRCh37",
+  "liftover_method": "UCSC hg19ToHg38 chain via pyliftover",
   "source": "Burren et al. 2017 Additional file 5 Table S4",
   "source_assembly": "GRCh37",
   "source_bytes": 14877899,
   "source_interaction_rows": 291535,
-  "source_sha256": "23eb3205b2d45922cb511f698ba490de686df9e57c3a81f60568c865752ff857"
+  "source_interval_convention": "zero-based half-open",
+  "source_sha256": "23eb3205b2d45922cb511f698ba490de686df9e57c3a81f60568c865752ff857",
+  "target_assembly": "GRCh38",
+  "variant_position_convention": "one-based; converted to zero-based before overlap"
 }

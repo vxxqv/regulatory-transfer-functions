@@ -1,0 +1,16 @@
+locus,gene,link_type,status,value,evidence
+gata3,GATA3,activity_by_contact,available_unqualified,0.8451496958732605,Open Targets rE2G aggregate feature
+gata3,GATA3,promoter_capture_hic,unsupported,0.0,credible variants in called primary CD4 PCHiC interactions
+gata3,GATA3,coaccessibility,unavailable,,no frozen locus-specific coaccessibility link
+gata3,GATA3,curated_locus_to_gene,unavailable,,no independent frozen curated enhancer-to-gene link
+gata3,GATA3,experimental_enhancer_perturbation,unavailable,,no frozen enhancer perturbation assay at this locus
+stat3,STAT3,activity_by_contact,available_unqualified,0.0280619487166404,Open Targets rE2G aggregate feature
+stat3,STAT3,promoter_capture_hic,unsupported,0.0,credible variants in called primary CD4 PCHiC interactions
+stat3,STAT3,coaccessibility,unavailable,,no frozen locus-specific coaccessibility link
+stat3,STAT3,curated_locus_to_gene,unavailable,,no independent frozen curated enhancer-to-gene link
+stat3,STAT3,experimental_enhancer_perturbation,unavailable,,no frozen enhancer perturbation assay at this locus
+ptpn22,PTPN22,activity_by_contact,unsupported,0.0,Open Targets rE2G aggregate feature
+ptpn22,PTPN22,promoter_capture_hic,unsupported,0.0,credible variants in called primary CD4 PCHiC interactions
+ptpn22,PTPN22,coaccessibility,unavailable,,no frozen locus-specific coaccessibility link
+ptpn22,PTPN22,curated_locus_to_gene,unavailable,,no independent frozen curated enhancer-to-gene link
+ptpn22,PTPN22,experimental_enhancer_perturbation,unavailable,,no frozen enhancer perturbation assay at this locus

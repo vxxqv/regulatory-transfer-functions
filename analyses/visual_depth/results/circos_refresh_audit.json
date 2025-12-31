@@ -1,0 +1,11 @@
+{
+  "correction_id": "CT-001",
+  "locus_grades_sha256": "b0351b283562e21c6f06e5ea19d649d67ec241b34217d3dfdb7e892399b9d138",
+  "output_sha256": "e13b0fda8ed57c54be60c4191ac5da2452403c339269db8a747c506678dddc67",
+  "rows": 21,
+  "tier_by_locus": {
+    "gata3": "tier_3_partial",
+    "ptpn22": "tier_4_unsupported_or_contradictory",
+    "stat3": "tier_3_partial"
+  }
+}

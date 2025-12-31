@@ -1,9 +1,9 @@
 source,target,source_type,target_type,status,weight,evidence_tier,condition
-rs3824660,GATA3,variant,gene,available,0.4496459637453133,tier_4_unsupported_or_contradictory,locus
-GATA3,Program 25,gene,program,available,3.1820174320279584,tier_4_unsupported_or_contradictory,Rest
-Program 25,disease link unavailable,program,disease,unavailable,0.0,tier_4_unsupported_or_contradictory,Rest
-GATA3,Program 25,gene,program,available,3.3731054191307153,tier_4_unsupported_or_contradictory,Stim48hr
-Program 25,disease link unavailable,program,disease,unavailable,0.0,tier_4_unsupported_or_contradictory,Stim48hr
+rs3824660,GATA3,variant,gene,available,0.4496459637453133,tier_3_partial,locus
+GATA3,Program 25,gene,program,available,3.1820174320279584,tier_3_partial,Rest
+Program 25,disease link unavailable,program,disease,unavailable,0.0,tier_3_partial,Rest
+GATA3,Program 25,gene,program,available,3.3731054191307153,tier_3_partial,Stim48hr
+Program 25,disease link unavailable,program,disease,unavailable,0.0,tier_3_partial,Stim48hr
 rs3736161,STAT3,variant,gene,available,0.0415528255932921,tier_3_partial,locus
 STAT3,Program 106,gene,program,available,2.34531032590552,tier_3_partial,Rest
 Program 106,disease link unavailable,program,disease,unavailable,0.0,tier_3_partial,Rest

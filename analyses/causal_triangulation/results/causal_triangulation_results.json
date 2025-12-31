@@ -3,9 +3,14 @@
   "atac_file_sha256": "f6d24433af87ecae698368268a5215a01d80c75bf425e38593d808548762fefb",
   "atac_source": "ENCODE ENCSR841LHT, ENCFF944LFH, GRCh38 IDR thresholded peaks",
   "atac_source_noncompliance_note": true,
+  "chromatin_gate_rule": "at least one 95% credible-set variant overlaps CD4 ATAC or H3K27ac",
+  "colocalization_coverage_status": "unavailable_for_all_loci",
+  "config_sha256": "90a710c66264e6258618679b180fd795c85c87d2f1e291413e526d5e999ec224",
   "eligible_locus_denominator": 3,
+  "h3k27ac_file_sha256": "d4c003434581b8e1117c06477b484b53b8798e55daf636ba38da594da675f905",
+  "h3k27ac_source": "ENCODE ENCSR396RXX, ENCFF068XUG, GRCh38 pseudoreplicated narrow peaks",
   "loci_with_mediation_claim": 0,
   "matched_negative_locus_status": "unresolved_missing_matching_fields",
   "pchic_call_rule": "CHiCAGO score greater than 5 in either CD4 state",
-  "pchic_source": "Burren et al. 2017 Additional file 5 Table S4, GRCh37"
+  "pchic_source": "Burren et al. 2017 Additional file 5 Table S4, lifted from GRCh37 with the frozen UCSC chain"
 }

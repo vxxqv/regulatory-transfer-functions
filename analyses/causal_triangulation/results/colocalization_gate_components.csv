@@ -1,0 +1,4 @@
+locus,gene,shared_variant_posterior,minimum_shared_variant_posterior,shared_variant_posterior_pass,regional_coverage_status,final_status,reason
+gata3,GATA3,0.0,0.8,False,unavailable,failed,shared-variant posterior below threshold
+stat3,STAT3,0.964428186416626,0.8,True,unavailable,unresolved,"posterior threshold passed, but adequate regional coverage was not reported by the frozen source"
+ptpn22,PTPN22,0.0,0.8,False,unavailable,failed,shared-variant posterior below threshold

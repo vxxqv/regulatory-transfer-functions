@@ -1,2 +1,4 @@
-locus,gene,rsid,role,assessed_allele,other_allele,z_score,p_value,samples,valid_for_mediation,exclusion_reason
-ptpn22,PTPN22,rs2476601,variant_to_cis,A,G,15.2163,2.7610999999999996e-52,30125,False,fewer_than_three_independent_instruments
+locus,gene,rsid,role,assessed_allele,other_allele,z_score,p_value,samples,status,valid_for_mediation,exclusion_reason
+gata3,GATA3,rs3824660,variant_to_cis,,,,,,unavailable,False,no_lead_variant_cis_association_for_selected_gene
+stat3,STAT3,rs3736161,variant_to_cis,,,,,,unavailable,False,no_lead_variant_cis_association_for_selected_gene
+ptpn22,PTPN22,rs2476601,variant_to_cis,A,G,15.2163,2.7610999999999996e-52,30125.0,observed_but_ineligible,False,fewer_than_three_independent_instruments
