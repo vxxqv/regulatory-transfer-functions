@@ -29,6 +29,7 @@ def test_freeze_manifest_and_artifacts():
             json.loads((ROOT / "analyses/pyvista_landscape/render_amendment.json").read_text()),
             json.loads((FREEZE / "reporting_amendment_01.json").read_text()),
             json.loads((FREEZE / "release_metadata_amendment.json").read_text()),
+            json.loads((FREEZE / "release_history_amendment.json").read_text()),
         ]
     }
     assert manifest["status"] == "frozen_before_new_external_outcome_inspection"

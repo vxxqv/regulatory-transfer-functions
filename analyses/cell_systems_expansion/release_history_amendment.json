@@ -1,0 +1,9 @@
+{
+  "path": "analyses/molecular_cascade/protocol_revision.json",
+  "parent_sha256": "1fb50e142286e56b84d2eaa7c03d5c7dd397c9b913a3dae042ca791cd0d0eca6",
+  "parent_bytes": 363,
+  "current_sha256": "4224949b9357c419fb3e40b8cba337d1ec3b4eaa25af723ab0515d6eb7ec0d4d",
+  "current_bytes": 363,
+  "analysis_values_changed": false,
+  "reason": "Updated only the frozen Git object identifier after a metadata-only history rewrite; the referenced file digest is unchanged."
+}
