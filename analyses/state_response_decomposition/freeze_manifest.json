@@ -2,7 +2,7 @@
   "status": "retrospective extension frozen before new decomposition outcomes",
   "targets": 4399,
   "config_sha256": "e8e15cda15cfa906c2a6156d8730b06d395dec84d3637c4c184a300d1a577bdd",
-  "cohort_sha256": "f59cecc97aeb34e269b8d14fa410374583a6f15bc44f873d53614cdd550c1a47",
+  "original_crlf_cohort_sha256": "f59cecc97aeb34e269b8d14fa410374583a6f15bc44f873d53614cdd550c1a47",
   "canonical_cohort_sha256": "b4cb275bfd27d04b26b72c34eb9af7c2d697af09e27244ee14f3a402df658d9b",
   "sources": {
     "data/interim/gwt_vectors/rows.parquet": "ad1ff11af7c34db7baae8eb24971e0f698a0a73ba70d70255def1851f0acdf9c",

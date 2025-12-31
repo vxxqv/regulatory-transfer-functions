@@ -43,6 +43,8 @@ def test_folds_and_sensitivity_denominators():
     manifest = json.loads((ROOT / "analyses/state_response_decomposition/freeze_manifest.json").read_text())
     cohort_text = (ROOT / "analyses/state_response_decomposition/frozen_cohort.tsv").read_text(encoding="utf-8")
     assert hashlib.sha256(cohort_text.encode()).hexdigest() == manifest["canonical_cohort_sha256"]
+    assert hashlib.sha256(cohort_text.replace("\n", "\r\n").encode()).hexdigest() == manifest["original_crlf_cohort_sha256"]
+    assert "cohort_sha256" not in manifest
     config_text = (ROOT / "config/state_response_decomposition.yaml").read_text(encoding="utf-8")
     assert hashlib.sha256(config_text.encode()).hexdigest() == manifest["config_sha256"]
 
@@ -55,6 +57,8 @@ def test_matched_null_and_direction():
     assert null["mean_core_fraction"].between(0, 1).all()
     expected_p = (1 + (null["mean_core_fraction"] >= audit["mean_core_fraction"]).sum()) / 1000
     assert expected_p == audit["matched_null_p"]
+    assert "directional one-sided matched permutation" in audit["matched_null_p_tail"]
+    assert "not separately preregistered" in audit["tail_reporting"]
     np.testing.assert_allclose(assoc["rho_excess"], assoc["rho"] - assoc["null_median"])
     assert (assoc.loc[assoc["status"] == "below_matched_null", "excess_ci_high"] < 0).all()
     assert (assoc.loc[assoc["status"] == "above_matched_null", "excess_ci_low"] > 0).all()

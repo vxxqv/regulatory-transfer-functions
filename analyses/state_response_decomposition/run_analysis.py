@@ -300,6 +300,8 @@ def main():
     ]
     pd.DataFrame(gates).to_csv(OUT / "availability_gates.tsv", sep="\t", index=False)
     audit = {"targets": len(target), "target_state_rows": len(target) * 3, "nonzero_targets": int(finite.sum()), "zero_energy_targets": int((~finite).sum()), "signed_consensus_targets": int((target["consensus_genes"] > 0).sum()), "state_nonzero": {state: int((energy[:, i] > 0).sum()) for i, state in enumerate(states)}, "maximum_energy_identity_error": float(np.max(np.abs(total - core_energy - residual_energy.sum(axis=1)))), "mean_core_fraction": float(np.nanmean(fraction)), "matched_null_mean": float(null["mean_core_fraction"].mean()), "matched_null_p": float((1 + (null["mean_core_fraction"] >= np.nanmean(fraction)).sum()) / (len(null) + 1)), "maximum_absolute_leave_one_target_change": float(target["leave_one_target_mean_change"].abs().max()), "source_sha256_verified": True, "freeze_manifest_sha256": sha(freeze_path), "elapsed_seconds": time.perf_counter() - start, "interpretation": "Mean component is a descriptive energy projection. Biological conservation also requires signed consensus and held-out or independent reproducibility."}
+    audit["matched_null_p_tail"] = "directional one-sided matched permutation: observed mean core fraction greater than the null"
+    audit["tail_reporting"] = "Reporting clarification; the tail was not separately preregistered."
     (OUT / "audit.json").write_text(json.dumps(audit, indent=2) + "\n")
     print(json.dumps(audit, indent=2))
 

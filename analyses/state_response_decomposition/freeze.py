@@ -58,7 +58,7 @@ def main():
         "status": "retrospective extension frozen before new decomposition outcomes",
         "targets": len(targets),
         "config_sha256": digest(config_path),
-        "cohort_sha256": digest(folder / "frozen_cohort.tsv"),
+        "original_crlf_cohort_sha256": hashlib.sha256((folder / "frozen_cohort.tsv").read_text(encoding="utf-8").replace("\n", "\r\n").encode()).hexdigest(),
         "canonical_cohort_sha256": hashlib.sha256((folder / "frozen_cohort.tsv").read_text(encoding="utf-8").encode()).hexdigest(),
         "sources": {name: digest(args.source_root / name) for name in FILES},
         "outcomes_examined_before_freeze": False,
