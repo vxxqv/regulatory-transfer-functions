@@ -5,6 +5,7 @@ data/processed/
 data/independent_confirmation/genetics/
 work/
 outputs/
+submission/
 
 # Python
 __pycache__/
