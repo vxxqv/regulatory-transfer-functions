@@ -46,7 +46,7 @@ Downstream programs are represented by the source study's perturbation clusters 
 
 ## External benchmark and falsification challenge
 
-All CD4-derived outcomes, features, labels, module loadings, model predictions, and target-fold assignments are locked by SHA-256 digest before processing the falsification holdout. Replogle K562 results inspected during development remain a labeled external replication analysis and are not represented as untouched. The confirmatory falsification holdout is a separately acquired Replogle RPE1 CRISPRi Perturb-seq screen. Its perturbation outcomes cannot alter the CD4 feature definitions, model hyperparameters, endpoints, eligibility rules, folds, null procedures, or decision thresholds.
+The original external benchmark locked all CD4-derived outcomes, features, labels, module loadings, model predictions, and target-fold assignments by SHA-256 digest before processing the RPE1 endpoint. Replogle K562 and RPE1 results are now already inspected external analyses and cannot serve as untouched confirmation for later extensions. Their perturbation outcomes cannot alter the CD4 feature definitions, model hyperparameters, endpoints, eligibility rules, folds, null procedures, or decision thresholds.
 
 The primary external endpoint is `log(1 + number of differentially expressed genes)` for each eligible shared perturbation target. Secondary endpoints are the pseudobulk response norm and cross-system response-vector concordance. Every eligible target is retained in the target-level results table. Targets that fail minimum-cell, gene-overlap, or effect-estimation requirements remain in an exclusions table with one explicit reason.
 
@@ -96,7 +96,7 @@ Motif tests use controls matched within state and chromosome class on baseline e
 
 Guide concordance is reported for cis knockdown, full-vector and significant-union correlations, significant-union sign agreement, and significant-gene counts. Guide-resolved signed vectors, module activity, transfer gain, rerouting, disease convergence, and joint donor-by-guide effects are unavailable in the public release and are not reconstructed. Two-guide target-state combinations cannot identify target-specific nonlinear dose curves or cis mediation. They remain underpowered for those estimands.
 
-Timing comparisons use the Rest, 8-hour, and 48-hour cross-sectional states to test direct-edge support, cascade depth, signed propagation, module coherence, and rerouting. They are not interpreted as longitudinal causation. K562 provides direction-aware external replication. RPE1 remains a scalar untouched falsification endpoint because compatible signed target-gene vectors were not retained in the frozen benchmark output. Every supported, contradictory, null, heterogeneous, unavailable, and underpowered target remains in machine-readable tables.
+Timing comparisons use the Rest, 8-hour, and 48-hour cross-sectional states to test direct-edge support, cascade depth, signed propagation, module coherence, and rerouting. They are not interpreted as longitudinal causation. K562 provides direction-aware external replication. RPE1 remains a previously inspected scalar external falsification endpoint because compatible signed target-gene vectors were not retained in the frozen benchmark output. Every supported, contradictory, null, heterogeneous, unavailable, and underpowered target remains in machine-readable tables.
 
 ## Negative controls
 
@@ -113,4 +113,4 @@ Benjamini-Hochberg correction is applied separately to the prespecified families
 
 ## Confirmatory boundary
 
-The protocol, quality filters, transfer outcome, covariates, cross-validation grouping, tail thresholds, multiplicity families, and external-challenge decision rules are frozen before inspecting the confirmatory labels to which they apply. Analyses whose outcomes had already been inspected are labeled external replication, not untouched confirmation. Additional models are explicitly marked exploratory.
+The protocol, quality filters, transfer outcome, covariates, cross-validation grouping, tail thresholds, multiplicity families, and external-challenge decision rules were frozen before the original confirmatory labels were inspected. Analyses whose outcomes have since been inspected are labeled external replication or external falsification, not untouched confirmation. Additional models are explicitly marked exploratory.

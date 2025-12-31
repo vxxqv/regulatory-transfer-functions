@@ -1,0 +1,7 @@
+{
+  "status": "reporting_only_revision",
+  "frozen_protocol_commit": "9fa022af811c18323681f6cabfae624c2e715aa0",
+  "frozen_protocol_sha256": "cd3f185cc0b043664ab7afb68b96199b0b90533e042de0a4862ac1f215b7cf9f",
+  "reason": "RPE1 outcomes are already inspected and cannot be reused as untouched confirmation in later analyses.",
+  "analysis_values_changed": false
+}

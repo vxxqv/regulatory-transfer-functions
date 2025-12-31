@@ -1,0 +1,311 @@
+version: 1
+freeze_seed: 20260913
+question: How much regulatory information survives a perturbation, how do perturbations compose, and when does their regulatory logic transfer across states and systems?
+
+core:
+  genome_build: GRCh38
+  gene_identifier: Ensembl_with_frozen_gene_symbol_crosswalk
+  states: [Rest, Stim8hr, Stim48hr]
+  complete_state_targets: 4399
+  primary_rows: 15807
+  primary_targets: 6105
+  response_gene_universe: 10282
+  exclude_cis_gene: true
+  retain_negative_null_unavailable_underpowered: true
+  do_not_change:
+    - CD4 transfer definition
+    - primary quality filters
+    - response normalization
+    - thirty frozen response modules
+    - transfer-class thresholds
+    - target-held-out fold rule
+    - molecular evidence rules
+
+existing_system_roles:
+  GSE314342_CD4:
+    role: development_source
+    outcomes_previously_inspected: true
+  Replogle_K562_CRISPRi:
+    role: external_replication_previously_inspected
+    outcomes_previously_inspected: true
+  Replogle_RPE1_CRISPRi:
+    role: external_development_result_previously_inspected
+    outcomes_previously_inspected: true
+    untouched_claim_allowed: false
+  future_eligible_external:
+    role: confirmatory_holdout
+    outcomes_previously_inspected: false
+
+external_dataset_eligibility:
+  confirmatory:
+    species: human
+    interventions: [CRISPRi, knockdown]
+    require_single_and_double_perturbations: true
+    require_non_targeting_controls: true
+    require_clear_guide_assignments: true
+    require_processed_counts_or_anndata: true
+    require_uncertainty_unit: true
+    minimum_cells_per_single: 50
+    minimum_cells_per_pair: 50
+    minimum_control_cells: 500
+    minimum_unique_pairs: 40
+    minimum_unique_targets: 15
+    minimum_overlapping_cd4_targets: 20
+    minimum_expressed_overlap_genes: 200
+  sensitivity_only_interventions: [CRISPRa, Cas13, overexpression, chemical]
+  exclusions:
+    - no matching single perturbations
+    - no non-targeting control
+    - incompatible or unresolved target identifiers
+    - intervention direction cannot be harmonized
+    - processed release fails documented quality checks
+    - outcome labels were used to select the dataset
+  selection_order:
+    - confirmatory intervention compatibility
+    - complete required metadata
+    - number of eligible target pairs descending
+    - number of overlapping CD4 targets descending
+    - accession ascending
+  processing: processed_release_only_unless_documented_qc_failure
+
+common_inference:
+  alpha: 0.05
+  correction: benjamini_hochberg_within_prespecified_family
+  confidence_level: 0.95
+  bootstrap_replicates: 1000
+  permutation_replicates: 1000
+  rewiring_replicates: 1000
+  increase_resamples_only_if:
+    q_value_distance_from_0_05_at_most: 0.005
+    maximum_replicates: 5000
+  bootstrap_units:
+    response: target
+    composition: unordered_target_pair
+    external: target_within_dataset
+  required_reporting:
+    - numerator
+    - denominator
+    - effect_size
+    - confidence_interval
+    - raw_p_value
+    - corrected_q_value
+    - validation_design
+    - null_definition
+    - eligibility_rule
+    - exclusion_count
+    - decision
+  decisions: [supported, failed, unresolved, unavailable, underpowered, heterogeneous]
+  calibration:
+    slopes: true
+    prediction_interval_coverage: [0.50, 0.80, 0.95]
+    calibration_intercept: true
+  computational_reporting: [wall_time_seconds, peak_memory_mb, output_storage_mb]
+
+splits:
+  target:
+    folds: 10
+    rule: 1_plus_first_16_hex_sha256_uppercase_target_modulo_10
+  pair:
+    folds: 5
+    canonical_id: sorted_target_a_pipe_target_b_pipe_dataset_accession
+    rule: 1_plus_first_16_hex_sha256_canonical_id_modulo_5
+  guide:
+    folds: 5
+    rule: 1_plus_first_16_hex_sha256_dataset_pipe_guide_id_modulo_5
+  dataset: leave_one_dataset_out
+  state: leave_one_state_out
+  intervention_type: leave_one_intervention_type_out_sensitivity
+  all_preprocessing_fit_on_training_only: true
+
+negative_controls:
+  pair_label_permutation_match: [dataset, intervention_type, single_response_norm_quintiles, cell_count_quintile]
+  target_label_permutation_match: [state, expression_quintile, response_degree_quintile, network_degree_quintile]
+  sign_preserving_vector_permutation: within_gene_detection_and_response_degree_blocks
+  network_null: directed_degree_preserving_edge_swap
+  random_modules: size_expression_and_response_degree_matched
+  exposures: [non_targeting_pairs, single_plus_non_targeting, same_target_guide_pairs]
+  outcomes: [negative_control_genes, matched_unresponsive_modules, permuted_disease_programs]
+
+compositionality:
+  primary_endpoint: target_pair_cluster_bootstrap_difference_in_heldout_response_cosine_against_best_simple_baseline
+  secondary_endpoints:
+    - residual_l2_norm
+    - signed_residual_projection
+    - module_residual_norm
+    - transfer_gain_change
+    - buffering_change
+    - rerouting_change
+    - emergent_gene_fraction
+    - lost_shared_gene_fraction
+    - interaction_class_log_loss
+    - calibration
+  minimum_power:
+    pair_model: {eligible_pairs: 100, unique_targets: 30, unique_pairs_per_test_fold: 15}
+    dataset_replication: {eligible_pairs: 40, unique_targets: 15}
+    guide_held_out: {guides_per_component: 2}
+  models:
+    simple_addition: {fit: none}
+    stronger_single: {fit: none}
+    mean_response_template: {fit: training_only}
+    covariate_only: {ridge_alpha: 1.0}
+    signed_magnitude_limited: {cap_quantile: 0.99, cap_source: training_singles}
+    saturating: {function: tanh, scale_grid: [0.25, 0.5, 1.0, 2.0, 4.0]}
+    low_rank_module: {components: 30, loadings: frozen_cd4}
+    regularized_nonlinear: {family: histogram_gradient_boosting, max_depth: 3, learning_rate: 0.05, max_iter: 200, l2_regularization: 1.0}
+    network_propagation: {restart_grid: [0.25, 0.5, 0.75], network: frozen_regulatory_network}
+    graph_composition: {layers: 2, hidden_dimensions: 32, weight_decay: 0.001, early_stopping_rounds: 20}
+    CPA_or_GEARS: compatibility_gated_published_implementation_only
+  model_selection: nested_pair_held_out_mean_response_cosine_then_log_loss
+  class_rules:
+    thresholds_from: training_fold_negative_control_pairs_only
+    null_quantile: 0.95
+    alignment_same_sign: 0.50
+    alignment_opposite_sign: -0.25
+    norm_ratio_low: 0.75
+    norm_ratio_high: 1.25
+    hierarchy: [underpowered, unresolved, signed_cancellation, redundant_or_saturating, suppressive, synergistically_amplified, emergent, rerouted, approximately_additive]
+    uncertainty_rule: unresolved_if_bootstrap_interval_crosses_adjacent_class_gate
+  hypotheses:
+    H1: aligned same-sign singles are enriched for sub-additive or saturating responses
+    H2: anti-aligned singles are enriched for signed cancellation
+    H3: overlapping neighborhoods or modules predict redundancy after single-effect adjustment
+    H4: distinct paths converging on one module predict synergy or rerouting
+    H5: frozen CD4 geometry predicts held-out interaction behavior beyond simple and degree baselines
+    H6: molecularly supported paths compose more reproducibly than unsupported paths
+  primary_pass:
+    requirements:
+      - H5 corrected q below 0.05
+      - paired 95 percent interval for improvement over best simple baseline excludes zero
+      - improvement reproduces in at least one eligible external dataset
+
+transportability:
+  reliability_estimators: [guide_to_guide, donor_pair, split_half_spearman_brown, replicate_agreement, response_vector, module_score]
+  minimum_replicate_units: 3
+  minimum_reliability: 0.10
+  measurement_error_model: bounded_hierarchical_errors_in_variables
+  corrected_concordance_bounds: [-1.0, 1.0]
+  endpoints:
+    - observed_signed_profile_concordance
+    - reliability_corrected_concordance
+    - module_concordance
+    - transfer_class_agreement
+    - calibration_slope
+    - interval_coverage
+    - core_and_rerouted_component_concordance
+    - fraction_of_ceiling
+    - noise_attributable_fraction
+    - context_attributable_fraction
+  applicability_features:
+    - baseline_target_expression
+    - expression_range_compatibility
+    - guide_efficacy
+    - source_guide_concordance
+    - source_response_reliability
+    - baseline_transcriptomic_distance
+    - network_neighborhood_conservation
+    - module_availability
+    - target_degree
+    - chromatin_accessibility_compatibility
+    - TF_occupancy_support
+    - enhancer_link_compatibility
+    - intervention_type
+    - assay_type
+    - timepoint_compatibility
+    - cell_state_similarity
+  applicability_model: {family: elastic_net, alpha_grid: [0.001, 0.01, 0.1, 1.0], l1_ratio_grid: [0.0, 0.5, 1.0]}
+  validation: leave_one_system_out
+  minimum_systems_for_applicability: 3
+  risk_coverage_grid: [0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90, 1.00]
+  primary_coverage: 0.80
+  conformal_alpha: 0.10
+  comparators: [predict_all, random_abstention, response_magnitude, degree, uncertainty_only, reliability_only]
+  hypotheses:
+    H7: reliability correction explains some but not all observed non-portability
+    H8: rerouted responses remain less portable than invariant responses after correction
+    H9: pre-outcome applicability predicts error in a held-out system
+    H10: selective abstention improves error or calibration at matched coverage
+    H11: molecular support predicts reliability-corrected portability
+  primary_pass:
+    requirements:
+      - H9 corrected q below 0.05 in leave-one-system-out validation
+      - H10 paired 95 percent interval excludes zero against matched-coverage comparators
+      - false_confidence_rate does not increase
+      - result holds in a genuinely external system not used for development
+
+information_retention:
+  remove:
+    - perturbed_cis_gene
+    - frozen_assay_covariates
+    - library_size_direction
+    - generic_stress_template
+    - proliferation_template
+    - state_average_response
+    - target_label_leakage
+  primary_estimator: cross_validated_logK_minus_log_loss
+  decoder: regularized_multinomial_logistic
+  comparators: [label_prior, nearest_centroid, ridge_multinomial, frozen_module_decoder, RNA_fingerprint_cosine]
+  regularization_grid: [0.01, 0.1, 1.0, 10.0]
+  outcomes: [target_identity, regulator_family, frozen_functional_module]
+  target_identity_gate: {minimum_classes: 100, minimum_independent_profiles_per_class: 3}
+  regulator_family_gate: {minimum_classes: 5, minimum_profiles_per_class: 20}
+  functional_module_gate: {minimum_classes: 5, minimum_profiles_per_class: 20}
+  equivalence_test:
+    metric: reliability_adjusted_response_distance
+    alpha: 0.05
+    correction: benjamini_hochberg
+    minimum_stability_fraction: 0.80
+    resolutions: [20, 30, 40]
+  hypotheses:
+    H12: distal responses retain identity information after cis and generic-template removal
+    H13: buffering reduces magnitude more than identity information
+    H14: rerouting preserves information while changing its carrying module
+    H15: information retention differs across the three states
+    H16: shared equivalence class predicts external redundancy
+    H17: distinct information channels converging on one module predict emergence or synergy
+  primary_pass:
+    requirements:
+      - held-out information lower bound 95 percent interval exceeds zero
+      - reproducible in guide-held-out or donor-held-out profiles
+      - predicts external composition or portability with corrected q below 0.05
+      - external association interval excludes zero
+
+perturbation_design:
+  eligibility: run_only_after_one_predictive_primary_block_passes_internal_validity_gate
+  candidate_models: [additive, saturating, network_overlap, topology_independent, conserved_transfer, context_gated, direct_edge, cascade_mediated]
+  acquisition_rules: [expected_information_gain, model_disagreement, predictive_uncertainty, transfer_field_diversity, module_coverage, network_path_coverage, random, degree, response_magnitude]
+  seeds: [20260913, 20260923, 20261003, 20261013, 20261023, 20261103, 20261113, 20261123, 20261203, 20261213]
+  initial_training_fraction: 0.10
+  batch_fraction: 0.05
+  maximum_budget_fraction: 0.50
+  minimum_candidates: 200
+  minimum_unique_targets: 50
+  success_rule: beats_random_and_two_simple_heuristics_with_corrected_q_below_0_05_and_95_percent_intervals_excluding_zero
+  prospective_panels: [96_guides, 384_guides]
+  proposed_only: true
+
+mechanistic_integration:
+  resources: [state_matched_occupancy, ATAC_seq, H3K27ac, promoter_capture_HiC, validated_enhancer_links, signed_CRISPR, motifs, DoRothEA, RegNetwork, TRRUST, CollecTRI, OmniPath, guide_concordance, donor_robustness, independent_perturbation]
+  correlated_curated_resources_count_as_one_type: true
+  tiers:
+    tier_1: occupancy_and_active_chromatin_and_physical_link_and_signed_CRISPR_and_independent_perturbation
+    tier_2: one_required_orthogonal_layer_unavailable_with_other_direct_gates_passed
+    tier_3: curated_or_motif_support_without_state_matched_physical_support
+    tier_4: statistical_response_only
+    unavailable: comparable_required_assay_absent
+  matched_covariates: [expression, accessibility, promoter_distance, peak_count, response_magnitude, network_degree]
+  secondary_modifiers: [protein_complex_membership, paralogy, pathway_comembership]
+  prohibit: [protein_stoichiometry_claim, structural_mechanism_from_transcriptomics]
+
+dynamic_operator_gate:
+  status_at_freeze: unavailable
+  reason: Rest, Stim8hr and Stim48hr are sampled cell states rather than a perturbation-time series with longitudinal or recovery measurements
+  run_operator_models: false
+  prohibited_claims: [cellular_trajectory, attractor, irreversibility, hysteresis, biochemical_controllability]
+
+positioning_gate:
+  primary_results: [compositionality.primary_pass, transportability.primary_pass, information_retention.primary_pass]
+  minimum_primary_results_passed: 2
+  external_replication_required: true
+  if_one_passes: position_for_JMB_or_strong_bioinformatics_journal
+  if_none_pass: report_failed_expansion_and_stop_exploratory_branches
+  mechanistic_enrichment_alone_is_sufficient: false

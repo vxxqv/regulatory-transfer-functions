@@ -1,0 +1,5 @@
+dataset	role	outcomes_inspected	eligible_for_new_external_replication
+GSE314342 CD4	development_source	True	False
+Replogle K562 CRISPRi	external_replication_previously_inspected	True	False
+Replogle RPE1 CRISPRi	external_development_previously_inspected	True	False
+Future metadata-eligible combinatorial holdout	confirmatory_holdout	False	True

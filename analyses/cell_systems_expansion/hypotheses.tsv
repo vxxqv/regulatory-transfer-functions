@@ -1,0 +1,18 @@
+hypothesis	block	directional_expectation	status_at_freeze
+H1	compositionality	aligned same-sign singles are enriched for sub-additive or saturating responses	not_tested
+H2	compositionality	anti-aligned singles are enriched for signed cancellation	not_tested
+H3	compositionality	overlapping neighborhoods or modules predict redundancy after single-effect adjustment	not_tested
+H4	compositionality	distinct paths converging on one module predict synergy or rerouting	not_tested
+H5	compositionality	frozen CD4 geometry predicts held-out interaction behavior beyond simple and degree baselines	not_tested
+H6	compositionality	molecularly supported paths compose more reproducibly than unsupported paths	not_tested
+H7	transportability	reliability correction explains some but not all observed non-portability	not_tested
+H8	transportability	rerouted responses remain less portable than invariant responses after correction	not_tested
+H9	transportability	pre-outcome applicability predicts error in a held-out system	not_tested
+H10	transportability	selective abstention improves error or calibration at matched coverage	not_tested
+H11	transportability	molecular support predicts reliability-corrected portability	not_tested
+H12	information_retention	distal responses retain identity information after cis and generic-template removal	not_tested
+H13	information_retention	buffering reduces magnitude more than identity information	not_tested
+H14	information_retention	rerouting preserves information while changing its carrying module	not_tested
+H15	information_retention	information retention differs across the three states	not_tested
+H16	information_retention	shared equivalence class predicts external redundancy	not_tested
+H17	information_retention	distinct information channels converging on one module predict emergence or synergy	not_tested

@@ -1,0 +1,285 @@
+{
+  "status": "frozen_before_new_external_outcome_inspection",
+  "freeze_seed": 20260913,
+  "git_commit_before_freeze_commit": "b2982801285ab501a8cbcd7620659612561c3412",
+  "new_external_outcomes_present": false,
+  "previously_inspected_external_systems": [
+    "Replogle K562 CRISPRi",
+    "Replogle RPE1 CRISPRi"
+  ],
+  "rpe1_untouched_claim_allowed": false,
+  "complete_state_targets": 4399,
+  "complete_target_sha256": "ba97a94684c23b28df37e00b58da5a8f28c36f350c9411c29295a1606c6b873a",
+  "target_fold_counts": {
+    "1": 438,
+    "2": 446,
+    "3": 431,
+    "4": 424,
+    "5": 432,
+    "6": 460,
+    "7": 461,
+    "8": 449,
+    "9": 455,
+    "10": 403
+  },
+  "unmaterialized_split_rules": {
+    "pair": {
+      "folds": 5,
+      "canonical_id": "sorted_target_a_pipe_target_b_pipe_dataset_accession",
+      "rule": "1_plus_first_16_hex_sha256_canonical_id_modulo_5"
+    },
+    "guide": {
+      "folds": 5,
+      "rule": "1_plus_first_16_hex_sha256_dataset_pipe_guide_id_modulo_5"
+    },
+    "dataset": "leave_one_dataset_out",
+    "reason": "External pair and guide identifiers are unavailable before metadata-only eligibility screening; deterministic rules are frozen before acquisition."
+  },
+  "dynamic_operator": {
+    "status_at_freeze": "unavailable",
+    "reason": "Rest, Stim8hr and Stim48hr are sampled cell states rather than a perturbation-time series with longitudinal or recovery measurements",
+    "run_operator_models": false,
+    "prohibited_claims": [
+      "cellular_trajectory",
+      "attractor",
+      "irreversibility",
+      "hysteresis",
+      "biochemical_controllability"
+    ]
+  },
+  "configuration_files_hashed": 13,
+  "prior_freeze_manifests_hashed": 7,
+  "raw_source_note": "Validated processed response matrices are direct inputs. Large raw source objects are tracked by the existing data manifest and upstream audit rather than rehashed for this expansion.",
+  "artifacts": [
+    {
+      "path": "config/analysis.yaml",
+      "bytes": 1471,
+      "sha256": "1b2bcc9fbbd35bcbdbe6110153b0946179a57731e7c713be8fba60d9b69c2dda"
+    },
+    {
+      "path": "config/causal_triangulation.yaml",
+      "bytes": 3310,
+      "sha256": "90a710c66264e6258618679b180fd795c85c87d2f1e291413e526d5e999ec224"
+    },
+    {
+      "path": "config/cell_systems_expansion.yaml",
+      "bytes": 14021,
+      "sha256": "6cadafe6f6c1860066d6177aabad7dcf7eb9157d8df891c4da0797d6228f6100"
+    },
+    {
+      "path": "config/colors.yaml",
+      "bytes": 292,
+      "sha256": "e1d5d8d46a46b64d5642fc87a41b582858f6f6fb64d212e87ef7fbe9f0a68db9"
+    },
+    {
+      "path": "config/context_dynamics.yaml",
+      "bytes": 297,
+      "sha256": "f2f69c2628e7afbad45131d98cc45e087cafa7aa04dbfa92312e531a34d2a57d"
+    },
+    {
+      "path": "config/external_benchmark.yaml",
+      "bytes": 2665,
+      "sha256": "46ba07567226734b58bb6bc0f6b98eb62c157dcf0d69ffad3e4b341fe898c3e6"
+    },
+    {
+      "path": "config/guide_concordance.yaml",
+      "bytes": 2356,
+      "sha256": "e456549132dc46eebe8c396f6993ca0f350d6e5061b285daf78551b964159b3a"
+    },
+    {
+      "path": "config/guide_dose_response.yaml",
+      "bytes": 525,
+      "sha256": "35dadb9960dd6ffe92e5f1d36b9d09a225015a3a169166811be2d803b9e254b4"
+    },
+    {
+      "path": "config/molecular_cascade.yaml",
+      "bytes": 4420,
+      "sha256": "5e938ad1b0c19030851ed32eda9b88d7f8467d4948aeaed8e3051af91aecaa99"
+    },
+    {
+      "path": "config/multiverse.yaml",
+      "bytes": 3553,
+      "sha256": "bd258b1ec15ce2244f91ab53a6c76d7c55f736fcf41b191af9362a1183d81c71"
+    },
+    {
+      "path": "config/network_decomposition.yaml",
+      "bytes": 594,
+      "sha256": "0a811850929449cd2fb83fbaca5b9a9fdd15a8e9da748c8f57528b8612eedef9"
+    },
+    {
+      "path": "config/pyvista_transfer_landscape.yaml",
+      "bytes": 3642,
+      "sha256": "f01c675b749de6ff20213b70f418cf3cc0f869581fefcf6ec03be93708abde69"
+    },
+    {
+      "path": "config/state_response_decomposition.yaml",
+      "bytes": 2280,
+      "sha256": "22ff85de8d6a0e1b7cdfc179ef238d416221014aab6ab37140284958c8135d31"
+    },
+    {
+      "path": "analyses/causal_triangulation/freeze_manifest.json",
+      "bytes": 2213,
+      "sha256": "5f0d03d2134df4131580a5ad65b211cbb9f2013facf9da88f9257de1e751bf97"
+    },
+    {
+      "path": "analyses/external_benchmark/freeze_manifest.json",
+      "bytes": 3075,
+      "sha256": "baf783ca4c71035b5c10c770f621706cf203171e935e1fb0186c993c282338dc"
+    },
+    {
+      "path": "analyses/guide_concordance/freeze_manifest.json",
+      "bytes": 6872,
+      "sha256": "3c6532ce650d7f6a3f40d700fd124a4c4a064fa74e2bbd47b5840ef6016a8a8e"
+    },
+    {
+      "path": "analyses/molecular_cascade/freeze_manifest.json",
+      "bytes": 5647,
+      "sha256": "eafc5c8c5410e055875846045042fd7f6c05cb8133434b9567967f51bcc0efa8"
+    },
+    {
+      "path": "analyses/multiverse/freeze_manifest.json",
+      "bytes": 1870,
+      "sha256": "4f9ddbfcd3624779abe79708d35e989a2a50f8b63bdccad88a20c52f223f4b91"
+    },
+    {
+      "path": "analyses/pyvista_landscape/freeze_manifest.json",
+      "bytes": 1375,
+      "sha256": "f29a19f8bf0fe8dbad6f7d65e4e7d7924dca01a58b4ef8ac65a5715cf3f202d4"
+    },
+    {
+      "path": "analyses/state_response_decomposition/freeze_manifest.json",
+      "bytes": 2295,
+      "sha256": "80ad159b50adae01535bc75fa89d35b1e2a93d406a0bb605379d555c25956920"
+    },
+    {
+      "path": "analyses/primary/results/transfer_phenotypes.parquet",
+      "bytes": 1991787,
+      "sha256": "4327ea47df56278e92a60c8e4a26c41f5ff2d8f4e4786108e23e8998d0f97b3f"
+    },
+    {
+      "path": "analyses/primary/results/context_switching.parquet",
+      "bytes": 250772,
+      "sha256": "8431f325c278e9cedf6c456ad917aa12fdddc0b492d03290f5a274fa28877a7a"
+    },
+    {
+      "path": "analyses/vectors/results/contextual_transfer_tensor.parquet",
+      "bytes": 5959719,
+      "sha256": "d644893577cc5a78a0bda649584d21e608f3e105f78ed865a6d0328b541a8099"
+    },
+    {
+      "path": "analyses/vectors/results/context_rerouting_pairs.parquet",
+      "bytes": 374850,
+      "sha256": "b3845ac971b20991a0be5635d00d56c2593b67c746a8c9c517adc9c16e58c745"
+    },
+    {
+      "path": "analyses/vectors/results/network_gain_rows.parquet",
+      "bytes": 2883127,
+      "sha256": "d31cb32ec00b4474b8736d146d2709eeec378cf0575b0fd5338b48503ae1a608"
+    },
+    {
+      "path": "analyses/vectors/results/reference_module_loadings.parquet",
+      "bytes": 3040851,
+      "sha256": "85a083525b34f2fa321eb43f7d71a42270ee5469306b4cf16cc56403b34739ef"
+    },
+    {
+      "path": "analyses/guide_concordance/results/eligible_pairs.parquet",
+      "bytes": 4573913,
+      "sha256": "3cdd5aac0c8dd06695924fe30ecf58be1d3877a965d636796000b3dfe82268f0"
+    },
+    {
+      "path": "analyses/guide_concordance/results/hypothesis_tests.csv",
+      "bytes": 4497,
+      "sha256": "62f14107cdfb73b869c65964cc8f5e00338044735605470faf6f1aba4c414796"
+    },
+    {
+      "path": "analyses/guide_dose_response/results/guide_held_out_predictions.parquet",
+      "bytes": 3241584,
+      "sha256": "4981a1caa4949489d123971343f63094c2683ff7e091b40a7a8edb52423c3661"
+    },
+    {
+      "path": "analyses/molecular_cascade/results/edge_evidence_matrix.parquet",
+      "bytes": 1867568,
+      "sha256": "463185e912e5370b5fdd49afd44789f3ff87cc91000e2cfb3730835f0f337785"
+    },
+    {
+      "path": "analyses/molecular_cascade/results/hypothesis_decisions.csv",
+      "bytes": 3020,
+      "sha256": "2a9dc27cba6a06562c7a5ada0cc12078c43072601cd872f1b95b4411524210b1"
+    },
+    {
+      "path": "analyses/molecular_cascade/protocol_revision.json",
+      "bytes": 363,
+      "sha256": "1fb50e142286e56b84d2eaa7c03d5c7dd397c9b913a3dae042ca791cd0d0eca6"
+    },
+    {
+      "path": "analyses/state_response_decomposition/results/target_decomposition.parquet",
+      "bytes": 598182,
+      "sha256": "9314524e1449e57c283abefecf842a753a7807ceb381edaa333f8e278c39dc5a"
+    },
+    {
+      "path": "analyses/state_response_decomposition/results/associations.tsv",
+      "bytes": 1283,
+      "sha256": "40dfb9b5801e9e57b6f3abb23679139a21dc8eb23ffa19bd5bc3f64a81c527ad"
+    },
+    {
+      "path": "analyses/replication/results/k562_replication_rows.parquet",
+      "bytes": 507884,
+      "sha256": "d6ea5c21f8a331a23b13e437c96566dbb3d93e285aaf0c04a03cbe83b6f817d6"
+    },
+    {
+      "path": "analyses/external_benchmark/results/all_eligible_target_predictions.parquet",
+      "bytes": 68450,
+      "sha256": "6e9cc451eec7815bc3431f87d04b2387d17184b164ea30799808f40cf262b6b1"
+    },
+    {
+      "path": "analyses/external_benchmark/target_folds.tsv",
+      "bytes": 57779,
+      "sha256": "9b797fdb62bff52347ba2e3d7022a7a6f81e35bf7aea3eba892a5f80f5819ff0"
+    },
+    {
+      "path": "data/interim/gwt_vectors/audit.json",
+      "bytes": 328,
+      "sha256": "89779d5526a3b316db54f5472f8c43d981747ba0cc76a38d9befe0bb5849f033"
+    },
+    {
+      "path": "data/interim/gwt_vectors/genes.parquet",
+      "bytes": 230012,
+      "sha256": "2a87aa6bc012ea3f374d85546eb3d235c7efd9b8c063d34c5d2b8a488340ddf4"
+    },
+    {
+      "path": "data/interim/gwt_vectors/rows.parquet",
+      "bytes": 2516576,
+      "sha256": "ad1ff11af7c34db7baae8eb24971e0f698a0a73ba70d70255def1851f0acdf9c"
+    },
+    {
+      "path": "data/interim/gwt_vectors/normalized_significant_logfc.npz",
+      "bytes": 5679020,
+      "sha256": "d759799345804582aa0bc5829fb7cc4534f2322bc8b3b0bf696723fe5589f58b"
+    },
+    {
+      "path": "data_manifest/sources.tsv",
+      "bytes": 11721,
+      "sha256": "fd493e2760e66f252e57ae4e3ef0731389ab373fa0d0ca72c65a1b423775c191"
+    },
+    {
+      "path": "docs/protocol.md",
+      "bytes": 17523,
+      "sha256": "cdf7e684c6876feb8c380b9c636069d8bfc09d6eb15fbd9ca98e6772a414f99a"
+    },
+    {
+      "path": "analyses/cell_systems_expansion/target_folds.tsv",
+      "bytes": 37249,
+      "sha256": "d0352b81284eb74a427f27ad2cd474d2e275a725ba77351493552fc8bda1c6ad"
+    },
+    {
+      "path": "analyses/cell_systems_expansion/hypotheses.tsv",
+      "bytes": 1840,
+      "sha256": "10aa063188192456c8a3782b246acaac7e085d0692dfc25d5ff90859bcc37829"
+    },
+    {
+      "path": "analyses/cell_systems_expansion/dataset_roles.tsv",
+      "bytes": 343,
+      "sha256": "4b0baceaad0323b0c69df43bb543b86abd10b3ef90474640a0c84198fe1e8c24"
+    }
+  ]
+}

@@ -34,7 +34,11 @@ def test_complete_denominator_and_unique_edges():
 
 
 def test_every_frozen_hash_matches():
-    assert len(cascade.verify_freeze()) == 27
+    checks = cascade.verify_freeze()
+    assert len(checks) == 27
+    protocol = next(record for record in checks if record["path"] == "docs/protocol.md")
+    assert protocol["source"] == "historical_git_object"
+    assert protocol["sha256"] == "cd3f185cc0b043664ab7afb68b96199b0b90533e042de0a4862ac1f215b7cf9f"
 
 
 def test_effects_and_rows_independently_match_frozen_matrix():

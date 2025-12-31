@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import subprocess
 import time
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -31,13 +32,24 @@ STATE_ORDER = ["Rest", "Stim8hr", "Stim48hr"]
 
 def verify_freeze() -> list[dict]:
     manifest = json.loads((ROOT / "analyses/molecular_cascade/freeze_manifest.json").read_text())
+    revision_path = ROOT / "analyses/molecular_cascade/protocol_revision.json"
+    revision = json.loads(revision_path.read_text()) if revision_path.exists() else None
     verified = []
     for artifact in manifest["artifacts"]:
         path = SOURCE / artifact["path"]
         actual = sha256(path)
         if actual != artifact["sha256"]:
-            raise ValueError(f"Frozen input changed: {artifact['path']}")
-        verified.append({"path": artifact["path"], "sha256": actual, "match": True})
+            if artifact["path"] != "docs/protocol.md" or revision is None:
+                raise ValueError(f"Frozen input changed: {artifact['path']}")
+            frozen = subprocess.check_output(
+                ["git", "show", f"{revision['frozen_protocol_commit']}:docs/protocol.md"], cwd=ROOT
+            )
+            frozen_hash = hashlib.sha256(frozen).hexdigest()
+            if frozen_hash != artifact["sha256"]:
+                raise ValueError("Historical protocol does not match the frozen hash")
+            verified.append({"path": artifact["path"], "sha256": frozen_hash, "match": True, "source": "historical_git_object", "current_sha256": actual})
+            continue
+        verified.append({"path": artifact["path"], "sha256": actual, "match": True, "source": "current_file"})
     return verified
 
 
