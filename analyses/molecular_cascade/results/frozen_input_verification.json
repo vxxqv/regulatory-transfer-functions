@@ -2,136 +2,166 @@
   {
     "path": "config/molecular_cascade.yaml",
     "sha256": "5e938ad1b0c19030851ed32eda9b88d7f8467d4948aeaed8e3051af91aecaa99",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "docs/protocol.md",
     "sha256": "cd3f185cc0b043664ab7afb68b96199b0b90533e042de0a4862ac1f215b7cf9f",
-    "match": true
+    "match": true,
+    "source": "historical_git_object",
+    "current_sha256": "cdf7e684c6876feb8c380b9c636069d8bfc09d6eb15fbd9ca98e6772a414f99a"
   },
   {
     "path": "data/interim/gwt_vectors/rows.parquet",
     "sha256": "ad1ff11af7c34db7baae8eb24971e0f698a0a73ba70d70255def1851f0acdf9c",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "data/interim/gwt_vectors/genes.parquet",
     "sha256": "2a87aa6bc012ea3f374d85546eb3d235c7efd9b8c063d34c5d2b8a488340ddf4",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "data/interim/gwt_vectors/normalized_significant_logfc.npz",
     "sha256": "d759799345804582aa0bc5829fb7cc4534f2322bc8b3b0bf696723fe5589f58b",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "analyses/primary/results/transfer_phenotypes.parquet",
     "sha256": "4327ea47df56278e92a60c8e4a26c41f5ff2d8f4e4786108e23e8998d0f97b3f",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "analyses/primary/results/context_switching.parquet",
     "sha256": "8431f325c278e9cedf6c456ad917aa12fdddc0b492d03290f5a274fa28877a7a",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "analyses/vectors/results/contextual_transfer_tensor.parquet",
     "sha256": "d644893577cc5a78a0bda649584d21e608f3e105f78ed865a6d0328b541a8099",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "analyses/vectors/results/context_rerouting_pairs.parquet",
     "sha256": "b3845ac971b20991a0be5635d00d56c2593b67c746a8c9c517adc9c16e58c745",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "analyses/vectors/results/network_gain_rows.parquet",
     "sha256": "d31cb32ec00b4474b8736d146d2709eeec378cf0575b0fd5338b48503ae1a608",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "analyses/replication/results/k562_replication_rows.parquet",
     "sha256": "d6ea5c21f8a331a23b13e437c96566dbb3d93e285aaf0c04a03cbe83b6f817d6",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "analyses/natural_genetics/results/directional_pairs.parquet",
     "sha256": "051522e495325176813f31d6be6774c5d6bcb24daae30b8df89bd58f96e0e430",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "analyses/disease/results/disease_model_rows.parquet",
     "sha256": "355b9e174af1966238500a910ff848c624e52bd8348f5ce966247e1edae21c34",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "analyses/external_benchmark/results/all_eligible_target_predictions.parquet",
     "sha256": "6e9cc451eec7815bc3431f87d04b2387d17184b164ea30799808f40cf262b6b1",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "analyses/guide_dose_response/results/eligible_guide_rows.csv",
     "sha256": "35b9dd87b0812d449533e276bda0951a1110d5376ea75d2bd61f267706e0aa15",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "analyses/guide_dose_response/results/hypothesis_decisions.csv",
     "sha256": "7f60be8210c24dc364deb2c027c84917ab6b1404554eeb746eab75429f3bbd26",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "analyses/causal_triangulation/results/evidence_gates.csv",
-    "sha256": "d93862ed2019bbb64d0a728522ab55cb0a3db0a95231348e018cf1ab0c58f936",
-    "match": true
+    "sha256": "11194af22f3c42dfd9c91fb72db7755b1b416a3416c4d2a767a39f3e18f3a6e3",
+    "match": true,
+    "source": "audited_upstream_correction",
+    "original_frozen_sha256": "d93862ed2019bbb64d0a728522ab55cb0a3db0a95231348e018cf1ab0c58f936",
+    "correction_id": "CT-001"
   },
   {
     "path": "work/upstream/GWT_perturbseq_analysis_2025/metadata/DE_by_guide.correlation_results.csv",
     "sha256": "a7b6a439b08615b47db734793ac52eb19ed2f77dcc223ddca24e5651ad22ed7f",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "work/upstream/GWT_perturbseq_analysis_2025/metadata/suppl_tables/guide_kd_efficiency.suppl_table.csv",
     "sha256": "55970de2cbe2c498dbdc0c1e9faa2d123b4c0cde7cc7a01a7fbb9cd601a49d1d",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "work/motif/TRANSFAC_and_JASPAR_PWMs.gmt",
     "sha256": "55424badcff1aec60889d8be5ef98e2698c9e85164373157a72b22ec3e6dd68e",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "work/cd4_pchic_interactions.tsv.gz",
     "sha256": "23eb3205b2d45922cb511f698ba490de686df9e57c3a81f60568c865752ff857",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "work/causal_inputs/ENCFF944LFH.bed.gz",
     "sha256": "f6d24433af87ecae698368268a5215a01d80c75bf425e38593d808548762fefb",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "work/causal_inputs/ENCFF068XUG.bed.gz",
     "sha256": "d4c003434581b8e1117c06477b484b53b8798e55daf636ba38da594da675f905",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "work/regulatory_inputs/ENCFF858TLX.bed.gz",
     "sha256": "c8a9d42a44feab05e4b5a634a5bbc75746fe14ac4c08b9080f000ce3a19435ce",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "work/regulatory_inputs/omnipath_tf_target.tsv",
     "sha256": "e252ce9460fa2b2ad0c73a15c55158183f50698c8d1da27f3cb102e7bfb6cf5d",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "work/regulatory_inputs/ensembl_gene_attributes.tsv",
     "sha256": "2f7ab71c084f4ada92fd81bab4c8adf85d65f854c566917e2fe46fc6e4520e3a",
-    "match": true
+    "match": true,
+    "source": "current_file"
   },
   {
     "path": "work/regulatory_inputs/hg19ToHg38.over.chain.gz",
     "sha256": "5c0598e500ceb5a78c73086929e8ef993aec309bcafb595139b53d440b125a1d",
-    "match": true
+    "match": true,
+    "source": "current_file"
   }
 ]

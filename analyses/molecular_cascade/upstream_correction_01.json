@@ -1,0 +1,24 @@
+{
+  "affected_output_scope": [
+    "locus_regulatory_verification.csv",
+    "causal-gate dependent figures and tables"
+  ],
+  "corrected_locus_grades_sha256": "b0351b283562e21c6f06e5ea19d649d67ec241b34217d3dfdb7e892399b9d138",
+  "corrected_sha256": "11194af22f3c42dfd9c91fb72db7755b1b416a3416c4d2a767a39f3e18f3a6e3",
+  "correction_date": "2026-09-16",
+  "correction_id": "CT-001",
+  "original_frozen_sha256": "d93862ed2019bbb64d0a728522ab55cb0a3db0a95231348e018cf1ab0c58f936",
+  "path": "analyses/causal_triangulation/results/evidence_gates.csv",
+  "reason": "The prior gate implementation omitted H3K27ac from the frozen ATAC-or-H3K27ac rule, did not enforce regional coverage for colocalization, and did not enforce the two-link enhancer rule.",
+  "result_impact": {
+    "gata3": "4 of 7 gates, Tier 3",
+    "ptpn22": "3 of 7 gates, Tier 4",
+    "stat3": "4 of 7 gates, Tier 3; colocalization unresolved"
+  },
+  "status": "audited_upstream_correction",
+  "unchanged_conclusions": [
+    "no locus passed all seven gates",
+    "no locus was eligible for mediation",
+    "no mediation claim was made"
+  ]
+}

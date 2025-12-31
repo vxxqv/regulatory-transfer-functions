@@ -20,7 +20,7 @@
     "Tier 3": 2490,
     "Tier 4": 122272
   },
-  "extension_rules_sha256": "5f65c696adabcf077d2ca25bcaae2ea49b45c78ac166bd76de9d8ebb18637430",
+  "extension_rules_sha256": "406ca35eeeef14035f11962d6773fc92bda33e9352ebb6a53729936a332d34c4",
   "hypothesis_decisions": {
     "failed": 1,
     "passed": 6,
@@ -32,10 +32,30 @@
   "matched_permutation_replicates": 1000,
   "motif_regulators": 214,
   "pchic": {
+    "bait_status_counts": {
+      "endpoint_orientation_mismatch": 28,
+      "mapped": 198701
+    },
+    "cache_inputs": {
+      "repository/analyses/molecular_cascade/run_analysis.py": "8ca45b92ef13939c15814dc32a119f415f2d27348e1d117b7eb43cdae602bd8f",
+      "repository/config/molecular_cascade.yaml": "5e938ad1b0c19030851ed32eda9b88d7f8467d4948aeaed8e3051af91aecaa99",
+      "repository/data/interim/gwt_vectors/genes.parquet": "2a87aa6bc012ea3f374d85546eb3d235c7efd9b8c063d34c5d2b8a488340ddf4",
+      "repository/work/causal_inputs/ENCFF068XUG.bed.gz": "d4c003434581b8e1117c06477b484b53b8798e55daf636ba38da594da675f905",
+      "repository/work/causal_inputs/ENCFF944LFH.bed.gz": "f6d24433af87ecae698368268a5215a01d80c75bf425e38593d808548762fefb",
+      "repository/work/cd4_pchic_interactions.tsv.gz": "23eb3205b2d45922cb511f698ba490de686df9e57c3a81f60568c865752ff857",
+      "repository/work/regulatory_inputs/ENCFF858TLX.bed.gz": "c8a9d42a44feab05e4b5a634a5bbc75746fe14ac4c08b9080f000ce3a19435ce",
+      "repository/work/regulatory_inputs/hg19ToHg38.over.chain.gz": "5c0598e500ceb5a78c73086929e8ef993aec309bcafb595139b53d440b125a1d"
+    },
+    "cache_key": "859428de0ef2eba38e4c55410c9fba70148a185331a78dcbed7acbf8506d3631",
     "eligible_called_rows": 198729,
-    "failed_liftover_rows": 49,
-    "lifted_rows": 198680,
-    "liftover_rate": 0.9997534330671417,
+    "failed_liftover_rows": 41,
+    "lifted_rows": 198688,
+    "liftover_rate": 0.9997936888929144,
+    "prey_status_counts": {
+      "endpoint_orientation_mismatch": 11,
+      "mapped": 198716,
+      "unmapped_endpoint": 2
+    },
     "source_rows": 291535
   },
   "primary_curated_edges_observed": 477,

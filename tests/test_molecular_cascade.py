@@ -39,6 +39,13 @@ def test_every_frozen_hash_matches():
     protocol = next(record for record in checks if record["path"] == "docs/protocol.md")
     assert protocol["source"] == "historical_git_object"
     assert protocol["sha256"] == "cd3f185cc0b043664ab7afb68b96199b0b90533e042de0a4862ac1f215b7cf9f"
+    causal = next(
+        record
+        for record in checks
+        if record["path"] == "analyses/causal_triangulation/results/evidence_gates.csv"
+    )
+    assert causal["source"] == "audited_upstream_correction"
+    assert causal["correction_id"] == "CT-001"
 
 
 def test_effects_and_rows_independently_match_frozen_matrix():
@@ -174,9 +181,9 @@ def test_state_summary_and_permutation_statistics():
 
 def test_figure_has_editable_vector_layers_and_exact_sources():
     directory = ROOT / "figures/fig08"
-    assert (directory / "figure8.png").stat().st_size > 50000
-    assert (directory / "figure8.pdf").read_bytes().startswith(b"%PDF-")
-    tree = ET.parse(directory / "figure8.svg")
+    assert (directory / "fig08.png").stat().st_size > 50000
+    assert (directory / "fig08.pdf").read_bytes().startswith(b"%PDF-")
+    tree = ET.parse(directory / "fig08.svg")
     assert not tree.findall(".//{http://www.w3.org/2000/svg}image")
     assert len(tree.findall(".//{http://www.w3.org/2000/svg}text")) > 30
     plotted = pd.read_csv(directory / "figure_data/prediction_comparison.tsv", sep="\t")

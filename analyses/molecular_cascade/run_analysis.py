@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import subprocess
+import sys
 import time
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -23,8 +24,11 @@ from sklearn.neighbors import NearestNeighbors
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+from analyses.common.strict_liftover import lift_interval
+
+
 SOURCE = Path(os.environ.get("REGULATORY_SOURCE_ROOT", ROOT)).resolve()
 OUTPUT = ROOT / "analyses/molecular_cascade/results"
 STATE_ORDER = ["Rest", "Stim8hr", "Stim48hr"]
@@ -34,11 +38,31 @@ def verify_freeze() -> list[dict]:
     manifest = json.loads((ROOT / "analyses/molecular_cascade/freeze_manifest.json").read_text())
     revision_path = ROOT / "analyses/molecular_cascade/protocol_revision.json"
     revision = json.loads(revision_path.read_text()) if revision_path.exists() else None
+    correction_path = ROOT / "analyses/molecular_cascade/upstream_correction_01.json"
+    corrections = {}
+    if correction_path.exists():
+        record = json.loads(correction_path.read_text(encoding="utf-8"))
+        corrections[record["path"]] = record
     verified = []
     for artifact in manifest["artifacts"]:
         path = SOURCE / artifact["path"]
         actual = sha256(path)
         if actual != artifact["sha256"]:
+            correction = corrections.get(artifact["path"])
+            if correction is not None:
+                if correction["original_frozen_sha256"] != artifact["sha256"]:
+                    raise ValueError("Upstream correction does not match the frozen input hash")
+                if correction["corrected_sha256"] != actual:
+                    raise ValueError("Corrected upstream input changed after adjudication")
+                verified.append({
+                    "path": artifact["path"],
+                    "sha256": actual,
+                    "match": True,
+                    "source": "audited_upstream_correction",
+                    "original_frozen_sha256": artifact["sha256"],
+                    "correction_id": correction["correction_id"],
+                })
+                continue
             if artifact["path"] != "docs/protocol.md" or revision is None:
                 raise ValueError(f"Frozen input changed: {artifact['path']}")
             frozen = subprocess.check_output(
@@ -75,6 +99,26 @@ def sha256(path: Path) -> str:
         for block in iter(lambda: handle.read(8 * 1024 * 1024), b""):
             digest.update(block)
     return digest.hexdigest()
+
+
+def frame_sha256(frame: pd.DataFrame, sort_columns: list[str]) -> str:
+    ordered = frame.sort_values(sort_columns, kind="stable").reset_index(drop=True)
+    digest = hashlib.sha256()
+    schema = [(str(column), str(dtype)) for column, dtype in ordered.dtypes.items()]
+    digest.update(json.dumps(schema, separators=(",", ":")).encode("utf-8"))
+    digest.update(pd.util.hash_pandas_object(ordered, index=False).to_numpy(dtype=np.uint64).tobytes())
+    return digest.hexdigest()
+
+
+def audit_path(path: Path) -> str:
+    for base, prefix in [(ROOT, "repository"), (SOURCE, "source")]:
+        try:
+            relative = path.resolve().relative_to(base)
+            normalized = str(relative).replace("\\", "/")
+            return f"{prefix}/{normalized}"
+        except ValueError:
+            continue
+    return path.name
 
 
 def stable_fold(value: str, folds: int, seed: int) -> int:
@@ -181,22 +225,11 @@ def build_gene_table(genes: pd.DataFrame, config: dict, beds: dict[str, dict[str
     return table
 
 
-def lift_interval(converter: LiftOver, chromosome: str, start: int, end: int) -> tuple[str | None, int | None, int | None]:
-    chromosome = str(chromosome)
-    chromosome = chromosome if chromosome.startswith("chr") else f"chr{chromosome}"
-    first = converter.convert_coordinate(chromosome, int(start))
-    last = converter.convert_coordinate(chromosome, max(int(start), int(end) - 1))
-    if not first or not last:
-        return None, None, None
-    first_best = max(first, key=lambda value: value[3])
-    last_best = max(last, key=lambda value: value[3])
-    if first_best[0] != last_best[0] or first_best[2] != last_best[2] or first_best[0] != chromosome:
-        return None, None, None
-    mapped = sorted([int(first_best[1]), int(last_best[1])])
-    return first_best[0].removeprefix("chr"), mapped[0], mapped[1] + 1
-
-
-def prepare_pchic(config: dict, measured: set[str], beds: dict[str, dict[str, tuple[np.ndarray, np.ndarray]]]) -> tuple[pd.DataFrame, dict]:
+def prepare_pchic(
+    config: dict,
+    measured: set[str],
+    beds: dict[str, dict[str, tuple[np.ndarray, np.ndarray]]],
+) -> tuple[pd.DataFrame, dict, pd.DataFrame]:
     source = pd.read_csv(SOURCE / "work/cd4_pchic_interactions.tsv.gz", sep=r"\s+", compression="gzip")
     source_rows = len(source)
     source["gene"] = source["gene"].astype(str).str.upper()
@@ -204,41 +237,87 @@ def prepare_pchic(config: dict, measured: set[str], beds: dict[str, dict[str, tu
     source = source[source["gene"].isin(measured) & ((source["Total_CD4_Activated"] > threshold) | (source["Total_CD4_NonActivated"] > threshold))].copy()
     converter = LiftOver(str(SOURCE / "work/regulatory_inputs/hg19ToHg38.over.chain.gz"))
     records = []
-    failed = 0
-    for row in source.itertuples(index=False):
+    liftover_rows = []
+    for source_index, row in enumerate(source.itertuples(index=False)):
         bait = lift_interval(converter, row.baitChr, row.baitStart, row.baitStart + row.baitLength)
         prey = lift_interval(converter, row.oeChr, row.oeStart, row.oeStart + row.oeLength)
-        if bait[0] is None or prey[0] is None:
-            failed += 1
+        liftover_row = {
+            "eligible_source_row": source_index,
+            "gene": row.gene,
+            "bait_chr_grch37": str(row.baitChr).removeprefix("chr"),
+            "bait_start_grch37": int(row.baitStart),
+            "bait_end_grch37": int(row.baitStart + row.baitLength),
+            "prey_chr_grch37": str(row.oeChr).removeprefix("chr"),
+            "prey_start_grch37": int(row.oeStart),
+            "prey_end_grch37": int(row.oeStart + row.oeLength),
+            "bait_liftover_status": bait["status"],
+            "prey_liftover_status": prey["status"],
+            "bait_first_candidates": int(bait.get("first_candidates", 0)),
+            "bait_last_candidates": int(bait.get("last_candidates", 0)),
+            "prey_first_candidates": int(prey.get("first_candidates", 0)),
+            "prey_last_candidates": int(prey.get("last_candidates", 0)),
+        }
+        mapped = bait["status"] == "mapped" and prey["status"] == "mapped"
+        liftover_row["liftover_status"] = "mapped" if mapped else "failed"
+        if mapped:
+            liftover_row.update({
+                "bait_chr_grch38": bait["chromosome"],
+                "bait_start_grch38": int(bait["start"]),
+                "bait_end_grch38": int(bait["end"]),
+                "bait_strand": bait["strand"],
+                "prey_chr_grch38": prey["chromosome"],
+                "prey_start_grch38": int(prey["start"]),
+                "prey_end_grch38": int(prey["end"]),
+                "prey_strand": prey["strand"],
+            })
+        liftover_rows.append(liftover_row)
+        if not mapped:
             continue
         records.append({
             "gene": row.gene,
-            "bait_chromosome": bait[0],
-            "bait_start": bait[1],
-            "bait_end": bait[2],
-            "prey_chromosome": prey[0],
-            "prey_start": prey[1],
-            "prey_end": prey[2],
+            "bait_chromosome": bait["chromosome"],
+            "bait_start": bait["start"],
+            "bait_end": bait["end"],
+            "prey_chromosome": prey["chromosome"],
+            "prey_start": prey["start"],
+            "prey_end": prey["end"],
+            "bait_first_candidates": bait["first_candidates"],
+            "bait_last_candidates": bait["last_candidates"],
+            "prey_first_candidates": prey["first_candidates"],
+            "prey_last_candidates": prey["last_candidates"],
             "chicago_activated": row.Total_CD4_Activated,
             "chicago_nonactivated": row.Total_CD4_NonActivated,
             "differential_logfc": row.logFC,
             "differential_fdr": row.FDR,
-            "prey_atac_count": overlap_count(beds["atac"], prey[0], prey[1], prey[2]),
-            "prey_h3k27ac_count": overlap_count(beds["h3k27ac"], prey[0], prey[1], prey[2]),
-            "prey_ctcf_count": overlap_count(beds["ctcf"], prey[0], prey[1], prey[2]),
-            "bait_ctcf_count": overlap_count(beds["ctcf"], bait[0], bait[1], bait[2]),
+            "prey_atac_count": overlap_count(beds["atac"], prey["chromosome"], prey["start"], prey["end"]),
+            "prey_h3k27ac_count": overlap_count(beds["h3k27ac"], prey["chromosome"], prey["start"], prey["end"]),
+            "prey_ctcf_count": overlap_count(beds["ctcf"], prey["chromosome"], prey["start"], prey["end"]),
+            "bait_ctcf_count": overlap_count(beds["ctcf"], bait["chromosome"], bait["start"], bait["end"]),
         })
     links = pd.DataFrame(records)
     links["active_both"] = links["prey_atac_count"].gt(0) & links["prey_h3k27ac_count"].gt(0)
     links["active_either"] = links["prey_atac_count"].gt(0) | links["prey_h3k27ac_count"].gt(0)
+    liftover_table = pd.DataFrame(liftover_rows)
+    bait_counts = (
+        {str(key): int(value) for key, value in liftover_table["bait_liftover_status"].value_counts().sort_index().items()}
+        if len(liftover_table)
+        else {}
+    )
+    prey_counts = (
+        {str(key): int(value) for key, value in liftover_table["prey_liftover_status"].value_counts().sort_index().items()}
+        if len(liftover_table)
+        else {}
+    )
     audit = {
         "source_rows": int(source_rows),
         "eligible_called_rows": int(len(source)),
         "lifted_rows": int(len(links)),
-        "failed_liftover_rows": int(failed),
+        "failed_liftover_rows": int((liftover_table["liftover_status"] != "mapped").sum()) if len(liftover_table) else 0,
         "liftover_rate": float(len(links) / len(source)) if len(source) else np.nan,
+        "bait_status_counts": bait_counts,
+        "prey_status_counts": prey_counts,
     }
-    return links, audit
+    return links, audit, liftover_table
 
 
 def pchic_support(links: pd.DataFrame, config: dict, threshold: float | None = None, active_rule: str = "atac_and_h3k27ac") -> pd.DataFrame:
@@ -1474,12 +1553,44 @@ def main() -> None:
     )
     pchic_cache = OUTPUT / "pchic_lifted_links.parquet"
     pchic_audit_cache = OUTPUT / "pchic_liftover_audit.json"
-    if pchic_cache.exists() and pchic_audit_cache.exists():
+    pchic_rows_cache = OUTPUT / "pchic_liftover_rows.parquet"
+    pchic_key_inputs = [
+        ROOT / "config/molecular_cascade.yaml",
+        SOURCE / "work/cd4_pchic_interactions.tsv.gz",
+        SOURCE / "work/regulatory_inputs/hg19ToHg38.over.chain.gz",
+        SOURCE / "work/causal_inputs/ENCFF944LFH.bed.gz",
+        SOURCE / "work/causal_inputs/ENCFF068XUG.bed.gz",
+        SOURCE / "work/regulatory_inputs/ENCFF858TLX.bed.gz",
+        SOURCE / "data/interim/gwt_vectors/genes.parquet",
+        ROOT / "analyses/common/strict_liftover.py",
+        Path(__file__).resolve(),
+    ]
+    pchic_cache_key = hashlib.sha256(
+        "".join(sha256(path) for path in pchic_key_inputs).encode()
+    ).hexdigest()
+    cached_pchic_audit = (
+        json.loads(pchic_audit_cache.read_text(encoding="utf-8"))
+        if pchic_audit_cache.exists()
+        else {}
+    )
+    if (
+        pchic_cache.exists()
+        and pchic_audit_cache.exists()
+        and pchic_rows_cache.exists()
+        and cached_pchic_audit.get("cache_key") == pchic_cache_key
+    ):
         pchic_links = pd.read_parquet(pchic_cache)
-        pchic_audit = json.loads(pchic_audit_cache.read_text(encoding="utf-8"))
+        pchic_liftover_rows = pd.read_parquet(pchic_rows_cache)
+        pchic_audit = cached_pchic_audit
     else:
-        pchic_links, pchic_audit = prepare_pchic(config, measured, beds)
+        pchic_links, pchic_audit, pchic_liftover_rows = prepare_pchic(config, measured, beds)
+        pchic_audit["cache_key"] = pchic_cache_key
+        pchic_audit["cache_inputs"] = {
+            audit_path(path): sha256(path)
+            for path in pchic_key_inputs
+        }
         pchic_links.to_parquet(pchic_cache, index=False)
+        pchic_liftover_rows.to_parquet(pchic_rows_cache, index=False)
         pchic_audit_cache.write_text(json.dumps(pchic_audit, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     pchic_primary = pchic_support(pchic_links, config)
     guides = guide_summary(config)
@@ -1519,17 +1630,47 @@ def main() -> None:
     activity_range = targets.groupby("target_gene")["source_tf_activity"].agg(lambda values: values.max() - values.min() if values.notna().sum() >= 2 else np.nan)
     targets["source_tf_activity_range"] = targets["target_gene"].map(activity_range)
 
+    edge_digest = frame_sha256(edges, ["response_row", "gene_column"])
+    gene_digest = frame_sha256(gene_table, ["feature_id"])
+    curated_digest = frame_sha256(curated, ["source_gene", "response_gene"])
+    rows_digest = frame_sha256(rows, ["index"])
+    motif_digest = hashlib.sha256(
+        json.dumps(
+            {key: sorted(values) for key, values in sorted(motifs.items())},
+            separators=(",", ":"),
+        ).encode("utf-8")
+    ).hexdigest()
+    semantic_key = hashlib.sha256(
+        "".join(
+            [
+                sha256(ROOT / "config/molecular_cascade.yaml"),
+                sha256(OUTPUT / "extension_rules.json"),
+                sha256(Path(__file__).resolve()),
+                edge_digest,
+                gene_digest,
+                curated_digest,
+                rows_digest,
+                motif_digest,
+            ]
+        ).encode("utf-8")
+    ).hexdigest()
     matched_cache = OUTPUT / "motif_matched_backgrounds.parquet"
     matched_cache_meta = OUTPUT / "matched_background_cache.json"
-    matched_key = hashlib.sha256((sha256(ROOT / "config/molecular_cascade.yaml") + sha256(OUTPUT / "extension_rules.json") + str(len(edges)) + str(int(edges["response_row"].sum()))).encode()).hexdigest()
-    if matched_cache.exists() and matched_cache_meta.exists() and json.loads(matched_cache_meta.read_text(encoding="utf-8")).get("key") == matched_key:
+    if matched_cache.exists() and matched_cache_meta.exists() and json.loads(matched_cache_meta.read_text(encoding="utf-8")).get("key") == semantic_key:
         matched = pd.read_parquet(matched_cache)
     else:
         matched = build_matched_backgrounds(edges, rows, gene_table, curated, motifs, config)
         matched.to_parquet(matched_cache, index=False)
-        matched_cache_meta.write_text(json.dumps({"key": matched_key, "rows": len(matched)}, indent=2) + "\n", encoding="utf-8")
+        matched_cache_meta.write_text(json.dumps({"key": semantic_key, "rows": len(matched)}, indent=2) + "\n", encoding="utf-8")
     matched_permutations, matched_summary = run_matched_permutations(matched, config)
-    rewiring = pd.read_parquet(OUTPUT / "degree_preserving_rewiring_null.parquet") if (OUTPUT / "degree_preserving_rewiring_null.parquet").exists() else degree_preserving_null(edges, curated, config)
+    rewiring_cache = OUTPUT / "degree_preserving_rewiring_null.parquet"
+    rewiring_meta = OUTPUT / "degree_preserving_rewiring_cache.json"
+    if rewiring_cache.exists() and rewiring_meta.exists() and json.loads(rewiring_meta.read_text(encoding="utf-8")).get("key") == semantic_key:
+        rewiring = pd.read_parquet(rewiring_cache)
+    else:
+        rewiring = degree_preserving_null(edges, curated, config)
+        rewiring.to_parquet(rewiring_cache, index=False)
+        rewiring_meta.write_text(json.dumps({"key": semantic_key, "rows": len(rewiring)}, indent=2) + "\n", encoding="utf-8")
     ablation = component_ablation(edges, targets)
     threshold = threshold_sensitivity(pchic_links, gene_table, edges, config)
     influence = leave_one_influence(targets, ablation)
@@ -1571,6 +1712,7 @@ def main() -> None:
     curated.to_parquet(OUTPUT / "curated_regulatory_edges.parquet", index=False)
     motif_membership.to_parquet(OUTPUT / "motif_membership.parquet", index=False)
     pchic_links.to_parquet(OUTPUT / "pchic_lifted_links.parquet", index=False)
+    pchic_liftover_rows.to_parquet(OUTPUT / "pchic_liftover_rows.parquet", index=False)
     edges.to_parquet(OUTPUT / "edge_evidence_matrix.parquet", index=False)
     targets.to_parquet(OUTPUT / "target_state_evidence.parquet", index=False)
     activity_top.to_parquet(OUTPUT / "tf_activity_top.parquet", index=False)
