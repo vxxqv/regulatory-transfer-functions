@@ -1,0 +1,21 @@
+{
+  "all_bootstrap_replicates_valid": true,
+  "analysis": "frozen_cluster_paired_disease_model_uncertainty",
+  "clusters": 75,
+  "config_sha256": "9c9df76e1c3ab74d02f2d67ff9bf11a509d27d2d3ab41164b7886dff5b2c471e",
+  "diseases": 14,
+  "input_sha256": "355b9e174af1966238500a910ff848c624e52bd8348f5ce966247e1edae21c34",
+  "model_refitting": false,
+  "multiplicity_family": "two-sided tests across three frozen performance metrics",
+  "output_sha256": {
+    "model_null_distribution.parquet": "232eaf746450d470a6cb19691c5570404e5b4a2c0d8b22dc096f6c557c45e7a7",
+    "model_uncertainty.csv": "30936e723a4259a6ce03aee6db4b9bf84dec85bf1e9661e32f09cbedc0e19bba"
+  },
+  "point_estimates_reproduced": {
+    "auroc": -0.0886214870850155,
+    "average_precision": -0.014209033831639184,
+    "brier": -0.002095606627273622
+  },
+  "positive_rows": 62,
+  "rows": 1708
+}
