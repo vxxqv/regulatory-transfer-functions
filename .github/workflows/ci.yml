@@ -24,6 +24,9 @@ jobs:
           tests/test_strict_liftover.py
           tests/test_genetic_confirmation_runner.py
           tests/test_transfer_stability.py
+          tests/test_buffering_deletions.py
           tests/test_composition_sensitivity.py
           tests/test_grn_paired_contrasts.py
+          tests/test_disease_model_uncertainty.py
           tests/test_strengthening_synthesis.py
+          tests/test_bibliography.py
