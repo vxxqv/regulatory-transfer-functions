@@ -1,0 +1,40 @@
+{
+  "artifacts": [
+    {
+      "bytes": 3558,
+      "path": "config/pyvista_transfer_landscape.yaml",
+      "sha256": "613578c0319535aa300f3cb30eec38ea955fcd45714b6f403bba83d143e0b253"
+    },
+    {
+      "bytes": 1991787,
+      "path": "analyses/primary/results/transfer_phenotypes.parquet",
+      "sha256": "4327ea47df56278e92a60c8e4a26c41f5ff2d8f4e4786108e23e8998d0f97b3f"
+    },
+    {
+      "bytes": 5959719,
+      "path": "analyses/vectors/results/contextual_transfer_tensor.parquet",
+      "sha256": "d644893577cc5a78a0bda649584d21e608f3e105f78ed865a6d0328b541a8099"
+    },
+    {
+      "bytes": 374850,
+      "path": "analyses/vectors/results/context_rerouting_pairs.parquet",
+      "sha256": "b3845ac971b20991a0be5635d00d56c2593b67c746a8c9c517adc9c16e58c745"
+    },
+    {
+      "bytes": 250772,
+      "path": "analyses/context_dynamics/results/switch_scores.parquet",
+      "sha256": "8431f325c278e9cedf6c456ad917aa12fdddc0b492d03290f5a274fa28877a7a"
+    }
+  ],
+  "complete_target_state_rows": 13197,
+  "complete_targets": 4399,
+  "freeze_date": "2026-09-13",
+  "git_commit_before_freeze_commit": "92cb0cf043b4f709d813b37a0f34a3c815d7e6f0",
+  "not_a_prospective_preregistration": true,
+  "states": [
+    "Rest",
+    "Stim8hr",
+    "Stim48hr"
+  ],
+  "status": "retrospective_figure_rules_frozen_before_s24_specific_derivations"
+}

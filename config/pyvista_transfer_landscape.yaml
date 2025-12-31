@@ -1,0 +1,135 @@
+seed: 20260913
+figure:
+  number: S24
+  title: Three-dimensional regulatory transfer landscape
+  panel_layout: 1|3
+  width_px: 7000
+  height_px: 4600
+  base_window_width_px: 3500
+  base_window_height_px: 2300
+  supersampling: 2
+  background: "#FFFFFF"
+states:
+  order:
+    - Rest
+    - Stim8hr
+    - Stim48hr
+  labels:
+    Rest: Rest
+    Stim8hr: 8 h
+    Stim48hr: 48 h
+  colors:
+    Rest: "#4C78A8"
+    Stim8hr: "#F28E2B"
+    Stim48hr: "#59A14F"
+cohort:
+  expected_complete_targets: 4399
+  required_states: 3
+  require_exact_state_set: true
+  retain_missing_rerouting_rows: true
+  impute_coordinates: false
+axes:
+  x:
+    field: cis_magnitude
+    label: Absolute cis perturbation strength
+  y:
+    field: transfer_z
+    label: Cross-fitted distal transfer gain
+  z:
+    field: state_rerouting_js
+    label: Mean pairwise module JS divergence
+  display_transform: full_observed_range_linear_to_unit_interval
+  clip_values: false
+rerouting:
+  source: context_rerouting_pairs.parquet
+  definition: mean_of_two_pairwise_module_js_divergences_involving_the_state
+  require_both_state_pairs: true
+  pair_evaluable_required: true
+  structural_zero_padding: inherited_from_frozen_module_tensor
+thresholds:
+  source: transfer_class
+  buffered_quantile: 0.10
+  amplified_quantile: 0.90
+  state_specific: true
+density:
+  estimator: gaussian_kde
+  bandwidth_rule: scott
+  grid_points_per_axis: 72
+  cumulative_mass_levels:
+    - 0.50
+    - 0.80
+    - 0.95
+  planes:
+    - xy
+    - yz
+    - xz
+inference:
+  bootstrap_replicates: 1000
+  permutation_replicates: 1000
+  confidence_level: 0.95
+  correlation: spearman
+  multiple_testing: benjamini_hochberg
+  alpha: 0.05
+  bootstrap_unit: target
+centroids:
+  estimator: arithmetic_mean
+  require_finite_xyz: true
+  ellipsoid_distribution: empirical_bootstrap_centroid
+  ellipsoid_level: 0.95
+displacement:
+  transitions:
+    - [Rest, Stim8hr]
+    - [Stim8hr, Stim48hr]
+    - [Rest, Stim48hr]
+  estimator: median_signed_change
+  standardization: pooled_complete_cohort_standard_deviation_by_axis
+  null: destination_target_permutation_within_baseline_cis_quintile_and_guide_support
+  minimum_permutation_stratum: 8
+trajectories:
+  required_states:
+    - Rest
+    - Stim8hr
+    - Stim48hr
+  require_finite_xyz_in_all_states: true
+  require_ontarget_significant_in_all_states: true
+  require_no_distal_offtarget_flag_in_all_states: true
+  require_two_or_more_guides_in_all_states: true
+  exclude_single_guide_estimates: true
+  classes:
+    - amplified
+    - buffered
+    - stable_core
+    - strongly_rerouted
+  stable_core_rule: bottom_rerouting_decile_and_constant_transfer_class
+  strongly_rerouted_rule: top_rerouting_decile
+  selection_without_replacement: true
+  rank_rule:
+    - guide_supported_states_descending
+    - median_guide_correlation_descending
+    - minimum_target_cells_descending
+    - target_identifier_ascending
+render:
+  camera_position: [2.20, -1.85, 1.55]
+  camera_focal_point: [0.50, 0.50, 0.43]
+  camera_view_up: [0.0, 0.0, 1.0]
+  parallel_projection: true
+  parallel_scale: 0.84
+  population_point_size: 3.4
+  population_outline_size: 4.4
+  population_opacity_far: 0.12
+  population_opacity_near: 0.30
+  contour_opacity: 0.24
+  threshold_plane_opacity: 0.018
+  ellipsoid_opacity: 0.13
+  trajectory_tube_radius: 0.0045
+  arrow_scale: 0.055
+  anti_aliasing: ssaa
+  depth_peeling: true
+  lighting:
+    ambient: 0.74
+    diffuse: 0.24
+    specular: 0.02
+claims:
+  centroid_ellipsoids_are_individual_coverage: false
+  paths_are_single_cell_trajectories: false
+  report_null_contradictory_and_missing: true
