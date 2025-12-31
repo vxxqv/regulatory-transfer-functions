@@ -21,9 +21,6 @@ tests/test_figures.py
 tests/test_guide_dose_figure.py
 tests/test_pyvista_landscape.py
 .chart-data-*/
-.codex-build/
-.codex-finalizer/
-.codex/
 tmp/
 analyses/independent_confirmation/results/.*.lock
 analyses/independent_confirmation/results/*.stdout.log
