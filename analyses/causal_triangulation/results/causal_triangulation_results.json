@@ -5,5 +5,7 @@
   "atac_source_noncompliance_note": true,
   "eligible_locus_denominator": 3,
   "loci_with_mediation_claim": 0,
-  "matched_negative_locus_status": "unresolved_missing_matching_fields"
+  "matched_negative_locus_status": "unresolved_missing_matching_fields",
+  "pchic_call_rule": "CHiCAGO score greater than 5 in either CD4 state",
+  "pchic_source": "Burren et al. 2017 Additional file 5 Table S4, GRCh37"
 }

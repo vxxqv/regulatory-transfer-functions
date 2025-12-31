@@ -61,6 +61,7 @@ def main() -> None:
     variants = pd.read_csv(ROOT / "analyses/loci/results/credible_set_variants.csv")
     features = pd.read_csv(ROOT / "analyses/loci/results/l2g_features.csv")
     programs = pd.read_csv(ROOT / "analyses/loci/results/transfer_programs.csv")
+    pchic = pd.read_csv(ROOT / "analyses/loci/results/pchic_locus_summary.csv").set_index("locus")
     phenotypes = pd.read_parquet(ROOT / "analyses/primary/results/transfer_phenotypes.parquet")
     cis = pd.read_parquet(ROOT / "data/interim/eqtlgen/cis_mediators.parquet")
     trans = pd.read_parquet(ROOT / "data/interim/eqtlgen/trans_associations.parquet")
@@ -100,7 +101,14 @@ def main() -> None:
         coloc_value = target_features["eQtlColocH4Maximum"]
         coloc_pass = bool(np.isfinite(coloc_value) and coloc_value >= 0.80)
         e2g_value = target_features["e2gMean"]
-        enhancer_pass = False
+        pchic_contact_variants = int(pchic.loc[locus, "variants_with_called_contact"])
+        pchic_nearest = pchic.loc[locus, "nearest_called_contact_bp"]
+        enhancer_pass = pchic_contact_variants > 0
+        enhancer_evidence = (
+            "Credible variant overlaps a called primary CD4 promoter contact"
+            if enhancer_pass
+            else "One rE2G feature and no credible-variant CD4 promoter contact do not meet the gate"
+        )
 
         perturb = phenotypes[phenotypes["target_contrast_gene_name"] == gene].copy()
         cis_pass = bool(len(perturb) > 0 and perturb["ontarget_significant"].fillna(False).all())
@@ -182,7 +190,7 @@ def main() -> None:
             ("statistical_fine_mapping", "passed", float(meta["lead_posterior_probability"]), "Open Targets credible set"),
             ("gwas_cis_eqtl_colocalization", "passed" if coloc_pass else "failed", coloc_value, "Open Targets target-specific maximum H4"),
             ("credible_set_cd4_chromatin_overlap", "passed" if overlaps else "failed", len(overlaps), "ENCODE ENCSR841LHT IDR peaks"),
-            ("enhancer_to_gene", "passed" if enhancer_pass else "failed", e2g_value, "One rE2G feature alone does not meet the two-link gate"),
+            ("enhancer_to_gene", "passed" if enhancer_pass else "failed", e2g_value, enhancer_evidence),
             ("perturbational_cis_effect", "passed" if cis_pass else "failed", float(perturb["ontarget_effect_size"].median()) if len(perturb) else np.nan, "Frozen CD4 on-target z-score"),
             ("signed_downstream_program", "passed" if program_pass else "failed", len(program), "Frozen signed CD4 program"),
             ("trans_eqtl_direction_concordance", trans_gate_status, direction_fraction, "eQTLGen lead-variant trans associations"),
@@ -213,6 +221,8 @@ def main() -> None:
                 "credible_set_variants": len(locus_variants),
                 "cd4_atac_overlap_variants": len(overlaps),
                 "nearest_cd4_atac_peak_bp": min(distances) if distances else np.nan,
+                "cd4_pchic_contact_variants": pchic_contact_variants,
+                "nearest_cd4_pchic_contact_bp": pchic_nearest,
                 "passed_gates": passed,
                 "total_gates": len(gates),
                 "evidence_tier": tier,
@@ -255,6 +265,8 @@ def main() -> None:
         "atac_source": "ENCODE ENCSR841LHT, ENCFF944LFH, GRCh38 IDR thresholded peaks",
         "atac_source_noncompliance_note": True,
         "atac_file_sha256": sha256(atac_path),
+        "pchic_source": "Burren et al. 2017 Additional file 5 Table S4, GRCh37",
+        "pchic_call_rule": "CHiCAGO score greater than 5 in either CD4 state",
         "all_loci_reported": True,
         "matched_negative_locus_status": "unresolved_missing_matching_fields",
     }
