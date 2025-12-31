@@ -1,0 +1,11 @@
+{
+  "bootstrap_replicates_per_estimate": 2000,
+  "cross_validation_folds": 10,
+  "result_rows": 4320,
+  "scalar_base_specifications_processed": 1080,
+  "scalar_base_specifications_total": 4320,
+  "shard_index": 0,
+  "shards": 4,
+  "unavailable_base_specifications": 360,
+  "wall_seconds": 777.2769746999838
+}
