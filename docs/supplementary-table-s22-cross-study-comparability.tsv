@@ -1,0 +1,7 @@
+resource	intervention_unit	outcome	state_structure	validation_estimand	leave_one_study_out_eligible	reason
+GWCD4i CD4	gene perturbation	signed differential expression and downstream response burden	rest, 8 h, 48 h	regulatory transfer gain	false	primary model-development resource
+Replogle RPE1	gene perturbation	downstream response burden	single context	frozen target-held-out external prediction	false	outcome available without a matched three-state signed program
+Replogle K562	gene perturbation	signed response profile and response degree	single context	cross-system concordance	false	replication estimand differs from RPE1 prediction and CD4 state switching
+ENCODE CRISPRi CRE	regulatory-element perturbation	CRE-to-gene effect	multiple assays	binary and continuous enhancer-to-gene prediction	false	intervention unit is a regulatory element rather than a gene
+eQTLGen	germline allelic variation	cis and trans association direction	blood aggregate	natural-genetic concordance	false	observational allelic effects are not exchangeable with experimental perturbations
+BEELINE	observational single-cell trajectories	gold-standard network edges	dataset-specific	GRN edge recovery	false	network reconstruction does not share the perturbational transfer estimand
