@@ -1,0 +1,15 @@
+*
+!.gitignore
+!input_verification.json
+!scperturb_website.csv
+!scperturb_zenodo.json
+!geo_summaries.json
+!replogle_exp6_cell_identities.csv.gz
+!norman_cell_identities.csv.gz
+!pacalin_metadata.csv.gz
+!wessels_metadata.tsv.gz
+!yao_kd_perturbations.tsv.gz
+!gasperini_lowmoi_pheno.tsv.gz
+!gasperini_pilot_guide_groups.tsv.gz
+!*_obs.tsv.gz
+!*_audit.json

@@ -1,0 +1,37 @@
+{
+  "dataset": "TianKampmann2019_iPSC",
+  "release_bytes": 350848489,
+  "source_checksum": "md5:8279484264b513fd0419dacdc639ecef",
+  "outcome_arrays_read": false,
+  "obs_columns": [
+    "_index",
+    "batch",
+    "cancer",
+    "celltype",
+    "disease",
+    "guide_id",
+    "ncounts",
+    "ngenes",
+    "nperts",
+    "organism",
+    "percent_mito",
+    "percent_ribo",
+    "perturbation",
+    "perturbation_type",
+    "sgRNA_read_count",
+    "sgRNA_umi_count",
+    "tissue_type"
+  ],
+  "cells": 275708,
+  "metadata_levels": {
+    "batch": {
+      "2": 140023,
+      "1": 135685
+    },
+    "perturbation_type": {
+      "CRISPR": 275708
+    }
+  },
+  "status": "metadata_retrieved",
+  "bytes_transferred": 5866985
+}

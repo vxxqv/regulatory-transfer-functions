@@ -1,0 +1,2 @@
+metadata/* -text -whitespace
+results/*.tsv -whitespace

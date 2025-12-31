@@ -1,0 +1,583 @@
+{
+  "header": {
+    "type": "esummary",
+    "version": "0.3"
+  },
+  "result": {
+    "uids": [
+      "200146194",
+      "200090546",
+      "200133344",
+      "200220974",
+      "200284197"
+    ],
+    "200146194": {
+      "uid": "200146194",
+      "accession": "GSE146194",
+      "gds": "",
+      "title": "Combinatorial single-cell CRISPR screens by direct guide RNA capture and targeted sequencing",
+      "summary": "Single-cell CRISPR screens allow for the exploration of mammalian gene function and genetic regulatory networks, but their utility has been limited in part by their reliance on indirect sgRNA indexing. Here, we present direct capture Perturb-seq, a versatile screening approach in which expressed sgRNAs are sequenced alongside single-cell transcriptomes. Direct capture Perturb-seq enables the detection of multiple distinct sgRNAs expressed from a single vector within individual cells and thus allows pooled single-cell CRISPR screens to be easily paired with combinatorial perturbation libraries. We demonstrate that this approach allows high-throughput investigations of genetic interactions, and we leverage this ability to dissect epistatic interactions between cholesterol biogenesis and DNA repair. We also show that targeting individual genes with multiple sgRNAs per cell improves the efficacy of CRISPR interference and activation, facilitating the use of compact, highly active CRISPR libraries for single-cell screens. Lastly, we show that hybridization-based target enrichment permits sensitive, specific sequencing of informative transcripts from single-cell RNA-seq experiments.",
+      "gpl": "24676",
+      "gse": "146194",
+      "taxon": "Homo sapiens",
+      "entrytype": "GSE",
+      "gdstype": "Expression profiling by high throughput sequencing",
+      "ptechtype": "",
+      "valtype": "",
+      "ssinfo": "",
+      "subsetinfo": "",
+      "pdat": "2020/03/03",
+      "suppfile": "CSV, MTX, TSV",
+      "samples": [
+        {
+          "accession": "GSM4367988",
+          "title": "exp10: Cholesterol/DNA repair target enrichment (lane 1)"
+        },
+        {
+          "accession": "GSM4367982",
+          "title": "exp4: UPR 5' standard sgRNA"
+        },
+        {
+          "accession": "GSM4367985",
+          "title": "exp7: CRISPRi multiplexing"
+        },
+        {
+          "accession": "GSM4367979",
+          "title": "exp1: UPR GBC"
+        },
+        {
+          "accession": "GSM4367983",
+          "title": "exp5: UPR 5' sgRNAcs1"
+        },
+        {
+          "accession": "GSM4367980",
+          "title": "exp2: UPR 3' sgRNAcs1"
+        },
+        {
+          "accession": "GSM4367989",
+          "title": "exp11: CRISPRi multiplexing target enrichment (lane 1-16)"
+        },
+        {
+          "accession": "GSM4367986",
+          "title": "exp8: CRISPRa multiplexing"
+        },
+        {
+          "accession": "GSM4367981",
+          "title": "exp3: UPR 3' sgRNAcs2"
+        },
+        {
+          "accession": "GSM4367984",
+          "title": "exp6: Cholesterol/DNA repair"
+        },
+        {
+          "accession": "GSM4367987",
+          "title": "exp9: Cholesterol/DNA repair deep sequencing (lane 1)"
+        }
+      ],
+      "relations": [],
+      "extrelations": [
+        {
+          "relationtype": "SRA",
+          "targetobject": "SRP251252",
+          "targetftplink": "ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP/SRP251/SRP251252/"
+        }
+      ],
+      "n_samples": 11,
+      "seriestitle": "",
+      "platformtitle": "",
+      "platformtaxa": "",
+      "samplestaxa": "",
+      "pubmedids": [
+        "32231336"
+      ],
+      "projects": [],
+      "ftplink": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE146nnn/GSE146194/",
+      "geo2r": "no",
+      "bioproject": "PRJNA609688"
+    },
+    "200090546": {
+      "uid": "200090546",
+      "accession": "GSE90546",
+      "gds": "",
+      "title": "A multiplexed single-cell CRISPR screening platform enables systematic dissection of the unfolded protein response",
+      "summary": "Functional genomics efforts face tradeoffs between number of perturbations examined and complexity of phenotypes measured.  We bridge this gap with Perturb-seq, which combines droplet-based single-cell RNA-seq with a strategy for barcoding CRISPR-mediated perturbations, allowing many perturbations to be profiled in pooled format. We applied Perturb-seq to dissect the mammalian unfolded protein response (UPR) using single and combinatorial CRISPR perturbations. A genome-scale CRISPR interference (CRISPRi) screen identified genes whose depletion perturbs ER homeostasis. Subjecting ~100 hits to Perturb-seq enabled high-precision functional clustering of genes. Single-cell analyses revealed epistasis among the three UPR branches, bifurcated UPR branch activation between cells subject to the same perturbation, and differential activation of the branches across hits, including a feedback loop between the translocon and the IRE1\u03b1 branch. These studies provide insight into how the three sensors of ER homeostasis monitor distinct types of stress and highlight the ability of Perturb-seq to dissect complex cellular responses.",
+      "gpl": "20301;16791",
+      "gse": "90546",
+      "taxon": "Homo sapiens",
+      "entrytype": "GSE",
+      "gdstype": "Expression profiling by high throughput sequencing",
+      "ptechtype": "",
+      "valtype": "",
+      "ssinfo": "",
+      "subsetinfo": "",
+      "pdat": "2016/12/15",
+      "suppfile": "CSV, TSV, TXT",
+      "samples": [
+        {
+          "accession": "GSM2406677",
+          "title": "Epistasis experiment cells"
+        },
+        {
+          "accession": "GSM2406680",
+          "title": "Epistasis experiment guide barcodes (gemgroup 3)"
+        },
+        {
+          "accession": "GSM2406686",
+          "title": "UPR Perturb-seq experiment guide barcodes (gemgroup 5)"
+        },
+        {
+          "accession": "GSM2406683",
+          "title": "UPR Perturb-seq experiment guide barcodes (gemgroup 2)"
+        },
+        {
+          "accession": "GSM2406689",
+          "title": "UPR Perturb-seq experiment guide barcodes (gemgroup 8)"
+        },
+        {
+          "accession": "GSM2406685",
+          "title": "UPR Perturb-seq experiment guide barcodes (gemgroup 4)"
+        },
+        {
+          "accession": "GSM2406688",
+          "title": "UPR Perturb-seq experiment guide barcodes (gemgroup 7)"
+        },
+        {
+          "accession": "GSM2406682",
+          "title": "UPR Perturb-seq experiment guide barcodes (gemgroup 1)"
+        },
+        {
+          "accession": "GSM2406691",
+          "title": "UPR Perturb-seq experiment guide barcodes (gemgroup 10)"
+        },
+        {
+          "accession": "GSM2406687",
+          "title": "UPR Perturb-seq experiment guide barcodes (gemgroup 6)"
+        },
+        {
+          "accession": "GSM2406676",
+          "title": "Pilot TF experiment guide barcodes"
+        },
+        {
+          "accession": "GSM2406690",
+          "title": "UPR Perturb-seq experiment guide barcodes (gemgroup 9)"
+        },
+        {
+          "accession": "GSM2406679",
+          "title": "Epistasis experiment guide barcodes (gemgroup 2)"
+        },
+        {
+          "accession": "GSM2406678",
+          "title": "Epistasis experiment guide barcodes (gemgroup 1)"
+        },
+        {
+          "accession": "GSM2406675",
+          "title": "Pilot TF experiment cells"
+        },
+        {
+          "accession": "GSM2406681",
+          "title": "UPR Perturb-seq experiment cells"
+        },
+        {
+          "accession": "GSM2406684",
+          "title": "UPR Perturb-seq experiment guide barcodes (gemgroup 3)"
+        }
+      ],
+      "relations": [],
+      "extrelations": [
+        {
+          "relationtype": "SRA",
+          "targetobject": "SRP094654",
+          "targetftplink": "ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP/SRP094/SRP094654/"
+        }
+      ],
+      "n_samples": 17,
+      "seriestitle": "",
+      "platformtitle": "",
+      "platformtaxa": "",
+      "samplestaxa": "",
+      "pubmedids": [
+        "27984733"
+      ],
+      "projects": [],
+      "ftplink": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE90nnn/GSE90546/",
+      "geo2r": "no",
+      "bioproject": "PRJNA354963"
+    },
+    "200133344": {
+      "uid": "200133344",
+      "accession": "GSE133344",
+      "gds": "",
+      "title": "Exploring genetic interaction manifolds constructed from rich phenotypes",
+      "summary": "Rich phenotyping using single-cell RNA sequencing reveals principles and mechanisms of genetic interactions.",
+      "gpl": "24676",
+      "gse": "133344",
+      "taxon": "Homo sapiens",
+      "entrytype": "GSE",
+      "gdstype": "Expression profiling by high throughput sequencing",
+      "ptechtype": "",
+      "valtype": "",
+      "ssinfo": "",
+      "subsetinfo": "",
+      "pdat": "2019/08/08",
+      "suppfile": "CSV, H5, MTX, TSV",
+      "samples": [
+        {
+          "accession": "GSM3906024",
+          "title": "sgRNA perturb-seq experiment (gemgroup 5)"
+        },
+        {
+          "accession": "GSM3906027",
+          "title": "sgRNA perturb-seq experiment (gemgroup 8)"
+        },
+        {
+          "accession": "GSM3906030",
+          "title": "Barcodes identifying perturbations (gemgroup 3)"
+        },
+        {
+          "accession": "GSM3906033",
+          "title": "Barcodes identifying perturbations (gemgroup 6)"
+        },
+        {
+          "accession": "GSM3906025",
+          "title": "sgRNA perturb-seq experiment (gemgroup 6)"
+        },
+        {
+          "accession": "GSM3906022",
+          "title": "sgRNA perturb-seq experiment (gemgroup 3)"
+        },
+        {
+          "accession": "GSM3906028",
+          "title": "Barcodes identifying perturbations (gemgroup 1)"
+        },
+        {
+          "accession": "GSM3906034",
+          "title": "Barcodes identifying perturbations (gemgroup 7)"
+        },
+        {
+          "accession": "GSM3906031",
+          "title": "Barcodes identifying perturbations (gemgroup 4)"
+        },
+        {
+          "accession": "GSM3906026",
+          "title": "sgRNA perturb-seq experiment (gemgroup 7)"
+        },
+        {
+          "accession": "GSM3906020",
+          "title": "sgRNA perturb-seq experiment (gemgroup 1)"
+        },
+        {
+          "accession": "GSM3906023",
+          "title": "sgRNA perturb-seq experiment (gemgroup 4)"
+        },
+        {
+          "accession": "GSM3906035",
+          "title": "Barcodes identifying perturbations (gemgroup 8)"
+        },
+        {
+          "accession": "GSM3906029",
+          "title": "Barcodes identifying perturbations (gemgroup 2)"
+        },
+        {
+          "accession": "GSM3906032",
+          "title": "Barcodes identifying perturbations (gemgroup 5)"
+        },
+        {
+          "accession": "GSM3906021",
+          "title": "sgRNA perturb-seq experiment (gemgroup 2)"
+        }
+      ],
+      "relations": [],
+      "extrelations": [
+        {
+          "relationtype": "SRA",
+          "targetobject": "SRP212114",
+          "targetftplink": "ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP/SRP212/SRP212114/"
+        }
+      ],
+      "n_samples": 16,
+      "seriestitle": "",
+      "platformtitle": "",
+      "platformtaxa": "",
+      "samplestaxa": "",
+      "pubmedids": [
+        "31395745"
+      ],
+      "projects": [],
+      "ftplink": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE133nnn/GSE133344/",
+      "geo2r": "no",
+      "bioproject": "PRJNA551220"
+    },
+    "200220974": {
+      "uid": "200220974",
+      "accession": "GSE220974",
+      "gds": "",
+      "title": "CRISPRai Perturb-seq [Series 1]",
+      "summary": "We develop a system for bidirectional epigenetic editing (CRISPRai), in which orthogonal activating (CRISPRa) and repressive (CRISPRi) perturbations are applied simultaneously to multiple loci the same cell. We perform Perturb-seq, a method for single-cell RNA-seq paired with CRISPR guide RNA (gRNA) detection, on cells perturbed using CRISPRai for a panel of pairwise combinations of genes in K562 cells.",
+      "gpl": "24676",
+      "gse": "220974",
+      "taxon": "Homo sapiens",
+      "entrytype": "GSE",
+      "gdstype": "Expression profiling by high throughput sequencing",
+      "ptechtype": "",
+      "valtype": "",
+      "ssinfo": "",
+      "subsetinfo": "",
+      "pdat": "2024/03/14",
+      "suppfile": "CSV, MTX, TSV",
+      "samples": [
+        {
+          "accession": "GSM6833435",
+          "title": "gRNA CRISPRi double perturbation rep1"
+        },
+        {
+          "accession": "GSM6833432",
+          "title": "gRNA CRISPRa single perturbation S3"
+        },
+        {
+          "accession": "GSM6833438",
+          "title": "gRNA CRISPRa double perturbation rep3"
+        },
+        {
+          "accession": "GSM6833424",
+          "title": "scRNA CRISPRa single perturbation S1"
+        },
+        {
+          "accession": "GSM6833437",
+          "title": "gRNA CRISPRi double perturbation rep2"
+        },
+        {
+          "accession": "GSM6833426",
+          "title": "scRNA CRISPRa or CRISPRi single perturbation S3"
+        },
+        {
+          "accession": "GSM6833425",
+          "title": "scRNA CRISPRi single perturbation S2"
+        },
+        {
+          "accession": "GSM6833429",
+          "title": "scRNA double perturbation rep3"
+        },
+        {
+          "accession": "GSM6833428",
+          "title": "scRNA double perturbation rep2"
+        },
+        {
+          "accession": "GSM6833434",
+          "title": "gRNA CRISPRa double perturbations rep1"
+        },
+        {
+          "accession": "GSM6833431",
+          "title": "gRNA CRISPRi single perturbation S2"
+        },
+        {
+          "accession": "GSM6833433",
+          "title": "gRNA CRISPRi single perturbation S3"
+        },
+        {
+          "accession": "GSM6833430",
+          "title": "gRNA CRISPRa single perturbation S1"
+        },
+        {
+          "accession": "GSM6833427",
+          "title": "scRNA double perturbation rep1"
+        },
+        {
+          "accession": "GSM6833439",
+          "title": "gRNA CRISPRi double perturbation rep3"
+        },
+        {
+          "accession": "GSM6833436",
+          "title": "gRNA CRISPRa double perturbation rep2"
+        }
+      ],
+      "relations": [],
+      "extrelations": [],
+      "n_samples": 16,
+      "seriestitle": "",
+      "platformtitle": "",
+      "platformtaxa": "",
+      "samplestaxa": "",
+      "pubmedids": [
+        "38760566"
+      ],
+      "projects": [],
+      "ftplink": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE220nnn/GSE220974/",
+      "geo2r": "no",
+      "bioproject": "PRJNA912208"
+    },
+    "200284197": {
+      "uid": "200284197",
+      "accession": "GSE284197",
+      "gds": "",
+      "title": "Dissecting Gene Regulatory Networks Governing Human Cortical Cell Fate ",
+      "summary": "Human cortical neurogenesis involves conserved and specialized developmental processes during a restricted window of prenatal development. Radial glia (RG) neural stem cells shape cortical cell diversity by giving rise to excitatory neurons, oligodendrocytes, and astrocytes, as well as olfactory bulb interneurons (INs) and a recently characterized population of cortical INs. Complex genetic programs orchestrated by transcription factor (TF) circuits govern the balance between self-renewal and differentiation, and between different cell fates. Despite progress in measuring gene regulatory network activity during human cortical development, functional studies are required to evaluate the roles of TFs and effector genes in human RG lineage progression. Here we establish a human primary culture system that allows sensitive discrimination of cell fate dynamics and apply single cell clustered regularly interspaced short palindromic repeats interference (CRISPRi) screening to examine the transcriptional and cell fate consequences of 44 TFs active during cortical neurogenesis. We identified multiple TFs, with novel roles in cortical neurogenesis, including ZNF219, previously uncharacterized, that represses neural differentiation and NR2E1 and ARX that have opposing roles in regulating RG lineage plasticity and progression across developmental stages. We also uncovered convergent effector genes downstream of multiple TFs enriched in neurodevelopmental and neuropsychiatric disorders and observed conserved mechanisms of RG lineage plasticity across primates. We further uncovered a postmitotic role for ARX in safeguarding IN subtype specification through repressing LMO1. Our study provides a framework for dissecting regulatory networks driving cell fate consequences during human neurogenesis.",
+      "gpl": "34281;36331",
+      "gse": "284197",
+      "taxon": "Homo sapiens; Macaca mulatta",
+      "entrytype": "GSE",
+      "gdstype": "Other; Expression profiling by high throughput sequencing",
+      "ptechtype": "",
+      "valtype": "",
+      "ssinfo": "",
+      "subsetinfo": "",
+      "pdat": "2025/10/13",
+      "suppfile": "CSV, H5AD",
+      "samples": [
+        {
+          "accession": "GSM9304164",
+          "title": "D7 human perturb-seq targeting 5 TFs coupled with lineage tracing , batch2, 10X lane1,  sgRNA"
+        },
+        {
+          "accession": "GSM9304181",
+          "title": "D7 human perturb-seq targeting ARX and LMO1, illumina, GEX"
+        },
+        {
+          "accession": "GSM9304161",
+          "title": "D7 human perturb-seq targeting 44 TFs, 10X lane4, GEX"
+        },
+        {
+          "accession": "GSM9304158",
+          "title": "D7 human perturb-seq targeting 44 TFs, 10X lane2 , sgRNA"
+        },
+        {
+          "accession": "GSM8679677",
+          "title": "D7 macaque perturb-seq targeting 5 TFs coupled with lineage tracing , 10X lane1,  STICR"
+        },
+        {
+          "accession": "GSM8679680",
+          "title": "D7 macaque perturb-seq targeting 5 TFs coupled with lineage tracing , 10X lane2,  STICR"
+        },
+        {
+          "accession": "GSM9304173",
+          "title": "D7 macaque perturb-seq targeting 5 TFs coupled with lineage tracing , batch3, 10X lane2, sgRNA"
+        },
+        {
+          "accession": "GSM8679683",
+          "title": "D7 macaque perturb-seq targeting 5 TFs coupled with lineage tracing , 10X lane3,  STICR"
+        },
+        {
+          "accession": "GSM9304167",
+          "title": "D7 human perturb-seq targeting 5 TFs coupled with lineage tracing, batch2, 10X lane2,  sgRNA"
+        },
+        {
+          "accession": "GSM9304170",
+          "title": "D7 macaque perturb-seq targeting 5 TFs coupled with lineage tracing , batch3, 10X lane1, sgRNA"
+        },
+        {
+          "accession": "GSM8679682",
+          "title": "D7 macaque perturb-seq targeting 5 TFs coupled with lineage tracing, 10X lane3,  sgRNA"
+        },
+        {
+          "accession": "GSM9304163",
+          "title": "D7 human perturb-seq targeting 5 TFs coupled with lineage tracing, batch2, 10X lane1 , GEX"
+        },
+        {
+          "accession": "GSM9304169",
+          "title": "D7 macaque perturb-seq targeting 5 TFs coupled with lineage tracing, batch3, 10X lane1, GEX"
+        },
+        {
+          "accession": "GSM9304166",
+          "title": "D7 human perturb-seq targeting 5 TFs coupled with lineage tracing, batch2, 10X lane2 , GEX"
+        },
+        {
+          "accession": "GSM8679679",
+          "title": "D7 macaque perturb-seq targeting 5 TFs coupled with lineage tracing, 10X lane2,  sgRNA"
+        },
+        {
+          "accession": "GSM9304172",
+          "title": "D7 macaque perturb-seq targeting 5 TFs coupled with lineage tracing, batch3, 10X lane2, GEX"
+        },
+        {
+          "accession": "GSM9304175",
+          "title": "D12-14 human perturb-seq targeting 5 TFs coupled with lineage tracing, slice culture, 10X lane1, GEX"
+        },
+        {
+          "accession": "GSM9304178",
+          "title": "D12-14 human perturb-seq targeting 5 TFs coupled with lineage tracing, slice culture, 10X lane2, GEX"
+        },
+        {
+          "accession": "GSM9304174",
+          "title": "D7 macaque perturb-seq targeting 5 TFs coupled with lineage tracing , batch3, 10X lane2, STICR"
+        },
+        {
+          "accession": "GSM9304171",
+          "title": "D7 macaque perturb-seq targeting 5 TFs coupled with lineage tracing , batch3, 10X lane1, STICR"
+        },
+        {
+          "accession": "GSM8679676",
+          "title": "D7 macaque perturb-seq targeting 5 TFs coupled with lineage tracing , 10X lane1,  sgRNA"
+        },
+        {
+          "accession": "GSM9304180",
+          "title": "D12-14 human perturb-seq targeting 5 TFs coupled with lineage tracing, slice culture, 10X lane2, STICR"
+        },
+        {
+          "accession": "GSM9304177",
+          "title": "D12-14 human perturb-seq targeting 5 TFs coupled with lineage tracing, slice culture, 10X lane1, STICR"
+        },
+        {
+          "accession": "GSM9304160",
+          "title": "D7 human perturb-seq targeting 44 TFs, 10X lane3,  sgRNA"
+        },
+        {
+          "accession": "GSM9304157",
+          "title": "D7 human perturb-seq targeting 44 TFs, 10X lane2 , GEX"
+        },
+        {
+          "accession": "GSM9304159",
+          "title": "D7 human perturb-seq targeting 44 TFs, 10X lane3 , GEX"
+        },
+        {
+          "accession": "GSM9304182",
+          "title": "D7 human perturb-seq targeting ARX and LMO1, illumina, sgRNA"
+        },
+        {
+          "accession": "GSM8679675",
+          "title": "D7 macaque perturb-seq targeting 5 TFs coupled with lineage tracing, 10X lane1 , GEX"
+        },
+        {
+          "accession": "GSM9304179",
+          "title": "D12-14 human perturb-seq targeting 5 TFs coupled with lineage tracing, slice culture, 10X lane2, sgRNA"
+        },
+        {
+          "accession": "GSM8679681",
+          "title": "D7 macaque perturb-seq targeting 5 TFs coupled with lineage tracing,10X lane3 , GEX"
+        },
+        {
+          "accession": "GSM9304176",
+          "title": "D12-14 human perturb-seq targeting 5 TFs coupled with lineage tracing, slice culture, 10X lane1, sgRNA"
+        },
+        {
+          "accession": "GSM8679678",
+          "title": "D7 macaque perturb-seq targeting 5 TFs coupled with lineage tracing, 10X lane2 , GEX"
+        },
+        {
+          "accession": "GSM9304162",
+          "title": "D7 human perturb-seq targeting 44 TFs, 10X lane4 , sgRNA"
+        },
+        {
+          "accession": "GSM9304168",
+          "title": "D7 human perturb-seq targeting 5 TFs coupled with lineage tracing , batch2,10X lane2,  STICR"
+        },
+        {
+          "accession": "GSM9304165",
+          "title": "D7 human perturb-seq targeting 5 TFs coupled with lineage tracing , batch2, 10X lane1,  STICR"
+        }
+      ],
+      "relations": [],
+      "extrelations": [],
+      "n_samples": 35,
+      "seriestitle": "",
+      "platformtitle": "",
+      "platformtaxa": "",
+      "samplestaxa": "",
+      "pubmedids": [
+        "41565813"
+      ],
+      "projects": [],
+      "ftplink": "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE284nnn/GSE284197/",
+      "geo2r": "no",
+      "bioproject": "PRJNA1197574"
+    }
+  }
+}

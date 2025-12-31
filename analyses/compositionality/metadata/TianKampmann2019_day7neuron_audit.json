@@ -1,0 +1,38 @@
+{
+  "dataset": "TianKampmann2019_day7neuron",
+  "release_bytes": 268921535,
+  "source_checksum": "md5:74074e99e8e7c5a6297b6a684b72d754",
+  "outcome_arrays_read": false,
+  "obs_columns": [
+    "_index",
+    "batch",
+    "cancer",
+    "celltype",
+    "disease",
+    "guide_id",
+    "ncounts",
+    "ngenes",
+    "nperts",
+    "organism",
+    "percent_hemo",
+    "percent_mito",
+    "percent_ribo",
+    "perturbation",
+    "perturbation_type",
+    "sgRNA_read_count",
+    "sgRNA_umi_count",
+    "tissue_type"
+  ],
+  "cells": 182790,
+  "metadata_levels": {
+    "batch": {
+      "1": 96444,
+      "2": 86346
+    },
+    "perturbation_type": {
+      "CRISPR": 182790
+    }
+  },
+  "status": "metadata_retrieved",
+  "bytes_transferred": 7301823
+}

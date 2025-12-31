@@ -1,0 +1,39 @@
+{
+  "dataset": "SunshineHein2023",
+  "release_bytes": 743672579,
+  "source_checksum": "md5:739f42ccb24815c4ac1d8ca6d4aa85d8",
+  "outcome_arrays_read": false,
+  "obs_columns": [
+    "UMI_count",
+    "cancer",
+    "cell_barcode",
+    "cell_line",
+    "celltype",
+    "coverage",
+    "disease",
+    "gem_group",
+    "good_coverage",
+    "guide_id",
+    "match_type",
+    "matched_library_element",
+    "ncounts",
+    "ngenes",
+    "nperts",
+    "number_of_cells",
+    "organism",
+    "percent_mito",
+    "percent_ribo",
+    "perturbation",
+    "perturbation_type",
+    "read_count",
+    "tissue_type"
+  ],
+  "cells": 90380,
+  "metadata_levels": {
+    "perturbation_type": {
+      "CRISPR-cas9": 90380
+    }
+  },
+  "status": "metadata_retrieved",
+  "bytes_transferred": 3902211
+}

@@ -1,0 +1,7 @@
+hypothesis	branch	question	eligible_datasets	outcome_pairs_analyzed	effect_size	ci_low	ci_high	p_value	q_value	decision	reason
+H1	confirmatory_compositionality	aligned same-sign singles are enriched for sub-additive or saturating responses	0	0						unavailable	no_dataset_passed_all_frozen_availability_and_power_gates
+H2	confirmatory_compositionality	anti-aligned singles are enriched for signed cancellation	0	0						unavailable	no_dataset_passed_all_frozen_availability_and_power_gates
+H3	confirmatory_compositionality	overlapping neighborhoods or modules predict redundancy after single-effect adjustment	0	0						unavailable	no_dataset_passed_all_frozen_availability_and_power_gates
+H4	confirmatory_compositionality	distinct paths converging on one module predict synergy or rerouting	0	0						unavailable	no_dataset_passed_all_frozen_availability_and_power_gates
+H5	confirmatory_compositionality	frozen CD4 geometry predicts held-out interaction behavior beyond simple and degree baselines	0	0						unavailable	no_dataset_passed_all_frozen_availability_and_power_gates
+H6	confirmatory_compositionality	molecularly supported paths compose more reproducibly than unsupported paths	0	0						unavailable	no_dataset_passed_all_frozen_availability_and_power_gates
