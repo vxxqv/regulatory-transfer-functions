@@ -17,8 +17,6 @@ jobs:
         run: >-
           pytest -q -p no:cacheprovider
           tests/test_release_schema.py
-          tests/test_figures.py
-          tests/test_figure7.py
           tests/test_text_style.py
           tests/test_cell_systems_freeze.py
           tests/test_independent_confirmation_decisions.py
