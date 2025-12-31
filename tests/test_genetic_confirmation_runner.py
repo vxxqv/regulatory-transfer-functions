@@ -89,6 +89,7 @@ class GeneticConfirmationRunnerTest(unittest.TestCase):
             patch.object(runner, "DATA", self.data),
             patch.object(runner, "OUTPUT", self.output),
             patch.object(runner, "EXPECTED_DENSE_VARIANTS", {"N05": 24}),
+            patch.object(runner, "REQUIRED_FREE_BYTES", 0),
             patch.object(runner, "verify_acquisition", return_value=(self.manifest, "manifest")),
             patch.object(runner, "enforce_opening_order"),
         ):
