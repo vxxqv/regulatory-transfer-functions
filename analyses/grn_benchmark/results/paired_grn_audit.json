@@ -1,0 +1,273 @@
+{
+  "analysis": "frozen_paired_grn_benchmark_extension",
+  "availability": {
+    "estimated_datasets": [
+      "hESC",
+      "hHep",
+      "mDC",
+      "mHSC-E"
+    ],
+    "mESC": {
+      "candidate_rows_in_frozen_edge_table": 0,
+      "reason": "No eligible regulators passed the frozen selection rule; mESC has no rows in the frozen candidate-edge table.",
+      "relaxation_attempted": false,
+      "status": "unavailable"
+    }
+  },
+  "calibration": {
+    "bins_per_method": 10,
+    "methods": 8,
+    "metrics": [
+      "Brier score",
+      "expected calibration error"
+    ],
+    "probability_definition": "Empirical gold-edge frequency in the score-rank decile after removing every edge for the evaluated target.",
+    "rank_definition": "Outcome-free global within-dataset/method score ranks; score ties are broken deterministically by regulator and target.",
+    "target_outcome_leakage": false
+  },
+  "decisions": {
+    "finite_horizon_transfer_superiority_by_metric": {
+      "auprc": {
+        "criterion": "q < 0.05 and lower CI > 0 in at least 3 of 4 datasets, with no corrected opposite effects",
+        "datasets": 4,
+        "finite_horizon_transfer_superior_datasets": 0,
+        "finite_horizon_transfer_superiority_criterion_met": false,
+        "frozen_simple_comparator_superior_datasets": 1,
+        "status": "failed",
+        "unresolved_datasets": 3
+      },
+      "auroc": {
+        "criterion": "q < 0.05 and lower CI > 0 in at least 3 of 4 datasets, with no corrected opposite effects",
+        "datasets": 4,
+        "finite_horizon_transfer_superior_datasets": 0,
+        "finite_horizon_transfer_superiority_criterion_met": false,
+        "frozen_simple_comparator_superior_datasets": 3,
+        "status": "failed",
+        "unresolved_datasets": 1
+      },
+      "early_precision_ratio": {
+        "criterion": "q < 0.05 and lower CI > 0 in at least 3 of 4 datasets, with no corrected opposite effects",
+        "datasets": 4,
+        "finite_horizon_transfer_superior_datasets": 1,
+        "finite_horizon_transfer_superiority_criterion_met": false,
+        "frozen_simple_comparator_superior_datasets": 1,
+        "status": "failed",
+        "unresolved_datasets": 2
+      }
+    },
+    "frozen_conclusion_preserved": true,
+    "new_methods_added": false
+  },
+  "frozen_input_checks": {
+    "analyses/grn_benchmark/results/all_candidate_edges.parquet": {
+      "bytes": 42274908,
+      "expected_sha256": "dec71e235ae4fdfdad9112992a401063c55ac11a93037fde575795b81707b5d4",
+      "matches_freeze_manifest": true,
+      "observed_sha256": "dec71e235ae4fdfdad9112992a401063c55ac11a93037fde575795b81707b5d4"
+    },
+    "analyses/grn_benchmark/results/method_results.csv": {
+      "bytes": 5383,
+      "expected_sha256": "3ab3478cdba305519e804722fcc1972802512888f9732482a90d8397f227580c",
+      "matches_freeze_manifest": true,
+      "observed_sha256": "3ab3478cdba305519e804722fcc1972802512888f9732482a90d8397f227580c"
+    },
+    "config/strengthening_extensions.yaml": {
+      "bytes": 11285,
+      "expected_sha256": "a08f4a4eaa19da4182b08ee2a62d472b4d57fe03e012d8231cdcdf336d7d9d51",
+      "matches_freeze_manifest": true,
+      "observed_sha256": "a08f4a4eaa19da4182b08ee2a62d472b4d57fe03e012d8231cdcdf336d7d9d51"
+    }
+  },
+  "frozen_specification": {
+    "alpha": 0.05,
+    "bootstrap_p_value_method": "two-sided absolute observed mean against the bootstrap distribution centered on the paired-difference null, with a plus-one correction",
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed_offsets": {
+      "hESC/auprc": 1,
+      "hESC/auroc": 0,
+      "hESC/early_precision_ratio": 2,
+      "hHep/auprc": 101,
+      "hHep/auroc": 100,
+      "hHep/early_precision_ratio": 102,
+      "mDC/auprc": 201,
+      "mDC/auroc": 200,
+      "mDC/early_precision_ratio": 202,
+      "mHSC-E/auprc": 301,
+      "mHSC-E/auroc": 300,
+      "mHSC-E/early_precision_ratio": 302
+    },
+    "comparison_by_dataset": {
+      "hESC": "pseudotime_lagged_correlation",
+      "hHep": "pseudotime_lagged_correlation",
+      "mDC": "absolute_pearson",
+      "mHSC-E": "pseudotime_lagged_correlation"
+    },
+    "confidence_level": 0.95,
+    "correction": "benjamini_hochberg_within_family",
+    "decision_criterion": "superiority requires q below 0.05 and a lower confidence bound above zero in at least 3 of 4 datasets without corrected opposite effects",
+    "hypothesis": "Finite-horizon transfer does not outperform the frozen best simple comparator on paired target-macro metrics.",
+    "minimum_targets": 100,
+    "multiplicity_family": "grn_paired_metrics",
+    "null": "paired target difference equal to zero",
+    "seed": 20260912,
+    "stopping_rule": "no new method and no relaxation for mESC"
+  },
+  "heterogeneity": {
+    "datasets": 4,
+    "estimator": "DerSimonian-Laird random effects",
+    "included_in_12_contrast_bh_family": false,
+    "metrics": [
+      "auroc",
+      "auprc",
+      "early_precision_ratio"
+    ],
+    "within_dataset_variance": "Squared standard deviation across the 2,000 paired target-bootstrap means"
+  },
+  "independent_reference_reproduction": {
+    "maximum_absolute_error": 1.1102230246251565e-16,
+    "passed": true,
+    "statistics_checked": 24,
+    "tolerance": 1e-12
+  },
+  "limitations": [
+    "Target-macro metrics exclude targets whose frozen candidate edges contain only one gold class.",
+    "Early precision retains the frozen score-order definition; tied scores can make the top-k membership depend on deterministic row order.",
+    "Rank-decile calibration is descriptive and target-held-out, but it does not establish transportable absolute probabilities across datasets.",
+    "Brier scores are strongly influenced by the low gold-edge prevalence; ECE and the ten calibration bins are reported alongside them.",
+    "Random-effects heterogeneity uses only four datasets; tau-squared, I-squared, normal intervals, and prediction intervals are imprecise.",
+    "The BH family contains only the 12 prespecified dataset-metric paired contrasts; heterogeneity synthesis p-values are descriptive and unadjusted.",
+    "mESC remains unavailable and no eligibility rule was relaxed."
+  ],
+  "multiplicity_check": {
+    "contrasts": 12,
+    "correction": "benjamini_hochberg_within_family",
+    "expected_contrasts": 12,
+    "family": "grn_paired_metrics",
+    "passed": true
+  },
+  "output_files": {
+    "analyses/grn_benchmark/results/dataset_heterogeneity.csv": {
+      "bytes": 2670,
+      "sha256": "d935114c7337219fc1355ada11fb2d9e12f55332f905402e48cfeabdc05e6c53"
+    },
+    "analyses/grn_benchmark/results/paired_method_contrasts.csv": {
+      "bytes": 4107,
+      "sha256": "b097013187773ae644a2b49528932dda284a8e364d35f8b2aa193818340010c2"
+    },
+    "analyses/grn_benchmark/results/paired_target_metrics.parquet": {
+      "bytes": 198661,
+      "sha256": "4e8484e4080db9a42a1b05d02aa58a781a096852e070b98332f28e43cedc17ac"
+    },
+    "analyses/grn_benchmark/results/score_calibration.csv": {
+      "bytes": 25945,
+      "sha256": "b19a179067c4b1ef3c05b542b8398b47ccd50aa6a7d1b1f344bd28647fe80a57"
+    }
+  },
+  "pairing_checks": {
+    "hESC": {
+      "all_scores_finite": true,
+      "all_targets": 910,
+      "comparator_duplicate_edge_keys": 0,
+      "comparator_method": "pseudotime_lagged_correlation",
+      "comparator_rows": 372690,
+      "edge_keys_identical": true,
+      "evaluable_targets": 815,
+      "finite_comparator_scores": 372690,
+      "finite_transfer_scores": 372690,
+      "gold_label_mismatches": 0,
+      "gold_labels_identical": true,
+      "matched_edge_pairs": 372690,
+      "minimum_power_passed": true,
+      "minimum_targets": 100,
+      "negative_edges": 368093,
+      "positive_edges": 4597,
+      "single_class_targets_excluded": 95,
+      "transfer_duplicate_edge_keys": 0,
+      "transfer_rows": 372690,
+      "unmatched_comparator_edges": 0,
+      "unmatched_transfer_edges": 0
+    },
+    "hHep": {
+      "all_scores_finite": true,
+      "all_targets": 948,
+      "comparator_duplicate_edge_keys": 0,
+      "comparator_method": "pseudotime_lagged_correlation",
+      "comparator_rows": 424256,
+      "edge_keys_identical": true,
+      "evaluable_targets": 874,
+      "finite_comparator_scores": 424256,
+      "finite_transfer_scores": 424256,
+      "gold_label_mismatches": 0,
+      "gold_labels_identical": true,
+      "matched_edge_pairs": 424256,
+      "minimum_power_passed": true,
+      "minimum_targets": 100,
+      "negative_edges": 414397,
+      "positive_edges": 9859,
+      "single_class_targets_excluded": 74,
+      "transfer_duplicate_edge_keys": 0,
+      "transfer_rows": 424256,
+      "unmatched_comparator_edges": 0,
+      "unmatched_transfer_edges": 0
+    },
+    "mDC": {
+      "all_scores_finite": true,
+      "all_targets": 821,
+      "comparator_duplicate_edge_keys": 0,
+      "comparator_method": "absolute_pearson",
+      "comparator_rows": 263220,
+      "edge_keys_identical": true,
+      "evaluable_targets": 415,
+      "finite_comparator_scores": 263220,
+      "finite_transfer_scores": 263220,
+      "gold_label_mismatches": 0,
+      "gold_labels_identical": true,
+      "matched_edge_pairs": 263220,
+      "minimum_power_passed": true,
+      "minimum_targets": 100,
+      "negative_edges": 262502,
+      "positive_edges": 718,
+      "single_class_targets_excluded": 406,
+      "transfer_duplicate_edge_keys": 0,
+      "transfer_rows": 263220,
+      "unmatched_comparator_edges": 0,
+      "unmatched_transfer_edges": 0
+    },
+    "mHSC-E": {
+      "all_scores_finite": true,
+      "all_targets": 704,
+      "comparator_duplicate_edge_keys": 0,
+      "comparator_method": "pseudotime_lagged_correlation",
+      "comparator_rows": 143412,
+      "edge_keys_identical": true,
+      "evaluable_targets": 692,
+      "finite_comparator_scores": 143412,
+      "finite_transfer_scores": 143412,
+      "gold_label_mismatches": 0,
+      "gold_labels_identical": true,
+      "matched_edge_pairs": 143412,
+      "minimum_power_passed": true,
+      "minimum_targets": 100,
+      "negative_edges": 132360,
+      "positive_edges": 11052,
+      "single_class_targets_excluded": 12,
+      "transfer_duplicate_edge_keys": 0,
+      "transfer_rows": 143412,
+      "unmatched_comparator_edges": 0,
+      "unmatched_transfer_edges": 0
+    }
+  },
+  "row_counts": {
+    "dataset_heterogeneity_metrics": 3,
+    "paired_edge_keys": 1203578,
+    "paired_method_contrasts": 12,
+    "paired_target_metrics": 2796,
+    "score_calibration_bins": 80,
+    "selected_candidate_method_edges": 2407156,
+    "source_candidate_method_edges": 4814312
+  },
+  "script": "analyses/grn_benchmark/run_paired_contrasts.py",
+  "script_sha256": "3c27798bf5b155bec2209d3445b264dd8258b95abf163f86ed1d44a6b43289f4",
+  "source_duplicate_keys": 0,
+  "status": "completed"
+}
