@@ -7,6 +7,7 @@ rule all:
         "analyses/vectors/results/vector_results.json",
         "data/interim/eqtlgen/audit.json",
         "analyses/natural_genetics/results/natural_genetics_results.json",
+        "data/interim/encode_crispri/audit.json",
         "figures/fig01/fig01.pdf"
 
 rule primary_summary:
@@ -52,6 +53,23 @@ rule natural_genetics:
         "analyses/natural_genetics/results/natural_genetics_results.json"
     shell:
         "python analyses/natural_genetics/run_eqtlgen.py"
+
+rule fetch_encode_crispri:
+    input:
+        workbook="data/raw/encode_crispri/supplementary_tables.xlsx",
+        summary="work/upstream/GWT_perturbseq_analysis_2025/metadata/suppl_tables/DE_stats.suppl_table.csv"
+    output:
+        "data/raw/encode_crispri/element_quantifications/catalog.tsv"
+    shell:
+        "python src/ingest/fetch_encode_crispri.py --workbook {input.workbook} --target-summary {input.summary}"
+
+rule prepare_encode_crispri:
+    input:
+        "data/raw/encode_crispri/element_quantifications/catalog.tsv"
+    output:
+        "data/interim/encode_crispri/audit.json"
+    shell:
+        "python src/ingest/prepare_encode_crispri.py"
 
 rule figure_1:
     input:
