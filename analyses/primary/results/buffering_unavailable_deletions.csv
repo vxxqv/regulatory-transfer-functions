@@ -1,0 +1,4 @@
+analysis,status,reason
+leave_one_guide,unavailable,Aggregate target-state rows do not contain guide-resolved residuals.
+leave_one_donor,unavailable,Aggregate target-state rows do not contain donor-resolved residuals.
+leave_one_locus,not_applicable,Buffering is not a locus-level estimand.

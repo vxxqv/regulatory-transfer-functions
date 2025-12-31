@@ -1,0 +1,21 @@
+{
+  "analysis": "frozen_buffering_deletion_extension",
+  "complete_bootstrap_replicates": true,
+  "complete_permutation_replicates": true,
+  "config_sha256": "b46ef3e27c08424feb3c19fe7df74405c85fc408a7ff8242508c2fae6fd30cf1",
+  "eligible_targets": 4399,
+  "input_sha256": "4327ea47df56278e92a60c8e4a26c41f5ff2d8f4e4786108e23e8998d0f97b3f",
+  "maximum_absolute_leave_one_target_change": 0.004914176649757129,
+  "selected_rows": {
+    "Pooled": 1320,
+    "Rest": 440,
+    "Stim48hr": 440,
+    "Stim8hr": 440
+  },
+  "states": [
+    "Rest",
+    "Stim8hr",
+    "Stim48hr"
+  ],
+  "tail_fraction": 0.1
+}
