@@ -1256,22 +1256,34 @@ class GeneticInputAcquirer:
         response = self._request(physical.url, headers=self._conditional_headers(physical.metadata))
         status = getattr(response, "status", response.getcode())
         length = response.headers.get("Content-Length", "")
+        checksum_locks_identity = (
+            physical.provider_algorithm in {"MD5", "SHA256", "Git_blob_SHA1"}
+            and physical.provider_checksum not in NA_VALUES
+        )
         if (
             status != 200
             or length != str(physical.expected_bytes)
-            or not self._same_remote_entity(response, physical.metadata)
+            or not self._same_remote_entity(
+                response,
+                physical.metadata,
+                allow_missing=checksum_locks_identity,
+            )
         ):
             response.close()
             raise AcquisitionError("Full transfer response does not match locked metadata", EXIT_NETWORK)
         self._stream_response(response, part, "wb", physical.expected_bytes, physical)
 
     @staticmethod
-    def _same_remote_entity(response, metadata: RemoteMetadata) -> bool:
+    def _same_remote_entity(response, metadata: RemoteMetadata, allow_missing: bool = False) -> bool:
         observed_etag = response.headers.get("ETag", "").strip()
         observed_modified = response.headers.get("Last-Modified", "")
-        if metadata.etag and observed_etag != metadata.etag:
+        if metadata.etag and observed_etag and observed_etag != metadata.etag:
             return False
-        if metadata.last_modified and observed_modified != metadata.last_modified:
+        if metadata.last_modified and observed_modified and observed_modified != metadata.last_modified:
+            return False
+        if not allow_missing and metadata.etag and not observed_etag:
+            return False
+        if not allow_missing and metadata.last_modified and not observed_modified:
             return False
         return True
 

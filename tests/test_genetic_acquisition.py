@@ -357,6 +357,23 @@ class GeneticAcquisitionTest(unittest.TestCase):
         self.assertEqual(caught.exception.exit_code, acquisition.EXIT_NETWORK)
         self.assertFalse(self.fixture.destination.exists())
 
+    def test_full_get_may_omit_validator_with_locked_checksum(self):
+        self.prepare_roster()
+        MockHandler.get_etags = {"/a.bin": ""}
+        self.run_first()
+        self.assertEqual(self.fixture.destination.read_bytes(), MockHandler.files["/a.bin"])
+
+    def test_full_get_may_not_omit_validator_without_locked_checksum(self):
+        self.fixture.rows[1]["provider_checksum_algorithm"] = "NA"
+        self.fixture.rows[1]["provider_checksum"] = "NA"
+        self.fixture.write()
+        self.prepare_roster()
+        MockHandler.get_etags = {"/a.bin": ""}
+        with self.assertRaises(acquisition.AcquisitionError) as caught:
+            self.run_first()
+        self.assertEqual(caught.exception.exit_code, acquisition.EXIT_NETWORK)
+        self.assertFalse(self.fixture.destination.exists())
+
     def test_truncated_body_preserves_and_resumes_partial(self):
         self.prepare_roster()
         MockHandler.modes = {"/a.bin": "truncate_once"}

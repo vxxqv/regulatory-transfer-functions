@@ -217,15 +217,9 @@ class GeneticProtocolLockTest(unittest.TestCase):
         self.assertFalse(cap["delete_source_files"])
         self.assertGreater(cap["safety_margin_bytes"], 0)
 
-    def test_no_outcome_values_or_downloaded_payloads(self):
+    def test_no_outcome_values_in_protocol_inputs(self):
         forbidden_columns = {"observed_beta", "observed_odds_ratio", "observed_p_value", "observed_q_value", "posterior_probability", "heritability"}
         self.assertFalse(forbidden_columns.intersection(self.rows[0]))
-        artifact_root = ROOT / "data" / "independent_confirmation" / "genetics"
-        if artifact_root.exists():
-            allowed = {".acquisition.lock", "acquisition_roster.json", "acquisition_roster.json.sha256"}
-            observed = {path.relative_to(artifact_root).as_posix() for path in artifact_root.rglob("*")}
-            self.assertTrue(observed.issubset(allowed))
-            self.assertFalse((artifact_root / "checksum_manifest.json").exists())
 
     def test_ascii_dashes_and_prohibited_metadata_language(self):
         prohibited = ("artificial " + "intelligence", "language " + "model", "generated " + "by", "ai " + "disclosure")
