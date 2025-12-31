@@ -1,0 +1,13 @@
+{
+  "revision": "worktree_line_endings",
+  "scope": "verification_only",
+  "analysis_outputs_changed": false,
+  "rule": "Frozen text inputs accept only raw, LF-canonical or CRLF-canonical byte equivalence; binary inputs require exact bytes.",
+  "preserved": [
+    "46 frozen artifact hashes",
+    "eligibility thresholds",
+    "dataset decisions",
+    "candidate-pair counts",
+    "stopping decision"
+  ]
+}
