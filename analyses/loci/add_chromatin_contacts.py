@@ -36,6 +36,36 @@ def main() -> None:
     interactions["called_activated"] = interactions["Total_CD4_Activated"] > 5
     interactions["called_nonactivated"] = interactions["Total_CD4_NonActivated"] > 5
 
+    gene_contact_rows = []
+    for locus, locus_variants in variants.groupby("locus"):
+        gene = str(locus_variants.iloc[0]["gene"])
+        chromosome = str(locus_variants.iloc[0]["chromosome"])
+        mapping = MAPPING[locus]
+        offset = mapping["grch38_start"] - mapping["grch37_start"]
+        called_gene = interactions[
+            (interactions["gene"] == gene)
+            & (interactions["oeChr"] == chromosome)
+            & (interactions["called_activated"] | interactions["called_nonactivated"])
+        ]
+        for contact in called_gene.itertuples(index=False):
+            gene_contact_rows.append(
+                {
+                    "locus": locus,
+                    "gene": gene,
+                    "chromosome": chromosome,
+                    "bait_start_grch38": int(contact.baitStart + offset),
+                    "bait_end_grch38": int(contact.baitStart + contact.baitLength + offset),
+                    "prey_start_grch38": int(contact.oeStart + offset),
+                    "prey_end_grch38": int(contact.oeEnd + offset),
+                    "chicago_activated": contact.Total_CD4_Activated,
+                    "chicago_nonactivated": contact.Total_CD4_NonActivated,
+                    "called_activated": contact.called_activated,
+                    "called_nonactivated": contact.called_nonactivated,
+                    "differential_logfc": contact.logFC,
+                    "differential_fdr": contact.FDR,
+                }
+            )
+
     variant_rows = []
     contact_rows = []
     for variant in variants.itertuples(index=False):
@@ -104,8 +134,10 @@ def main() -> None:
 
     variant_table = pd.DataFrame(variant_rows)
     contacts = pd.DataFrame(contact_rows, columns=CONTACT_COLUMNS)
+    gene_contacts = pd.DataFrame(gene_contact_rows)
     variant_table.to_csv(OUTPUT / "credible_variant_pchic_tests.csv", index=False)
     contacts.to_csv(OUTPUT / "credible_variant_pchic_contacts.csv", index=False)
+    gene_contacts.to_csv(OUTPUT / "target_gene_pchic_contacts.csv", index=False)
     summary = variant_table.groupby(["locus", "gene"], as_index=False).agg(
         credible_variants=("variant_id", "size"),
         variants_with_called_contact=("called_contact", "sum"),

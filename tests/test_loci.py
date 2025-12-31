@@ -16,9 +16,13 @@ def test_pchic_contact_denominator_is_complete_and_nonfabricated() -> None:
     variants = pd.read_csv("analyses/loci/results/credible_set_variants.csv")
     tests = pd.read_csv("analyses/loci/results/credible_variant_pchic_tests.csv")
     contacts = pd.read_csv("analyses/loci/results/credible_variant_pchic_contacts.csv")
+    gene_contacts = pd.read_csv("analyses/loci/results/target_gene_pchic_contacts.csv")
     summary = pd.read_csv("analyses/loci/results/pchic_locus_summary.csv")
     assert len(tests) == len(variants) == 50
     assert set(summary["gene"]) == {"GATA3", "STAT3", "PTPN22"}
     assert tests["called_contact"].sum() == len(contacts)
     assert tests.loc[tests["gene"] == "STAT3", "called_gene_interaction_rows"].eq(0).all()
     assert not tests["called_contact"].any()
+    assert len(gene_contacts) == 58
+    assert set(gene_contacts["gene"]) == {"GATA3", "PTPN22"}
+    assert gene_contacts[["called_activated", "called_nonactivated"]].any(axis=1).all()
