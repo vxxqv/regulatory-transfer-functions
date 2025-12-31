@@ -1,0 +1,30 @@
+# Local data and generated artifacts
+data/raw/
+data/interim/
+data/processed/
+work/
+outputs/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/
+
+# Workflow
+.snakemake/
+logs/
+benchmarks/
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

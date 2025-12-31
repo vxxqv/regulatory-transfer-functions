@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the archived release."
+title: "Regulatory Transfer Functions"
+type: software
+authors:
+  - family-names: Patni
+    given-names: Vivaan
+    affiliation: Independent Researcher
+license: MIT
+version: 0.1.0
+date-released: 2026-09-12
+repository-code: "https://github.com/vxxqv/regulatory-transfer-functions"
