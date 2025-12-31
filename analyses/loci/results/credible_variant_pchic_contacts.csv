@@ -1,0 +1,1 @@
+locus,gene,variant_id,rsids,posterior_probability,grch37_position,bait_chr,bait_start,bait_length,prey_chr,prey_start,prey_end,chicago_activated,chicago_nonactivated,called_activated,called_nonactivated,differential_logfc,differential_fdr

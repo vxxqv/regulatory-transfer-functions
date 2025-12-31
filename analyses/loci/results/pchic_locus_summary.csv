@@ -1,0 +1,4 @@
+locus,gene,credible_variants,variants_with_called_contact,posterior_probability_with_called_contact,nearest_called_contact_bp
+gata3,GATA3,9,0,0.0,108305.0
+ptpn22,PTPN22,1,0,0.0,66475.0
+stat3,STAT3,40,0,0.0,

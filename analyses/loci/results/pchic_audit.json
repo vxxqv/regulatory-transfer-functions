@@ -1,0 +1,12 @@
+{
+  "called_contact_rows": 0,
+  "doi": "10.1186/s13059-017-1285-0",
+  "frozen_credible_variants": 50,
+  "interaction_call_rule": "CHiCAGO score greater than 5 in either CD4 state",
+  "mapping_service": "Ensembl REST GRCh38 to GRCh37",
+  "source": "Burren et al. 2017 Additional file 5 Table S4",
+  "source_assembly": "GRCh37",
+  "source_bytes": 14877899,
+  "source_interaction_rows": 291535,
+  "source_sha256": "23eb3205b2d45922cb511f698ba490de686df9e57c3a81f60568c865752ff857"
+}
