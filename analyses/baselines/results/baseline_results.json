@@ -1,0 +1,9 @@
+{
+  "best_model_by_r2": "sparse_nonlinear",
+  "best_oof_r2": 0.0874017152135862,
+  "folds": 10,
+  "graph_scope": "transductive covariate graph without outcome propagation",
+  "outcome": "log1p_n_downstream",
+  "rows": 15807,
+  "targets": 6105
+}
