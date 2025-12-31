@@ -28,14 +28,14 @@ def label_grid(axes: np.ndarray) -> None:
     """Place panel labels relative to each axis so tight bounding boxes cannot drop them."""
     for label, axis in zip("ABCD", axes, strict=True):
         axis.text(
-            -0.14,
-            1.06,
+            -0.18,
+            1.10,
             label,
             transform=axis.transAxes,
             fontsize=14,
             fontweight="bold",
             ha="left",
-            va="top",
+            va="bottom",
             clip_on=False,
         )
 
