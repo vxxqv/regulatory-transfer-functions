@@ -1,0 +1,14 @@
+{
+  "amplified_disease_fdr_significant": 0,
+  "amplified_disease_tests": 42,
+  "clusters": 75,
+  "diseases": 14,
+  "joined_rows": 2074,
+  "negative_control_rows": 366,
+  "negative_control_significant_links": 2,
+  "real_disease_rows": 1708,
+  "significant_cluster_disease_links": 62,
+  "size_state_auroc": 0.6701093560145809,
+  "transfer_augmented_auroc": 0.5814878689295653,
+  "transfer_minus_size_state_auroc": -0.0886214870850156
+}
