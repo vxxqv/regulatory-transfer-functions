@@ -1,0 +1,17 @@
+{
+  "benchmark_rows": 2886,
+  "benchmark_targets": 17,
+  "distance_assay_auroc": 0.8174288985297662,
+  "prevalence": 0.04158004158004158,
+  "significant_elements": 120,
+  "source_significant_elements": 164,
+  "source_targets": 28,
+  "source_valid_rows": 4312,
+  "targets_with_transfer_features": 17,
+  "transfer_augmented_auroc": 0.7515003615328995,
+  "transfer_minus_distance_auc": -0.06592853699686674,
+  "transfer_minus_distance_auc_ci_95": [
+    -0.16705504126671528,
+    0.09259162788188365
+  ]
+}
