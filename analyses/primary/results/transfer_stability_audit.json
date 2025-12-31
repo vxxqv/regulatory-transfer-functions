@@ -1,0 +1,15 @@
+{
+  "rows": 15807,
+  "targets": 6105,
+  "original_buffered_rows": 1581,
+  "original_amplified_rows": 1581,
+  "target_tail_size": 611,
+  "sigma2": 0.1793421128634542,
+  "tau2": 0.1464443249845323,
+  "decision": "supported",
+  "response_degree_adjustment": "stratified diagnostic only because response degree defines the transfer outcome",
+  "measurement_error_status": "bounded sensitivity because target-state sampling variances are unavailable",
+  "seed": 20260912,
+  "bootstrap_replicates": 1000,
+  "permutation_replicates": 1000
+}
